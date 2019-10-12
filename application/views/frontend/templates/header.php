@@ -25,7 +25,9 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-    <a class="site-logo" href="index.html"><img src="<?php echo base_url(); ?>assets/frontend/layout/img/logo-corp-red.png" alt="Metronic FrontEnd"></a>
+    <a class="site-logo" href="<?php echo base_url('home') ?>" style="text-decoration: none; color: #FF0D59;">
+        <b>SIDAPORA</b>
+    </a>
 
     <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
