@@ -9,7 +9,8 @@ class Page_error extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('error_index');
+        $data['is_404'] = 1;
+        $this->templates->frontend('error_index', $data);
     }
 
 }

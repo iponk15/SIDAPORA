@@ -53,3 +53,8 @@ $route['default_controller']   = 'frontend/home';
 $route['404_override']         = 'Page_error';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['home']      = 'frontend/home';
+$route['pusatdata'] = 'frontend/pusatdata';
+$route['galeri']    = 'frontend/galeri';
+$route['faq']       = 'frontend/faq';
+
