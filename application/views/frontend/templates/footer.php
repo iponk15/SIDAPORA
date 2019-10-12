@@ -66,7 +66,7 @@
     <div class="row">
         <!-- BEGIN COPYRIGHT -->
         <div class="col-md-6 col-sm-6 padding-top-10">
-        2019 - 2020 © Kementerian Pemuda dan Olahraga.
+        <?php date('Y') ?> - Sekarang © Kementerian Pemuda dan Olahraga.
         </div>
         <!-- END COPYRIGHT -->
         <!-- BEGIN PAYMENTS -->
