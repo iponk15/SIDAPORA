@@ -31,7 +31,7 @@
 
     <!-- BEGIN NAVIGATION -->
     <div class="header-navigation pull-right font-transform-inherit">
-        <?php $uri = $this->uri->segment(1); ?>
+        <?php $uri = $this->uri->segment(1) == '' ? 'home' : $this->uri->segment(1); ?>
         <ul>
             <li <?php echo ($uri == 'home' ? 'class="active" ' : ''); ?>><a href="<?php echo base_url('home'); ?>" >Beranda</a></li>
             <li <?php echo ($uri == 'pusatdata' ? 'class="active" ' : ''); ?>><a href="<?php echo base_url('pusatdata') ?>" >Pusat Data</a></li>
