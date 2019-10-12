@@ -6,8 +6,8 @@ class Home extends MX_Controller {
         parent::__construct();
     }
     
-    public function index()
-    {
+    public function index(){
+        $data['slider']     = 1;
         $data['breadcrumb'] = null;
         $this->templates->frontend('home/home_index', $data);
     }
