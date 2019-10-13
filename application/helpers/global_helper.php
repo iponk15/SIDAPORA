@@ -28,4 +28,43 @@ function md56($param,$tipe = null,$jml = null){
 	}
 }
 
+function getCtrl(){
+    $CI =& get_instance();
+    return $CI->router->fetch_class(); 
+}
+
+function getUserIP(){
+    $client  = @$_SERVER['HTTP_CLIENT_IP'];
+    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+    $remote  = $_SERVER['REMOTE_ADDR'];
+
+    if(filter_var($client, FILTER_VALIDATE_IP)){
+        $ip = $client;
+    }elseif(filter_var($forward, FILTER_VALIDATE_IP)){
+        $ip = $forward;
+    }else{
+        $ip = $remote;
+    }
+
+    return $ip;
+}
+
+function md5_mod($str, $salt){
+
+    $str = md5(md5($str).$salt);
+    return $str;
+}
+
+function getSession($field = ''){
+    $CI   =& get_instance();
+
+    if(!empty($field)){
+        $result = ($CI->session->userdata('sidaporaSes')->$field == '' ? '-' : $CI->session->userdata('sidaporaSes')->$field);
+    }else{
+        $result = $CI->session->userdata('sidaporaSes');
+    }
+
+    return $result;
+}
+
 ?>

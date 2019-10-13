@@ -18,6 +18,17 @@ class Templates
 
                 $this->_ci->load->view('frontend/templates/template.php', $data);
         }
+
+        function backend( $template, $data = NULL, $js = NULL, $css = NULL ){
+                $data['_header']      = $this->_ci->load->view('backend/templates/header', $data, TRUE);
+                $data['_theme']       = $this->_ci->load->view('backend/templates/theme', $data, TRUE);
+                $data['_sidebar']     = $this->_ci->load->view('backend/templates/sidebar', $data, TRUE);
+                $data['_page_header'] = $this->_ci->load->view('backend/templates/page_header', $data, TRUE);
+                $data['_content']     = $this->_ci->load->view($template, $data, TRUE);
+                $data['_footer']      = $this->_ci->load->view('backend/templates/footer', $data, TRUE);
+
+                $this->_ci->load->view('backend/templates/template.php', $data);
+        }
 	
 
 }

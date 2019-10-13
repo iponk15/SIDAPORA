@@ -9,8 +9,13 @@ class Page_error extends CI_Controller {
 
     public function index()
     {
-        $data['is_404'] = 1;
-        $this->templates->frontend('error_index', $data);
+        if(!empty(getSession())){
+            $data['is_404'] = '';
+            $this->templates->backend('error_index', $data);
+        }else{
+            $data['is_404'] = 1;
+            $this->templates->frontend('error_index', $data);
+        }
     }
 
 }

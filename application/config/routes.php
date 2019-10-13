@@ -49,12 +49,101 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+
+// =============================================== Start routing frontend ========================================
 $route['default_controller']   = 'frontend/home';
 $route['404_override']         = 'Page_error';
 $route['translate_uri_dashes'] = FALSE;
 
+// Start Frontend
 $route['home']      = 'frontend/home';
 $route['pusatdata'] = 'frontend/pusatdata';
 $route['galeri']    = 'frontend/galeri';
 $route['faq']       = 'frontend/faq';
+// =============================================== Start routing frontend ========================================
+
+
+
+// =============================================== Start Routing Backend ========================================= 
+
+// Start Backend
+$route['landing']     = 'backend/landing';
+$route['login']       = 'backend/login';
+$route['login/masuk'] = 'backend/login/masuk';
+$route['login/out']   = 'backend/login/keluar';
+
+// start user
+$route['user']               = 'backend/user';
+$route['user_tambah']        = 'backend/user/tambah';
+$route['user_simpan']        = 'backend/user/simpan';
+$route['user_ubah/(:any)']   = 'backend/user/ubah/$1';
+$route['user_update/(:any)'] = 'backend/user/update/$1';
+$route['user_hapus/(:any)']  = 'backend/user/hapus/$1';
+// end user
+
+// start kategori
+$route['kategori']               = 'backend/kategori';
+$route['kategori_tambah']        = 'backend/kategori/tambah';
+$route['kategori_simpan']        = 'backend/kategori/simpan';
+$route['kategori_ubah/(:any)']   = 'backend/kategori/ubah/$1';
+$route['kategori_update/(:any)'] = 'backend/kategori/update/$1';
+$route['kategori_hapus/(:any)']  = 'backend/kategori/hapus/$1';
+// end kategori
+
+// start jenis bantuan
+$route['jenis_bantuan']               = 'backend/jenis_bantuan';
+$route['jenis_bantuan_tambah']        = 'backend/jenis_bantuan/tambah';
+$route['jenis_bantuan_simpan']        = 'backend/jenis_bantuan/simpan';
+$route['jenis_bantuan_ubah/(:any)']   = 'backend/jenis_bantuan/ubah/$1';
+$route['jenis_bantuan_update/(:any)'] = 'backend/jenis_bantuan/update/$1';
+$route['jenis_bantuan_hapus/(:any)']  = 'backend/jenis_bantuan/hapus/$1';
+$route['jenis_bantuan_bantuan']       = 'backend/jenis_bantuan/getBantuan';
+// end jenis bantuan
+
+// start bantuan
+$route['bantuan']               = 'backend/bantuan';
+$route['bantuan_tambah']        = 'backend/bantuan/tambah';
+$route['bantuan_simpan']        = 'backend/bantuan/simpan';
+$route['bantuan_ubah/(:any)']   = 'backend/bantuan/ubah/$1';
+$route['bantuan_update/(:any)'] = 'backend/bantuan/update/$1';
+$route['bantuan_hapus/(:any)']  = 'backend/bantuan/hapus/$1';
+// end bantuan
+
+// start provinsi
+$route['provinsi']               = 'backend/provinsi';
+$route['provinsi_tambah']        = 'backend/provinsi/tambah';
+$route['provinsi_simpan']        = 'backend/provinsi/simpan';
+$route['provinsi_ubah/(:any)']   = 'backend/provinsi/ubah/$1';
+$route['provinsi_update/(:any)'] = 'backend/provinsi/update/$1';
+$route['provinsi_hapus/(:any)']  = 'backend/provinsi/hapus/$1';
+// end provinsi
+
+// start kabupaten / kota
+$route['kabkot']               = 'backend/kabkot';
+$route['kabkot_tambah']        = 'backend/kabkot/tambah';
+$route['kabkot_simpan']        = 'backend/kabkot/simpan';
+$route['kabkot_ubah/(:any)']   = 'backend/kabkot/ubah/$1';
+$route['kabkot_update/(:any)'] = 'backend/kabkot/update/$1';
+$route['kabkot_hapus/(:any)']  = 'backend/kabkot/hapus/$1';
+// end kabupaten / kota
+
+// start kecamatan
+$route['kecamatan']               = 'backend/kecamatan';
+$route['kecamatan_tambah']        = 'backend/kecamatan/tambah';
+$route['kecamatan_simpan']        = 'backend/kecamatan/simpan';
+$route['kecamatan_ubah/(:any)']   = 'backend/kecamatan/ubah/$1';
+$route['kecamatan_update/(:any)'] = 'backend/kecamatan/update/$1';
+$route['kecamatan_hapus/(:any)']  = 'backend/kecamatan/hapus/$1';
+// end kecamatan
+
+// start keldes
+$route['keldes']               = 'backend/keldes';
+$route['keldes_tambah']        = 'backend/keldes/tambah';
+$route['keldes_simpan']        = 'backend/keldes/simpan';
+$route['keldes_ubah/(:any)']   = 'backend/keldes/ubah/$1';
+$route['keldes_update/(:any)'] = 'backend/keldes/update/$1';
+$route['keldes_hapus/(:any)']  = 'backend/keldes/hapus/$1';
+// end keldes
+
+// =============================================== End Routing Backend ======================================= 
 
