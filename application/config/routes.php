@@ -134,6 +134,7 @@ $route['kecamatan_simpan']        = 'backend/kecamatan/simpan';
 $route['kecamatan_ubah/(:any)']   = 'backend/kecamatan/ubah/$1';
 $route['kecamatan_update/(:any)'] = 'backend/kecamatan/update/$1';
 $route['kecamatan_hapus/(:any)']  = 'backend/kecamatan/hapus/$1';
+$route['kecamatan_get_kabkot']    = 'backend/kecamatan/getKabkot';
 // end kecamatan
 
 // start keldes
@@ -143,6 +144,7 @@ $route['keldes_simpan']        = 'backend/keldes/simpan';
 $route['keldes_ubah/(:any)']   = 'backend/keldes/ubah/$1';
 $route['keldes_update/(:any)'] = 'backend/keldes/update/$1';
 $route['keldes_hapus/(:any)']  = 'backend/keldes/hapus/$1';
+$route['keldes_get_kecamatan'] = 'backend/keldes/getKecamatan';
 // end keldes
 
 // =============================================== End Routing Backend ======================================= 
