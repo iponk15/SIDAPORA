@@ -24,8 +24,8 @@ class Pusatdata extends MX_Controller {
 
     function cariData(){
         $post  = $this->input->post();
+        
         // get data rekap
-
         $selectJoin = '(
             SELECT
                 kategori_id,
@@ -53,8 +53,16 @@ class Pusatdata extends MX_Controller {
                     [$this->tableKecamatan,'rekdet_kecamatan_id = kecamatan_id','left'],
                     [$this->tableKeldes,'rekdet_keldes_id = keldes_id','left'],
                 ];
-                $select         = 'rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
-                $getRekapDetail = $this->m_global->get($this->tableRekdet,$join,['rekdet_rekap_id' => $rows->rekap_id],$select);
+
+                $select                   = 'rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
+                $where['rekdet_rekap_id'] = $rows->rekap_id;
+                $where['provinsi_id']     = $post['provinsi'];
+
+                if($post['kabupaten'] != ''){
+                    $where['kabkot_id'] = $post['kabupaten'];
+                }
+
+                $getRekapDetail = $this->m_global->get($this->tableRekdet,$join,$where,$select);
                 $tempRekDet     = [];
                 foreach ($getRekapDetail as $rekdet) {
                     $tempRekDet[] = [
@@ -81,7 +89,7 @@ class Pusatdata extends MX_Controller {
 
         $data['tahun']   = $post['tahun'];
         $data['records'] = $tempRekap;
-        $this->templates->frontend($this->prefix.'detail', $data);
+        $this->load->view($this->prefix.'detail', $data);
     }
 
 }

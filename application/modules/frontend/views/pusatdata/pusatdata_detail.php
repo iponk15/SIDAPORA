@@ -1,7 +1,6 @@
 <div class="row margin-bottom-40">
     <!-- BEGIN CONTENT -->
     <div class="col-md-12 col-sm-12">
-        <h1>Data Prasarana Bantuan Tahun <?php echo $tahun ?></h1>
         <div class="content-page">
             <div class="row margin-bottom-30">
                 <!-- BEGIN CAROUSEL -->            
@@ -75,22 +74,25 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>';
-                                                $a = 1;
-                                                foreach ($rekap['rekap_detail'] as $rows) {
-                                                    $html .= '<tr>
-                                                                <td>'.$a.'</td>
-                                                                <td>'.$rows['rekdet_lembaga'].'</td>
-                                                                <td><center>'.$rows['rekdet_bantuan'].'</center></td>
-                                                                <td><center>'.$rows['rekdet_jnsbtn'].'</center></td>
-                                                                <td>'.$rows['rekdet_keldes'].'</td>
-                                                                <td>'.$rows['rekdet_kecamatan'].'</td>
-                                                                <td>'.$rows['rekdet_kabkot'].'</td>
-                                                                <td>'.$rows['rekdet_provinsi'].'</td>
-                                                                <td>'.uang($rows['rekdet_nominal']).'</td>
-                                                            </tr>';
-                                                    $a++;
+                                                if(empty($rekap['rekap_detail'])){
+                                                    $html .= '<tr><td colspan="9"> <center><i>Data rekap masih Kosong</i></center> </td></tr>';
+                                                }else{
+                                                    $a = 1;
+                                                    foreach ($rekap['rekap_detail'] as $rows) {
+                                                        $html .= '<tr>
+                                                                    <td>'.$a.'</td>
+                                                                    <td>'.$rows['rekdet_lembaga'].'</td>
+                                                                    <td><center>'.$rows['rekdet_bantuan'].'</center></td>
+                                                                    <td><center>'.$rows['rekdet_jnsbtn'].'</center></td>
+                                                                    <td>'.$rows['rekdet_keldes'].'</td>
+                                                                    <td>'.$rows['rekdet_kecamatan'].'</td>
+                                                                    <td>'.$rows['rekdet_kabkot'].'</td>
+                                                                    <td>'.$rows['rekdet_provinsi'].'</td>
+                                                                    <td>'.uang($rows['rekdet_nominal']).'</td>
+                                                                </tr>';
+                                                        $a++;
+                                                    }
                                                 }
-
                         $html .=                '</tbody>
                                             </table>
                                         </div>

@@ -1,343 +1,106 @@
-<div class="row margin-bottom-40">
+<div class="row ">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">Form Pencarian</div>
+                <div class="tools">
+                    <a href="" class="collapse"></a>
+                    <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                    <a href="" class="reload"></a>
+                    <a href="" class="remove"></a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="alert alert-warning alert-dismissable notifWarning" style="display:none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong>Notifikasi!</strong> Ada kesalahan, inputan Tahun dan Provinsi tidak boleh kosong. Terima kasih
+                </div>
+                <form class="form-inline form-cari" role="form" method="POST" action="javascript:void(0);">
+                    <div class="form-group">
+                        <label class="sr-only"></label>
+                        <input type="text" readonly class="form-control tahun input-sm input-xsmall" placeholder="Tahun *" name="tahun">
+                    </div> &nbsp;
+                    <div class="form-group">
+                        <label class="sr-only"></label>
+                        <input type="text" placeholder="--- Pilih Provinsi * ---" name="provinsi" class="form-control input-sm provinsi">
+                    </div> &nbsp;
+                    <div class="form-group formKabupaten" style="display:none">
+                        <label class="sr-only"></label>
+                        <input type="text" placeholder="--- Pilih Kabupaten ---" name="kabupaten" class="form-control input-sm kabupaten">
+                    </div> &nbsp;
+                    <button class="btn yellow btn-sm buttonSubmit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row margin-bottom-40 kontenBlock">
     <!-- BEGIN CONTENT -->
     <div class="col-md-12 col-sm-12">
-        <h1>Data Prasarana Bantuan Tahun 2019</h1>
-        <div class="content-page">
-            <div class="row margin-bottom-30">
-                <!-- BEGIN CAROUSEL -->            
-                <div class="col-md-5 front-carousel">
-                    <div class="carousel slide" id="myCarousel">
-                        <!-- Carousel items -->
-                        <div class="carousel-inner">
-                            <div class="item">
-                                <img alt="" src="<?php echo base_url('assets/frontend/pages/img/img1.jpg') ?>">
-                                <div class="carousel-caption"><p>Excepturi sint occaecati cupiditate non provident</p></div>
-                            </div>
-                            <div class="item active">
-                                <img alt="" src="<?php echo base_url('assets/frontend/pages/img/img2.jpg') ?>">
-                                <div class="carousel-caption"><p>Ducimus qui blanditiis praesentium voluptatum</p></div>
-                            </div>
-                            <div class="item">
-                                <img alt="" src="<?php echo base_url('assets/frontend/pages/img/img3.jpg') ?>">
-                                <div class="carousel-caption"><p>Ut non libero consectetur adipiscing elit magna</p></div>
-                            </div>
-                        </div>
-                        <!-- Carousel nav -->
-                        <a data-slide="prev" href="#myCarousel" class="carousel-control left">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a data-slide="next" href="#myCarousel" class="carousel-control right">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </div>                
-                </div>
-                <!-- END CAROUSEL -->                             
-                <!-- BEGIN PORTFOLIO DESCRIPTION -->            
-                <div class="col-md-7">
-                    <h2>Deskripsi</h2>
-                    <p>Molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa quis tempor incididunt ut et dolore et dolorum fuga. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus.</p>
-                    <p>Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde nostrudlaboris. Sed unde omnis iste natus error sit voluptatem.</p>
-                </div>
-                <!-- END PORTFOLIO DESCRIPTION -->            
+        <div class="content-page page-404">
+            <div class="number">
+                500
             </div>
-            <div class="row quote-v1 margin-bottom-30" style="background: #553A1F;">
-                <div class="col-md-7 quote-v1-inner">
-                    <span>Berdasarkan Kategori Data</span>
-                </div>
+            <div class="details">
+                <h3>Oops!  Konten kosong.</h3>
+                <p>
+                    Data belum bisa di tampilkan .<br>
+                    Silahkan input form pencarian di atas untuk mencari data. Terima kasih
+                </p>
             </div>
-            <div id="accordion1" class="panel-group">
-                <div class="panel panel-success">
-                    <div class="panel-heading" style="background: #E69C39;">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_1" style="color: #EDEDED;">
-                                <b>1. Prasarana Olahraga Pendidikan</b>
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="accordion1_1" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            <table class="table table-bordered table-striped table-condensed flip-content">
-                                <thead class="flip-content">
-                                    <tr>
-                                        <th width="20%">Code</th>
-                                        <th>Company</th>
-                                        <th class="numeric">Price</th>
-                                        <th class="numeric">Change</th>
-                                        <th class="numeric">Change %</th>
-                                        <th class="numeric">Open</th>
-                                        <th class="numeric">High</th>
-                                        <th class="numeric">Low</th>
-                                        <th class="numeric">Volume</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>AAC</td>
-                                        <td>AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
-                                        <td class="numeric">&nbsp;</td>
-                                        <td class="numeric">-0.01</td>
-                                        <td class="numeric">-0.36%</td>
-                                        <td class="numeric">$1.39</td>
-                                        <td class="numeric">$1.39</td>
-                                        <td class="numeric">&nbsp;</td>
-                                        <td class="numeric">9,395</td>
-                                    </tr>
-                                    <tr>
-                                        <td>AAD</td>
-                                        <td>ARDENT LEISURE GROUP</td>
-                                        <td class="numeric">$1.15</td>
-                                        <td class="numeric">+0.02</td>
-                                        <td class="numeric">1.32%</td>
-                                        <td class="numeric">$1.14</td>
-                                        <td class="numeric">$1.15</td>
-                                        <td class="numeric">$1.13</td>
-                                        <td class="numeric">56,431</td>
-                                    </tr>
-                                    <tr>
-                                        <td>AAX</td>
-                                        <td>AUSENCO LIMITED</td>
-                                        <td class="numeric">$4.00</td>
-                                        <td class="numeric">-0.04</td>
-                                        <td class="numeric">-0.99%</td>
-                                        <td class="numeric">$4.01</td>
-                                        <td class="numeric">$4.05</td>
-                                        <td class="numeric">$4.00</td>
-                                        <td class="numeric">90,641</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ABC</td>
-                                        <td>ADELAIDE BRIGHTON LIMITED</td>
-                                        <td class="numeric">$3.00</td>
-                                        <td class="numeric">+0.06</td>
-                                        <td class="numeric">2.04%</td>
-                                        <td class="numeric">$2.98</td>
-                                        <td class="numeric">$3.00</td>
-                                        <td class="numeric">$2.96</td>
-                                        <td class="numeric">862,518</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ABP</td>
-                                        <td>ABACUS PROPERTY GROUP</td>
-                                        <td class="numeric">$1.91</td>
-                                        <td class="numeric">0.00</td>
-                                        <td class="numeric">0.00%</td>
-                                        <td class="numeric">$1.92</td>
-                                        <td class="numeric">$1.93</td>
-                                        <td class="numeric">$1.90</td>
-                                        <td class="numeric">595,701</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ABY</td>
-                                        <td>ADITYA BIRLA MINERALS LIMITED</td>
-                                        <td class="numeric">$0.77</td>
-                                        <td class="numeric">+0.02</td>
-                                        <td class="numeric">2.00%</td>
-                                        <td class="numeric">$0.76</td>
-                                        <td class="numeric">$0.77</td>
-                                        <td class="numeric">$0.76</td>
-                                        <td class="numeric">54,567</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>         
-                <div class="panel panel-success">
-                    <div class="panel-heading" style="background: #E69C39;">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_2" style="color: #EDEDED;">
-                                <b>2. Prasarana Olahraga Rekreasi</b>
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="accordion1_2" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                        <table class="table table-bordered table-striped table-condensed flip-content">
-                                <thead class="flip-content">
-                                    <tr>
-                                        <th width="20%">Code</th>
-                                        <th>Company</th>
-                                        <th class="numeric">Price</th>
-                                        <th class="numeric">Change</th>
-                                        <th class="numeric">Change %</th>
-                                        <th class="numeric">Open</th>
-                                        <th class="numeric">High</th>
-                                        <th class="numeric">Low</th>
-                                        <th class="numeric">Volume</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>AAC</td>
-                                        <td>AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
-                                        <td class="numeric">&nbsp;</td>
-                                        <td class="numeric">-0.01</td>
-                                        <td class="numeric">-0.36%</td>
-                                        <td class="numeric">$1.39</td>
-                                        <td class="numeric">$1.39</td>
-                                        <td class="numeric">&nbsp;</td>
-                                        <td class="numeric">9,395</td>
-                                    </tr>
-                                    <tr>
-                                        <td>AAD</td>
-                                        <td>ARDENT LEISURE GROUP</td>
-                                        <td class="numeric">$1.15</td>
-                                        <td class="numeric">+0.02</td>
-                                        <td class="numeric">1.32%</td>
-                                        <td class="numeric">$1.14</td>
-                                        <td class="numeric">$1.15</td>
-                                        <td class="numeric">$1.13</td>
-                                        <td class="numeric">56,431</td>
-                                    </tr>
-                                    <tr>
-                                        <td>AAX</td>
-                                        <td>AUSENCO LIMITED</td>
-                                        <td class="numeric">$4.00</td>
-                                        <td class="numeric">-0.04</td>
-                                        <td class="numeric">-0.99%</td>
-                                        <td class="numeric">$4.01</td>
-                                        <td class="numeric">$4.05</td>
-                                        <td class="numeric">$4.00</td>
-                                        <td class="numeric">90,641</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ABC</td>
-                                        <td>ADELAIDE BRIGHTON LIMITED</td>
-                                        <td class="numeric">$3.00</td>
-                                        <td class="numeric">+0.06</td>
-                                        <td class="numeric">2.04%</td>
-                                        <td class="numeric">$2.98</td>
-                                        <td class="numeric">$3.00</td>
-                                        <td class="numeric">$2.96</td>
-                                        <td class="numeric">862,518</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ABP</td>
-                                        <td>ABACUS PROPERTY GROUP</td>
-                                        <td class="numeric">$1.91</td>
-                                        <td class="numeric">0.00</td>
-                                        <td class="numeric">0.00%</td>
-                                        <td class="numeric">$1.92</td>
-                                        <td class="numeric">$1.93</td>
-                                        <td class="numeric">$1.90</td>
-                                        <td class="numeric">595,701</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ABY</td>
-                                        <td>ADITYA BIRLA MINERALS LIMITED</td>
-                                        <td class="numeric">$0.77</td>
-                                        <td class="numeric">+0.02</td>
-                                        <td class="numeric">2.00%</td>
-                                        <td class="numeric">$0.76</td>
-                                        <td class="numeric">$0.77</td>
-                                        <td class="numeric">$0.76</td>
-                                        <td class="numeric">54,567</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-success">
-                    <div class="panel-heading" style="background: #E69C39;">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_3" style="color: #EDEDED;">
-                                <b>3. Prasarana Olahraga Prestasi</b>
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="accordion1_3" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                        <table class="table table-bordered table-striped table-condensed flip-content">
-                                <thead class="flip-content">
-                                    <tr>
-                                        <th width="20%">Code</th>
-                                        <th>Company</th>
-                                        <th class="numeric">Price</th>
-                                        <th class="numeric">Change</th>
-                                        <th class="numeric">Change %</th>
-                                        <th class="numeric">Open</th>
-                                        <th class="numeric">High</th>
-                                        <th class="numeric">Low</th>
-                                        <th class="numeric">Volume</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>AAC</td>
-                                        <td>AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
-                                        <td class="numeric">&nbsp;</td>
-                                        <td class="numeric">-0.01</td>
-                                        <td class="numeric">-0.36%</td>
-                                        <td class="numeric">$1.39</td>
-                                        <td class="numeric">$1.39</td>
-                                        <td class="numeric">&nbsp;</td>
-                                        <td class="numeric">9,395</td>
-                                    </tr>
-                                    <tr>
-                                        <td>AAD</td>
-                                        <td>ARDENT LEISURE GROUP</td>
-                                        <td class="numeric">$1.15</td>
-                                        <td class="numeric">+0.02</td>
-                                        <td class="numeric">1.32%</td>
-                                        <td class="numeric">$1.14</td>
-                                        <td class="numeric">$1.15</td>
-                                        <td class="numeric">$1.13</td>
-                                        <td class="numeric">56,431</td>
-                                    </tr>
-                                    <tr>
-                                        <td>AAX</td>
-                                        <td>AUSENCO LIMITED</td>
-                                        <td class="numeric">$4.00</td>
-                                        <td class="numeric">-0.04</td>
-                                        <td class="numeric">-0.99%</td>
-                                        <td class="numeric">$4.01</td>
-                                        <td class="numeric">$4.05</td>
-                                        <td class="numeric">$4.00</td>
-                                        <td class="numeric">90,641</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ABC</td>
-                                        <td>ADELAIDE BRIGHTON LIMITED</td>
-                                        <td class="numeric">$3.00</td>
-                                        <td class="numeric">+0.06</td>
-                                        <td class="numeric">2.04%</td>
-                                        <td class="numeric">$2.98</td>
-                                        <td class="numeric">$3.00</td>
-                                        <td class="numeric">$2.96</td>
-                                        <td class="numeric">862,518</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ABP</td>
-                                        <td>ABACUS PROPERTY GROUP</td>
-                                        <td class="numeric">$1.91</td>
-                                        <td class="numeric">0.00</td>
-                                        <td class="numeric">0.00%</td>
-                                        <td class="numeric">$1.92</td>
-                                        <td class="numeric">$1.93</td>
-                                        <td class="numeric">$1.90</td>
-                                        <td class="numeric">595,701</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ABY</td>
-                                        <td>ADITYA BIRLA MINERALS LIMITED</td>
-                                        <td class="numeric">$0.77</td>
-                                        <td class="numeric">+0.02</td>
-                                        <td class="numeric">2.00%</td>
-                                        <td class="numeric">$0.76</td>
-                                        <td class="numeric">$0.77</td>
-                                        <td class="numeric">$0.76</td>
-                                        <td class="numeric">54,567</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>   
-            <!-- END RECENT WORKS -->
         </div>
     </div>
     <!-- END CONTENT -->
 </div>
-<!-- BEGIN SIDEBAR & CONTENT -->
+
+<div id="contentRekap"></div>
+
+<script>
+    $( function() {
+        $('.buttonSubmit').on('click', function(){
+            $('.kontenBlock').fadeOut();
+            var tahun    = $('.tahun').val();
+            var provinsi = $('.proinsi').val();
+
+            if(tahun == '' && typeof provinsi == 'undefined'){
+                $('.notifWarning').fadeIn('slow');
+            }else{
+                var url  = base_url + 'pusatdata_cari';
+                var xdta = $('.form-cari').serializeArray();
+
+                $.post(url,xdta,function(html){
+                    $('#contentRekap').html(html);
+                })
+
+            }
+        });
+
+        $('.provinsi').on('change', function(){
+            $('.formKabupaten').fadeIn('slow');
+            var provId = $(this).val();
+            var tahun  = $('.tahun').val();
+
+            if(provId == ''){
+                $('.formKabupaten').fadeOut('slow');
+            }
+
+            if(tahun != '' || typeof provinsi != 'undefined'){
+                $('.notifWarning').fadeOut('slow');
+            }
+
+            global.init_select2('.kabupaten','fetch/getKabkotFromProvinsi/sdp_master_kabkot/' + provId, true);
+            
+        });
+
+        global.init_select2('.provinsi','fetch/globalFetch/sdp_master_provinsi/provinsi_id/provinsi_nama',true);
+
+        var prm = {
+            format      : "yyyy",
+            minViewMode : 2,
+            autoclose   : true
+        };
+        global.init_dtrp(1,'.tahun',prm);
+    });
+    // ComponentsDropdowns.init();
+</script>
