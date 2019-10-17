@@ -59,12 +59,12 @@
                                         </h4>
                                     </div>
                                     <div id="accordion1_'.$i.'" class="panel-collapse collapse in">
-                                        <div class="panel-body">
+                                        <div class="panel-body flip-scroll">
                                             <table class="table table-bordered table-striped table-condensed flip-content">
                                                 <thead class="flip-content">
                                                     <tr>
                                                         <th width="1%"><center>No. </center></th>
-                                                        <th><center>Lembaga</center></th>
+                                                        <th width="25%"><center>Lembaga</center></th>
                                                         <th><center>Jenis Bantuan</center></th>
                                                         <th><center>Bantuan</center></th>
                                                         <th><center>Desa</center></th>
@@ -80,8 +80,8 @@
                                                     $html .= '<tr>
                                                                 <td>'.$a.'</td>
                                                                 <td>'.$rows['rekdet_lembaga'].'</td>
-                                                                <td>'.$rows['rekdet_bantuan'].'</td>
-                                                                <td>'.$rows['rekdet_jnsbtn'].'</td>
+                                                                <td><center>'.$rows['rekdet_bantuan'].'</center></td>
+                                                                <td><center>'.$rows['rekdet_jnsbtn'].'</center></td>
                                                                 <td>'.$rows['rekdet_keldes'].'</td>
                                                                 <td>'.$rows['rekdet_kecamatan'].'</td>
                                                                 <td>'.$rows['rekdet_kabkot'].'</td>

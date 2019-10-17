@@ -45,7 +45,7 @@
     <!-- End Slider -->
 
     <div class="main">
-      <div class="container" style="width: 70%;">
+      <div class="container">
         <?php echo $_breadcrumb; ?>
         <?php echo $_content; ?>
       </div>
