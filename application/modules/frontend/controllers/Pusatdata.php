@@ -24,7 +24,7 @@ class Pusatdata extends MX_Controller {
 
     function cariData(){
         $post  = $this->input->post();
-        
+
         // get data rekap
         $selectJoin = '(
             SELECT
@@ -56,10 +56,13 @@ class Pusatdata extends MX_Controller {
 
                 $select                   = 'rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
                 $where['rekdet_rekap_id'] = $rows->rekap_id;
-                $where['provinsi_id']     = $post['provinsi'];
+
+                if($post['provinsi'] != ''){
+                    $where['provinsi_id'] = $post['provinsi'];
+                }
 
                 if($post['kabupaten'] != ''){
-                    $where['kabkot_id'] = $post['kabupaten'];
+                    $where['kabkot_id']   = $post['kabupaten'];
                 }
 
                 $getRekapDetail = $this->m_global->get($this->tableRekdet,$join,$where,$select);

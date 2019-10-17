@@ -63,14 +63,14 @@
                                                 <thead class="flip-content">
                                                     <tr>
                                                         <th width="1%"><center>No. </center></th>
-                                                        <th width="25%"><center>Lembaga</center></th>
-                                                        <th><center>Jenis Bantuan</center></th>
+                                                        <th width="23%"><center>Lembaga</center></th>
+                                                        <th width="14%"><center>Jenis Bantuan</center></th>
                                                         <th><center>Bantuan</center></th>
                                                         <th><center>Desa</center></th>
                                                         <th><center>Kecamatan</center></th>
                                                         <th><center>Kabupaten</center></th>
                                                         <th><center>Provinsi</center></th>
-                                                        <th class="numeric"><center>Nominal</center></th>
+                                                        <th class="numeric" width="10%"><center>Nominal</center></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>';

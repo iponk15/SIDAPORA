@@ -13,7 +13,7 @@
             <div class="portlet-body">
                 <div class="alert alert-warning alert-dismissable notifWarning" style="display:none;">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-                    <strong>Notifikasi!</strong> Ada kesalahan, inputan Tahun dan Provinsi tidak boleh kosong. Terima kasih
+                    <strong>Notifikasi!</strong> Ada kesalahan, inputan Tahun tidak boleh kosong. Terima kasih
                 </div>
                 <form class="form-inline form-cari" role="form" method="POST" action="javascript:void(0);">
                     <div class="form-group">
@@ -63,9 +63,10 @@
             var tahun    = $('.tahun').val();
             var provinsi = $('.proinsi').val();
 
-            if(tahun == '' && typeof provinsi == 'undefined'){
+            if(tahun == ''){
                 $('.notifWarning').fadeIn('slow');
             }else{
+                $('.notifWarning').fadeOut('slow');
                 var url  = base_url + 'pusatdata_cari';
                 var xdta = $('.form-cari').serializeArray();
 
@@ -85,7 +86,7 @@
                 $('.formKabupaten').fadeOut('slow');
             }
 
-            if(tahun != '' || typeof provinsi != 'undefined'){
+            if(tahun != ''){
                 $('.notifWarning').fadeOut('slow');
             }
 
