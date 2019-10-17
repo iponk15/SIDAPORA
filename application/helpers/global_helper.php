@@ -67,4 +67,9 @@ function getSession($field = ''){
     return $result;
 }
 
+function uang( $var, $tipe=null, $dec="0" ){
+    if ( empty($var) ) return 0;
+    return 'Rp. ' . number_format(str_replace(',','.',$var), $dec,',','.').($dec=="0"?($tipe == true ? ',-' : ",00" ):'');
+}
+
 ?>

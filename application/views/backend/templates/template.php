@@ -25,12 +25,15 @@
     =========================================================
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
-	<link href="<?php echo base_url('assets/backend/css//main.css'); ?>" rel="stylesheet">
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/js/jquery.js'); ?>"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/backend/plugins/datatable/DataTables/media/js/jquery.dataTables.js"></script>
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/plugins/datatable/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/plugins/datatable/DataTables/media/css/jquery.dataTables.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/backend/plugins/datatable/DataTables/media/css/dataTables.bootstrap.css">
+	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/js/jquery.dataTables.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datepicker/js/bootstrap-datepicker.js'); ?>"></script>
+
+    <link href="<?php echo base_url('assets/backend/css//main.css'); ?>" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/datatable/css/bootstrap.css'); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/css/jquery.dataTables.css'); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/css/dataTables.bootstrap.css'); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/datepicker/css/bootstrap-datepicker.css'); ?>">
 </head>
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">

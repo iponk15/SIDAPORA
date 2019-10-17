@@ -79,6 +79,12 @@
 						<i class="metismenu-icon pe-7s-plugin"></i> Kelurahan / Desa
 					</a>
 				</li>
+				<li class="app-sidebar__heading">Data Rekapitulasi</li>
+				<li>
+					<a href="<?php echo base_url('rekap'); ?>" class="<?php echo (getCtrl() == 'rekap' ? 'mm-active' : ''); ?>">
+						<i class="metismenu-icon pe-7s-plugin"></i> Rekap
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>

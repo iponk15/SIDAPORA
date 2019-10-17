@@ -1,4 +1,5 @@
 <?php
+function auth(){
 	$CI = &get_instance();
 	$CI->load->library( 'session' );
 
@@ -10,4 +11,5 @@
 	} else if ( empty($session) AND ! in_array( $CI->uri->segment(1), $ex ) ) {
 		redirect(base_url('login'));
 	}
+}
 ?>	

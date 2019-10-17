@@ -116,7 +116,7 @@ class Keldes extends MX_Controller {
         $getData = $this->m_global->get($this->tableKecamatan,$join,['kecamatan_provinsi_id' => $post['provinsi_id'], 'kecamatan_kabkot_id' => $post['kabkot_id'] ],'kecamatan_id,kecamatan_nama');
 
         if(!empty($getData)){
-            $select = '<select name="keldes_kecamatan_id" class="form-control">
+            $select = '<select name="keldes_kecamatan_id" class="form-control keldes_kecamatan_id">
                         <option value=""> Pilih Kecamatan </option>';
         
             foreach ($getData as $kecamatan) {

@@ -36,7 +36,7 @@
         <?php $uri = $this->uri->segment(1) == '' ? 'home' : $this->uri->segment(1); ?>
         <ul>
             <li <?php echo ($uri == 'home' ? 'class="active" ' : ''); ?>><a href="<?php echo base_url('home'); ?>" >Beranda</a></li>
-            <li <?php echo ($uri == 'pusatdata' ? 'class="active" ' : ''); ?>><a href="<?php echo base_url('pusatdata') ?>" >Pusat Data</a></li>
+            <!-- <li <?php echo ($uri == 'pusatdata' ? 'class="active" ' : ''); ?>><a href="<?php echo base_url('pusatdata') ?>" >Pusat Data</a></li> -->
             <li <?php echo ($uri == 'galeri' ? 'class="active" ' : ''); ?>><a href="<?php echo base_url('galeri') ?>" >Galeri</a></li>
             <li <?php echo ($uri == 'faq' ? 'class="active" ' : ''); ?>><a href="<?php echo base_url('faq') ?>" >FAQ</a></li>
             <!-- <li class="dropdown">
@@ -180,20 +180,20 @@
             <li><a href="http://keenthemes.com/preview/metronic/theme/templates/admin" target="_blank">Admin theme</a></li> -->
 
             <!-- BEGIN TOP SEARCH -->
-            <!-- <li class="menu-search">
+            <li class="menu-search">
                 <span class="sep"></span>
                 <i class="fa fa-search search-btn"></i>
                 <div class="search-box">
-                <form action="#">
+                <form action="<?php echo base_url('pusatdata_cari') ?>" method="POST">
                     <div class="input-group">
-                    <input type="text" placeholder="Search" class="form-control">
+                    <input type="number" placeholder="Cari Tahun" class="form-control" name="tahun">
                     <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Search</button>
                     </span>
                     </div>
                 </form>
                 </div> 
-            </li> -->
+            </li>
         <!-- END TOP SEARCH -->
         </ul>
     </div>

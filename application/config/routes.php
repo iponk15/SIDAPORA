@@ -57,7 +57,11 @@ $route['translate_uri_dashes'] = FALSE;
 
 // Start Frontend
 $route['home']      = 'frontend/home';
-$route['pusatdata'] = 'frontend/pusatdata';
+
+$route['pusatdata']      = 'frontend/pusatdata';
+$route['pusatdata_cari'] = 'frontend/pusatdata/cariData';
+
+
 $route['galeri']    = 'frontend/galeri';
 $route['faq']       = 'frontend/faq';
 // =============================================== Start routing frontend ========================================
@@ -146,6 +150,20 @@ $route['keldes_update/(:any)'] = 'backend/keldes/update/$1';
 $route['keldes_hapus/(:any)']  = 'backend/keldes/hapus/$1';
 $route['keldes_get_kecamatan'] = 'backend/keldes/getKecamatan';
 // end keldes
+
+// start rekap
+$route['rekap']                             = 'backend/rekap';
+$route['rekap_tambah']                      = 'backend/rekap/tambah';
+$route['rekap_simpan']                      = 'backend/rekap/simpan';
+$route['rekap_ubah/(:any)']                 = 'backend/rekap/ubah/$1';
+$route['rekap_update/(:any)']               = 'backend/rekap/update/$1';
+$route['rekap_hapus/(:any)']                = 'backend/rekap/hapus/$1';
+$route['rekap_detail/(:any)']               = 'backend/rekap/detail/$1';
+$route['rekap_detail_tambah/(:any)/(:any)'] = 'backend/rekap/detail_tambah/$1/$2';
+$route['rekap_get_kelurahan']               = 'backend/rekap/getKelurahan';
+$route['rekap_detail_simpan/(:any)/(:any)'] = 'backend/rekap/simpan_detail/$1/$2';
+$route['rekap_detail_hapus/(:any)/(:any)']  = 'backend/rekap/hapus_detail/$1/$2';
+// end rekap
 
 // =============================================== End Routing Backend ======================================= 
 

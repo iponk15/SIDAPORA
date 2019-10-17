@@ -6,6 +6,7 @@ class Landing extends MX_Controller {
 
     public function __construct(){
         parent::__construct();
+        auth();
     }
     
     public function index(){
