@@ -59,7 +59,7 @@
 <script>
     $( function() {
         $('.buttonSubmit').on('click', function(){
-            $('.kontenBlock').fadeOut();
+            $('.kontenBlock').hide();
             var tahun    = $('.tahun').val();
             var provinsi = $('.proinsi').val();
 
