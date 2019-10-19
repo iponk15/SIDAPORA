@@ -28,7 +28,8 @@
                         <label class="sr-only"></label>
                         <input type="text" placeholder="--- Pilih Kabupaten ---" name="kabupaten" class="form-control input-sm kabupaten">
                     </div> &nbsp;
-                    <button class="btn yellow btn-sm buttonSubmit"><i class="fa fa-search"></i></button>
+                    <button class="btn yellow btn-sm buttonSubmit" title="Cari Data"><i class="fa fa-search"></i></button> 
+                    <a href="<?php echo base_url('pusatdata_pdf') ?>" target="_blank" class="btn red btn-sm buttonExportPdf" title="Export PDF" style="display:none;"><i class="fa fa-file-pdf-o"></i></a>
                 </form>
             </div>
         </div>
@@ -67,6 +68,7 @@
                 $('.notifWarning').fadeIn('slow');
             }else{
                 $('.notifWarning').fadeOut('slow');
+                $('.buttonExportPdf').fadeIn('slow').attr('href',base_url + 'pusatdata_pdf/' + tahun);
                 var url  = base_url + 'pusatdata_cari';
                 var xdta = $('.form-cari').serializeArray();
 
