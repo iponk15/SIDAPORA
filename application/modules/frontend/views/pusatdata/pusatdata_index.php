@@ -53,7 +53,7 @@
         </div>
     </div>
     <!-- END CONTENT -->
-</div>
+</div> 
 
 <div id="contentRekap"></div>
 
