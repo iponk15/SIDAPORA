@@ -1,1 +1,36 @@
 /* here you can put your own css to customize and override the theme */
+
+.slider-item-1 .promo-like {
+    color: #fff;
+    background: rgba(0,0,0,0.67);
+    display: inline-block;
+    margin-right: 7px;
+    text-align: left;
+    padding: 35px 22px 25px 21px;
+    position: relative;
+    top: -12px;
+  }
+  .ie8 .slider-item-1 .promo-like,
+  .ie8 .slider-item-1 .promo-like-text {
+    background: #000;
+  }
+  .slider-item-1 .promo-like i {
+    font-size: 80px;
+    line-height: 1;
+  }
+  .slider-item-1 .promo-like-text {
+    color: #fff;
+    background: rgba(0,0,0,0.67);
+    font: 400 20px/1.4 "PT Sans Narrow", Arial, sans-serif;
+    display: inline-block;
+    text-align: left;
+    padding: 22px 25px 17px;
+  }
+  .slider-item-1 .promo-like-text h2 {
+    font: 400 38px/38px "PT Sans Narrow", Arial, sans-serif;
+    padding: 0;
+    margin: 0 0 8px;
+  }
+  .slider-item-1 .promo-like-text p {
+    margin: 0;
+  }

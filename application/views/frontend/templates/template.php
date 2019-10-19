@@ -56,6 +56,7 @@
   <script src="<?php echo base_url('assets/frontend/pages/js/portfolio.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/global/js/metronic.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/global/js/global.js'); ?>" type="text/javascript"></script>
+  <script src="<?php echo base_url('assets/frontend/global/js/revo-ini.js'); ?>" type="text/javascript"></script>
   <!-- END RevolutionSlider -->
   
   <script src="<?php echo base_url('assets/frontend/layout/js/back-to-top.js'); ?>" type="text/javascript"></script>
@@ -82,7 +83,7 @@
 <!-- Body BEGIN -->
 <body class="corporate">
     <!-- Start Header -->
-    <?php echo $_header; ?>
+    <?php echo $_header; ?> <br>
     <!-- End Header -->
     <!-- Start Slider -->
     <?php echo ( @$is_404 == 1 || @$slider == 0 ? '' : $_slider ); ?>
