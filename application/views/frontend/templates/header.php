@@ -26,7 +26,8 @@
 <div class="header">
     <div class="container">
     <a class="site-logo" href="<?php echo base_url('home') ?>" style="text-decoration: none; color: #FF0D59;">
-        <b>SIDAPORA</b>
+        <p><h1 style="margin-top: -5%;"><b>SIDAPORA</b></h1></p>
+        <p><h5 style="margin-top: -5%; margin-bottom: -5%; color: black;">Sistem Aplikasi Database Prasarana Olahraga</h5></p>
     </a>
 
     <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
@@ -35,10 +36,10 @@
     <div class="header-navigation pull-right font-transform-inherit">
         <?php $uri = $this->uri->segment(1) == '' ? 'home' : $this->uri->segment(1); ?>
         <ul>
-            <li <?php echo ($uri == 'home' ? 'class="active" ' : ''); ?>><a href="<?php echo base_url('home'); ?>" >Beranda</a></li>
-            <li <?php echo ($uri == 'pusatdata' ? 'class="active" ' : ''); ?>><a href="<?php echo base_url('pusatdata') ?>" >Pusat Data</a></li>
-            <li <?php echo ($uri == 'galeri' ? 'class="active" ' : ''); ?>><a href="<?php echo base_url('galeri') ?>" >Galeri</a></li>
-            <li <?php echo ($uri == 'faq' ? 'class="active" ' : ''); ?>><a href="<?php echo base_url('faq') ?>" >FAQ</a></li>
+            <li <?php echo ($uri == 'home' ? 'class="active" ' : ''); ?>><a style="font-size: x-large;" href="<?php echo base_url('home'); ?>" >Beranda</a></li>
+            <li <?php echo ($uri == 'pusatdata' ? 'class="active" ' : ''); ?>><a style="font-size: x-large;" href="<?php echo base_url('pusatdata') ?>" >Pusat Data</a></li>
+            <li <?php echo ($uri == 'galeri' ? 'class="active" ' : ''); ?>><a style="font-size: x-large;" href="<?php echo base_url('galeri') ?>" >Galeri</a></li>
+            <li <?php echo ($uri == 'faq' ? 'class="active" ' : ''); ?>><a style="font-size: x-large;" href="<?php echo base_url('faq') ?>" >FAQ</a></li>
             <!-- <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
                 Home 
