@@ -6,6 +6,12 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Kode Provinsi</label>
+						<div class="col-sm-4">
+							<input required name="provinsi_kode" placeholder="Input kode provinsi" type="text" class="form-control" value="<?php echo $records->provinsi_kode ?>">
+						</div>
+					</div>
+					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Janis provinsi</label>
 						<div class="col-sm-4">
 							<input required name="provinsi_nama" placeholder="Input jenis provinsi" type="text" class="form-control" value="<?php echo $records->provinsi_nama; ?>">

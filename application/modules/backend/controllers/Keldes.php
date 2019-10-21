@@ -21,12 +21,12 @@ class Keldes extends MX_Controller {
 		
         // get data
         $join            = [ 
-            [$this->tableProvinsi,'keldes_provinsi_id = provinsi_id','left'],
-            [$this->tableKabkot,'keldes_kabkot_id = kabkot_id','left'],
-            [$this->tableKecamatan,'keldes_kecamatan_id = kecamatan_id','left']
+            [$this->tableProvinsi,'keldes_provinsi_kode = provinsi_kode','left'],
+            [$this->tableKabkot,'keldes_kabkot_kode = kabkot_kode','left'],
+            [$this->tableKecamatan,'keldes_kecamatan_kode = kecamatan_kode','left']
         ];
-		$select          = 'keldes_id,keldes_nama,keldes_status,provinsi_nama,kabkot_nama,kecamatan_nama';
-        $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['keldes_id','DESC']);
+		$select          = 'keldes_id,keldes_kode,keldes_nama,keldes_status,provinsi_kode,provinsi_nama,kabkot_kode,kabkot_nama,kecamatan_kode,kecamatan_nama';
+        $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['keldes_lastupdate','DESC']);
         
         $this->templates->backend($this->prefix.'index', $data);
     }
@@ -37,20 +37,21 @@ class Keldes extends MX_Controller {
 		$data['icon']      = 'provinsi';
         $data['header']    = 'Form Provinsi';
         $data['url']       = $this->url;
-        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_id,provinsi_nama');
+        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama');
 		
 		$this->templates->backend($this->prefix.'tambah',$data);
     }
 
     function simpan(){
-        $post                        = $this->input->post();
-        $data['keldes_provinsi_id']  = $post['keldes_provinsi_id'];
-        $data['keldes_kabkot_id']    = $post['kecamatan_kabkot_id'];
-        $data['keldes_kecamatan_id'] = $post['keldes_kecamatan_id'];
-        $data['keldes_nama']         = $post['keldes_nama'];
-        $data['keldes_createdby']    = getSession('user_id');
-        $data['keldes_createddate']  = date('Y-m-d H:i:s');
-        $data['keldes_ip']           = getUserIp();
+        $post                          = $this->input->post();
+        $data['keldes_provinsi_kode']  = $post['keldes_provinsi_kode'];
+        $data['keldes_kabkot_kode']    = $post['kecamatan_kabkot_id'];
+        $data['keldes_kecamatan_kode'] = $post['keldes_kecamatan_id'];
+        $data['keldes_kode']           = $post['keldes_kode'];
+        $data['keldes_nama']           = $post['keldes_nama'];
+        $data['keldes_createdby']      = getSession('user_id');
+        $data['keldes_createddate']    = date('Y-m-d H:i:s');
+        $data['keldes_ip']             = getUserIp();
         
         $input = $this->m_global->insert($this->table, $data); 
         
@@ -71,11 +72,11 @@ class Keldes extends MX_Controller {
 
         // get data janei provinsi
         $join            = [
-            [$this->tableProvinsi,'keldes_provinsi_id = provinsi_id','left'],
-            [$this->tableKabkot,'keldes_kabkot_id = kabkot_id','left'],
-            [$this->tableKecamatan,'keldes_kecamatan_id = kecamatan_id','left']
+            [$this->tableProvinsi,'keldes_provinsi_kode = provinsi_kode','left'],
+            [$this->tableKabkot,'keldes_kabkot_kode = kabkot_kode','left'],
+            [$this->tableKecamatan,'keldes_kecamatan_kode = kecamatan_kode','left']
         ];
-        $select          = 'provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,keldes_provinsi_id';
+        $select          = 'provinsi_nama,kabkot_nama,kecamatan_nama,keldes_kode,keldes_nama,keldes_provinsi_kode';
 		$data['records'] = $this->m_global->get($this->table,$join,[md56('keldes_id',1) => $keldes_id],$select)[0];
 		
 		$this->templates->backend($this->prefix.'ubah',$data);
@@ -83,6 +84,7 @@ class Keldes extends MX_Controller {
 
     function update($keldes_id){
         $post                     = $this->input->post();
+        $data['keldes_nama']      = $post['keldes_nama'];
 		$data['keldes_nama']      = $post['keldes_nama'];
         $data['keldes_updatedby'] = getSession('user_id');
         $data['keldes_ip']        = getUserIp();
@@ -90,7 +92,8 @@ class Keldes extends MX_Controller {
 		$update = $this->m_global->update($this->table,$data,[md56('keldes_id',1) => $keldes_id]);
 		
 		if($update == TRUE){
-			redirect('keldes_ubah/'.$keldes_id);
+			// redirect('keldes_ubah/'.$keldes_id);
+			redirect('keldes');
 		}else{
 			pre('data gagal disimpan');
 		}
@@ -110,17 +113,17 @@ class Keldes extends MX_Controller {
         $post = $this->input->post();
         
         $join    = [ 
-            [$this->tableProvinsi,'kecamatan_provinsi_id = provinsi_id','left'],
-            [$this->tableKabkot,'kecamatan_kabkot_id = kabkot_id','left']
+            [$this->tableProvinsi,'kecamatan_provinsi_kode = provinsi_kode','left'],
+            [$this->tableKabkot,'kecamatan_kabkot_kode = kabkot_kode','left']
         ];
-        $getData = $this->m_global->get($this->tableKecamatan,$join,['kecamatan_provinsi_id' => $post['provinsi_id'], 'kecamatan_kabkot_id' => $post['kabkot_id'] ],'kecamatan_id,kecamatan_nama');
+        $getData = $this->m_global->get($this->tableKecamatan,$join,['kecamatan_provinsi_kode' => $post['provinsi_id'], 'kecamatan_kabkot_kode' => $post['kabkot_id'] ],'kecamatan_kode,kecamatan_nama');
 
         if(!empty($getData)){
             $select = '<select name="keldes_kecamatan_id" class="form-control keldes_kecamatan_id">
                         <option value=""> Pilih Kecamatan </option>';
         
             foreach ($getData as $kecamatan) {
-                $select .= '<option value="'.$kecamatan->kecamatan_id.'"> '.$kecamatan->kecamatan_nama.' </option>';
+                $select .= '<option value="'.$kecamatan->kecamatan_kode.'"> '.$kecamatan->kecamatan_nama.' </option>';
             }
 
             echo $select .= '</select>';

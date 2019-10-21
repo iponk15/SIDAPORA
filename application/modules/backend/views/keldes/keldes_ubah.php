@@ -24,6 +24,12 @@
 						</div>
 					</div>
 					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Kode Kelurahan / Desa</label>
+						<div class="col-sm-4">
+							<input required name="keldes_kode" placeholder="Input kode Kelurahan / Desa" type="text" class="form-control" value="<?php echo $records->keldes_kode ?>">
+						</div>
+					</div>
+					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Kelurahan / Desa</label>
 						<div class="col-sm-4">
 							<input value="<?php echo $records->keldes_nama ?>" required name="keldes_nama" placeholder="Input provinsi" type="text" class="form-control">

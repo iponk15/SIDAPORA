@@ -1,5 +1,43 @@
 <div class="main-card mb-3 card">
-	<div class="card-header"><?php echo $header; ?></div>
+	<div class="card-header">
+		<h4><b>Import Data</b></h4>
+	</div>
+	<div class="card-body">
+		<form enctype="multipart/form-data" class="" method="POST" action="<?php echo base_url('rekap_import'); ?>">
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Kategori</label>
+						<div class="col-sm-3">
+							<select name="data_kategori" class="form-control">
+								<option value="">Pilih Kategori</option>
+								<?php 
+									foreach ($kategori as $ktgrs) {
+										echo '<option value="'.$ktgrs->kategori_id.'"> '.$ktgrs->kategori_nama.' </option>';
+									}
+								?>
+							</select>
+						</div>
+					</div>
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Masukan file excel</label>
+						<div class="col-sm-3">
+							<input type="file" class="form-control" name="data_rekap" placeholder="import data excel">
+						</div>
+						<button type="submit" class="mb-2 mr-2 btn btn-success active">Submit</button>
+					</div>
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+		</form>
+	</div>
+</div>
+<br>
+<div class="main-card mb-3 card">
+	<div class="card-header">
+		<h4><b><?php echo $header; ?></b></h4>
+	</div>
 	<div class="card-body">
 		<div class="text-right"> 
 			<a href="<?php echo base_url('rekap_tambah'); ?>" class="mb-2 mr-2 btn btn-primary active">Tambah Data Rekap</a> 
@@ -43,6 +81,13 @@
 
 <script>
 	$(document).ready(function() {
+		$('.datepicker').datepicker({
+			orientation : "bottom right",
+			minViewMode : 2,
+			format      : "yyyy",
+			autoclose   : true
+		});
+
 		$('.table_user').DataTable();
-	} );
+	});
 </script>

@@ -8,14 +8,20 @@
 					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Provinsi</label>
 						<div class="col-sm-4">
-							<select name="kabkot_provinsi_id" class="form-control">
+							<select name="kabkot_provinsi_kode" class="form-control">
 								<option value="">Pilih Provinsi</option>
 								<?php 
 									foreach ($provinsi as $prov) {
-										echo '<option '.($prov->provinsi_id == $records->kabkot_provinsi_id ? "selected" : "").' value="'.$prov->provinsi_id.'"> '.$prov->provinsi_nama.' </option>';
+										echo '<option '.($prov->provinsi_kode == $records->kabkot_provinsi_kode ? "selected" : "").' value="'.$prov->provinsi_kode.'"> '.$prov->provinsi_nama.' </option>';
 									}
 								?>
 							</select>
+						</div>
+					</div>
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Kode Kabupaten / Kota</label>
+						<div class="col-sm-4">
+							<input required name="kabkot_kode" placeholder="Input kode kabupaten / kota" type="text" class="form-control" value="<?php echo $records->kabkot_kode ?>">
 						</div>
 					</div>
 					<div class="position-relative row form-group">

@@ -28,7 +28,10 @@ class Rekap extends MX_Controller {
         // get data
         $join            = [[$this->tableKategori,'rekap_kategori_id = kategori_id','left']];
         $select          = 'rekap_id,rekap_judul,rekap_tahun,rekap_status,kategori_nama';
-        $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['rekap_id','DESC']);
+        $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['rekap_lastupdate','DESC']);
+
+        // get data kategori
+        $data['kategori'] = $this->m_global->get($this->tableKategori,null,['kategori_status' => '1'],'kategori_id,kategori_nama');
         
         $this->templates->backend($this->prefix.'index', $data);
     }
@@ -125,12 +128,12 @@ class Rekap extends MX_Controller {
 		// get data rekap detail
 		$select            = 'rekdet_id,rekdet_lembaga,rekdet_nominal,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama';
 		$join              = [
-			[$this->tableBantuan,'rekdet_bantuan_id = bantuan_id','left'],
-			[$this->tableJenisBantuan,'rekdet_jnsbtn_id = jnsbtn_id','left'],
-			[$this->tableProvinsi,'rekdet_provinsi_id = provinsi_id', 'left'],
-			[$this->tableKabkot,'rekdet_kabkot_id = kabkot_id','left'],
-			[$this->tableKecamatan,'rekdet_kecamatan_id = kecamatan_id','left'],
-			[$this->tableKeldes,'rekdet_keldes_id = keldes_id','left']
+			[$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],
+			[$this->tableJenisBantuan,'rekdet_jnsbtn_kode = jnsbtn_kode','left'],
+			[$this->tableProvinsi,'rekdet_provinsi_kode = provinsi_kode', 'left'],
+			[$this->tableKabkot,'rekdet_kabkot_kode = kabkot_kode','left'],
+			[$this->tableKecamatan,'rekdet_kecamatan_kode = kecamatan_kode','left'],
+			[$this->tableKeldes,'rekdet_keldes_kode = keldes_kode','left']
 		];
 		$data['rkpDetail'] = $this->m_global->get($this->tableRekapDetail,$join,[md56('rekdet_rekap_id',1) => $rekap_id], $select);
 		
@@ -148,29 +151,10 @@ class Rekap extends MX_Controller {
 
         // get data foreign
         $data['bantuan']  = $this->m_global->get($this->tableBantuan,null,['bantuan_status' => '1', md56('bantuan_kategori_id',1) => $kategori_id],'bantuan_id,bantuan_nama');
-        $data['jnsbtn']   = $this->m_global->get($this->tableJenisBantuan,null,['jnsbtn_status' => '1', md56('jnsbtn_kategori_id',1) => $kategori_id],'jnsbtn_id,jnsbtn_nama');
-        $data['provinsi'] = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_id,provinsi_nama');
+        $data['jnsbtn']   = $this->m_global->get($this->tableJenisBantuan,null,['jnsbtn_status' => '1', md56('jnsbtn_kategori_id',1) => $kategori_id],'jnsbtn_kode,jnsbtn_nama');
+        $data['provinsi'] = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama');
 
         $this->templates->backend($this->prefix.'detail_tambah', $data);
-    }
-
-    function getKelurahan(){
-        $post = $this->input->post();
-        
-        // get kelurahan 
-        $where['keldes_provinsi_id']  = $post['provinsi_id'];
-        $where['keldes_kabkot_id']    = $post['kabkot_id'];
-        $where['keldes_kecamatan_id'] = $post['kecamtan_id'];
-        $getKeldes = $this->m_global->get($this->tableKeldes,null,$where,'keldes_id,keldes_nama');
-
-        $select = '<select name="rekap_keldes_id" class="form-control rekap_keldes_id">
-                        <option value=""> Pilih Kelurahan </option>';
-        
-        foreach ($getKeldes as $keldes) {
-            $select .= '<option value="'.$keldes->keldes_id.'"> '.$keldes->keldes_nama.' </option>';
-        }
-
-        echo $select .= '</select>';
     }
 
     function simpan_detail($rekap_id, $kategori_id){
@@ -181,20 +165,72 @@ class Rekap extends MX_Controller {
         $where[md56('rekap_kategori_id',1)] = $kategori_id;
         $rekap_id = $this->m_global->get($this->table,null,$where,'rekap_id')[0]->rekap_id;
 
-        $data['rekdet_rekap_id']     = $rekap_id;
-        $data['rekdet_lembaga']      = $post['rekdet_lembaga'];
-        $data['rekdet_bantuan_id']   = $post['rekdet_bantuan_id'];
-        $data['rekdet_jnsbtn_id']    = $post['rekdet_jnsbtn_id'];
-        $data['rekdet_provinsi_id']  = $post['rekdet_provinsi_id'];
-        $data['rekdet_kabkot_id']    = $post['kecamatan_kabkot_id'];
-        $data['rekdet_kecamatan_id'] = $post['keldes_kecamatan_id'];
-        $data['rekdet_keldes_id']    = $post['rekap_keldes_id'];
-        $data['rekdet_nominal']      = $post['rekdet_nominal'];
+        $data['rekdet_rekap_id']       = $rekap_id;
+        $data['rekdet_lembaga']        = $post['rekdet_lembaga'];
+        $data['rekdet_bantuan_kode']   = $post['rekdet_bantuan_id'];
+        $data['rekdet_jnsbtn_kode']    = $post['rekdet_jnsbtn_id'];
+        $data['rekdet_provinsi_kode']  = $post['rekdet_provinsi_id'];
+        $data['rekdet_kabkot_kode']    = $post['kecamatan_kabkot_id'];
+        $data['rekdet_kecamatan_kode'] = $post['keldes_kecamatan_id'];
+        $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
+        $data['rekdet_nominal']        = $post['rekdet_nominal'];
         
         $input = $this->m_global->insert($this->tableRekapDetail, $data); 
         
         if($input){
             redirect('rekap_detail_tambah/'.md56($rekap_id).'/'.$kategori_id);
+        }else{
+            pre('data gagal disimpan');
+        }
+    }
+
+    function detail_ubah($rekdet_id){
+        $data['pagetitle'] = 'Halaman bantuan';
+		$data['subtitle']  = 'Tambah data bantuan';
+		$data['icon']      = 'bantuan';
+        $data['header']    = 'Form bantuan';
+        $data['url']       = $this->url;
+        $data['rekdet_id'] = $rekdet_id;
+
+        $join              = [ 
+            [$this->table,'rekdet_rekap_id = rekap_id','left'],
+            [$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],
+            [$this->tableJenisBantuan,'rekdet_jnsbtn_kode = jnsbtn_kode','left'],
+            [$this->tableProvinsi,'rekdet_provinsi_kode = provinsi_kode','left'],
+            [$this->tableKabkot,'rekdet_kabkot_kode = kabkot_kode','left'],
+            [$this->tableKecamatan,'rekdet_kecamatan_kode = kecamatan_kode','left'],
+            [$this->tableKeldes,'rekdet_keldes_kode = keldes_kode','left']
+        ];
+        $select          = 'rekdet_rekap_id,rekdet_lembaga,rekdet_nominal,rekap_kategori_id,rekdet_bantuan_kode,rekdet_jnsbtn_kode,rekdet_provinsi_kode,rekdet_kabkot_kode,rekdet_kecamatan_kode,rekdet_keldes_kode';
+        $data['records'] = $this->m_global->get($this->tableRekapDetail,$join,[md56('rekdet_id',1) => $rekdet_id],$select)[0];
+
+        // get data foreign
+        $data['bantuan']   = $this->m_global->get($this->tableBantuan,null,['bantuan_status' => '1', 'bantuan_kategori_id' => $data['records']->rekap_kategori_id ],'bantuan_kode,bantuan_nama');
+        $data['jnsbtn']    = $this->m_global->get($this->tableJenisBantuan,null,['jnsbtn_status' => '1', 'jnsbtn_kategori_id' => $data['records']->rekap_kategori_id ],'jnsbtn_kode,jnsbtn_nama');
+        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama');
+        $data['kabkot']    = $this->m_global->get($this->tableKabkot,null,['kabkot_provinsi_kode' => $data['records']->rekdet_provinsi_kode ],'kabkot_kode,kabkot_nama');
+        $data['kecamatan'] = $this->m_global->get($this->tableKecamatan,null,['kecamatan_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'kecamatan_kode,kecamatan_nama');
+        $data['kelurahan'] = $this->m_global->get($this->tableKeldes,null,['keldes_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'keldes_kode,keldes_nama');
+
+        $this->templates->backend($this->prefix.'detail_ubah', $data);
+    }
+
+    function update_detail($rekdet_id){
+        $post = $this->input->post();
+
+        $data['rekdet_lembaga']        = $post['rekdet_lembaga'];
+        $data['rekdet_bantuan_kode']   = $post['rekdet_bantuan_id'];
+        $data['rekdet_jnsbtn_kode']    = $post['rekdet_jnsbtn_id'];
+        $data['rekdet_provinsi_kode']  = $post['rekdet_provinsi_id'];
+        $data['rekdet_kabkot_kode']    = $post['kecamatan_kabkot_id'];
+        $data['rekdet_kecamatan_kode'] = $post['keldes_kecamatan_id'];
+        $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
+        $data['rekdet_nominal']        = $post['rekdet_nominal'];
+        
+        $input = $this->m_global->update($this->tableRekapDetail, $data, [md56('rekdet_id',1) => $rekdet_id]); 
+        
+        if($input){
+            redirect('rekap_detail_ubah/'.$rekdet_id);
         }else{
             pre('data gagal disimpan');
         }
@@ -208,6 +244,85 @@ class Rekap extends MX_Controller {
 		}else{
 			pre('data gagal disimpan');
 		}
+    }
+
+    function getKelurahan(){
+        $post = $this->input->post();
+        
+        // get kelurahan 
+        $where['keldes_provinsi_kode']  = $post['provinsi_id'];
+        $where['keldes_kabkot_kode']    = $post['kabkot_id'];
+        $where['keldes_kecamatan_kode'] = $post['kecamtan_id'];
+        $getKeldes = $this->m_global->get($this->tableKeldes,null,$where,'keldes_kode,keldes_nama');
+
+        if(!empty($getKeldes)){
+            $select = '<select name="rekap_keldes_id" class="form-control rekap_keldes_id">
+                            <option value=""> Pilih Kelurahan </option>';
+            
+            foreach ($getKeldes as $keldes) {
+                $select .= '<option value="'.$keldes->keldes_kode.'"> '.$keldes->keldes_nama.' </option>';
+            }
+
+            echo $select .= '</select>';
+        }else{
+            echo 'Maaf data tidak di temukan';
+        }
+    }
+
+    function importData(){
+        $this->load->library('excel');
+
+        $post     = $this->input->post();
+        $fileName = $_FILES['data_rekap']['name'];
+        $tmpFile  = $_FILES['data_rekap']['tmp_name'];
+
+        $objPHPExcel     = PHPExcel_IOFactory::load($tmpFile);
+        $cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
+        $sheet           = $objPHPExcel->getSheetNames();
+
+        $p = 0;
+        $x = 1;
+        foreach ($sheet as $sheets) {
+            $rowExcel      = $objPHPExcel->getSheet($p++);
+            $highestRow    = $rowExcel->getHighestRow();
+            $highestColumn = $rowExcel->getHighestColumn();
+            
+            $dtRekap['rekap_judul']       = $rowExcel->rangeToArray('A1')[0][0];
+            $dtRekap['rekap_kategori_id'] = $post['data_kategori'];
+            $dtRekap['rekap_tahun']       = $sheets;
+            $dtRekap['rekap_createdby']   = getSession('user_id');
+            $dtRekap['rekap_createddate'] = date('Y-m-d H:i:s');
+            $dtRekap['rekap_ip']          = getUserIp();
+
+            $saveRekap = $this->m_global->insert($this->table, $dtRekap);
+            $lastId    = $this->db->insert_id();
+            
+            pre('Data lastid '. $lastId);
+            
+            for($row = 6; $row <= $highestRow; $row++){
+                $rowData = $rowExcel->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
+
+                $dtRekapDetail['rekdet_rekap_id']       = $lastId;
+                $dtRekapDetail['rekdet_lembaga']        = $rowData[0][1];
+                $dtRekapDetail['rekdet_bantuan_kode']   = $rowData[0][3];
+                $dtRekapDetail['rekdet_jnsbtn_kode']    = $rowData[0][2];
+                $dtRekapDetail['rekdet_keldes_kode']    = $rowData[0][4];
+                $dtRekapDetail['rekdet_kecamatan_kode'] = $rowData[0][5];
+                $dtRekapDetail['rekdet_kabkot_kode']    = $rowData[0][6];
+                $dtRekapDetail['rekdet_provinsi_kode']  = $rowData[0][7];
+                $dtRekapDetail['rekdet_nominal']        = $rowData[0][8];
+
+                $tempData[] = $dtRekapDetail;
+            }
+        }
+
+        $insRekapDetail = $this->db->insert_batch($this->tableRekapDetail, $tempData);
+
+        if($insRekapDetail){
+            redirect('rekap');          
+        }else{
+            pre('data gagal disimpan');
+        }
     }
 
 }

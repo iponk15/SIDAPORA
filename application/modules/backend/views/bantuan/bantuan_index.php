@@ -1,14 +1,15 @@
 <div class="main-card mb-3 card">
-	<div class="card-header"><?php echo $header; ?></div>
+	<div class="card-header"><h4><?php echo $header; ?></h4></div>
 	<div class="card-body">
 		<div class="text-right"> 
-			<a href="<?php echo base_url('bantuan_tambah'); ?>" class="mb-2 mr-2 btn btn-primary active">Tambah Data User</a> 
+			<a href="<?php echo base_url('bantuan_tambah'); ?>" class="mb-2 mr-2 btn btn-primary active">Tambah Data Bantuan</a> 
 		</div>
 		<table class="mb-0 table table-bordered table_user">
 			<thead>
 				<tr>
 					<th><center>No.</center></th>
 					<th><center>Kategori</center></th>
+					<th><center>Kode Bantuan</center></th>
 					<th><center>Bantuan</center></th>
 					<th><center>Deskripsi</center></th>
                     <th><center>Status</center></th>
@@ -23,6 +24,7 @@
                         <tr>
                             <td scope="row" width="3%"><center>'.$i++.'</center></td>
                             <td>'.$row->kategori_nama.'</td>
+                            <td>'.$row->bantuan_kode.'</td>
                             <td>'.$row->bantuan_nama.'</td>
                             <td>'.$row->bantuan_deskripsi.'</td>
                             <td align="center">'.($row->bantuan_status == 1 ? '<div class="mb-2 mr-2 badge badge-success">Aktif</div>' : '<div class="mb-2 mr-2 badge badge-danger">Tidak Aktif</div>').'</td>

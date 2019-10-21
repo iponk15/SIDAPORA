@@ -17,8 +17,8 @@ class provinsi extends MX_Controller {
 		$data['header']    = 'Table Provinsi';
 		
         // get data
-		$select          = 'provinsi_id,provinsi_nama,provinsi_status';
-        $data['records'] = $this->m_global->get($this->table,null,null,$select,null,['provinsi_id','DESC']);
+		$select          = 'provinsi_id,provinsi_kode,provinsi_nama,provinsi_status';
+        $data['records'] = $this->m_global->get($this->table,null,null,$select,null,['provinsi_lastupdate','DESC']);
         
         $this->templates->backend($this->prefix.'index', $data);
     }
@@ -35,6 +35,7 @@ class provinsi extends MX_Controller {
 
     function simpan(){
         $post                         = $this->input->post();
+        $data['provinsi_kode']        = $post['provinsi_kode'];
         $data['provinsi_nama']        = $post['provinsi_nama'];
         $data['provinsi_createdby']   = getSession('user_id');
         $data['provinsi_createddate'] = date('Y-m-d H:i:s');
@@ -58,7 +59,7 @@ class provinsi extends MX_Controller {
         $data['url']         = $this->url;
 
         // get data janei provinsi
-        $select          = 'provinsi_nama';
+        $select          = 'provinsi_kode, provinsi_nama';
 		$data['records'] = $this->m_global->get($this->table,null,[md56('provinsi_id',1) => $provinsi_id],$select)[0];
 		
 		$this->templates->backend('provinsi/provinsi_ubah',$data);
@@ -66,6 +67,7 @@ class provinsi extends MX_Controller {
 
     function update($provinsi_id){
         $post                       = $this->input->post();
+        $data['provinsi_kode']      = $post['provinsi_kode'];
 		$data['provinsi_nama']      = $post['provinsi_nama'];
         $data['provinsi_updatedby'] = getSession('user_id');
         $data['provinsi_ip']        = getUserIp();
@@ -73,7 +75,8 @@ class provinsi extends MX_Controller {
 		$update = $this->m_global->update($this->table,$data,[md56('provinsi_id',1) => $provinsi_id]);
 		
 		if($update == TRUE){
-			redirect('provinsi_ubah/'.$provinsi_id);
+			// redirect('provinsi_ubah/'.$provinsi_id);
+			redirect('provinsi');
 		}else{
 			pre('data gagal disimpan');
 		}

@@ -60,7 +60,7 @@
 							<td>'.$row->rekdet_nominal.'</td>
                             <td width="15%">
 								<center>
-                                    <a href="'.base_url('rekap_detail_ubah/'.$rekap_id.'/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="nav-link-icon fa fa-edit"></i></a>
+                                    <a href="'.base_url('rekap_detail_ubah/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="nav-link-icon fa fa-edit"></i></a>
                                     <a href="'.base_url('rekap_detail_hapus/'.$rekap_id.'/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-danger"><i class="nav-link-icon fa fa-trash"></i></a>
                                 </center>
                             </td>

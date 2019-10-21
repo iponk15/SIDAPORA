@@ -10,6 +10,7 @@
 					<th><center>No.</center></th>
 					<th><center>Provinsi</center></th>
 					<th><center>Kabupaten / Kota</center></th>
+					<th><center>Kode Kecamatan</center></th>
 					<th><center>Kecamatan</center></th>
                     <th><center>Status</center></th>
 					<th><center>Action</center></th>
@@ -22,10 +23,11 @@
                         echo '
                         <tr>
                             <td scope="row" width="3%"><center>'.$i++.'</center></td>
-                            <td>'.$row->provinsi_nama.'</td>
-                            <td>'.$row->kabkot_nama.'</td>
+                            <td>'.$row->provinsi_nama.' (<b> '.$row->provinsi_kode.' </b>)</td>
+                            <td>'.$row->kabkot_nama.' (<b> '.$row->kabkot_kode.' </b>)</td>
+                            <td align="center" width="13%">'.$row->kecamatan_kode.'</td>
                             <td>'.$row->kecamatan_nama.'</td>
-                            <td align="center">'.($row->kecamatan_status == 1 ? '<div class="mb-2 mr-2 badge badge-success">Aktif</div>' : '<div class="mb-2 mr-2 badge badge-danger">Tidak Aktif</div>').'</td>
+                            <td align="center" width="10%">'.($row->kecamatan_status == 1 ? '<div class="mb-2 mr-2 badge badge-success">Aktif</div>' : '<div class="mb-2 mr-2 badge badge-danger">Tidak Aktif</div>').'</td>
                             <td width="10%">
                                 <center>
                                     <a href="'.base_url('kecamatan_ubah/'.md56($row->kecamatan_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-info"><i class="nav-link-icon fa fa-edit"></i></a>

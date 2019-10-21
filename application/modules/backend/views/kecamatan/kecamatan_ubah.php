@@ -18,6 +18,12 @@
 						</div>
 					</div>
 					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Kode Kecamatan</label>
+						<div class="col-sm-4">
+							<input required name="kecamatan_kode" placeholder="Input kode kecamatan" type="text" class="form-control" value="<?php echo $records->kecamatan_kode ?>">
+						</div>
+					</div>
+					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Kecamatan</label>
 						<div class="col-sm-4">
 							<input value="<?php echo $records->kecamatan_nama ?>" required name="kecamatan_nama" placeholder="Input provinsi" type="text" class="form-control">

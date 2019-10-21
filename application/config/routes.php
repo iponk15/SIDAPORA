@@ -163,9 +163,12 @@ $route['rekap_update/(:any)']               = 'backend/rekap/update/$1';
 $route['rekap_hapus/(:any)']                = 'backend/rekap/hapus/$1';
 $route['rekap_detail/(:any)']               = 'backend/rekap/detail/$1';
 $route['rekap_detail_tambah/(:any)/(:any)'] = 'backend/rekap/detail_tambah/$1/$2';
+$route['rekap_detail_ubah/(:any)']          = 'backend/rekap/detail_ubah/$1';
 $route['rekap_get_kelurahan']               = 'backend/rekap/getKelurahan';
 $route['rekap_detail_simpan/(:any)/(:any)'] = 'backend/rekap/simpan_detail/$1/$2';
+$route['rekap_detail_update/(:any)']        = 'backend/rekap/update_detail/$1';
 $route['rekap_detail_hapus/(:any)/(:any)']  = 'backend/rekap/hapus_detail/$1/$2';
+$route['rekap_import']                      = 'backend/rekap/importData';
 // end rekap
 
 // =============================================== End Routing Backend ======================================= 

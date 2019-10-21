@@ -9,6 +9,7 @@
 				<tr>
 					<th><center>No.</center></th>
 					<th><center>Provinsi</center></th>
+					<th><center>Kode Kabupaten / Kota</center></th>
 					<th><center>Kabupaten / Kota</center></th>
                     <th><center>Status</center></th>
 					<th><center>Action</center></th>
@@ -21,9 +22,10 @@
                         echo '
                         <tr>
                             <td scope="row" width="3%"><center>'.$i++.'</center></td>
-                            <td>'.$row->provinsi_nama.'</td>
+                            <td width="15%">'.$row->provinsi_nama.' (<b> '.$row->provinsi_kode.' </b>)</td>
+                            <td align="center" width="15%">'.$row->kabkot_kode.'</td>
                             <td>'.$row->kabkot_nama.'</td>
-                            <td align="center">'.($row->kabkot_status == 1 ? '<div class="mb-2 mr-2 badge badge-success">Aktif</div>' : '<div class="mb-2 mr-2 badge badge-danger">Tidak Aktif</div>').'</td>
+                            <td align="center" width="10%">'.($row->kabkot_status == 1 ? '<div class="mb-2 mr-2 badge badge-success">Aktif</div>' : '<div class="mb-2 mr-2 badge badge-danger">Tidak Aktif</div>').'</td>
                             <td width="10%">
                                 <center>
                                     <a href="'.base_url('kabkot_ubah/'.md56($row->kabkot_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-info"><i class="nav-link-icon fa fa-edit"></i></a>

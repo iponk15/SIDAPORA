@@ -8,11 +8,11 @@
 					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Provinsi</label>
 						<div class="col-sm-4">
-							<select name="keldes_provinsi_id" class="form-control kecamatan_provinsi_id">
+							<select name="keldes_provinsi_kode" class="form-control kecamatan_provinsi_id">
 								<option value="">Pilih Provinsi</option>
 								<?php 
 									foreach ($provinsi as $prov) {
-										echo '<option value="'.$prov->provinsi_id.'"> '.$prov->provinsi_nama.' </option>';
+										echo '<option value="'.$prov->provinsi_kode.'"> '.$prov->provinsi_nama.' </option>';
 									}
 								?>
 							</select>
@@ -28,6 +28,12 @@
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Kecamatan</label>
 						<div class="col-sm-4">
 							<div class="selectKecamatan"></div>
+						</div>
+					</div>
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Kode Kelurahan / Desa</label>
+						<div class="col-sm-4">
+							<input required name="keldes_kode" placeholder="Input kode Kelurahan / Desa" type="text" class="form-control">
 						</div>
 					</div>
 					<div class="position-relative row form-group">

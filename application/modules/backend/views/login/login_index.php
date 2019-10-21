@@ -21,6 +21,58 @@
 					font-size: 3.5rem;
 				}
 			}
+
+			body {
+				margin: 0;
+				width: 100%;
+				height: 100vh;
+				font-family: "Exo", sans-serif;
+				color: #fff;
+				/* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
+				background: linear-gradient(-45deg, red, yellow, green, blue);
+				background-size: 400% 400%;
+				animation: gradientBG 15s ease infinite;
+			}
+
+			@keyframes gradientBG {
+				0% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+				100% {
+					background-position: 0% 50%;
+				}
+			}
+
+			.container {
+				width: 100%;
+				position: absolute;
+				top: 35%;
+				text-align: center;
+			}
+
+			h1 {
+				font-weight: 300;
+			}
+
+			h3 {
+				color: #eee;
+				font-weight: 100;
+			}
+
+			h5 {
+				color:#eee;
+				font-weight:300;
+			}
+
+			a,
+			a:hover {
+				text-decoration: none;
+				color: #ddd;
+			}
+
 		</style>
 		<!-- Custom styles for this template -->
 		<link href="<?php echo base_url('assets/backend/css/floating-labels.css'); ?>" rel="stylesheet">
@@ -28,8 +80,11 @@
 	<body>
 		<form class="form-signin" method="POST" action="<?php echo base_url('login/masuk'); ?>">
 			<div class="text-center mb-4">
-				<img class="mb-4" src="<?php echo base_url('assets/backend/img/bl.png'); ?>" alt="" width="110" height="80">
-				<h1 class="h3 mb-3 font-weight-normal">Login to APP</h1>
+				<!-- <img class="mb-4" src="<?php echo base_url('assets/backend/img/bl.png'); ?>" alt="" width="110" height="80"> -->
+				<h1><b> SIDAPORA </b></h1>
+				<br>
+				<br>
+				<!-- <h1 class="h3 mb-3 font-weight-normal">Halaman Login</h1> -->
 			</div>
 
 			<div class="form-label-group">
@@ -43,10 +98,10 @@
 			</div>
 
 			<div class="checkbox mb-3">
-				<label><input type="checkbox" value="remember-me"> Remember me</label>
+				<!-- <label><input type="checkbox" value="remember-me"> Remember me</label> -->
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			<p class="mt-5 mb-3 text-muted text-center"> &copy; Irfan Isma Somantri || Theme By : <a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/" target="_blank"> Bootstrap </a> <?php echo date('Y'); ?></p>
+			<!-- <p class="mt-5 mb-3 text-muted text-center"> &copy; Irfan Isma Somantri || Theme By : <a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/" target="_blank"> Bootstrap </a> <?php echo date('Y'); ?></p> -->
 		</form>
 	</body>
 </html>

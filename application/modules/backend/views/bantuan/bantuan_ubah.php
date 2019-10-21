@@ -1,5 +1,5 @@
 <div class="main-card mb-3 card">
-	<div class="card-header"><?php echo $header; ?></div>
+	<div class="card-header"><h4><?php echo $header; ?></h4></div>
 	<div class="card-body">
 		<form enctype="multipart/form-data" class="" method="POST" action="<?php echo base_url('bantuan_update/'.$bantuan_id); ?>">
 			<div class="row">
@@ -16,6 +16,12 @@
 									} 
 								?>
 							</select>
+						</div>
+					</div>
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Kode Bantuan</label>
+						<div class="col-sm-4">
+							<input required name="bantuan_kode" placeholder="Input kode bantuan" type="text" class="form-control" value="<?php echo $records->bantuan_kode; ?>">
 						</div>
 					</div>
 					<div class="position-relative row form-group">

@@ -19,6 +19,12 @@
 						</div>
 					</div>
 					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Kode Janis Bantuan</label>
+						<div class="col-sm-4">
+							<input value="<?php echo $records->jnsbtn_kode; ?>" required name="jnsbtn_kode" placeholder="Input kode jenis bantuan" type="text" class="form-control">
+						</div>
+					</div>
+					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Janis Bantuan</label>
 						<div class="col-sm-4">
 							<input required name="jnsbtn_nama" placeholder="Input jenis bantuan" type="text" class="form-control" value="<?php echo $records->jnsbtn_nama; ?>">

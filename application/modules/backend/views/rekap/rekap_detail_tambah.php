@@ -31,7 +31,7 @@
 								<option value="">Pilih Jenis Bantuan</option>
 								<?php 
 									foreach ($jnsbtn as $jns) {
-										echo '<option value="'.$jns->jnsbtn_id.'"> '.$jns->jnsbtn_nama.' </option>';
+										echo '<option value="'.$jns->jnsbtn_kode.'"> '.$jns->jnsbtn_nama.' </option>';
 									}
 								?>
 							</select>
@@ -44,7 +44,7 @@
 								<option value="">Pilih Provinsi</option>
 								<?php 
 									foreach ($provinsi as $prv) {
-										echo '<option value="'.$prv->provinsi_id.'"> '.$prv->provinsi_nama.' </option>';
+										echo '<option value="'.$prv->provinsi_kode.'"> '.$prv->provinsi_nama.' </option>';
 									}
 								?>
 							</select>
@@ -95,10 +95,10 @@
 
             var provId = $(this).val();
             var url    = base_url + 'kecamatan_get_kabkot';
-			var dta    = { 'provinsi_id' : provId };
+			var dta    = { 'provinsi_id' : provId, 'message' : true };
 
 			$.post(url,dta,function(res){
-				$('.selectKabkot').html(res);
+				$('.selectKabkot').html(res.message);
 
                 // get select kecamatan berdasarkan provinsi dan kabupatern
                 $('.kecamatan_kabkot_id').on('change', function(){
@@ -125,7 +125,7 @@
                         });
 					});
 				});
-			});
+			},'json');
 
         }); 
     });

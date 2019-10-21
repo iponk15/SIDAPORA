@@ -8,6 +8,7 @@
 			<thead>
 				<tr>
 					<th><center>No.</center></th>
+					<th><center>Kode Provinsi</center></th>
 					<th><center>Provinsi</center></th>
                     <th><center>Status</center></th>
 					<th><center>Action</center></th>
@@ -20,8 +21,9 @@
                         echo '
                         <tr>
                             <td scope="row" width="3%"><center>'.$i++.'</center></td>
+                            <td align="center" width="10%">'.$row->provinsi_kode.'</td>
                             <td>'.$row->provinsi_nama.'</td>
-                            <td align="center">'.($row->provinsi_status == 1 ? '<div class="mb-2 mr-2 badge badge-success">Aktif</div>' : '<div class="mb-2 mr-2 badge badge-danger">Tidak Aktif</div>').'</td>
+                            <td align="center" width="10%">'.($row->provinsi_status == 1 ? '<div class="mb-2 mr-2 badge badge-success">Aktif</div>' : '<div class="mb-2 mr-2 badge badge-danger">Tidak Aktif</div>').'</td>
                             <td width="10%">
                                 <center>
                                     <a href="'.base_url('provinsi_ubah/'.md56($row->provinsi_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-info"><i class="nav-link-icon fa fa-edit"></i></a>

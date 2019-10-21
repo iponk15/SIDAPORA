@@ -19,8 +19,8 @@ class Jenis_bantuan extends MX_Controller {
 		
         // get data
         $join            = [ ['sdp_master_kategori','jnsbtn_kategori_id = kategori_id','left']];
-		$select          = 'kategori_nama,jnsbtn_id,jnsbtn_nama,jnsbtn_deskripsi,jnsbtn_status';
-        $data['records'] = $this->m_global->get($this->table,$join,null,$select);
+		$select          = 'kategori_nama,jnsbtn_id,jnsbtn_kode,jnsbtn_nama,jnsbtn_deskripsi,jnsbtn_status';
+        $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['jnsbtn_lastupdate','DESC']);
         
         $this->templates->backend($this->prefix.'index', $data);
     }
@@ -39,6 +39,7 @@ class Jenis_bantuan extends MX_Controller {
     function simpan(){
         $post                       = $this->input->post();
         $data['jnsbtn_kategori_id'] = $post['jnsbtn_kategori_id'];
+        $data['jnsbtn_kode']        = strtoupper($post['jnsbtn_kode']);
         $data['jnsbtn_nama']        = $post['jnsbtn_nama'];
         $data['jnsbtn_deskripsi']   = $post['jnsbtn_deskripsi'];
         $data['jnsbtn_createdby']   = getSession('user_id');
@@ -65,7 +66,7 @@ class Jenis_bantuan extends MX_Controller {
         // get data kategoro
         $data['kategori']  = $this->m_global->get($this->tableKategori,null,['kategori_status' => '1'],'kategori_id,kategori_nama');
         // get data janei bantuan
-        $select          = 'jnsbtn_kategori_id,jnsbtn_nama,jnsbtn_deskripsi';
+        $select          = 'jnsbtn_kategori_id,jnsbtn_kode,jnsbtn_nama,jnsbtn_deskripsi';
 		$data['records'] = $this->m_global->get($this->table,null,[md56('jnsbtn_id',1) => $jenis_bantuan_id],$select)[0];
 		
 		$this->templates->backend('jenis_bantuan/jenis_bantuan_ubah',$data);
@@ -73,7 +74,8 @@ class Jenis_bantuan extends MX_Controller {
 
     function update($jenis_bantuan_id){
         $post                       = $this->input->post();
-		$data['jnsbtn_kategori_id'] = $post['jnsbtn_kategori_id'];
+        $data['jnsbtn_kategori_id'] = $post['jnsbtn_kategori_id'];
+        $data['jnsbtn_kode']        = strtoupper($post['jnsbtn_kode']);
 		$data['jnsbtn_nama']        = $post['jnsbtn_nama'];
         $data['jnsbtn_deskripsi']   = $post['jnsbtn_deskripsi'];
         $data['jnsbtn_updatedby']   = getSession('user_id');

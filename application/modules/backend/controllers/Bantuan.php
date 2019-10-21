@@ -19,8 +19,8 @@ class Bantuan extends MX_Controller {
 		
         // get data
         $join            = [ ['sdp_master_kategori','bantuan_kategori_id = kategori_id','left'] ];
-		$select          = 'kategori_nama,bantuan_id,bantuan_nama,bantuan_deskripsi,bantuan_status';
-        $data['records'] = $this->m_global->get($this->table,$join,null,$select);
+		$select          = 'kategori_nama,bantuan_id,bantuan_kode,bantuan_nama,bantuan_deskripsi,bantuan_status';
+        $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['bantuan_lastupdate','DESC']);
         
         $this->templates->backend($this->prefix.'index', $data);
     }
@@ -39,6 +39,7 @@ class Bantuan extends MX_Controller {
     function simpan(){
         $post                        = $this->input->post();
         $data['bantuan_kategori_id'] = $post['bantuan_kategori_id'];
+        $data['bantuan_kode']        = $post['bantuan_kode'];
         $data['bantuan_nama']        = $post['bantuan_nama'];
         $data['bantuan_deskripsi']   = $post['bantuan_deskripsi'];
         $data['bantuan_createdby']   = getSession('user_id');
@@ -65,7 +66,7 @@ class Bantuan extends MX_Controller {
         // get data kategoro
         $data['kategori']  = $this->m_global->get($this->tableKategori,null,['kategori_status' => '1'],'kategori_id,kategori_nama');
         // get data janei bantuan
-        $select          = 'bantuan_kategori_id,bantuan_nama,bantuan_deskripsi';
+        $select          = 'bantuan_kategori_id,bantuan_kode,bantuan_nama,bantuan_deskripsi';
 		$data['records'] = $this->m_global->get($this->table,null,[md56('bantuan_id',1) => $bantuan_id],$select)[0];
 		
 		$this->templates->backend('bantuan/bantuan_ubah',$data);
@@ -74,6 +75,7 @@ class Bantuan extends MX_Controller {
     function update($bantuan_id){
         $post                       = $this->input->post();
 		$data['bantuan_kategori_id'] = $post['bantuan_kategori_id'];
+		$data['bantuan_kode']        = $post['bantuan_kode'];
 		$data['bantuan_nama']        = $post['bantuan_nama'];
         $data['bantuan_deskripsi']   = $post['bantuan_deskripsi'];
         $data['bantuan_updatedby']   = getSession('user_id');
