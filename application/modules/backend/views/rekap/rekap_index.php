@@ -25,10 +25,15 @@
 						<div class="col-sm-3">
 							<input type="file" class="form-control" name="data_rekap" placeholder="import data excel">
 						</div>
-						<button type="submit" class="mb-2 mr-2 btn btn-success active">Submit</button>
+					</div>
+					<div class="position-relative row form-check">
+						<div class="col-sm-4 offset-sm-2">
+							<a href="<?php echo base_url('rekap_template') ?>" class="mb-2 mr-2 btn btn-info active">Downlod Template</a>
+							<button type="submit" class="mb-2 mr-2 btn btn-success active">Submit</button>
+						</div>
 					</div>
 				</div>
-				<div class="col-sm-2"></div>
+				<div class="col-sm-2 text-right"></div>
 			</div>
 		</form>
 	</div>

@@ -46,12 +46,12 @@ class Pusatdata extends MX_Controller {
             if(!empty($rows->rekap_id)){
 
                 $join           = [
-                    [$this->tableBantuan,'rekdet_bantuan_id = bantuan_id','left'],
-                    [$this->tableJnsbtn,'rekdet_jnsbtn_id = jnsbtn_id','left'],
-                    [$this->tableProvinsi,'rekdet_provinsi_id = provinsi_id','left'],
-                    [$this->tableKabkot,'rekdet_kabkot_id = kabkot_id','left'],
-                    [$this->tableKecamatan,'rekdet_kecamatan_id = kecamatan_id','left'],
-                    [$this->tableKeldes,'rekdet_keldes_id = keldes_id','left'],
+                    [$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],
+                    [$this->tableJnsbtn,'rekdet_jnsbtn_kode = jnsbtn_kode','left'],
+                    [$this->tableProvinsi,'rekdet_provinsi_kode = provinsi_kode','left'],
+                    [$this->tableKabkot,'rekdet_kabkot_kode = kabkot_kode','left'],
+                    [$this->tableKecamatan,'rekdet_kecamatan_kode = kecamatan_kode','left'],
+                    [$this->tableKeldes,'rekdet_keldes_kode = keldes_kode','left'],
                 ];
 
                 $select                   = 'rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
@@ -102,10 +102,10 @@ class Pusatdata extends MX_Controller {
 
         if(empty($tahun)){
             $data['tahun']   = $post['tahun'];
-            $data['records'] = $tempRekap;
+            $data['records'] = ( empty($tempRekap) ? null : $tempRekap );
             $this->load->view($this->prefix.'detail', $data);
         }else{
-            return $tempRekap;
+            return ( empty($tempRekap) ? null : $tempRekap );
         }
     }
 

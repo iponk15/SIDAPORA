@@ -31,7 +31,7 @@ class Kabkot extends MX_Controller {
 		$data['icon']      = 'provinsi';
         $data['header']    = 'Form Provinsi';
         $data['url']       = $this->url;
-        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama');
+        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama',null,['provinsi_nama','ASC']);
 		
 		$this->templates->backend($this->prefix.'tambah',$data);
     }
@@ -62,7 +62,7 @@ class Kabkot extends MX_Controller {
         $data['kabkot_id'] = $kabkot_id;
         $data['url']       = $this->url;
         // get data provinsi
-        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama');
+        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama',null,['provinsi_nama','ASC']);
 
         // get data janei provinsi
         $join            = [[$this->tableProvinsi,'kabkot_provinsi_kode = provinsi_kode','left']];

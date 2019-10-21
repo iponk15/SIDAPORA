@@ -325,6 +325,115 @@ class Rekap extends MX_Controller {
         }
     }
 
+    public function template()
+    {
+        $this->load->library('excel');
+        $phpExcel   = new PHPExcel();
+        
+        $phpExcel->getActiveSheet()->getStyle('A4:I4')->applyFromArray(
+            array(
+                'fill' => array(
+                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => 'FFFFFF')
+                ),
+                'alignment' => array(
+                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+                ),
+                'bold'  => TRUE
+            )
+        );
+
+        $phpExcel->getActiveSheet()->getStyle('E5:H5')->applyFromArray(
+            array(
+                'fill' => array(
+                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => 'FFFFFF')
+                ),
+                'alignment' => array(
+                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+                ),
+                'bold'  => TRUE
+            )
+        );
+
+        $phpExcel->getActiveSheet()->getStyle('A1:I1')->applyFromArray(
+            array(
+                'alignment' => array(
+                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+                )
+            )
+        );
+
+        $phpExcel->getActiveSheet()->getStyle('A4:I4')->applyFromArray(
+            array(
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN,
+                        'color' => array('rgb' => '000000')
+                    )
+                )
+            )
+        );
+
+        $phpExcel->getActiveSheet()->getStyle('A5:I5')->applyFromArray(
+            array(
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN,
+                        'color' => array('rgb' => '000000')
+                    )
+                )
+            )
+        );
+        
+        foreach(range('B','N') as $columnID) {
+            $phpExcel->getActiveSheet()->getColumnDimension($columnID)->setWidth(19);
+        }
+
+        $phpExcel->getActiveSheet()->mergeCells('A1:I1');
+        $phpExcel->getActiveSheet()->setCellValue('A1', 'judul_rekapitulasi');
+
+        $phpExcel->getActiveSheet()->mergeCells('A4:A5');
+        $phpExcel->getActiveSheet()->setCellValue('A4', 'No');
+
+        $phpExcel->getActiveSheet()->mergeCells('B4:B5');
+        $phpExcel->getActiveSheet()->setCellValue('B4', 'Nama Lembaga');
+
+        $phpExcel->getActiveSheet()->mergeCells('C4:C5');
+        $phpExcel->getActiveSheet()->setCellValue('C4', 'Jenis Bantuan');
+
+        $phpExcel->getActiveSheet()->mergeCells('D4:D5');
+        $phpExcel->getActiveSheet()->setCellValue('D4', 'Spesifikasi Bantuan');
+
+        $phpExcel->getActiveSheet()->mergeCells('E4:H4');
+        $phpExcel->getActiveSheet()->setCellValue('E4', 'Lokasi Bantuan');
+
+        $phpExcel->getActiveSheet()->setCellValue('E5', 'Desa');
+        $phpExcel->getActiveSheet()->setCellValue('F5', 'Kelurahan');
+        $phpExcel->getActiveSheet()->setCellValue('G5', 'Kabupaten');
+        $phpExcel->getActiveSheet()->setCellValue('H5', 'Provinsi');
+
+        $phpExcel->getActiveSheet()->mergeCells('I4:I5');
+        $phpExcel->getActiveSheet()->setCellValue('I4', 'Nilai Bantuan');
+
+        $phpExcel->getActiveSheet()->setTitle('Tahun');
+
+        $phpExcel->createSheet();
+        $phpExcel->setActiveSheetIndex(0);
+        // exit;
+        $objWriter = PHPExcel_IOFactory::createWriter($phpExcel,'Excel2007');
+        ob_end_clean();
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="Template Import Data Rekapitulasi.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $objWriter->save('php://output');
+
+    }
+
 }
 
 /* End of file Controllername.php */
