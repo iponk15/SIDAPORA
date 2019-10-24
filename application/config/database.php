@@ -75,10 +75,18 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost:3307',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'sidapora',
+	// development
+	// 'hostname' => 'localhost:3307',
+	// 'username' => 'root',
+	// 'password' => '',
+	// 'database' => 'sidapora',
+
+	// server
+	'hostname' => '128.199.165.95',
+	'username' => 'timprimal',
+	'password' => 'cdn2425',
+	'database' => 'cdn_acs',
+
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
