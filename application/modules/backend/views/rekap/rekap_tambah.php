@@ -40,7 +40,7 @@
 				<div class="col-sm-2"></div>
 			</div>
 		</form>
-	</div>
+	</div> 
 </div>
 
 <script>
