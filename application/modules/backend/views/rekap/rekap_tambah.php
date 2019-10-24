@@ -8,7 +8,7 @@
 					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Judul</label>
 						<div class="col-sm-6">
-							<textarea class="form-control" name="rekap_judul" placeholder="input judul rekap"> </textarea>
+							<textarea class="form-control" name="rekap_judul" placeholder="input judul rekap"></textarea>
 						</div>
 					</div>
 					<div class="position-relative row form-group">

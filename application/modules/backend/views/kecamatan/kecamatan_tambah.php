@@ -56,11 +56,11 @@
 
 			var provId = $(this).val();
 			var url    = base_url + 'kecamatan_get_kabkot';
-			var dta    = { 'provinsi_id' : provId };
+			var dta    = { 'provinsi_id' : provId, 'message' : true };
 
 			$.post(url,dta,function(res){
-				$('.selectKabkot').html(res);
-			});
+				$('.selectKabkot').html(res.message);
+			},'json');
 		});
 	});
 </script>

@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '128.199.165.95',
-	'username' => 'timprimal',
-	'password' => 'cdn2425',
-	'database' => 'cdn_acs',
+	'hostname' => 'localhost:3307',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'sidapora',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

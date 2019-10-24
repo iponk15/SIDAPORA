@@ -114,7 +114,7 @@ class Keldes extends MX_Controller {
         
         $join    = [ 
             [$this->tableProvinsi,'kecamatan_provinsi_kode = provinsi_kode','left'],
-            [$this->tableKabkot,'kecamatan_kabkot_kode = kabkot_kode','left']
+            [$this->tableKabkot,'(kabkot_provinsi_kode = provinsi_kode AND kecamatan_provinsi_kode = provinsi_kode AND kecamatan_kabkot_kode = kabkot_kode)','left']
         ];
         $getData = $this->m_global->get($this->tableKecamatan,$join,['kecamatan_provinsi_kode' => $post['provinsi_id'], 'kecamatan_kabkot_kode' => $post['kabkot_id'] ],'kecamatan_kode,kecamatan_nama');
 
