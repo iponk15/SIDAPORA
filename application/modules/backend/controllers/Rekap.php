@@ -12,7 +12,8 @@ class Rekap extends MX_Controller {
 	private $tableProvinsi     = 'sdp_master_provinsi';
 	private $tableKabkot       = 'sdp_master_kabkot';
 	private $tableKecamatan    = 'sdp_master_kecamatan';
-	private $tableKeldes       = 'sdp_master_keldes';
+    private $tableKeldes       = 'sdp_master_keldes';
+    private $tableDokumen      = 'sdp_rekap_dokumen';
 
     public function __construct(){
         parent::__construct();
@@ -37,10 +38,10 @@ class Rekap extends MX_Controller {
     }
 
     function tambah(){
-        $data['pagetitle'] = 'Halaman bantuan';
-		$data['subtitle']  = 'Tambah data bantuan';
+        $data['pagetitle'] = 'Halaman Form Rekap';
+		$data['subtitle']  = 'Tambah data Rekap';
 		$data['icon']      = 'bantuan';
-        $data['header']    = 'Form bantuan';
+        $data['header']    = 'Form Rekapitulasi';
         $data['url']       = $this->url;
 
         // get data kategoro
@@ -50,7 +51,7 @@ class Rekap extends MX_Controller {
     }
 
     function simpan(){
-        $post                      = $this->input->post();
+        $post = $this->input->post();
         $data['rekap_kategori_id'] = $post['rekap_kategori_id'];
         $data['rekap_judul']       = $post['rekap_judul'];
         $data['rekap_tahun']       = $post['rekap_tahun'];
@@ -123,7 +124,7 @@ class Rekap extends MX_Controller {
 		// get data rekap
 		$joinRekap     = [ [$this->tableKategori,'rekap_kategori_id = kategori_id','left'] ];
 		$selectRekap   = 'rekap_judul, kategori_id, kategori_nama, rekap_tahun';
-		$data['rekap'] = $this->m_global->get($this->table,$joinRekap,[md56('rekap_id',1) => $rekap_id], $selectRekap )[0];
+        $data['rekap'] = $this->m_global->get($this->table,$joinRekap,[md56('rekap_id',1) => $rekap_id], $selectRekap )[0];
 		
 		// get data rekap detail
 		$select            = 'rekdet_id,rekdet_lembaga,rekdet_nominal,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama';
@@ -131,11 +132,11 @@ class Rekap extends MX_Controller {
 			[$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],
 			[$this->tableJenisBantuan,'rekdet_jnsbtn_kode = jnsbtn_kode','left'],
 			[$this->tableProvinsi,'rekdet_provinsi_kode = provinsi_kode', 'left'],
-			[$this->tableKabkot,'rekdet_kabkot_kode = kabkot_kode','left'],
-			[$this->tableKecamatan,'rekdet_kecamatan_kode = kecamatan_kode','left'],
-			[$this->tableKeldes,'rekdet_keldes_kode = keldes_kode','left']
+			[$this->tableKabkot,'(rekdet_kabkot_kode = kabkot_kode AND kabkot_provinsi_kode = provinsi_kode)','left'],
+			[$this->tableKecamatan,'(rekdet_kecamatan_kode = kecamatan_kode AND kecamatan_provinsi_kode = provinsi_kode AND kecamatan_kabkot_kode = kabkot_kode)','left'],
+			[$this->tableKeldes,'(rekdet_keldes_kode = keldes_kode AND keldes_provinsi_kode = provinsi_kode AND keldes_kabkot_kode = kabkot_kode AND keldes_kecamatan_kode = kecamatan_kode)','left']
 		];
-		$data['rkpDetail'] = $this->m_global->get($this->tableRekapDetail,$join,[md56('rekdet_rekap_id',1) => $rekap_id], $select);
+        $data['rkpDetail'] = $this->m_global->get($this->tableRekapDetail,$join,[md56('rekdet_rekap_id',1) => $rekap_id], $select);
 		
 		$this->templates->backend('rekap/rekap_detail',$data);
     }
@@ -150,7 +151,7 @@ class Rekap extends MX_Controller {
         $data['ktgrId']    = $kategori_id;
 
         // get data foreign
-        $data['bantuan']  = $this->m_global->get($this->tableBantuan,null,['bantuan_status' => '1', md56('bantuan_kategori_id',1) => $kategori_id],'bantuan_id,bantuan_nama');
+        $data['bantuan']  = $this->m_global->get($this->tableBantuan,null,['bantuan_status' => '1', md56('bantuan_kategori_id',1) => $kategori_id],'bantuan_kode,bantuan_nama');
         $data['jnsbtn']   = $this->m_global->get($this->tableJenisBantuan,null,['jnsbtn_status' => '1', md56('jnsbtn_kategori_id',1) => $kategori_id],'jnsbtn_kode,jnsbtn_nama');
         $data['provinsi'] = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama');
 
@@ -175,7 +176,53 @@ class Rekap extends MX_Controller {
         $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
         $data['rekdet_nominal']        = $post['rekdet_nominal'];
         
-        $input = $this->m_global->insert($this->tableRekapDetail, $data); 
+        $input  = $this->m_global->insert($this->tableRekapDetail, $data); 
+        $lastId = $this->db->insert_id();
+        $file   = $_FILES['rekdok_file']['name'];
+
+        if(count($file) > 0){
+            $config                  = array();
+            $config['upload_path'] 	 = './assets/frontend/global/img/galeri';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            // $config['overwrite'] 	 = true;
+
+            $this->load->library('upload');
+
+            $files = $_FILES;
+            for($i = 0; $i < count($file); $i++){
+                $_FILES['rekdok_file']['name']     = $files['rekdok_file']['name'][$i];
+                $_FILES['rekdok_file']['type']     = $files['rekdok_file']['type'][$i];
+                $_FILES['rekdok_file']['tmp_name'] = $files['rekdok_file']['tmp_name'][$i];
+                $_FILES['rekdok_file']['error']    = $files['rekdok_file']['error'][$i];
+                $_FILES['rekdok_file']['size']     = $files['rekdok_file']['size'][$i];    
+
+                $this->upload->initialize($config);
+                $upload = $this->upload->do_upload('rekdok_file');
+
+                $conRes['image_library']  = 'gd2';
+                $conRes['source_image']	  = './assets/frontend/global/img/galeri/'.$this->upload->data()['file_name'];
+                $conRes['create_thumb']	  = FALSE;
+                $conRes['maintain_ratio'] = FALSE;
+                $conRes['quality']		  = '50%';
+                $conRes['width']		  = 800;
+                $conRes['height']		  = 600;
+                $conRes['new_image']	  = './assets/frontend/global/img/galeri/'.$this->upload->data()['file_name'];
+
+                $this->load->library('image_lib', $conRes);
+                $this->image_lib->initialize($conRes);
+                $this->image_lib->resize();
+
+                $dataGlr['rekdok_rekdet_id'] = $lastId;
+                $dataGlr['rekdok_ringkasan'] = $post['rekdok_ringkasan'][$i];
+                $dataGlr['rekdok_deskripsi'] = $post['rekdok_deskripsi'][$i];
+                $dataGlr['rekdok_file']      = 'assets/frontend/global/img/galeri/'.$_FILES['rekdok_file']['name'];
+                $dataGlr['rekdok_is_public'] = (empty($post['rekdok_is_public'][$i]) ? '0' : '1');
+
+                $tempGaleri[] = $dataGlr;
+            }
+        }
+
+        $this->db->insert_batch($this->tableDokumen, $tempGaleri);
         
         if($input){
             redirect('rekap_detail_tambah/'.md56($rekap_id).'/'.$kategori_id);
@@ -237,9 +284,17 @@ class Rekap extends MX_Controller {
     }
 
     function hapus_detail($rekap_id, $rekdet_id){
-        $delete = $this->m_global->delete($this->tableRekapDetail,[md56('rekdet_id',1) => $rekdet_id]);
+
+        $delRekdet     = $this->m_global->delete($this->tableRekapDetail,[md56('rekdet_id',1) => $rekdet_id]);
+        $getDataRekDok = $this->m_global->get($this->tableDokumen,null,[md56('rekdok_rekdet_id',1) => $rekdet_id],'rekdok_file');
+
+        foreach ($getDataRekDok as $doks) {
+           unlink(FCPATH . $doks->rekdok_file);
+        }
+        
+        $delRekDok = $this->m_global->delete($this->tableDokumen,[md56('rekdok_rekdet_id',1) => $rekdet_id]);
 		
-		if($delete == TRUE){
+		if($delRekdet && $delRekDok){
 			redirect('rekap_detail/'.$rekap_id);
 		}else{
 			pre('data gagal disimpan');

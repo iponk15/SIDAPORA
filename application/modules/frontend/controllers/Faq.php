@@ -11,7 +11,7 @@
         public function index(){
             $data['slider']     = 0;
             $data['breadcrumb'] = ['Home' => base_url('home'), 'FAQ' => base_url($this->url)];
-            $this->templates->frontend($this->prefix.'index', $data);
+            $this->load->view($this->prefix.'index', $data);
         }
     
     }

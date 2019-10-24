@@ -28,6 +28,8 @@
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/js/jquery.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/js/jquery.dataTables.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datepicker/js/bootstrap-datepicker.js'); ?>"></script>
+    <!-- <script src="<?php echo base_url(); ?>path/to/jquery.js"></script> -->
+    <script src="<?php echo base_url('assets/bower_components/jquery.repeater/jquery.repeater.js'); ?>"></script>
 
     <link href="<?php echo base_url('assets/backend/css//main.css'); ?>" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/datatable/css/bootstrap.css'); ?>">
@@ -50,7 +52,7 @@
 				</div>
 				<?php echo $_footer; ?> 
 			</div>
-			<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+			<!-- <script src="http://maps.google.com/maps/api/js?sensor=true"></script> -->
         </div>
     </div>
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/js/main.js'); ?>"></script>

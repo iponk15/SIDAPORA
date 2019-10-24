@@ -1,16 +1,19 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pusatdata extends MX_Controller {
-    private $prefix         = 'pusatdata/pusatdata_';
-    private $url            = 'pusatdata';
-    private $tableKategori  = 'sdp_master_kategori';
-    private $tableRekdet    = 'sdp_rekap_detail';
-    private $tableBantuan   = 'sdp_master_bantuan';
-    private $tableJnsbtn    = 'sdp_master_jenis_bantuan';
-    private $tableProvinsi  = 'sdp_master_provinsi';
-    private $tableKabkot    = 'sdp_master_kabkot';
-    private $tableKecamatan = 'sdp_master_kecamatan';
-    private $tableKeldes    = 'sdp_master_keldes';
+    private $prefix            = 'pusatdata/pusatdata_';
+    private $url               = 'pusatdata';
+    private $tableKategori     = 'sdp_master_kategori';
+    private $tableRekdet       = 'sdp_rekap_detail';
+    private $tableBantuan      = 'sdp_master_bantuan';
+    private $tableJnsbtn       = 'sdp_master_jenis_bantuan';
+    private $tableProvinsi     = 'sdp_master_provinsi';
+    private $tableKabkot       = 'sdp_master_kabkot';
+    private $tableKecamatan    = 'sdp_master_kecamatan';
+    private $tableKeldes       = 'sdp_master_keldes';
+    private $tableRekap        = 'sdp_rekap';
+    private $tableRekapDetail  = 'sdp_rekap_detail';
+    private $tableRekapDokumen = 'sdp_rekap_dokumen';
 
     public function __construct(){
         parent::__construct();
@@ -49,9 +52,9 @@ class Pusatdata extends MX_Controller {
                     [$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],
                     [$this->tableJnsbtn,'rekdet_jnsbtn_kode = jnsbtn_kode','left'],
                     [$this->tableProvinsi,'rekdet_provinsi_kode = provinsi_kode','left'],
-                    [$this->tableKabkot,'rekdet_kabkot_kode = kabkot_kode','left'],
-                    [$this->tableKecamatan,'rekdet_kecamatan_kode = kecamatan_kode','left'],
-                    [$this->tableKeldes,'rekdet_keldes_kode = keldes_kode','left'],
+                    [$this->tableKabkot,'(rekdet_kabkot_kode = kabkot_kode AND kabkot_provinsi_kode = provinsi_kode)','left'],
+                    [$this->tableKecamatan,'(rekdet_kecamatan_kode = kecamatan_kode AND kecamatan_provinsi_kode = provinsi_kode AND kecamatan_kabkot_kode = kabkot_kode)','left'],
+                    [$this->tableKeldes,'(rekdet_keldes_kode = keldes_kode AND keldes_provinsi_kode = provinsi_kode AND keldes_kabkot_kode = kabkot_kode AND keldes_kecamatan_kode = kecamatan_kode)','left'],
                 ];
 
                 $select                   = 'rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
@@ -101,7 +104,12 @@ class Pusatdata extends MX_Controller {
         }
 
         if(empty($tahun)){
-            $data['tahun']   = $post['tahun'];
+            $data['tahun']  = $post['tahun'];
+            $data['galeri'] = getGaleriPusdat($data['tahun']);
+
+            // pre($galeri,1);
+
+            // get data rekap dan rekap detail
             $data['records'] = ( empty($tempRekap) ? null : $tempRekap );
             $this->load->view($this->prefix.'detail', $data);
         }else{

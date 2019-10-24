@@ -1,7 +1,7 @@
 <div class="main-card mb-3 card">
-	<div class="card-header"><?php echo $header; ?></div>
+	<div class="card-header"><h4><b> <?php echo $header; ?> </b></h4></div>
 	<div class="card-body">
-		<form enctype="multipart/form-data" class="" method="POST" action="<?php echo base_url('rekap_simpan'); ?>">
+		<form enctype="multipart/form-data" class="" method="POST" action="<?php echo base_url('rekap_simpan'); ?>" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">

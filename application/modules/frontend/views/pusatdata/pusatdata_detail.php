@@ -30,18 +30,24 @@
                             <div class="carousel slide" id="myCarousel">
                                 <!-- Carousel items -->
                                 <div class="carousel-inner">
-                                    <div class="item">
-                                        <img alt="" src="<?php echo base_url('assets/frontend/pages/img/img1.jpg') ?>">
-                                        <div class="carousel-caption"><p>Excepturi sint occaecati cupiditate non provident</p></div>
-                                    </div>
-                                    <div class="item active">
-                                        <img alt="" src="<?php echo base_url('assets/frontend/pages/img/img2.jpg') ?>">
-                                        <div class="carousel-caption"><p>Ducimus qui blanditiis praesentium voluptatum</p></div>
-                                    </div>
-                                    <div class="item">
-                                        <img alt="" src="<?php echo base_url('assets/frontend/pages/img/img3.jpg') ?>">
-                                        <div class="carousel-caption"><p>Ut non libero consectetur adipiscing elit magna</p></div>
-                                    </div>
+                                    <?php 
+                                        foreach ($galeri as $key => $value) {
+                                            if(!empty($value)){
+                                                foreach ($value as $rows) {
+                                                    $temp[] = ['rekdok_ringkasan' => $rows->rekdok_ringkasan, 'rekdok_file' => $rows->rekdok_file];
+                                                }
+                                            }
+                                        }
+
+                                        $i = 1;
+                                        foreach ($temp as $datas) {
+                                            echo '<div class="item '.($i == 1 ? "active" : "" ).'">
+                                                    <img alt="" src="'.base_url($datas["rekdok_file"]).'">
+                                                    <div class="carousel-caption"><p>'.$datas["rekdok_ringkasan"].'</p></div>
+                                                </div>';
+                                            $i++;
+                                        }
+                                    ?>
                                 </div>
                                 <!-- Carousel nav -->
                                 <a data-slide="prev" href="#myCarousel" class="carousel-control left">

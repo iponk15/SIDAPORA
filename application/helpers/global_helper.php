@@ -73,4 +73,21 @@ function uang( $var, $tipe=null, $dec = "0" ){
     // . ( $dec == "0" ? ( $tipe == true ? ',-' : ",00" ) : '' );
 }
 
+function getGaleriPusdat($tahun){
+    $CI   =& get_instance();
+    $getKategori = $CI->m_global->get('sdp_master_kategori',null,['kategori_status' => '1'],'kategori_id,kategori_nama');
+
+    foreach ($getKategori as $galeri) {
+        $join = [
+            ['sdp_rekap_detail','rekap_id = rekdet_rekap_id','left'],
+            ['sdp_rekap_dokumen','rekdet_id = rekdok_rekdet_id','left']
+        ];
+        $select    = 'rekdok_ringkasan,rekdok_file';
+        $getGaleri = $CI->m_global->get('sdp_rekap',$join,['rekap_kategori_id' => $galeri->kategori_id],$select,null,null,null,2);
+        $hasil[]   = $getGaleri;
+    }
+
+    return $hasil;
+}
+
 ?>
