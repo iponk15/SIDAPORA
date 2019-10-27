@@ -215,7 +215,7 @@ class Rekap extends MX_Controller {
                 $dataGlr['rekdok_rekdet_id'] = $lastId;
                 $dataGlr['rekdok_ringkasan'] = $post['rekdok_ringkasan'][$i];
                 $dataGlr['rekdok_deskripsi'] = $post['rekdok_deskripsi'][$i];
-                $dataGlr['rekdok_file']      = 'assets/frontend/global/img/galeri/'.$_FILES['rekdok_file']['name'];
+                $dataGlr['rekdok_file']      = $conRes['new_image'];
                 $dataGlr['rekdok_is_public'] = (empty($post['rekdok_is_public'][$i]) ? '0' : '1');
 
                 $tempGaleri[] = $dataGlr;
@@ -248,7 +248,7 @@ class Rekap extends MX_Controller {
             [$this->tableKecamatan,'rekdet_kecamatan_kode = kecamatan_kode','left'],
             [$this->tableKeldes,'rekdet_keldes_kode = keldes_kode','left']
         ];
-        $select          = 'rekdet_rekap_id,rekdet_lembaga,rekdet_nominal,rekap_kategori_id,rekdet_bantuan_kode,rekdet_jnsbtn_kode,rekdet_provinsi_kode,rekdet_kabkot_kode,rekdet_kecamatan_kode,rekdet_keldes_kode';
+        $select          = 'rekdet_id,rekdet_rekap_id,rekdet_lembaga,rekdet_nominal,rekap_kategori_id,rekdet_bantuan_kode,rekdet_jnsbtn_kode,rekdet_provinsi_kode,rekdet_kabkot_kode,rekdet_kecamatan_kode,rekdet_keldes_kode';
         $data['records'] = $this->m_global->get($this->tableRekapDetail,$join,[md56('rekdet_id',1) => $rekdet_id],$select)[0];
 
         // get data foreign
@@ -258,12 +258,70 @@ class Rekap extends MX_Controller {
         $data['kabkot']    = $this->m_global->get($this->tableKabkot,null,['kabkot_provinsi_kode' => $data['records']->rekdet_provinsi_kode ],'kabkot_kode,kabkot_nama');
         $data['kecamatan'] = $this->m_global->get($this->tableKecamatan,null,['kecamatan_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'kecamatan_kode,kecamatan_nama');
         $data['kelurahan'] = $this->m_global->get($this->tableKeldes,null,['keldes_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'keldes_kode,keldes_nama');
+        $data['galeri']    = $this->m_global->get($this->tableDokumen,null,[md56('rekdok_rekdet_id',1) => $rekdet_id],'rekdok_id,rekdok_rekdet_id,rekdok_file,rekdok_ringkasan,rekdok_deskripsi,rekdok_is_public');
 
         $this->templates->backend($this->prefix.'detail_ubah', $data);
     }
 
     function update_detail($rekdet_id){
         $post = $this->input->post();
+        pre($post);
+        $file = $_FILES['rekdok_file']['name'];
+
+        if(count($file) > 0){
+            $config                  = array();
+            $config['upload_path'] 	 = './assets/frontend/global/img/galeri';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+
+            $this->load->library('upload');
+
+            $files = $_FILES;
+            for($i = 0; $i < count($file); $i++){
+                $_FILES['rekdok_file']['name']     = $files['rekdok_file']['name'][$i];
+                $_FILES['rekdok_file']['type']     = $files['rekdok_file']['type'][$i];
+                $_FILES['rekdok_file']['tmp_name'] = $files['rekdok_file']['tmp_name'][$i];
+                $_FILES['rekdok_file']['error']    = $files['rekdok_file']['error'][$i];
+                $_FILES['rekdok_file']['size']     = $files['rekdok_file']['size'][$i];
+
+                if(empty($_FILES['rekdok_file']['name'])){
+                    $dataGlr['rekdok_file']  = (empty($post['rekdok_file_old'][$i]) ? null : $post['rekdok_file_old'][$i]);
+                }else{
+                    $this->upload->initialize($config);
+                    $upload = $this->upload->do_upload('rekdok_file');
+
+                    $conRes['image_library']  = 'gd2';
+                    $conRes['source_image']	  = './assets/frontend/global/img/galeri/'.$this->upload->data()['file_name'];
+                    $conRes['create_thumb']	  = FALSE;
+                    $conRes['maintain_ratio'] = FALSE;
+                    $conRes['quality']		  = '50%';
+                    $conRes['width']		  = 800;
+                    $conRes['height']		  = 600;
+                    $conRes['new_image']	  = './assets/frontend/global/img/galeri/'.$this->upload->data()['file_name'];
+
+                    $this->load->library('image_lib', $conRes);
+                    $this->image_lib->initialize($conRes);
+                    $this->image_lib->resize();
+
+                    $dataGlr['rekdok_file'] = $conRes['new_image'];
+
+                    if(!empty($post['rekdok_file_old'][$i])){
+                        unlink(FCPATH.$post['rekdok_file_old'][$i]);
+                    }
+                }
+
+                $dataGlr['rekdok_ringkasan'] = $post['rekdok_ringkasan'][$i];
+                $dataGlr['rekdok_deskripsi'] = $post['rekdok_deskripsi'][$i];
+                $dataGlr['rekdok_is_public'] = (empty($post['rekdok_is_public'][$i]) ? '0' : '1');
+
+                if(!empty($post['rekdok_file_old'][$i])){
+                    $this->m_global->update($this->tableDokumen,$dataGlr,[ md56('rekdok_id',1) => $post['rekdok_id'][$i], md56('rekdok_rekdet_id',1) => $rekdet_id ]);
+                }else{
+                    $dataGlr['rekdok_rekdet_id'] = $post['rekdet_id'];
+                    $this->m_global->insert($this->tableDokumen,$dataGlr);
+                }
+                
+            }
+        }
 
         $data['rekdet_lembaga']        = $post['rekdet_lembaga'];
         $data['rekdet_bantuan_kode']   = $post['rekdet_bantuan_id'];
@@ -351,8 +409,6 @@ class Rekap extends MX_Controller {
 
             $saveRekap = $this->m_global->insert($this->table, $dtRekap);
             $lastId    = $this->db->insert_id();
-            
-            pre('Data lastid '. $lastId);
             
             for($row = 6; $row <= $highestRow; $row++){
                 $rowData = $rowExcel->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
@@ -487,6 +543,20 @@ class Rekap extends MX_Controller {
 
         $objWriter->save('php://output');
 
+    }
+
+    function apus_galeri(){
+        $post    = $this->input->post();
+        unlink(FCPATH.$post['rekdok_file']);
+        $apusGlr = $this->m_global->delete($this->tableDokumen,[md56('rekdok_id',1) => $post['rekdok_id']]);
+
+        if($apusGlr){
+            $data['status'] = '1';
+        }else{
+            $data['status'] = '0';
+        }
+
+        echo json_encode($data);
     }
 
 }

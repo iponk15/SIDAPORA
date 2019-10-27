@@ -106,7 +106,6 @@
 									</div>
 								</div>
 							</div>
-							<div><a style="margin-top: 40%;" data-repeater-delete class="mb-2 mr-2 btn btn-danger active btn-sm">Hapus</a></div>
 						</div>
 					</div>
 
@@ -136,7 +135,7 @@
 			e.preventDefault();
 			if(x < max_fields){ //max input box allowed
 				x++; //text box increment
-				var content = '<div class="row">' +
+				var content = '<div class="row formDel">' +
 									'<div class="col-md-3">' +
 										'<div class="position-relative form-group">' +
 											'<label for="exampleFile" class=""> Ringkasan </label>' +
@@ -164,7 +163,7 @@
 											'</div>' +
 										'</div>' +
 									'</div>' +
-									'<div><a style="margin-top: 40%;" data-repeater-delete class="mb-2 mr-2 btn btn-danger active btn-sm">Hapus</a></div>' +
+									'<div><a style="margin-top: 40%;" data-repeater-delete class="mb-2 mr-2 btn btn-danger active btn-sm remove_field">Hapus</a></div>' +
 								'</div>';
 				$(wrapper).append(content); //add input box
 			}
@@ -172,7 +171,7 @@
 		
 		$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
 			e.preventDefault(); 
-			$(this).parent('div').remove(); 
+			$(this).parent('div').parent('.formDel').remove(); 
 			x--;
 		})
 

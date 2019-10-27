@@ -31,13 +31,13 @@
 	</div>    <div class="scrollbar-sidebar">
 		<div class="app-sidebar__inner">
 			<ul class="vertical-nav-menu">
-				<li class="app-sidebar__heading">Dashboards</li>
+				<li class="app-sidebar__heading"><h6><b>Dashboards</b></h4></li>
 				<li>
 					<a href="<?php echo base_url('landing'); ?>" class="<?php echo (getCtrl() == 'landing' ? 'mm-active' : ''); ?>">
 						<i class="metismenu-icon pe-7s-home"></i> Landing
 					</a>
 				</li>
-				<li class="app-sidebar__heading">Master Data</li>
+				<li class="app-sidebar__heading"><h6><b>Master Data</b></h4></li>
 				<li>
 					<a href="<?php echo base_url('user'); ?>" class="<?php echo (getCtrl() == 'user' ? 'mm-active' : ''); ?>">
 						<i class="metismenu-icon pe-7s-user"></i> Users
@@ -58,7 +58,7 @@
 						<i class="metismenu-icon pe-7s-plugin"></i> Jenis Bantuan
 					</a>
 				</li>
-				<li class="app-sidebar__heading">Wilayah Administratif</li>
+				<li class="app-sidebar__heading"><h6><b>Wilayah Administratif</b></h4></li>
 				<li>
 					<a href="<?php echo base_url('provinsi'); ?>" class="<?php echo (getCtrl() == 'provinsi' ? 'mm-active' : ''); ?>">
 						<i class="metismenu-icon pe-7s-plugin"></i> Provinsi
@@ -79,7 +79,7 @@
 						<i class="metismenu-icon pe-7s-plugin"></i> Kelurahan / Desa
 					</a>
 				</li>
-				<li class="app-sidebar__heading">Data Rekapitulasi</li>
+				<li class="app-sidebar__heading"><h6><b>Data Rekapitulasi</b></h4></li>
 				<li>
 					<a href="<?php echo base_url('rekap'); ?>" class="<?php echo (getCtrl() == 'rekap' ? 'mm-active' : ''); ?>">
 						<i class="metismenu-icon pe-7s-plugin"></i> Rekap

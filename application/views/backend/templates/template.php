@@ -28,14 +28,16 @@
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/js/jquery.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/js/jquery.dataTables.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datepicker/js/bootstrap-datepicker.js'); ?>"></script>
-    <!-- <script src="<?php echo base_url(); ?>path/to/jquery.js"></script> -->
-    <script src="<?php echo base_url('assets/bower_components/jquery.repeater/jquery.repeater.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/swal/swal.min.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/sweetalert2/dist/sweetalert2.min.js'); ?>"></script>
+
 
     <link href="<?php echo base_url('assets/backend/css//main.css'); ?>" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/datatable/css/bootstrap.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/css/jquery.dataTables.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/css/dataTables.bootstrap.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/datepicker/css/bootstrap-datepicker.css'); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/sweetalert2/dist/sweetalert2.min.css'); ?>">
 </head>
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">

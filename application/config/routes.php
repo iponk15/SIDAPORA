@@ -170,6 +170,7 @@ $route['rekap_detail_update/(:any)']        = 'backend/rekap/update_detail/$1';
 $route['rekap_detail_hapus/(:any)/(:any)']  = 'backend/rekap/hapus_detail/$1/$2';
 $route['rekap_import']                      = 'backend/rekap/importData';
 $route['rekap_template']                    = 'backend/rekap/template';
+$route['rekap_apus_galeri']                 = 'backend/rekap/apus_galeri';
 // end rekap
 
 // =============================================== End Routing Backend ======================================= 

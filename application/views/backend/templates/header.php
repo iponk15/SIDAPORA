@@ -1,6 +1,9 @@
 <div class="app-header header-shadow">
 	<div class="app-header__logo">
-		<div class="logo-src"></div>
+		<div style="margin-top: -5%;">
+			<h3><b style="color: crimson;">SIDAPORA</b></h3>
+			<h6 style="margin-top: -5%; font-size: 10px; color: darkblue;">(Sistem Aplikasi Database Prasarana Olahraga)</h6>
+		</div>
 		<div class="header__pane ml-auto">
 			<div>
 				<button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">

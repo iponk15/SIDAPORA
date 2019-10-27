@@ -1,36 +1,37 @@
-<html>    
-  <head> 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="style.css" />
-    <script src="<?php echo base_url('assets/frontend/global/plugins/gmap3.js'); ?>" type="text/javascript"></script>  
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+  </head>
   <body>
-<div id="test" class="gmap3"></div>
-<script>
-  $.gmap3({
-    key: 'AIzaSyB8rc7_FjcX4eYqhNpEnaukeENomS99i7A'
-  });
-  $(function () {
-    $('#test')
-      .gmap3({
-        address: "Haltern am See, Weseler Str. 151",
-        zoom: 6,
-        mapTypeId : google.maps.MapTypeId.ROADMAP
-      })
-      .marker(function (map) {
-        return {
-          position: map.getCenter(),
-          icon: 'http://maps.google.com/mapfiles/marker_green.png'
-        };
-      })
-        .on('click', function (marker, event) {
-          marker.setIcon('http://maps.google.com/mapfiles/marker_orange.png');
-          setTimeout(function () {
-            marker.setIcon('http://maps.google.com/mapfiles/marker_green.png');
-          }, 200);
-        })
-    ;
-  });
-</script>
+    <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: -25.344, lng: 131.036};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiJKOoD2LLAuU-Lgl4B9uVnCPs_x6vIOY&callback=initMap">
+    </script>
   </body>
 </html>

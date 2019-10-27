@@ -101,6 +101,50 @@
 							<input type="number" class="form-control" name="rekdet_nominal" placeholder="Input Nominal" value="<?php echo $records->rekdet_nominal; ?>">
 						</div>
 					</div>
+					<input type="hidden" value="<?php echo $records->rekdet_id; ?>" name="rekdet_id">
+					<hr> <h4><b> Upload Galeri ( Foto ) </b></h4> <hr>
+					<div class="input_fields_wrap">
+						<?php 
+							foreach ($galeri as $glrs) {
+						?>
+								<input type="hidden" value="<?php echo md56($glrs->rekdok_id); ?>" name="rekdok_id[]" class="bewokAjag">
+								<div class="row formDel" data-rekdok_id="<?php echo md56($glrs->rekdok_id); ?>" data-rekdok_file="<?php echo $glrs->rekdok_file; ?>">
+									<div class="col-md-3">
+										<div class="position-relative form-group">
+											<label for="exampleFile" class=""> Ringkasan </label>
+											<input value="<?php echo $glrs->rekdok_ringkasan; ?>" name="rekdok_ringkasan[]" type="text" class="form-control">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="position-relative form-group">
+											<label for="exampleFile" class=""> Deskripsi </label>
+											<textarea name="rekdok_deskripsi[]" class="form-control" cols="30" rows="2"><?php echo $glrs->rekdok_deskripsi; ?></textarea>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="position-relative form-group">
+											<label for="exampleFile" class="">File Gambar </label>
+											<input name="rekdok_file[]" type="file" class="form-control-file">
+											<input type="hidden" value="<?php echo $glrs->rekdok_file; ?>" name="rekdok_file_old[]">
+											<?php echo $glrs->rekdok_file; ?>
+										</div>
+									</div>
+									<div class="col-md-2" style="margin-left: -1%;">
+										<div class="position-relative form-group">
+											<label for="exampleFile" class=""> &nbsp; </label>
+											<div class="custom-checkbox custom-control">
+												<input <?php echo ($glrs->rekdok_is_public == '1' ? 'checked' : ''); ?> type="checkbox" name="rekdok_is_public[]">
+												<label> <div style="margin-top: -10%;"> &nbsp; Tampil Galeri </div> </label>
+											</div>
+										</div>
+									</div>
+									<div><a style="margin-top: 40%;" data-repeater-delete class="mb-2 mr-2 btn btn-danger active btn-sm remove_field" data-swall="true">Hapus</a></div>
+								</div>
+							<?php } ?>
+					</div>
+
+					<a class="mb-2 mr-2 btn btn-info active btn-sm add_field_button">Tambah</a>
+
 					<div class="position-relative row form-check">
 						<div class="col-sm-4 offset-sm-3">
 							<a href="<?php echo base_url('rekap_detail/' . md56($records->rekdet_rekap_id)); ?>" class="mb-2 mr-2 btn btn-light active">Kembali</a>
@@ -114,8 +158,87 @@
 	</div>
 </div>
 
+<a href="<?php echo base_url('rekap_detail_ubah/'.$rekdet_id) ?>" class="reload"></a>
+
 <script>
     $(document).ready(function(){
+		var max_fields      = 10; //maximum input boxes allowed
+		var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
+		var add_button      = $(".add_field_button"); //Add button ID
+		
+		var x = 1; //initlal text box count
+		$(add_button).click(function(e){ //on add input button click
+			e.preventDefault();
+			if(x < max_fields){ //max input box allowed
+				x++; //text box increment
+				var content = '<div class="row formDel">' +
+									'<div class="col-md-3">' +
+										'<div class="position-relative form-group">' +
+											'<label for="exampleFile" class=""> Ringkasan </label>' +
+											'<input name="rekdok_ringkasan[]" type="text" class="form-control">' +
+										'</div>' +
+									'</div>' +
+									'<div class="col-md-3">' +
+										'<div class="position-relative form-group">' +
+											'<label for="exampleFile" class=""> Deskripsi </label>' +
+											'<textarea name="rekdok_deskripsi[]" class="form-control" cols="30" rows="2"></textarea>' +
+										'</div>' +
+									'</div>' +
+									'<div class="col-md-3">' +
+										'<div class="position-relative form-group">' +
+											'<label for="exampleFile" class="">File Gambar </label>' +
+											'<input name="rekdok_file[]" type="file" class="form-control-file">' +
+										'</div>' +
+									'</div>' +
+									'<div class="col-md-2" style="margin-left: -1%;">' +
+										'<div class="position-relative form-group">' +
+											'<label for="exampleFile" class=""> &nbsp; </label>' +
+											'<div class="custom-checkbox custom-control">' +
+												'<input type="checkbox" name="rekdok_is_public[]">' +
+												'<label> <div style="margin-top: -10%;"> &nbsp; Tampil Galeri </div> </label>' +
+											'</div>' +
+										'</div>' +
+									'</div>' +
+									'<div><a style="margin-top: 40%;" data-repeater-delete class="mb-2 mr-2 btn btn-danger active btn-sm remove_field data-swall="false"">Hapus</a></div>' +
+								'</div>';
+				$(wrapper).append(content); //add input box
+			}
+		});
+		
+		$(wrapper).on("click",".remove_field", function(e){
+			var dtSwl = $(this).attr('data-swall');
+
+			if(dtSwl == 'true'){
+				Swal.fire({
+					title: 'Are you sure?',
+					text: "You won't be able to revert this!",
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Yes, delete it!'
+				}).then((result) => {
+					if (result.value) {
+						var rekdok_id   = $(this).parent('div').parent('.formDel').attr('data-rekdok_id');
+						var rekdok_file = $(this).parent('div').parent('.formDel').attr('data-rekdok_file');
+						var url         = base_url + 'rekap_apus_galeri';
+						var xdta        = { 'rekdok_id' : rekdok_id, 'rekdok_file' : rekdok_file };
+						var redirect    = '<?php echo base_url('rekap_detail_ubah/'.$rekdet_id) ?>';
+
+						$.post(url,xdta,function(res){
+							if(res.status == '1'){
+								window.location.href = redirect;
+							}
+						},'json');
+					}
+				})
+			}else{
+				e.preventDefault(); 
+				$(this).parent('div').parent('.formDel').remove();
+				x--;
+			}
+		});
+
         // get select kabupaten berdasarkan provinsi
         $('.rekdet_provinsi_id').on('change', function(){
             $('.formKabkot').fadeIn('slow');
