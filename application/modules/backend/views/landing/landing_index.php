@@ -72,18 +72,24 @@
                     </thead>
                     <tbody>
                         <?php 
-                            $i = 1;
-                            foreach ($sumD2 as $sums) {
+                            if(empty($sumD2)){
+                                echo '<tr>
+                                        <td colspan="6" class="text-center"><i>Tidak ada data yang di tampilkan</i></td>
+                                    </tr>';
+                            }else{
+                                $i = 1;
+                                foreach ($sumD2 as $sums) {
                         ?>
-                                <tr>
-                                    <td class="text-center"><?php echo $i++ ?></td>
-                                    <td class="text-center"><?php echo $sums->rekap_tahun ?></td>
-                                    <td class="text-center"><?php echo $sums->jmlPerProvinsi ?></td>
-                                    <td class="text-center"><?php echo $sums->jmlPerProvinsi ?></td>
-                                    <td class="text-center"><?php echo $sums->jmlPerProvinsi ?></td>
-                                    <td class="text-center"><?php echo $sums->jmlPerProvinsi ?></td>
-                                </tr>
+                                    <tr>
+                                        <td class="text-center"><?php echo $i++ ?></td>
+                                        <td class="text-center"><?php echo $sums->rekap_tahun ?></td>
+                                        <td class="text-center"><?php echo $sums->jmlPerProvinsi ?></td>
+                                        <td class="text-center"><?php echo $sums->jmlPerKabkot ?></td>
+                                        <td class="text-center"><?php echo $sums->jmlPerKecamatan ?></td>
+                                        <td class="text-center"><?php echo $sums->jmlPerKeldes ?></td>
+                                    </tr>
                         <?php
+                                }
                             }
                         ?>
                     </tbody>
