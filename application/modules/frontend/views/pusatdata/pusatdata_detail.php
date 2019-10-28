@@ -62,8 +62,32 @@
                         <!-- BEGIN PORTFOLIO DESCRIPTION -->            
                         <div class="col-md-7">
                             <h2>Deskripsi</h2>
-                            <p>Molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa quis tempor incididunt ut et dolore et dolorum fuga. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus.</p>
-                            <p>Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde nostrudlaboris. Sed unde omnis iste natus error sit voluptatem.</p>
+                            <p style="text-align: justify;">
+                                Pelaksanaan Bantuan Pemerintah untuk Pembangunan dan/atau Rehabilitasi Lapangan Olahraga didasarkan pada komitmen peningkatan mutu, 
+                                tata kelola dan optimalisasi layanan yang efektif dan efisien. 
+                            </p>
+                            <p style="text-align: justify;">
+                                Oleh karenanya harus memiliki asas yang harus menjadi pegangan dalam pelaksanaan program. 
+                                Adapun asas pelaksanaan Bantuan Pemerintah untuk Pembangunan dan/atau Rehabilitasi Lapangan Olahraga meliputi:
+                            </p>
+                            <ul>
+                                <li><b>Efisien</b> <br>
+                                    berarti harus diusahakan dengan menggunakan dana dan daya yang minimum untuk mencapai kualitas dan sasaran dalam waktu yang
+                                    ditetapkan atau menggunakan dana yang telah ditetapkan untuk mencapai hasil dan sasaran dengan kualitas yang maksimum.   
+                                </li>
+                                <li><b>Efektif</b> <br>
+                                    berarti sesuai dengan kebutuhan dan sasaran yang telah ditetapkan serta memberikan manfaat yang sebesar-besarnya.
+                                </li>
+                                <li><b>Transparan</b> <br>
+                                    dilaksanakan secara terbuka baik pada perencanaan, pelaksanaan, dan pelaporan
+                                </li>
+                                <li><b>Akuntabel</b> <br>
+                                    berarti sesuai dengan aturan dan ketentuan yang terkait dengan Pengadaan Barang/Jasa sehingga dapat dipertanggungjawabkan
+                                </li>
+                                <li><b>Manfaat</b> <br>
+                                    dapat dirasakan manfaatnya oleh masyarakat untuk mendukung kegiatan keolahragaan       
+                                </li>
+                            </ul>
                         </div>
                         <!-- END PORTFOLIO DESCRIPTION -->            
                     </div>
