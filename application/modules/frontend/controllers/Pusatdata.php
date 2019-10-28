@@ -80,7 +80,7 @@ class Pusatdata extends MX_Controller {
 
                 $getRekapDetail = $this->m_global->get($this->tableRekdet,$join,$where,$select);
                 $tempRekDet     = [];
-                
+                 
                 foreach ($getRekapDetail as $rekdet) {
                     $tempRekDet[] = [
                         'rekdet_lembaga'   => $rekdet->rekdet_lembaga,
