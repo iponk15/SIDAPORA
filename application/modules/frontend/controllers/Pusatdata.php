@@ -62,24 +62,25 @@ class Pusatdata extends MX_Controller {
 
                 if(empty($tahun)){
                     if($post['provinsi'] != ''){
-                        $where['provinsi_id'] = $post['provinsi'];
+                        $where['provinsi_kode'] = $post['provinsi'];
                     }
 
                     if($post['kabupaten'] != ''){
-                        $where['kabkot_id']   = $post['kabupaten'];
+                        $where['kabkot_kode']   = $post['kabupaten'];
                     }
                 }else{
                     if($provinsi != ''){
-                        $where['provinsi_id'] = $post['provinsi'];
+                        $where['provinsi_kode'] = $post['provinsi'];
                     }
 
                     if($kabupaten != ''){
-                        $where['kabkot_id']   = $post['kabupaten'];
+                        $where['kabkot_kode']   = $post['kabupaten'];
                     }
                 }
 
                 $getRekapDetail = $this->m_global->get($this->tableRekdet,$join,$where,$select);
                 $tempRekDet     = [];
+                
                 foreach ($getRekapDetail as $rekdet) {
                     $tempRekDet[] = [
                         'rekdet_lembaga'   => $rekdet->rekdet_lembaga,
@@ -106,8 +107,6 @@ class Pusatdata extends MX_Controller {
         if(empty($tahun)){
             $data['tahun']  = $post['tahun'];
             $data['galeri'] = getGaleriPusdat($data['tahun']);
-
-            // pre($galeri,1);
 
             // get data rekap dan rekap detail
             $data['records'] = ( empty($tempRekap) ? null : $tempRekap );

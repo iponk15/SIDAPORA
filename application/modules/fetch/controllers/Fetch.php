@@ -29,17 +29,17 @@ class Fetch extends MX_Controller {
     public function getKabkotFromProvinsi($table,$provId, $id = NULL){
         if(is_null($id)){
             $key     = $_GET['key'];
-            $getData = $this->m_global->get($table, NULL, ['kabkot_provinsi_id' => $provId, 'kabkot_nama LIKE' => '%'.$key.'%']);
+            $getData = $this->m_global->get($table, NULL, ['kabkot_provinsi_kode' => $provId, 'kabkot_nama LIKE' => '%'.$key.'%']);
 
             $data = [];
             for ($i=0; $i < count($getData); $i++) {
-                $data[$i] = ['id' => $getData[$i]->kabkot_id, 'name' => $getData[$i]->kabkot_nama];
+                $data[$i] = ['id' => $getData[$i]->kabkot_kode, 'name' => $getData[$i]->kabkot_nama];
             }
 
             echo json_encode(['item' => $data]);
         }else{
 
-            $getData = $this->m_global->get($table, NULL, ['kabkot_id' => $id]);
+            $getData = $this->m_global->get($table, NULL, ['kabkot_kode' => $id]);
             $tmp      = [ ['id' => $id, 'name' => $getData[0]->kabkot_nama] ];
 
             echo json_encode($tmp);

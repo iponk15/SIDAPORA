@@ -96,7 +96,7 @@
             
         });
 
-        global.init_select2('.provinsi','fetch/globalFetch/sdp_master_provinsi/provinsi_id/provinsi_nama',true);
+        global.init_select2('.provinsi','fetch/globalFetch/sdp_master_provinsi/provinsi_kode/provinsi_nama',true);
 
         var prm = {
             format      : "yyyy",
