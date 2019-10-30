@@ -23,6 +23,8 @@
   <link href="<?php echo base_url('assets/frontend/global/plugins/slider-revolution-slider/rs-plugin/css/settings.css'); ?>" rel="stylesheet">
   <link href="<?php echo base_url('assets/frontend/global/plugins/select2/select2.css'); ?>" rel="stylesheet">
   <link href="<?php echo base_url('assets/frontend/global/plugins/bootstrap-datepicker/css/datepicker3.css'); ?>" rel="stylesheet">
+  <link href="<?php echo base_url('assets/frontend/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css'); ?>" rel="stylesheet">
+  <link href="<?php echo base_url('assets/frontend/global/plugins/uniform/css/uniform.default.css'); ?>" rel="stylesheet">
   <!-- Page level plugin styles END -->
 
   <!-- Theme styles START -->
@@ -48,6 +50,10 @@
   <script src="<?php echo base_url('assets/frontend/global/plugins/jquery-mixitup/jquery.mixitup.min.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/global/plugins/select2/select2.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>" type="text/javascript"></script>
+  <script src="<?php echo base_url('assets/frontend/global/plugins/datatables/media/js/jquery.dataTables.js'); ?>" type="text/javascript"></script>
+  <script src="<?php echo base_url('assets/frontend/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js'); ?>" type="text/javascript"></script>
+  <script src="<?php echo base_url('assets/frontend/global/plugins/jquery.blockui.min.js'); ?>" type="text/javascript"></script>
+  <script src="<?php echo base_url('assets/frontend/global/plugins/uniform/jquery.uniform.min.js'); ?>" type="text/javascript"></script>
 
   <!-- BEGIN RevolutionSlider -->  
   <script src="<?php echo base_url('assets/frontend/global/plugins/slider-revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js'); ?>" type="text/javascript"></script> 
@@ -57,6 +63,7 @@
   <script src="<?php echo base_url('assets/frontend/global/js/metronic.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/global/js/global.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/global/js/revo-ini.js'); ?>" type="text/javascript"></script>
+  <script src="<?php echo base_url('assets/frontend/global/js/datatable.js'); ?>" type="text/javascript"></script>
   <!-- END RevolutionSlider -->
   
   <script src="<?php echo base_url('assets/frontend/layout/js/back-to-top.js'); ?>" type="text/javascript"></script>

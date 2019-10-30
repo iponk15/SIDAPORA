@@ -95,6 +95,7 @@ class Pusatdata extends MX_Controller {
                 }
 
                 $tempRekap[] = [
+                    'rekap_id'       => $rows->rekap_id,
                     'rekap_judul'    => $rows->rekap_judul,
                     'rekap_kategori' => $rows->kategori_nama,
                     'rekap_tahun'    => $rows->rekap_tahun,
@@ -105,8 +106,10 @@ class Pusatdata extends MX_Controller {
         }
 
         if(empty($tahun)){
-            $data['tahun']  = $post['tahun'];
-            $data['galeri'] = getGaleriPusdat($data['tahun']);
+            $data['tahun']     = $post['tahun'];
+            $data['galeri']    = getGaleriPusdat($data['tahun']);
+            $data['provinsi']  = $post['provinsi'];
+            $data['kabupaten'] = $post['kabupaten'];
 
             // get data rekap dan rekap detail
             $data['records'] = ( empty($tempRekap) ? null : $tempRekap );
@@ -124,6 +127,107 @@ class Pusatdata extends MX_Controller {
         $mpdf->WriteHTML($html);
         // $mpdf->Output(); // opens in browser
         $mpdf->Output('Laporan Rekapitulasi Tahun '.$tahun.'.pdf','D');
+    }
+
+    function table($rekap_id = '', $provinsi = '', $kabupaten = ''){
+        if(@$_REQUEST['customActionType'] == 'group_action'){
+            $aChk = [0, 1, 99];
+            if(in_array(@$_REQUEST['customActionName'], $aChk)){
+                $this->change_status($_REQUEST['customActionName'], [strEncrypt('rekdet_id', true).' IN ' => "('".implode("','", $_REQUEST['id'] )."')"]);
+            }
+        }
+
+        $aCari = [
+            'rekdet_lembaga' => 'rekdet_lembaga',
+            'bantuan_nama'   => 'bantuan_nama',
+            'jnsbtn_nama'    => 'jnsbtn_nama',
+            'provinsi_nama'  => 'provinsi_nama',
+            'kabkot_nama'    => 'kabkot_nama',
+            'kecamatan_nama' => 'kecamatan_nama',
+            'keldes_nama'    => 'keldes_nama',
+            'rekdet_nominal' => 'rekdet_nominal'
+        ];
+
+        $join    = NULL;
+        $where   = NULL;
+        $where_e = NULL;
+
+        if(@$_REQUEST['action'] == 'filter')
+        {
+            $where = [];
+            foreach ($aCari as $key => $value) {
+                if($_REQUEST[$key] != '')
+                {
+                    if($key == 'lastupdate'){
+                        $tmp = explode(' - ', $_REQUEST[$key]);
+                        $where_e['DATE('.$this->db->escape_str(@$value).') BETWEEN '] = "'".$this->db->escape_str(@$tmp[0])."' AND '".$this->db->escape_str(@$tmp[1])."'";
+                    }else{
+                        $where[$value.' LIKE '] = '%'.$_REQUEST[$key].'%';
+                    }
+                }
+            }
+        }
+
+        $keys   = array_keys($aCari);
+        @$order = [$aCari[$keys[($_REQUEST['order'][0]['column']-2)]], $_REQUEST['order'][0]['dir']];
+
+        $join           = [
+            [$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],
+            [$this->tableJnsbtn,'rekdet_jnsbtn_kode = jnsbtn_kode','left'],
+            [$this->tableProvinsi,'rekdet_provinsi_kode = provinsi_kode','left'],
+            [$this->tableKabkot,'(rekdet_kabkot_kode = kabkot_kode AND kabkot_provinsi_kode = provinsi_kode)','left'],
+            [$this->tableKecamatan,'(rekdet_kecamatan_kode = kecamatan_kode AND kecamatan_provinsi_kode = provinsi_kode AND kecamatan_kabkot_kode = kabkot_kode)','left'],
+            [$this->tableKeldes,'(rekdet_keldes_kode = keldes_kode AND keldes_provinsi_kode = provinsi_kode AND keldes_kabkot_kode = kabkot_kode AND keldes_kecamatan_kode = kecamatan_kode)','left'],
+        ];
+
+        $where[md56('rekdet_rekap_id',1)] = $rekap_id;
+        
+        if($provinsi != ''){
+            $where['provinsi_kode'] = $provinsi;
+        }
+
+        if($kabupaten != ''){
+            $where['kabkot_kode']   = $kabupaten;
+        }
+
+        $iTotalRecords   = $this->m_global->count($this->tableRekdet,$join,$where);
+        $iDisplayLength  = intval($_REQUEST['length']);
+        $iDisplayLength  = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength; 
+        $iDisplayStart   = intval($_REQUEST['start']);
+        $sEcho           = intval($_REQUEST['draw']);
+        $records         = array();
+        $records["data"] = array(); 
+        $end             = $iDisplayStart + $iDisplayLength;
+        $end             = $end > $iTotalRecords ? $iTotalRecords : $end;
+
+        $select = 'rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
+        $result = $this->m_global->get($this->tableRekdet, $join, $where, $select, $where_e, $order, $iDisplayStart, $iDisplayLength);
+        $i      = 1 + $iDisplayStart;
+
+        foreach($result as $rows){
+            $records["data"][] = array(
+                $i++,
+                $rows->rekdet_lembaga,
+                $rows->bantuan_nama,
+                $rows->jnsbtn_nama,
+                $rows->keldes_nama,
+                $rows->kecamatan_nama,
+                $rows->kabkot_nama,
+                $rows->provinsi_nama,
+                uang($rows->rekdet_nominal)
+            );
+        }
+
+        if (isset($_REQUEST["customActionType"]) && $_REQUEST["customActionType"] == "group_action") {
+            $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
+            $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+        }
+
+        $records["draw"]            = $sEcho;
+        $records["recordsTotal"]    = $iTotalRecords;
+        $records["recordsFiltered"] = $iTotalRecords;
+        
+        echo json_encode($records);
     }
 
 }

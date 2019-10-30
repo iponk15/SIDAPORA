@@ -58,15 +58,16 @@ $route['translate_uri_dashes'] = FALSE;
 // Start Frontend
 $route['home'] = 'frontend/home';
 
-$route['pusatdata']      = 'frontend/pusatdata';
-$route['pusatdata_cari'] = 'frontend/pusatdata/cariData';
+$route['pusatdata']                          = 'frontend/pusatdata';
+$route['pusatdata_cari']                     = 'frontend/pusatdata/cariData';
 $route['pusatdata_pdf/(:any)']               = 'frontend/pusatdata/export_pdf/$1';
 $route['pusatdata_pdf/(:any)/(:any)']        = 'frontend/pusatdata/export_pdf/$1/$2';
 $route['pusatdata_pdf/(:any)/(:any)/(:any)'] = 'frontend/pusatdata/export_pdf/$1/$2/$3';
+$route['pusatdata_table/(:any)']             = 'frontend/pusatdata/table/$1';
 
 
-$route['galeri']    = 'frontend/galeri';
-$route['faq']       = 'frontend/faq';
+$route['galeri'] = 'frontend/galeri';
+$route['faq']    = 'frontend/faq';
 // =============================================== Start routing frontend ========================================
 
 

@@ -97,7 +97,26 @@
                         </div>
                     </div>
                     <div id="accordion1" class="panel-group">
-                        
+                         <!-- <table class="table table-striped table-bordered table-hover" id="datatable_ajax_1">
+                                <thead>
+                                    <tr role="row" class="heading">
+                                        <th width="5%">No.</th>
+                                        <th width="15%">Kategori Nama</th>
+                                        <th width="15%">Kategori Deskripsi</th>
+                                        <th width="10%">Actions</th>
+                                    </tr>
+                                    <tr role="row" class="filter">
+                                        <td></td>
+                                        <td><input type="text" class="form-control form-filter input-sm" name="kategori_nama"></td>
+                                        <td><input type="text" class="form-control form-filter input-sm" name="kategori_deskripsi"></td>
+                                        <td align="center">
+                                            <button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i></button>
+                                            <button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table> -->
                         <?php 
                             $i = 1;
                             foreach ($records as $rekap) {
@@ -111,8 +130,8 @@
                                             </div>
                                             <div id="accordion1_'.$i.'" class="panel-collapse collapse in">
                                                 <div class="panel-body flip-scroll">
-                                                    <table class="table table-bordered table-striped table-condensed flip-content">
-                                                        <thead class="flip-content">
+                                                    <table class="table table-striped table-bordered table-hover" id="tableBantuan_'.$i.'">
+                                                        <thead role="row" class="heading">
                                                             <tr>
                                                                 <th width="1%"><center>No. </center></th>
                                                                 <th width="23%"><center>Lembaga</center></th>
@@ -124,27 +143,38 @@
                                                                 <th><center>Provinsi</center></th>
                                                                 <th class="numeric" width="10%"><center>Nominal</center></th>
                                                             </tr>
+                                                            <tr role="row" class="filter">
+                                                                <td></td>
+                                                                <td><input type="text" class="form-control form-filter input-sm" name="rekdet_lembaga"></td>
+                                                                <td><input type="text" class="form-control form-filter input-sm" name="bantuan_nama"></td>
+                                                                <td><input type="text" class="form-control form-filter input-sm" name="jnsbtn_nama"></td>
+                                                                <td><input type="text" class="form-control form-filter input-sm" name="keldes_nama"></td>
+                                                                <td><input type="text" class="form-control form-filter input-sm" name="kecamatan_nama"></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
                                                         </thead>
                                                         <tbody>';
-                                                        if(empty($rekap['rekap_detail'])){
-                                                            $html .= '<tr><td colspan="9"> <center><i>Data rekap masih Kosong</i></center> </td></tr>';
-                                                        }else{
-                                                            $a = 1;
-                                                            foreach ($rekap['rekap_detail'] as $rows) {
-                                                                $html .= '<tr>
-                                                                            <td>'.$a.'</td>
-                                                                            <td>'.$rows['rekdet_lembaga'].'</td>
-                                                                            <td><center>'.$rows['rekdet_bantuan'].'</center></td>
-                                                                            <td><center>'.$rows['rekdet_jnsbtn'].'</center></td>
-                                                                            <td>'.$rows['rekdet_keldes'].'</td>
-                                                                            <td>'.$rows['rekdet_kecamatan'].'</td>
-                                                                            <td>'.$rows['rekdet_kabkot'].'</td>
-                                                                            <td>'.$rows['rekdet_provinsi'].'</td>
-                                                                            <td>'.uang($rows['rekdet_nominal']).'</td>
-                                                                        </tr>';
-                                                                $a++;
-                                                            }
-                                                        }
+                                                        // if(empty($rekap['rekap_detail'])){
+                                                        //     $html .= '<tr><td colspan="9"> <center><i>Data rekap masih Kosong</i></center> </td></tr>';
+                                                        // }else{
+                                                        //     $a = 1;
+                                                        //     foreach ($rekap['rekap_detail'] as $rows) {
+                                                        //         $html .= '<tr>
+                                                        //                     <td>'.$a.'</td>
+                                                        //                     <td>'.$rows['rekdet_lembaga'].'</td>
+                                                        //                     <td><center>'.$rows['rekdet_bantuan'].'</center></td>
+                                                        //                     <td><center>'.$rows['rekdet_jnsbtn'].'</center></td>
+                                                        //                     <td>'.$rows['rekdet_keldes'].'</td>
+                                                        //                     <td>'.$rows['rekdet_kecamatan'].'</td>
+                                                        //                     <td>'.$rows['rekdet_kabkot'].'</td>
+                                                        //                     <td>'.$rows['rekdet_provinsi'].'</td>
+                                                        //                     <td>'.uang($rows['rekdet_nominal']).'</td>
+                                                        //                 </tr>';
+                                                        //         $a++;
+                                                        //     }
+                                                        // }
                                 $html .=                '</tbody>
                                                     </table>
                                                 </div>
@@ -163,3 +193,35 @@
         </div>
         <!-- BEGIN SIDEBAR & CONTENT -->
 <?php } ?>
+
+<script>
+    $(document).ready(function(){
+        <?php 
+            $i = 1;    
+            foreach ($records as $rowsJs) {
+        ?>
+                var ri      = '<?php echo md56($rowsJs['rekap_id']); ?>';
+                var pr      = '<?php echo $provinsi; ?>';
+                var kk      = '<?php echo $kabupaten; ?>';
+                var id      = $('#tableBantuan_' + <?php echo $i++; ?>);
+                var baseUrl = 'pusatdata_table/' + ri +'/'+ pr +'/'+ kk;
+                var header  = [
+                    ,
+                    ,
+                    { "sClass": "text-center" },
+                    { "sClass": "text-center" },
+                    { "sClass": "text-center" },
+                    { "sClass": "text-center" },
+                    { "sClass": "text-center" },
+                    { "sClass": "text-center" },
+                    {}
+                ];
+                var order = [ [2, "asc"] ];
+                var sort  = [-1, 0, 1];
+                
+                global.init_da(id, baseUrl, header, order, sort);
+        <?php
+            }
+        ?>
+    });
+</script>
