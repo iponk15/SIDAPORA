@@ -51,14 +51,14 @@
                         <tr>
                             <td scope="row" width="3%"><center>'.$i++.'</center></td>
                             <td>'.$row->rekdet_lembaga.'</td>
-                            <td>'.$row->jnsbtn_nama.'</td>
+                            <td width="10%">'.$row->jnsbtn_nama.'</td>
                             <td>'.$row->bantuan_nama.'</td>
 							<td>'.$row->keldes_nama.'</td>
 							<td>'.$row->kecamatan_nama.'</td>
 							<td>'.$row->kabkot_nama.'</td>
 							<td>'.$row->provinsi_nama.'</td>
-							<td>'.$row->rekdet_nominal.'</td>
-                            <td width="15%">
+							<td width="10%">'.uang($row->rekdet_nominal).'</td>
+                            <td width="10%">
 								<center>
                                     <a href="'.base_url('rekap_detail_ubah/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="nav-link-icon fa fa-edit"></i></a>
                                     <a href="'.base_url('rekap_detail_hapus/'.$rekap_id.'/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-danger"><i class="nav-link-icon fa fa-trash"></i></a>

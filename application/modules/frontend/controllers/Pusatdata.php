@@ -169,7 +169,8 @@ class Pusatdata extends MX_Controller {
         }
 
         $keys   = array_keys($aCari);
-        @$order = [$aCari[$keys[($_REQUEST['order'][0]['column']-2)]], $_REQUEST['order'][0]['dir']];
+        $order = ['rekdet_lastupdate', 'DESC'];
+        // $order = [$aCari[$keys[($_REQUEST['order'][0]['column']-2)]], $_REQUEST['order'][0]['dir']];
 
         $join           = [
             [$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],

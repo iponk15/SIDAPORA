@@ -35,7 +35,7 @@ class Kecamatan extends MX_Controller {
 		$data['icon']      = 'provinsi';
         $data['header']    = 'Form Provinsi';
         $data['url']       = $this->url;
-        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama');
+        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama',null,['provinsi_nama','ASC']);
 		
 		$this->templates->backend($this->prefix.'tambah',$data);
     }

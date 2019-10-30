@@ -175,6 +175,7 @@ class Rekap extends MX_Controller {
         $data['rekdet_kecamatan_kode'] = $post['keldes_kecamatan_id'];
         $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
         $data['rekdet_nominal']        = $post['rekdet_nominal'];
+        $data['rekdet_createdby']      = getSession('user_id');
         
         $input  = $this->m_global->insert($this->tableRekapDetail, $data); 
         $lastId = $this->db->insert_id();
@@ -254,7 +255,7 @@ class Rekap extends MX_Controller {
         // get data foreign
         $data['bantuan']   = $this->m_global->get($this->tableBantuan,null,['bantuan_status' => '1', 'bantuan_kategori_id' => $data['records']->rekap_kategori_id ],'bantuan_kode,bantuan_nama');
         $data['jnsbtn']    = $this->m_global->get($this->tableJenisBantuan,null,['jnsbtn_status' => '1', 'jnsbtn_kategori_id' => $data['records']->rekap_kategori_id ],'jnsbtn_kode,jnsbtn_nama');
-        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama');
+        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama',null,['provinsi_nama','ASC']);
         $data['kabkot']    = $this->m_global->get($this->tableKabkot,null,['kabkot_provinsi_kode' => $data['records']->rekdet_provinsi_kode ],'kabkot_kode,kabkot_nama');
         $data['kecamatan'] = $this->m_global->get($this->tableKecamatan,null,['kecamatan_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'kecamatan_kode,kecamatan_nama');
         $data['kelurahan'] = $this->m_global->get($this->tableKeldes,null,['keldes_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'keldes_kode,keldes_nama');
@@ -331,6 +332,7 @@ class Rekap extends MX_Controller {
         $data['rekdet_kecamatan_kode'] = $post['keldes_kecamatan_id'];
         $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
         $data['rekdet_nominal']        = $post['rekdet_nominal'];
+        $data['rekdet_updatedby']      = getSession('user_id');
         
         $input = $this->m_global->update($this->tableRekapDetail, $data, [md56('rekdet_id',1) => $rekdet_id]); 
         
