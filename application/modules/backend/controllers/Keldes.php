@@ -16,14 +16,14 @@ class Keldes extends MX_Controller {
     public function index(){
         $data['pagetitle'] = 'Halaman Kelurahan / Desa';
 		$data['subtitle']  = 'Daftar Kelurahan / Desa';
-		$data['icon']      = 'provinsi';
+		$data['icon']      = 'map-marker';
 		$data['header']    = 'Table Kelurahan / Desa';
 		
         // get data
         $join            = [ 
             [$this->tableProvinsi,'keldes_provinsi_kode = provinsi_kode','left'],
-            [$this->tableKabkot,'keldes_kabkot_kode = kabkot_kode','left'],
-            [$this->tableKecamatan,'keldes_kecamatan_kode = kecamatan_kode','left']
+            [$this->tableKabkot,'(`keldes_kabkot_kode` = `kabkot_kode` AND kabkot_provinsi_kode = provinsi_kode)','left'],
+            [$this->tableKecamatan,'(`keldes_kecamatan_kode` = `kecamatan_kode` AND kecamatan_kabkot_kode = kabkot_kode)','left']
         ];
 		$select          = 'keldes_id,keldes_kode,keldes_nama,keldes_status,provinsi_kode,provinsi_nama,kabkot_kode,kabkot_nama,kecamatan_kode,kecamatan_nama';
         $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['keldes_lastupdate','DESC']);
@@ -32,10 +32,10 @@ class Keldes extends MX_Controller {
     }
 
     function tambah(){
-        $data['pagetitle'] = 'Halaman Provinsi';
-		$data['subtitle']  = 'Tambah Data Provinsi';
-		$data['icon']      = 'provinsi';
-        $data['header']    = 'Form Provinsi';
+        $data['pagetitle'] = 'Halaman Kelurahan / Desa';
+		$data['subtitle']  = 'Tambah Data Kelurahan / Desa';
+		$data['icon']      = 'map-marker';
+        $data['header']    = 'Form Kelurahan / Desa';
         $data['url']       = $this->url;
         $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama',null,['provinsi_nama','ASC']);
 		
@@ -65,7 +65,7 @@ class Keldes extends MX_Controller {
     function ubah($keldes_id){
         $data['pagetitle'] = 'Halaman Kelurahan / Desa';
 		$data['subtitle']  = 'Edit Data Kelurahan / Desa';
-		$data['icon']      = 'provinsi';
+		$data['icon']      = 'map-marker';
         $data['header']    = 'Form Kelurahan / Desa';
         $data['keldes_id'] = $keldes_id;
         $data['url']       = $this->url;

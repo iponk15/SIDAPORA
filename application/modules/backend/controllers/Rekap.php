@@ -23,7 +23,7 @@ class Rekap extends MX_Controller {
     public function index(){
         $data['pagetitle'] = 'Halaman Rekap';
 		$data['subtitle']  = 'Daftar Rekap';
-		$data['icon']      = 'provinsi';
+		$data['icon']      = 'news-paper';
 		$data['header']    = 'Table Rekap';
 		
         // get data
@@ -40,8 +40,8 @@ class Rekap extends MX_Controller {
     function tambah(){
         $data['pagetitle'] = 'Halaman Form Rekap';
 		$data['subtitle']  = 'Tambah data Rekap';
-		$data['icon']      = 'bantuan';
-        $data['header']    = 'Form Rekapitulasi';
+		$data['icon']      = 'news-paper';
+        $data['header']    = 'Form Judul Rekapitulasi';
         $data['url']       = $this->url;
 
         // get data kategoro
@@ -71,8 +71,8 @@ class Rekap extends MX_Controller {
     function ubah($rekap_id){
         $data['pagetitle'] = 'Halaman Rekap';
 		$data['subtitle']  = 'Edit data Rekap';
-		$data['icon']      = 'bantuan';
-        $data['header']    = 'Form Edit Rekap';
+		$data['icon']      = 'news-paper';
+        $data['header']    = 'Form Edit Judul Rekap';
         $data['rekap_id']  = $rekap_id;
         $data['url']       = $this->url;
 		
@@ -116,7 +116,7 @@ class Rekap extends MX_Controller {
 	function detail($rekap_id){
 		$data['pagetitle'] = 'Halaman Rekap Detail';
 		$data['subtitle']  = 'Data Rekap Detail';
-		$data['icon']      = 'rekap';
+		$data['icon']      = 'news-paper';
         $data['header']    = 'Detail Rekap';
         $data['rekap_id']  = $rekap_id;
         $data['url']       = $this->url;
@@ -142,10 +142,10 @@ class Rekap extends MX_Controller {
     }
     
     function detail_tambah($rekap_id,$kategori_id){
-        $data['pagetitle'] = 'Halaman bantuan';
-		$data['subtitle']  = 'Tambah data bantuan';
-		$data['icon']      = 'bantuan';
-        $data['header']    = 'Form bantuan';
+        $data['pagetitle'] = 'Halaman Rekap Detail';
+		$data['subtitle']  = 'Tambah data Rekap Detail';
+		$data['icon']      = 'news-paper';
+        $data['header']    = 'Form Rekap Detail';
         $data['url']       = $this->url;
         $data['rekap_id']  = $rekap_id;
         $data['ktgrId']    = $kategori_id;
@@ -233,10 +233,10 @@ class Rekap extends MX_Controller {
     }
 
     function detail_ubah($rekdet_id){
-        $data['pagetitle'] = 'Halaman bantuan';
-		$data['subtitle']  = 'Tambah data bantuan';
-		$data['icon']      = 'bantuan';
-        $data['header']    = 'Form bantuan';
+        $data['pagetitle'] = 'Halaman Rekap Detail';
+		$data['subtitle']  = 'Tambah data Rekap Detail';
+		$data['icon']      = 'news-paper';
+        $data['header']    = 'Form Rekap Detail';
         $data['url']       = $this->url;
         $data['rekdet_id'] = $rekdet_id;
 

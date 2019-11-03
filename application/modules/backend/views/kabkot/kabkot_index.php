@@ -1,5 +1,5 @@
 <div class="main-card mb-3 card">
-	<div class="card-header"><?php echo $header; ?></div>
+	<div class="card-header"><h5><b><?php echo $header; ?></b></h5></div>
 	<div class="card-body">
 		<div class="text-right"> 
 			<a href="<?php echo base_url('kabkot_tambah'); ?>" class="mb-2 mr-2 btn btn-primary active">Tambah Data Kabupaten / Kota</a> 

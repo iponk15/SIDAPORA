@@ -1,8 +1,8 @@
 <div class="main-card mb-3 card">
-	<div class="card-header"><?php echo $header; ?></div>
+	<div class="card-header"><h5><b><?php echo $header; ?></b></h5></div>
 	<div class="card-body">
 		<div class="text-right"> 
-			<a href="<?php echo base_url('kategori_tambah'); ?>" class="mb-2 mr-2 btn btn-primary active">Tambah Data User</a> 
+			<a href="<?php echo base_url('kategori_tambah'); ?>" class="mb-2 mr-2 btn btn-primary active">Tambah Data Kategori</a> 
 		</div>
 		<table class="mb-0 table table-bordered table_user">
 			<thead>

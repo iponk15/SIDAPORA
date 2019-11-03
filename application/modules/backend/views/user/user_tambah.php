@@ -1,12 +1,12 @@
 <div class="main-card mb-3 card">
-	<div class="card-header"><?php echo $header; ?></div>
+	<div class="card-header"><h5><b><?php echo $header; ?></b></h5></div>
 	<div class="card-body">
 		<form enctype="multipart/form-data" class="" method="POST" action="<?php echo base_url('user_simpan'); ?>">
 			<div class="row">
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Name</label>
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Nama</label>
 						<div class="col-sm-3">
 							<input required name="user_nama" placeholder="Input Nama" type="text" class="form-control">
 						</div>

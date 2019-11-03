@@ -1,5 +1,5 @@
 <div class="main-card mb-3 card">
-	<div class="card-header"><h4><?php echo $header; ?></h4></div>
+	<div class="card-header"><h5><b><?php echo $header; ?></b></h5></div>
 	<div class="card-body">
 		<div class="text-right"> 
 			<a href="<?php echo base_url('bantuan_tambah'); ?>" class="mb-2 mr-2 btn btn-primary active">Tambah Data Bantuan</a> 

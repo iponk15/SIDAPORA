@@ -15,13 +15,13 @@ class Kecamatan extends MX_Controller {
     public function index(){
         $data['pagetitle'] = 'Halaman Kecamatan';
 		$data['subtitle']  = 'Daftar Kecamatan';
-		$data['icon']      = 'provinsi';
+		$data['icon']      = 'map-marker';
 		$data['header']    = 'Table Kecamatan';
 		
         // get data
         $join            = [ 
             [$this->tableProvinsi,'kecamatan_provinsi_kode = provinsi_kode','left'],
-            [$this->tableKabkot,'kecamatan_kabkot_kode = kabkot_kode','left']
+            [$this->tableKabkot,'(`kecamatan_kabkot_kode` = `kabkot_kode` AND kabkot_provinsi_kode = provinsi_kode)','left']
         ];
 		$select          = 'kecamatan_id,kecamatan_kode,kecamatan_nama,kecamatan_status,provinsi_kode,provinsi_nama,kabkot_kode,kabkot_nama';
         $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['kecamatan_lastupdate','DESC']);
@@ -30,10 +30,10 @@ class Kecamatan extends MX_Controller {
     }
 
     function tambah(){
-        $data['pagetitle'] = 'Halaman Provinsi';
-		$data['subtitle']  = 'Tambah Data Provinsi';
-		$data['icon']      = 'provinsi';
-        $data['header']    = 'Form Provinsi';
+        $data['pagetitle'] = 'Halaman Kecamatan';
+		$data['subtitle']  = 'Tambah Data Kecamatan';
+		$data['icon']      = 'map-marker';
+        $data['header']    = 'Form Kecamatan';
         $data['url']       = $this->url;
         $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama',null,['provinsi_nama','ASC']);
 		
@@ -62,7 +62,7 @@ class Kecamatan extends MX_Controller {
     function ubah($kecamatan_id){
         $data['pagetitle']    = 'Halaman Kecamatan';
 		$data['subtitle']     = 'Edit Data Kecamatan';
-		$data['icon']         = 'provinsi';
+		$data['icon']         = 'map-marker';
         $data['header']       = 'Form Kecamatan';
         $data['kecamatan_id'] = $kecamatan_id;
         $data['url']          = $this->url;

@@ -13,7 +13,7 @@ class Kategori extends MX_Controller {
     public function index(){
         $data['pagetitle'] = 'Halaman kategori';
 		$data['subtitle']  = 'Daftar kategori';
-		$data['icon']      = 'kategori';
+		$data['icon']      = 'menu';
 		$data['header']    = 'Table kategori';
 		
 		// get data

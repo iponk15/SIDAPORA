@@ -1,5 +1,5 @@
 <div class="main-card mb-3 card">
-	<div class="card-header"> <h4><b> Detail Rekap </b></h4></div>
+	<div class="card-header"> <h5><b> Detail Rekap </b></h5></div>
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-8">
@@ -23,7 +23,7 @@
 		</div>
 	</div>
 	<hr/>
-	<div class="card-header"> <h4><b> Data Rekap Detail </b></h4></div>
+	<div class="card-header"> <h5><b> Data Rekap Detail </b></h5></div>
 	<div class="card-body">
 		<div class="text-right"> 
 			<a href="<?php echo base_url('rekap_detail_tambah/'.$rekap_id.'/'.md56($rekap->kategori_id)); ?>" class="mb-2 mr-2 btn btn-primary active">Tambah Detail Rekap</a> 

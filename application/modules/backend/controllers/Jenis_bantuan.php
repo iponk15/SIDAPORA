@@ -14,7 +14,7 @@ class Jenis_bantuan extends MX_Controller {
     public function index(){
         $data['pagetitle'] = 'Halaman Jenis Bantuan';
 		$data['subtitle']  = 'Daftar Jenis Bantuan';
-		$data['icon']      = 'jenis_bantuan';
+		$data['icon']      = 'plugin';
 		$data['header']    = 'Table Jenis Bantuan';
 		
         // get data
@@ -26,9 +26,9 @@ class Jenis_bantuan extends MX_Controller {
     }
 
     function tambah(){
-        $data['pagetitle'] = 'Halaman jenis_bantuan';
-		$data['subtitle']  = 'Tambah data jenis_bantuan';
-		$data['icon']      = 'jenis_bantuan';
+        $data['pagetitle'] = 'Halaman Jenis Bantuan';
+		$data['subtitle']  = 'Tambah data Jenis Bantuan';
+		$data['icon']      = 'plugin';
         $data['header']    = 'Form jenis_bantuan';
         $data['url']       = $this->url;
         $data['kategori']  = $this->m_global->get($this->tableKategori,null,['kategori_status' => '1'],'kategori_id,kategori_nama');
@@ -58,7 +58,7 @@ class Jenis_bantuan extends MX_Controller {
     function ubah($jenis_bantuan_id){
         $data['pagetitle'] = 'Halaman Jenis Bantuan';
 		$data['subtitle']  = 'Edit data Jenis Bantuan';
-		$data['icon']      = 'jenis_bantuan';
+		$data['icon']      = 'plugin';
         $data['header']    = 'Form Jenis Bantuan';
         $data['jnsbtn_id'] = $jenis_bantuan_id;
         $data['url']       = $this->url;

@@ -52,46 +52,129 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
+<!-- <div class="row">
+    <div class="col-md-3">
         <div class="main-card mb-3 card">
             <div class="card-header">
-                <h5><b>Data Rekap Per Tahun & Per Region</b></h5>
+                <h5><b>Data Rekap Per Provinsi</b></h5>
             </div>
             <div class="card-body">
                 <table class="mb-0 table table-sm table-bordered">
                     <thead style="background-color: #00A843;">
                         <tr>
                             <th class="text-center">No. </th>
-                            <th class="text-center">Tahun</th>
                             <th class="text-center">Provinsi</th>
-                            <th class="text-center">Kabupaten / Kota</th>
+                            <th class="text-center">Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <h5><b>Data Rekap Per Kabupategn</b></h5>
+            </div>
+            <div class="card-body">
+                <table class="mb-0 table table-sm table-bordered">
+                    <thead style="background-color: #00A843;">
+                        <tr>
+                            <th class="text-center">No. </th>
+                            <th class="text-center">Kabupaten</th>
+                            <th class="text-center">Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <h5><b>Data Rekap Per Kecamatan</b></h5>
+            </div>
+            <div class="card-body">
+                <table class="mb-0 table table-sm table-bordered">
+                    <thead style="background-color: #00A843;">
+                        <tr>
+                            <th class="text-center">No. </th>
                             <th class="text-center">Kecamatan</th>
-                            <th class="text-center">Kelurahan / Desa</th>
+                            <th class="text-center">Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <h5><b>Data Rekap Per Kelurahan</b></h5>
+            </div>
+            <div class="card-body">
+                <table class="mb-0 table table-sm table-bordered">
+                    <thead style="background-color: #00A843;">
+                        <tr>
+                            <th class="text-center">No. </th>
+                            <th class="text-center">Kelurahan</th>
+                            <th class="text-center">Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <h5><b>Data Rekap Per Tahun</b></h5>
+            </div>
+            <div class="card-body">
+                <table class="mb-0 table table-sm table-bordered">
+                    <thead style="background-color: #00A843;">
+                        <tr>
+                            <th class="text-center">No. </th>
+                            <th class="text-center">Kategori</th>
+							<th class="text-center">Tahun</th>
+                            <th class="text-center">Jumlah Data</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
-                            if(empty($sumD2)){
-                                echo '<tr>
-                                        <td colspan="6" class="text-center"><i>Tidak ada data yang di tampilkan</i></td>
-                                    </tr>';
-                            }else{
-                                $i = 1;
-                                foreach ($sumD2 as $sums) {
-                        ?>
-                                    <tr>
-                                        <td class="text-center"><?php echo $i++ ?></td>
-                                        <td class="text-center"><?php echo $sums->rekap_tahun ?></td>
-                                        <td class="text-center"><?php echo $sums->jmlPerProvinsi ?></td>
-                                        <td class="text-center"><?php echo $sums->jmlPerKabkot ?></td>
-                                        <td class="text-center"><?php echo $sums->jmlPerKecamatan ?></td>
-                                        <td class="text-center"><?php echo $sums->jmlPerKeldes ?></td>
-                                    </tr>
-                        <?php
-                                }
-                            }
-                        ?>
+							if(empty($sumPerKat)){
+								echo '<tr><td colspan="4"><i> Data Kosong </i></td></tr>';
+							}else{							
+								
+								$i = 1;
+								
+								foreach($sumPerKat as $kat){
+									echo '	<tr>
+												<td>'.$i++.'</td>
+												<td>'.$kat->kategori_nama.'</td>
+												<td class="text-center">'.$kat->rekap_tahun.'</td>
+												<td class="text-center">'.$kat->jmlData.'</td>
+											</tr>';
+								}
+							}
+						?>
                     </tbody>
                 </table>
             </div>

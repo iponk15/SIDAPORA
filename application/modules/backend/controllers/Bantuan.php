@@ -14,7 +14,7 @@ class Bantuan extends MX_Controller {
     public function index(){
         $data['pagetitle'] = 'Halaman Bantuan';
 		$data['subtitle']  = 'Daftar Bantuan';
-		$data['icon']      = 'bantuan';
+		$data['icon']      = 'box2';
 		$data['header']    = 'Table Bantuan';
 		
         // get data

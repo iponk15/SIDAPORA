@@ -40,7 +40,7 @@
 				<li class="app-sidebar__heading"><h6><b>Master Data</b></h4></li>
 				<li>
 					<a href="<?php echo base_url('user'); ?>" class="<?php echo (getCtrl() == 'user' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-user"></i> Users
+						<i class="metismenu-icon pe-7s-user"></i> User
 					</a>
 				</li>
 				<li>
@@ -61,28 +61,28 @@
 				<li class="app-sidebar__heading"><h6><b>Wilayah Administratif</b></h4></li>
 				<li>
 					<a href="<?php echo base_url('provinsi'); ?>" class="<?php echo (getCtrl() == 'provinsi' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-plugin"></i> Provinsi
+						<i class="metismenu-icon pe-7s-map-marker"></i> Provinsi
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo base_url('kabkot'); ?>" class="<?php echo (getCtrl() == 'kabkot' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-plugin"></i> Kabupaten / Kota
+						<i class="metismenu-icon pe-7s-map-marker"></i> Kabupaten / Kota
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo base_url('kecamatan'); ?>" class="<?php echo (getCtrl() == 'kecamatan' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-plugin"></i> Kecamatan
+						<i class="metismenu-icon pe-7s-map-marker"></i> Kecamatan
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo base_url('keldes'); ?>" class="<?php echo (getCtrl() == 'keldes' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-plugin"></i> Kelurahan / Desa
+						<i class="metismenu-icon pe-7s-map-marker"></i> Kelurahan / Desa
 					</a>
 				</li>
 				<li class="app-sidebar__heading"><h6><b>Data Rekapitulasi</b></h4></li>
 				<li>
 					<a href="<?php echo base_url('rekap'); ?>" class="<?php echo (getCtrl() == 'rekap' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-plugin"></i> Rekap
+						<i class="metismenu-icon pe-7s-news-paper"></i> Rekap
 					</a>
 				</li>
 			</ul>

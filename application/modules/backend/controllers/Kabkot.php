@@ -14,7 +14,7 @@ class Kabkot extends MX_Controller {
     public function index(){
         $data['pagetitle'] = 'Halaman Kabupaten / Kota';
 		$data['subtitle']  = 'Daftar Kabupaten / Kota';
-		$data['icon']      = 'provinsi';
+		$data['icon']      = 'map-marker';
 		$data['header']    = 'Table Kabupaten / Kota';
 		
         // get data
@@ -26,10 +26,10 @@ class Kabkot extends MX_Controller {
     }
 
     function tambah(){
-        $data['pagetitle'] = 'Halaman Provinsi';
-		$data['subtitle']  = 'Tambah Data Provinsi';
-		$data['icon']      = 'provinsi';
-        $data['header']    = 'Form Provinsi';
+        $data['pagetitle'] = 'Halaman Kabupaten / Kota';
+		$data['subtitle']  = 'Tambah Data Kabupaten / Kota';
+		$data['icon']      = 'map-marker';
+        $data['header']    = 'Form Kabupaten / Kota';
         $data['url']       = $this->url;
         $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama',null,['provinsi_nama','ASC']);
 		
@@ -57,7 +57,7 @@ class Kabkot extends MX_Controller {
     function ubah($kabkot_id){
         $data['pagetitle'] = 'Halaman Kabupaten / Kota';
 		$data['subtitle']  = 'Edit Data Kabupaten / Kota';
-		$data['icon']      = 'provinsi';
+		$data['icon']      = 'map-marker';
         $data['header']    = 'Form Kabupaten / Kota';
         $data['kabkot_id'] = $kabkot_id;
         $data['url']       = $this->url;
@@ -73,12 +73,12 @@ class Kabkot extends MX_Controller {
     }
 
     function update($kabkot_id){
-        $post                       = $this->input->post();
+        $post                         = $this->input->post();
 		$data['kabkot_provinsi_kode'] = $post['kabkot_provinsi_kode'];
-        $data['kabkot_kode']        = $post['kabkot_kode'];
-        $data['kabkot_nama']        = $post['kabkot_nama'];
-        $data['kabkot_updatedby']   = getSession('user_id');
-        $data['kabkot_ip']          = getUserIp();
+        $data['kabkot_kode']          = $post['kabkot_kode'];
+        $data['kabkot_nama']          = $post['kabkot_nama'];
+        $data['kabkot_updatedby']     = getSession('user_id');
+        $data['kabkot_ip']            = getUserIp();
 		
 		$update = $this->m_global->update($this->table,$data,[md56('kabkot_id',1) => $kabkot_id]);
 		

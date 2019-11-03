@@ -13,7 +13,7 @@ class provinsi extends MX_Controller {
     public function index(){
         $data['pagetitle'] = 'Halaman Provinsi';
 		$data['subtitle']  = 'Daftar Provinsi';
-		$data['icon']      = 'provinsi';
+		$data['icon']      = 'map-marker';
 		$data['header']    = 'Table Provinsi';
 		
         // get data
@@ -53,7 +53,7 @@ class provinsi extends MX_Controller {
     function ubah($provinsi_id){
         $data['pagetitle']   = 'Halaman Provinsi';
 		$data['subtitle']    = 'Edit Data Provinsi';
-		$data['icon']        = 'provinsi';
+		$data['icon']        = 'map-marker';
         $data['header']      = 'Form Provinsi';
         $data['provinsi_id'] = $provinsi_id;
         $data['url']         = $this->url;

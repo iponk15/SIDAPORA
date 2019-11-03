@@ -1,5 +1,5 @@
 <div class="main-card mb-3 card">
-	<div class="card-header"><h4><b><?php echo $header; ?></b></h4></div>
+	<div class="card-header"><h5><b><?php echo $header; ?></b></h5></div>
 	<div class="card-body">
 		<form enctype="multipart/form-data" class="" method="POST" action="<?php echo base_url('rekap_detail_update/'.$rekdet_id); ?>">
 			<div class="row">
