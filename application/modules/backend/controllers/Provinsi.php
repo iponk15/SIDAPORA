@@ -37,6 +37,8 @@ class provinsi extends MX_Controller {
         $post                         = $this->input->post();
         $data['provinsi_kode']        = $post['provinsi_kode'];
         $data['provinsi_nama']        = $post['provinsi_nama'];
+        $data['provinsi_latitude']    = $post['provinsi_latitude'];
+        $data['provinsi_longtitude']  = $post['provinsi_longtitude'];
         $data['provinsi_createdby']   = getSession('user_id');
         $data['provinsi_createddate'] = date('Y-m-d H:i:s');
         $data['provinsi_ip']          = getUserIp();
@@ -59,18 +61,20 @@ class provinsi extends MX_Controller {
         $data['url']         = $this->url;
 
         // get data janei provinsi
-        $select          = 'provinsi_kode, provinsi_nama';
+        $select          = 'provinsi_kode, provinsi_nama, provinsi_latitude, provinsi_longtitude';
 		$data['records'] = $this->m_global->get($this->table,null,[md56('provinsi_id',1) => $provinsi_id],$select)[0];
 		
 		$this->templates->backend('provinsi/provinsi_ubah',$data);
     }
 
     function update($provinsi_id){
-        $post                       = $this->input->post();
-        $data['provinsi_kode']      = $post['provinsi_kode'];
-		$data['provinsi_nama']      = $post['provinsi_nama'];
-        $data['provinsi_updatedby'] = getSession('user_id');
-        $data['provinsi_ip']        = getUserIp();
+        $post                        = $this->input->post();
+        $data['provinsi_kode']       = $post['provinsi_kode'];
+        $data['provinsi_nama']       = $post['provinsi_nama'];
+        $data['provinsi_latitude']   = $post['provinsi_latitude'];
+        $data['provinsi_longtitude'] = $post['provinsi_longtitude'];
+        $data['provinsi_updatedby']  = getSession('user_id');
+        $data['provinsi_ip']         = getUserIp();
 		
 		$update = $this->m_global->update($this->table,$data,[md56('provinsi_id',1) => $provinsi_id]);
 		
