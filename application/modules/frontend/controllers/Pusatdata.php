@@ -25,7 +25,7 @@ class Pusatdata extends MX_Controller {
         $this->templates->frontend($this->prefix.'index', $data);
     }
 
-    function cariData($tahun = null, $provinsi = null, $kabupaten = null){
+    function cariData($bool = null, $tahun = null, $provinsi = null, $kabupaten = null){
         $post  = $this->input->post();
 
         // get data rekap
@@ -70,11 +70,11 @@ class Pusatdata extends MX_Controller {
                     }
                 }else{
                     if($provinsi != ''){
-                        $where['provinsi_kode'] = $post['provinsi'];
+                        $where['provinsi_kode'] = $provinsi;
                     }
 
                     if($kabupaten != ''){
-                        $where['kabkot_kode']   = $post['kabupaten'];
+                        $where['kabkot_kode']   = $kabupaten;
                     }
                 }
 
@@ -105,7 +105,7 @@ class Pusatdata extends MX_Controller {
             }
         }
 
-        if(empty($tahun)){
+        if($bool != '1'){
             $data['tahun']     = $post['tahun'];
             $data['galeri']    = getGaleriPusdat($data['tahun']);
             $data['provinsi']  = $post['provinsi'];
@@ -119,10 +119,10 @@ class Pusatdata extends MX_Controller {
         }
     }
 
-    function export_pdf($tahun, $provinsi = null, $kabupaten = null){
+    function export_pdf($bool = null, $tahun, $provinsi = null, $kabupaten = null){
         $mpdf            = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A3-L']);
         $data['tahun']   = $tahun;
-        $data['records'] = $this->cariData($tahun,$provinsi,$kabupaten);
+        $data['records'] = $this->cariData($bool,$tahun,$provinsi,$kabupaten);
         $html            = $this->load->view($this->prefix.'pdf',$data,true);
         $mpdf->WriteHTML($html);
         // $mpdf->Output(); // opens in browser

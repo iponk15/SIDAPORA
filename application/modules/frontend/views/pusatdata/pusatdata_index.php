@@ -22,11 +22,13 @@
                     </div> &nbsp;
                     <div class="form-group">
                         <label class="sr-only"></label>
-                        <input type="text" placeholder="--- Pilih Provinsi * ---" name="provinsi" class="form-control input-sm provinsi">
+                        <input type="text" placeholder="--- Pilih Provinsi  ---" name="provinsi" class="form-control input-sm provinsi">
+                        <input type="hidden" class="tempProvinsi">
                     </div> &nbsp;
                     <div class="form-group formKabupaten" style="display:none">
                         <label class="sr-only"></label>
                         <input type="text" placeholder="--- Pilih Kabupaten ---" name="kabupaten" class="form-control input-sm kabupaten">
+                        <input type="hidden" class="tempKabupaten">
                     </div> &nbsp;
                     <button class="btn yellow btn-sm buttonSubmit" title="Cari Data"><i class="fa fa-search"></i></button> 
                     <a href="<?php echo base_url('pusatdata_pdf') ?>" class="btn red btn-sm buttonExportPdf" title="Export PDF" style="display:none;"><i class="fa fa-file-pdf-o"></i></a>
@@ -58,17 +60,27 @@
 <div id="contentRekap"></div>
 
 <script>
+    $('.provinsi').on('change', function(){
+        $('.tempProvinsi').val($(this).val());
+    });
+
+    $('.kabupaten').on('change', function(){
+        $('.tempKabupaten').val($(this).val());
+    });
+
     $( function() {
         $('.buttonSubmit').on('click', function(){
             $('.kontenBlock').hide();
-            var tahun    = $('.tahun').val();
-            var provinsi = $('.proinsi').val();
+            var tahun     = $('.tahun').val();
+            var provinsi  = $('.tempProvinsi').val();
+            var kabupaten = $('.tempKabupaten').val();
 
             if(tahun == ''){
                 $('.notifWarning').fadeIn('slow');
             }else{
+
                 $('.notifWarning').fadeOut('slow');
-                $('.buttonExportPdf').fadeIn('slow').attr('href',base_url + 'pusatdata_pdf/' + tahun);
+                $('.buttonExportPdf').fadeIn('slow').attr('href',base_url + 'pusatdata_pdf/1/' + tahun + '/' + provinsi + '/' + kabupaten);
                 var url  = base_url + 'pusatdata_cari';
                 var xdta = $('.form-cari').serializeArray();
 
