@@ -9,14 +9,21 @@ class Templates
                 $this->_ci =& get_instance();
 	}
 
-	function frontend( $template, $data = NULL, $js = NULL, $css = NULL ){
-                $data['_header']     = $this->_ci->load->view('frontend/templates/header', $data, TRUE);
-                $data['_breadcrumb'] = $this->_ci->load->view('frontend/templates/breadcrumb', $data, TRUE);
-                $data['_slider']     = $this->_ci->load->view('frontend/templates/slider', $data, TRUE);
-                $data['_content']    = $this->_ci->load->view($template, $data, TRUE);
-                $data['_footer']     = $this->_ci->load->view('frontend/templates/footer', $data, TRUE);
+	// function frontend( $template, $data = NULL, $js = NULL, $css = NULL ){
+        //         $data['_header']     = $this->_ci->load->view('frontend/templates/header', $data, TRUE);
+        //         $data['_breadcrumb'] = $this->_ci->load->view('frontend/templates/breadcrumb', $data, TRUE);
+        //         $data['_slider']     = $this->_ci->load->view('frontend/templates/slider', $data, TRUE);
+        //         $data['_content']    = $this->_ci->load->view($template, $data, TRUE);
+        //         $data['_footer']     = $this->_ci->load->view('frontend/templates/footer', $data, TRUE);
 
-                $this->_ci->load->view('frontend/templates/template.php', $data);
+        //         $this->_ci->load->view('frontend/templates/template.php', $data);
+        // }
+
+        function frontend( $template, $data = NULL, $js = NULL, $css = NULL ){
+                $data['_header']  = $this->_ci->load->view('frontend/layouts/header', $data, TRUE);
+                $data['_footer']  = $this->_ci->load->view('frontend/layouts/footer', $data, TRUE);
+                $data['_content'] = $this->_ci->load->view($template, $data, TRUE);
+                $this->_ci->load->view('frontend/layouts/layout.php', $data);
         }
 
         function backend( $template, $data = NULL, $js = NULL, $css = NULL ){

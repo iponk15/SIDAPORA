@@ -29,7 +29,8 @@ class Rekap extends MX_Controller {
         // get data
         $join            = [[$this->tableKategori,'rekap_kategori_id = kategori_id','left']];
         $select          = 'rekap_id,rekap_judul,rekap_tahun,rekap_status,kategori_nama';
-        $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['rekap_lastupdate','DESC']);
+        $where           = ['rekap_tipe', '1'];
+        $data['records'] = $this->m_global->get($this->table,$join,$where,$select,null,['rekap_lastupdate','DESC']);
 
         // get data kategori
         $data['kategori'] = $this->m_global->get($this->tableKategori,null,['kategori_status' => '1'],'kategori_id,kategori_nama');
@@ -127,7 +128,7 @@ class Rekap extends MX_Controller {
         $data['rekap'] = $this->m_global->get($this->table,$joinRekap,[md56('rekap_id',1) => $rekap_id], $selectRekap )[0];
 		
 		// get data rekap detail
-		$select            = 'rekdet_id,rekdet_lembaga,rekdet_nominal,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama';
+		$select            = 'rekdet_id,rekdet_lembaga,rekdet_nominal,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_luas';
 		$join              = [
 			[$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],
 			[$this->tableJenisBantuan,'rekdet_jnsbtn_kode = jnsbtn_kode','left'],
@@ -136,7 +137,7 @@ class Rekap extends MX_Controller {
 			[$this->tableKecamatan,'(rekdet_kecamatan_kode = kecamatan_kode AND kecamatan_provinsi_kode = provinsi_kode AND kecamatan_kabkot_kode = kabkot_kode)','left'],
 			[$this->tableKeldes,'(rekdet_keldes_kode = keldes_kode AND keldes_provinsi_kode = provinsi_kode AND keldes_kabkot_kode = kabkot_kode AND keldes_kecamatan_kode = kecamatan_kode)','left']
 		];
-        $data['rkpDetail'] = $this->m_global->get($this->tableRekapDetail,$join,[md56('rekdet_rekap_id',1) => $rekap_id], $select);
+        $data['rkpDetail'] = $this->m_global->get($this->tableRekapDetail,$join,[md56('rekdet_rekap_id',1) => $rekap_id], $select, null, ['rekdet_lastupdate', 'DESC']);
 		
 		$this->templates->backend('rekap/rekap_detail',$data);
     }
@@ -175,7 +176,9 @@ class Rekap extends MX_Controller {
         $data['rekdet_kecamatan_kode'] = $post['keldes_kecamatan_id'];
         $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
         $data['rekdet_nominal']        = $post['rekdet_nominal'];
+        $data['rekdet_luas']           = $post['rekdet_luas'];
         $data['rekdet_createdby']      = getSession('user_id');
+        $data['rekdet_createddate']    = date('Y-m-d H:i:s');
         
         $input  = $this->m_global->insert($this->tableRekapDetail, $data); 
         $lastId = $this->db->insert_id();
@@ -266,7 +269,6 @@ class Rekap extends MX_Controller {
 
     function update_detail($rekdet_id){
         $post = $this->input->post();
-        pre($post);
         $file = $_FILES['rekdok_file']['name'];
 
         if(count($file) > 0){
@@ -332,6 +334,7 @@ class Rekap extends MX_Controller {
         $data['rekdet_kecamatan_kode'] = $post['keldes_kecamatan_id'];
         $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
         $data['rekdet_nominal']        = $post['rekdet_nominal'];
+        $data['rekdet_luas']           = $post['rekdet_luas'];
         $data['rekdet_updatedby']      = getSession('user_id');
         
         $input = $this->m_global->update($this->tableRekapDetail, $data, [md56('rekdet_id',1) => $rekdet_id]); 

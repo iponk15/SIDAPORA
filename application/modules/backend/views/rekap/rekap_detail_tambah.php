@@ -75,6 +75,12 @@
 							<input type="number" class="form-control" name="rekdet_nominal" placeholder="Input Nominal">
 						</div>
 					</div>
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Luas (m)</label>
+						<div class="col-sm-3">
+							<input type="number" class="form-control" name="rekdet_luas" placeholder="Input Luas">
+						</div>
+					</div>
 
 					<hr> <h4><b> Upload Galeri ( Foto ) </b></h4> <hr>
 					<div class="input_fields_wrap">

@@ -23,10 +23,32 @@ class Pusatdata extends MX_Controller {
         $data['slider']     = 0;
         $data['breadcrumb'] = ['Home' => base_url('home'), 'Pusat Data' => base_url($this->url)];
         $this->templates->frontend($this->prefix.'index', $data);
+        // $this->templates->frontend($this->prefix.'map', $data);
     }
 
-    function cariData($bool = null, $tahun = null, $provinsi = null, $kabupaten = null){
+    function cariData($flag = null, $tahun = null, $provinsi = null, $kabupaten = null){
         $post  = $this->input->post();
+        /*BEGIN GET DATA PETA MAP*/
+        $selectjoinmap = '(
+            SELECT
+                rekdet_provinsi_kode,
+                COUNT(rekdet_provinsi_kode) jumlah
+            FROM sdp_rekap_detail 
+            LEFT JOIN sdp_rekap ON rekap_id = rekdet_rekap_id
+            WHERE rekdet_provinsi_kode IS NOT NULL AND rekap_tahun = "'.(empty($tahun) ? $post['tahun'] : $tahun).'"
+            GROUP BY rekdet_provinsi_kode
+        ) temp';
+        $joinmap    = [[$selectjoinmap, 'temp.rekdet_provinsi_kode = provinsi_kode', 'left']];
+        $selectmap  = 'provinsi_kode, provinsi_nama, provinsi_latitude, provinsi_longtitude, temp.jumlah';
+        $whereMap   = ['temp.jumlah IS NOT NULL' => NULL];
+
+        if(!empty($post['provinsi'])){
+            $whereMap['provinsi_kode'] = $post['provinsi'];
+        }
+
+        $data['getmap']  = $this->m_global->get('sdp_master_provinsi', $joinmap, $whereMap, $selectmap, null, ['provinsi_nama', 'asc']);
+        $data['datamap'] = json_encode($data['getmap']);
+        /*END GET DATA PETA MAP*/
 
         // get data rekap
         $selectJoin = '(
@@ -41,10 +63,10 @@ class Pusatdata extends MX_Controller {
             WHERE kategori_status = "1" AND rekap_tahun = "'.(empty($tahun) ? $post['tahun'] : $tahun).'"
             GROUP BY kategori_id
         ) temp';
-        $join       = [ [$selectJoin,'smk.kategori_id = temp.kategori_id','left'] ];
-        $select     = 'smk.kategori_id,smk.kategori_nama,temp.rekap_id,temp.rekap_judul,temp.rekap_tahun';
-        $rekap      = $this->m_global->get($this->tableKategori . ' smk',$join,null,$select);
-
+        $join   = [ [$selectJoin,'smk.kategori_id = temp.kategori_id','left'] ];
+        $select = 'smk.kategori_id,smk.kategori_nama,temp.rekap_id,temp.rekap_judul,temp.rekap_tahun';
+        $rekap  = $this->m_global->get($this->tableKategori . ' smk',$join,null,$select);
+        
         foreach ($rekap as $rows) {
             if(!empty($rows->rekap_id)){
 
@@ -60,23 +82,23 @@ class Pusatdata extends MX_Controller {
                 $select                   = 'rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
                 $where['rekdet_rekap_id'] = $rows->rekap_id;
 
-                if(empty($tahun)){
-                    if($post['provinsi'] != ''){
+                // if(empty($tahun)){
+                    if(!empty($post['provinsi'])){
                         $where['provinsi_kode'] = $post['provinsi'];
                     }
 
-                    if($post['kabupaten'] != ''){
+                    if(!empty($post['kabupaten'])){
                         $where['kabkot_kode']   = $post['kabupaten'];
                     }
-                }else{
-                    if($provinsi != ''){
-                        $where['provinsi_kode'] = $provinsi;
-                    }
+                // }else{
+                //     if($provinsi != ''){
+                //         $where['provinsi_kode'] = $post['provinsi'];
+                //     }
 
-                    if($kabupaten != ''){
-                        $where['kabkot_kode']   = $kabupaten;
-                    }
-                }
+                //     if($kabupaten != ''){
+                //         $where['kabkot_kode']   = $post['kabupaten'];
+                //     }
+                // }
 
                 $getRekapDetail = $this->m_global->get($this->tableRekdet,$join,$where,$select);
                 $tempRekDet     = [];
@@ -105,7 +127,7 @@ class Pusatdata extends MX_Controller {
             }
         }
 
-        if($bool != '1'){
+        if($flag == '1'){
             $data['tahun']     = $post['tahun'];
             $data['galeri']    = getGaleriPusdat($data['tahun']);
             $data['provinsi']  = $post['provinsi'];
@@ -114,15 +136,20 @@ class Pusatdata extends MX_Controller {
             // get data rekap dan rekap detail
             $data['records'] = ( empty($tempRekap) ? null : $tempRekap );
             $this->load->view($this->prefix.'detail', $data);
+        }else if($flag == '2'){
+            $data['provinsi']  = $post['provinsi'];
+            $data['kabupaten'] = (empty($post['kabupaten']) ? null : $post['kabupaten']);
+            $data['records']   = ( empty($tempRekap) ? '' : $tempRekap );
+            $this->load->view($this->prefix.'list_data_rekap', $data);
         }else{
-            return ( empty($tempRekap) ? null : $tempRekap );
-        }
+			return $tempRekap;
+		}
     }
 
-    function export_pdf($bool = null, $tahun, $provinsi = null, $kabupaten = null){
+    function export_pdf($tahun, $provinsi = null, $kabupaten = null){
         $mpdf            = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A3-L']);
         $data['tahun']   = $tahun;
-        $data['records'] = $this->cariData($bool,$tahun,$provinsi,$kabupaten);
+        $data['records'] = $this->cariData(0,$tahun,$provinsi,$kabupaten);
         $html            = $this->load->view($this->prefix.'pdf',$data,true);
         $mpdf->WriteHTML($html);
         // $mpdf->Output(); // opens in browser
@@ -201,7 +228,7 @@ class Pusatdata extends MX_Controller {
         $end             = $iDisplayStart + $iDisplayLength;
         $end             = $end > $iTotalRecords ? $iTotalRecords : $end;
 
-        $select = 'rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
+        $select = 'rekdet_id,rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
         $result = $this->m_global->get($this->tableRekdet, $join, $where, $select, $where_e, $order, $iDisplayStart, $iDisplayLength);
         $i      = 1 + $iDisplayStart;
 
@@ -215,7 +242,10 @@ class Pusatdata extends MX_Controller {
                 $rows->kecamatan_nama,
                 $rows->kabkot_nama,
                 $rows->provinsi_nama,
-                uang($rows->rekdet_nominal)
+                uang($rows->rekdet_nominal),
+                '<a data-toggle="modal" href="#dokumentasi" data-id="'. md56($rows->rekdet_id) .'" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
+                    <i class="fa fa-file-image-o"> </i>
+                </a>'
             );
         }
 
@@ -229,6 +259,12 @@ class Pusatdata extends MX_Controller {
         $records["recordsFiltered"] = $iTotalRecords;
         
         echo json_encode($records);
+    }
+
+    function dokumentasi(){
+        $post        = $this->input->post();
+        $data['dok'] = $this->m_global->get($this->tableRekapDokumen,null,[md56('rekdok_rekdet_id',1) => $post['rekdet_id']],'rekdok_ringkasan,rekdok_file,rekdok_deskripsi');
+        $this->load->view($this->prefix.'dokumentasi', $data);
     }
 
 }

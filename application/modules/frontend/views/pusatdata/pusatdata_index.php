@@ -1,3 +1,16 @@
+<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
 <div class="row ">
     <div class="col-md-12">
         <div class="portlet box blue">
@@ -22,13 +35,11 @@
                     </div> &nbsp;
                     <div class="form-group">
                         <label class="sr-only"></label>
-                        <input type="text" placeholder="--- Pilih Provinsi  ---" name="provinsi" class="form-control input-sm provinsi">
-                        <input type="hidden" class="tempProvinsi">
+                        <input type="text" placeholder="--- Pilih Provinsi * ---" name="provinsi" class="form-control input-sm provinsi">
                     </div> &nbsp;
                     <div class="form-group formKabupaten" style="display:none">
                         <label class="sr-only"></label>
                         <input type="text" placeholder="--- Pilih Kabupaten ---" name="kabupaten" class="form-control input-sm kabupaten">
-                        <input type="hidden" class="tempKabupaten">
                     </div> &nbsp;
                     <button class="btn yellow btn-sm buttonSubmit" title="Cari Data"><i class="fa fa-search"></i></button> 
                     <a href="<?php echo base_url('pusatdata_pdf') ?>" class="btn red btn-sm buttonExportPdf" title="Export PDF" style="display:none;"><i class="fa fa-file-pdf-o"></i></a>
@@ -58,30 +69,21 @@
 </div> 
 
 <div id="contentRekap"></div>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0G3cn2a4B2ndpi385BfwtS3fyjTW9IaQ"></script>
 <script>
-    $('.provinsi').on('change', function(){
-        $('.tempProvinsi').val($(this).val());
-    });
-
-    $('.kabupaten').on('change', function(){
-        $('.tempKabupaten').val($(this).val());
-    });
-
     $( function() {
         $('.buttonSubmit').on('click', function(){
             $('.kontenBlock').hide();
             var tahun     = $('.tahun').val();
-            var provinsi  = $('.tempProvinsi').val();
-            var kabupaten = $('.tempKabupaten').val();
+            var provinsi  = $('.proinsi').val();
+            var kabupaten = $('.kabupaten').val();
 
             if(tahun == ''){
                 $('.notifWarning').fadeIn('slow');
             }else{
-
                 $('.notifWarning').fadeOut('slow');
-                $('.buttonExportPdf').fadeIn('slow').attr('href',base_url + 'pusatdata_pdf/1/' + tahun + '/' + provinsi + '/' + kabupaten);
-                var url  = base_url + 'pusatdata_cari';
+                $('.buttonExportPdf').fadeIn('slow').attr('href',base_url + 'pusatdata_pdf/' + tahun);
+                var url  = base_url + 'pusatdata_cari/1';
                 var xdta = $('.form-cari').serializeArray();
 
                 $.post(url,xdta,function(html){

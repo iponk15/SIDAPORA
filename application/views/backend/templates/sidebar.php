@@ -40,7 +40,7 @@
 				<li class="app-sidebar__heading"><h6><b>Master Data</b></h4></li>
 				<li>
 					<a href="<?php echo base_url('user'); ?>" class="<?php echo (getCtrl() == 'user' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-user"></i> User
+						<i class="metismenu-icon pe-7s-user"></i> Users
 					</a>
 				</li>
 				<li>
@@ -82,7 +82,12 @@
 				<li class="app-sidebar__heading"><h6><b>Data Rekapitulasi</b></h4></li>
 				<li>
 					<a href="<?php echo base_url('rekap'); ?>" class="<?php echo (getCtrl() == 'rekap' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-news-paper"></i> Rekap
+						<i class="metismenu-icon pe-7s-news-paper"></i> Prasarana
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo base_url('sarana'); ?>" class="<?php echo (getCtrl() == 'sarana' ? 'mm-active' : ''); ?>">
+						<i class="metismenu-icon pe-7s-news-paper"></i> Sarana
 					</a>
 				</li>
 			</ul>
