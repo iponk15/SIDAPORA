@@ -2,6 +2,7 @@
 <html lang="en">
 
 <!-- Head BEGIN -->
+
 <head>
   <meta charset="utf-8">
   <title>SIDAPORA</title>
@@ -12,11 +13,11 @@
   <link href="<?php echo base_url('assets/frontend/pages/css/fontGlobal.css') ?>" rel="stylesheet" type="text/css">
   <!-- Fonts END -->
 
-  <!-- Global styles START -->          
+  <!-- Global styles START -->
   <link href="<?php echo base_url('assets/frontend/global/plugins/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet">
   <link href="<?php echo base_url('assets/frontend/global/plugins/bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
-  <!-- Global styles END --> 
-   
+  <!-- Global styles END -->
+
   <!-- Page level plugin styles START -->
   <link href="<?php echo base_url('assets/frontend/global/plugins/fancybox/source/jquery.fancybox.css'); ?>" rel="stylesheet">
   <link href="<?php echo base_url('assets/frontend/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.css'); ?>" rel="stylesheet">
@@ -41,7 +42,7 @@
 
   <script src="<?php echo base_url('assets/frontend/global/plugins/jquery.min.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/global/plugins/jquery-migrate.min.js'); ?>" type="text/javascript"></script>
-  <script src="<?php echo base_url('assets/frontend/global/plugins/bootstrap/js/bootstrap.min.js'); ?>" type="text/javascript"></script>  
+  <script src="<?php echo base_url('assets/frontend/global/plugins/bootstrap/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
   <!-- END CORE PLUGINS -->
 
   <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
@@ -55,9 +56,9 @@
   <script src="<?php echo base_url('assets/frontend/global/plugins/jquery.blockui.min.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/global/plugins/uniform/jquery.uniform.min.js'); ?>" type="text/javascript"></script>
 
-  <!-- BEGIN RevolutionSlider -->  
-  <script src="<?php echo base_url('assets/frontend/global/plugins/slider-revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js'); ?>" type="text/javascript"></script> 
-  <script src="<?php echo base_url('assets/frontend/global/plugins/slider-revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js'); ?>" type="text/javascript"></script> 
+  <!-- BEGIN RevolutionSlider -->
+  <script src="<?php echo base_url('assets/frontend/global/plugins/slider-revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js'); ?>" type="text/javascript"></script>
+  <script src="<?php echo base_url('assets/frontend/global/plugins/slider-revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/pages/js/revo-slider-init.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/pages/js/portfolio.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/global/js/metronic.js'); ?>" type="text/javascript"></script>
@@ -65,45 +66,46 @@
   <script src="<?php echo base_url('assets/frontend/global/js/revo-ini.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('assets/frontend/global/js/datatable.js'); ?>" type="text/javascript"></script>
   <!-- END RevolutionSlider -->
-  
+
   <script src="<?php echo base_url('assets/frontend/layout/js/back-to-top.js'); ?>" type="text/javascript"></script>
   <script src="<?php echo base_url(); ?>assets/frontend/layout/js/layout.js" type="text/javascript"></script>
 
   <script type="text/javascript">
     jQuery(document).ready(function() {
-        Layout.init();    
-        Layout.initOWL();
-        RevosliderInit.initRevoSlider();
-        Layout.initTwitter();
-        Layout.initFixHeaderWithPreHeader();
-        Layout.initNavScrolling();
-        Portfolio.init();
+      Layout.init();
+      Layout.initOWL();
+      RevosliderInit.initRevoSlider();
+      Layout.initTwitter();
+      Layout.initFixHeaderWithPreHeader();
+      Layout.initNavScrolling();
+      Portfolio.init();
     });
 
     var base_url = '<?php echo base_url() ?>';
-    
   </script>
   <!-- END PAGE LEVEL JAVASCRIPTS -->
 </head>
 <!-- Head END -->
 
 <!-- Body BEGIN -->
+
 <body class="corporate">
-    <!-- Start Header -->
-    <?php echo $_header; ?> <br>
-    <!-- End Header -->
-    <!-- Start Slider -->
-    <?php echo ( @$is_404 == 1 || @$slider == 0 ? '' : $_slider ); ?>
-    <!-- End Slider -->
+  <!-- Start Header -->
+  <?php echo $_header; ?> <br>
+  <!-- End Header -->
+  <!-- Start Slider -->
+  <?php echo (@$is_404 == 1 || @$slider == 0 ? '' : $_slider); ?>
+  <!-- End Slider -->
 
-    <div class="main">
-      <div class="container">
-        <?php echo $_breadcrumb; ?>
-        <?php echo $_content; ?>
-      </div>
+  <div class="main">
+    <div class="container">
+      <?php echo $_breadcrumb; ?>
+      <?php echo $_content; ?>
     </div>
+  </div>
 
-    <?php echo $_footer; ?>
+  <?php echo $_footer; ?>
 </body>
 <!-- END BODY -->
+
 </html>

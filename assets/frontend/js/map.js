@@ -16,8 +16,8 @@
 				enableGeolocation: false,
 				disableClickEvent: false,
 				openAllInfoboxes: false,
-				pixelOffsetX     : -100,
-				pixelOffsetY     : -255
+				pixelOffsetX: -100,
+				pixelOffsetY: -255
 			});
 
 			if (options.styles !== undefined) {
@@ -26,7 +26,7 @@
 
 			settings = $.extend({}, defaults, options);
 
-			google.maps.visualRefresh = true;			
+			google.maps.visualRefresh = true;
 			google.maps.event.addDomListener(window, 'load', loadMap);
 
 			if (settings.filterForm && $(settings.filterForm).length !== 0) {
@@ -35,15 +35,15 @@
 					var action = $(this).attr('action');
 
 					$.ajax({
-						type   : 'GET',
-						url    : action,
-						data   : form.serialize(),
+						type: 'GET',
+						url: action,
+						data: form.serialize(),
 						success: function (data) {
 							element.aviators_map('removeMarkers');
 							element.aviators_map('addMarkers', {
 								locations: eval(data.locations),
-								types    : eval(data.types),
-								contents : eval(data.contents)
+								types: eval(data.types),
+								contents: eval(data.contents)
 							});
 						}
 					});
@@ -88,7 +88,7 @@
 	$.fn.aviators_map = function (method) {
 		// Method calling logic
 		if (methods[method]) {
-			return methods[ method ].apply(this, Array.prototype.slice.call(arguments, 1));
+			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
 		} else if (typeof method === 'object' || !method) {
 			return methods.init.apply(this, arguments);
 		} else {
@@ -98,15 +98,15 @@
 
 	function loadMap() {
 		var mapOptions = {
-			zoom              : settings.zoom,
-			mapTypeId         : google.maps.MapTypeId.ROADMAP,
-			scrollwheel       : false,
-			draggable         : true,
-			mapTypeControl    : false,
-			panControl        : false,
-			zoomControl       : true,
+			zoom: settings.zoom,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			scrollwheel: false,
+			draggable: true,
+			mapTypeControl: false,
+			panControl: false,
+			zoomControl: true,
 			zoomControlOptions: {
-				style   : google.maps.ZoomControlStyle.SMALL,
+				style: google.maps.ZoomControlStyle.SMALL,
 				position: google.maps.ControlPosition.LEFT_BOTTOM
 			}
 		};
@@ -130,9 +130,9 @@
 
 		if (styles != undefined) {
 			mapOptions['mapTypeControlOptions'] = {
-	            mapTypeIds: ['Styled']
-	        };
-	        mapOptions['mapTypeId'] = 'Styled';
+				mapTypeIds: ['Styled']
+			};
+			mapOptions['mapTypeId'] = 'Styled';
 		}
 
 		map = new google.maps.Map($(element)[0], mapOptions);
@@ -141,15 +141,18 @@
 			map.panBy(settings.mapMoveCenter.x, settings.mapMoveCenter.y)
 		}
 
-    	if (styles !== undefined) {
-    		var styledMapType = new google.maps.StyledMapType(styles, { name: 'Styled' });
-    		map.mapTypes.set('Styled', styledMapType);
-    	}
+		if (styles !== undefined) {
+			var styledMapType = new google.maps.StyledMapType(styles, {
+				name: 'Styled'
+			});
+			map.mapTypes.set('Styled', styledMapType);
+		}
 
 		window.map = map;
 
 		var dragFlag = false;
-		var start = 0, end = 0;
+		var start = 0,
+			end = 0;
 
 		function thisTouchStart(e) {
 			dragFlag = true;
@@ -166,7 +169,7 @@
 			}
 
 			end = e.touches[0].pageY;
-			window.scrollBy(0, ( start - end ));
+			window.scrollBy(0, (start - end));
 		}
 		var el = $(element.selector)[0];
 
@@ -174,7 +177,7 @@
 			el.addEventListener('touchstart', thisTouchStart, true);
 			el.addEventListener('touchend', thisTouchEnd, true);
 			el.addEventListener('touchmove', thisTouchMove, true);
-		} else if (el.attachEvent){
+		} else if (el.attachEvent) {
 			el.attachEvent('touchstart', thisTouchStart);
 			el.attachEvent('touchend', thisTouchEnd);
 			el.attachEvent('touchmove', thisTouchMove);
@@ -229,16 +232,16 @@
 		}));
 
 		var newCluster = new InfoBox({
-			markers               : cluster.getMarkers(),
-			draggable             : true,
-			content               : '<div class="clusterer"><div class="clusterer-inner">' + cluster.getMarkers().length + '</div></div>',
-			disableAutoPan        : true,
-			pixelOffset           : new google.maps.Size(-21, -21),
-			position              : cluster.getCenter(),
-			closeBoxURL           : "",
-			isHidden              : false,
+			markers: cluster.getMarkers(),
+			draggable: true,
+			content: '<div class="clusterer"><div class="clusterer-inner">' + cluster.getMarkers().length + '</div></div>',
+			disableAutoPan: true,
+			pixelOffset: new google.maps.Size(-21, -21),
+			position: cluster.getCenter(),
+			closeBoxURL: "",
+			isHidden: false,
 			enableEventPropagation: true,
-			pane                  : "mapPane"
+			pane: "mapPane"
 		});
 
 		cluster.cluster = newCluster;
@@ -252,34 +255,34 @@
 		$.each(settings.locations, function (index, location) {
 			var marker = new google.maps.Marker({
 				position: new google.maps.LatLng(location[0], location[1]),
-				map     : map,
-				icon    : settings.transparentMarkerImage
+				map: map,
+				icon: settings.transparentMarkerImage
 			});
 
 			marker.infobox = new InfoBox({
-				content               : settings.contents[index],
-				disableAutoPan        : false,
-				maxWidth              : 0,
-				pixelOffset           : new google.maps.Size(settings.pixelOffsetX, settings.pixelOffsetY),
-				zIndex                : null,
-				closeBoxURL           : "",
-				infoBoxClearance      : new google.maps.Size(1, 1),
-				position              : new google.maps.LatLng(location[0], location[1]),
-				isHidden              : false,
-				pane                  : "floatPane",
+				content: settings.contents[index],
+				disableAutoPan: false,
+				maxWidth: 0,
+				pixelOffset: new google.maps.Size(settings.pixelOffsetX, settings.pixelOffsetY),
+				zIndex: null,
+				closeBoxURL: "",
+				infoBoxClearance: new google.maps.Size(1, 1),
+				position: new google.maps.LatLng(location[0], location[1]),
+				isHidden: false,
+				pane: "floatPane",
 				enableEventPropagation: false
 			});
 			marker.infobox.isOpen = false;
 
 			marker.marker = new InfoBox({
-				draggable             : true,
-				content               : '<div class="marker ' + settings.types[index] + '"><div class="marker-inner">' + settings.images[index] + '</div></div>',
-				disableAutoPan        : true,
-				pixelOffset           : new google.maps.Size(-24, -50),
-				position              : new google.maps.LatLng(location[0], location[1]),
-				closeBoxURL           : "",
-				isHidden              : false,
-				pane                  : "floatPane",
+				draggable: true,
+				content: '<div class="marker ' + settings.types[index] + '"><div class="marker-inner">' + settings.images[index] + '</div></div>',
+				disableAutoPan: true,
+				pixelOffset: new google.maps.Size(-24, -50),
+				position: new google.maps.LatLng(location[0], location[1]),
+				closeBoxURL: "",
+				isHidden: false,
+				pane: "floatPane",
 				enableEventPropagation: true
 			});
 			marker.marker.isHidden = false;
@@ -316,15 +319,13 @@
 		});
 
 		markerCluster = new MarkerClusterer(map, markers, {
-            gridSize: 50,
-			styles: [
-				{
-					height   : 48,
-					url      : settings.transparentClusterImage,
-					width    : 48,
-					textColor: 'transparent'
-				}
-			]
+			gridSize: 50,
+			styles: [{
+				height: 48,
+				url: settings.transparentClusterImage,
+				width: 48,
+				textColor: 'transparent'
+			}]
 		});
 
 		clustersOnMap = new Array();
