@@ -25,7 +25,7 @@ class Keldes extends MX_Controller {
             [$this->tableKabkot,'(`keldes_kabkot_kode` = `kabkot_kode` AND kabkot_provinsi_kode = provinsi_kode)','left'],
             [$this->tableKecamatan,'(`keldes_kecamatan_kode` = `kecamatan_kode` AND kecamatan_kabkot_kode = kabkot_kode)','left']
         ];
-		$select          = 'keldes_id,keldes_kode,keldes_nama,keldes_status,provinsi_kode,provinsi_nama,kabkot_kode,kabkot_nama,kecamatan_kode,kecamatan_nama';
+		$select          = 'keldes_id,keldes_kode,keldes_nama,keldes_status,provinsi_kode,provinsi_nama,kabkot_kode,kabkot_nama,kecamatan_kode,kecamatan_nama,keldes_latitude,keldes_longtitude';
         $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['keldes_lastupdate','DESC']);
         
         $this->templates->backend($this->prefix.'index', $data);
@@ -49,6 +49,8 @@ class Keldes extends MX_Controller {
         $data['keldes_kecamatan_kode'] = $post['keldes_kecamatan_id'];
         $data['keldes_kode']           = $post['keldes_kode'];
         $data['keldes_nama']           = $post['keldes_nama'];
+        $data['keldes_latitude']       = $post['keldes_latitude'];
+        $data['keldes_longtitude']     = $post['keldes_longtitude'];
         $data['keldes_createdby']      = getSession('user_id');
         $data['keldes_createddate']    = date('Y-m-d H:i:s');
         $data['keldes_ip']             = getUserIp();
@@ -76,18 +78,20 @@ class Keldes extends MX_Controller {
             [$this->tableKabkot,'keldes_kabkot_kode = kabkot_kode','left'],
             [$this->tableKecamatan,'keldes_kecamatan_kode = kecamatan_kode','left']
         ];
-        $select          = 'provinsi_nama,kabkot_nama,kecamatan_nama,keldes_kode,keldes_nama,keldes_provinsi_kode';
+        $select          = 'provinsi_nama,kabkot_nama,kecamatan_nama,keldes_kode,keldes_nama,keldes_provinsi_kode,keldes_latitude,keldes_longtitude';
 		$data['records'] = $this->m_global->get($this->table,$join,[md56('keldes_id',1) => $keldes_id],$select)[0];
 		
 		$this->templates->backend($this->prefix.'ubah',$data);
     }
 
     function update($keldes_id){
-        $post                     = $this->input->post();
-        $data['keldes_nama']      = $post['keldes_nama'];
-		$data['keldes_nama']      = $post['keldes_nama'];
-        $data['keldes_updatedby'] = getSession('user_id');
-        $data['keldes_ip']        = getUserIp();
+        $post                      = $this->input->post();
+        $data['keldes_nama']       = $post['keldes_nama'];
+        $data['keldes_nama']       = $post['keldes_nama'];
+        $data['keldes_latitude']   = $post['keldes_latitude'];
+        $data['keldes_longtitude'] = $post['keldes_longtitude'];
+        $data['keldes_updatedby']  = getSession('user_id');
+        $data['keldes_ip']         = getUserIp();
 		
 		$update = $this->m_global->update($this->table,$data,[md56('keldes_id',1) => $keldes_id]);
 		

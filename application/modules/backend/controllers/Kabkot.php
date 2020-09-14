@@ -19,7 +19,7 @@ class Kabkot extends MX_Controller {
 		
         // get data
         $join            = [ ['sdp_master_provinsi','kabkot_provinsi_kode = provinsi_kode','left'] ];
-		$select          = 'kabkot_id,kabkot_kode,kabkot_nama,kabkot_status,provinsi_kode,provinsi_nama';
+		$select          = 'kabkot_id,kabkot_kode,kabkot_nama,kabkot_status,provinsi_kode,provinsi_nama,kabkot_latitude,kabkot_longtitude';
         $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['kabkot_lastupdate','DESC']);
         
         $this->templates->backend($this->prefix.'index', $data);
@@ -41,6 +41,8 @@ class Kabkot extends MX_Controller {
         $data['kabkot_provinsi_kode'] = $post['kabkot_provinsi_kode'];
         $data['kabkot_kode']          = $post['kabkot_kode'];
         $data['kabkot_nama']          = $post['kabkot_nama'];
+        $data['kabkot_latitude']      = $post['kabkot_latitude'];
+        $data['kabkot_longtitude']    = $post['kabkot_longtitude'];
         $data['kabkot_createdby']     = getSession('user_id');
         $data['kabkot_createddate']   = date('Y-m-d H:i:s');
         $data['kabkot_ip']            = getUserIp();
@@ -66,7 +68,7 @@ class Kabkot extends MX_Controller {
 
         // get data janei provinsi
         $join            = [[$this->tableProvinsi,'kabkot_provinsi_kode = provinsi_kode','left']];
-        $select          = 'kabkot_kode,kabkot_nama,kabkot_provinsi_kode';
+        $select          = 'kabkot_kode,kabkot_nama,kabkot_provinsi_kode,kabkot_latitude,kabkot_longtitude';
 		$data['records'] = $this->m_global->get($this->table,null,[md56('kabkot_id',1) => $kabkot_id],$select)[0];
 		
 		$this->templates->backend($this->prefix.'ubah',$data);
@@ -77,6 +79,8 @@ class Kabkot extends MX_Controller {
 		$data['kabkot_provinsi_kode'] = $post['kabkot_provinsi_kode'];
         $data['kabkot_kode']          = $post['kabkot_kode'];
         $data['kabkot_nama']          = $post['kabkot_nama'];
+        $data['kabkot_latitude']      = $post['kabkot_latitude'];
+        $data['kabkot_longtitude']    = $post['kabkot_longtitude'];
         $data['kabkot_updatedby']     = getSession('user_id');
         $data['kabkot_ip']            = getUserIp();
 		

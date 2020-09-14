@@ -11,8 +11,9 @@
 					<th><center>Provinsi</center></th>
 					<th><center>Kabupaten / Kota</center></th>
 					<th><center>Kecamatan</center></th>
-					<th><center>Kode Kelurahan / Desa</center></th>
 					<th><center>Kelurahan / Desa</center></th>
+					<th><center>Latitude</center></th>
+					<th><center>Longtitude</center></th>
                     <th><center>Status</center></th>
 					<th><center>Action</center></th>
 				</tr>
@@ -27,8 +28,9 @@
                             <td>'.$row->provinsi_nama.' (<b>'.$row->provinsi_kode.'</b>)</td>
                             <td>'.$row->kabkot_nama.' (<b>'.$row->kabkot_kode.'</b>)</td>
                             <td>'.$row->kecamatan_nama.' (<b>'.$row->kecamatan_kode.'<b>)</td>
-                            <td align="center" width="15%">'.$row->keldes_kode.'</td>
-                            <td>'.$row->keldes_nama.'</td>
+                            <td>'.$row->keldes_nama.' (<b> '.$row->keldes_kode.' </b>)</td>
+                            <td>'.$row->keldes_latitude.'</td>
+                            <td>'.$row->keldes_longtitude.'</td>
                             <td align="center" width="10%">'.($row->keldes_status == 1 ? '<div class="mb-2 mr-2 badge badge-success">Aktif</div>' : '<div class="mb-2 mr-2 badge badge-danger">Tidak Aktif</div>').'</td>
                             <td width="10%">
                                 <center>

@@ -17,7 +17,7 @@ class provinsi extends MX_Controller {
 		$data['header']    = 'Table Provinsi';
 		
         // get data
-		$select          = 'provinsi_id,provinsi_kode,provinsi_nama,provinsi_status';
+		$select          = 'provinsi_id,provinsi_kode,provinsi_nama,provinsi_status,provinsi_latitude,provinsi_longtitude';
         $data['records'] = $this->m_global->get($this->table,null,null,$select,null,['provinsi_lastupdate','DESC']);
         
         $this->templates->backend($this->prefix.'index', $data);

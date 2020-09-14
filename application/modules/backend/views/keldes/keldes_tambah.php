@@ -6,7 +6,7 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Provinsi</label>
+						<label class="col-sm-2 col-form-label">Provinsi</label>
 						<div class="col-sm-4">
 							<select name="keldes_provinsi_kode" class="form-control kecamatan_provinsi_id">
 								<option value="">Pilih Provinsi</option>
@@ -19,27 +19,39 @@
 						</div>
 					</div>
 					<div class="position-relative row form-group formKabkot" style="display:none;">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Kabupaten / Kota</label>
+						<label class="col-sm-2 col-form-label">Kabupaten / Kota</label>
 						<div class="col-sm-4">
 							<div class="selectKabkot"></div>
 						</div>
 					</div>
 					<div class="position-relative row form-group formKecamatan" style="display:none;">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Kecamatan</label>
+						<label class="col-sm-2 col-form-label">Kecamatan</label>
 						<div class="col-sm-4">
 							<div class="selectKecamatan"></div>
 						</div>
 					</div>
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Kode Kelurahan / Desa</label>
+						<label class="col-sm-2 col-form-label">Kode Kelurahan / Desa</label>
 						<div class="col-sm-4">
 							<input required name="keldes_kode" placeholder="Input kode Kelurahan / Desa" type="text" class="form-control">
 						</div>
 					</div>
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Kelurahan / Desa</label>
+						<label class="col-sm-2 col-form-label">Kelurahan / Desa</label>
 						<div class="col-sm-4">
 							<input required name="keldes_nama" placeholder="Input Kelurahan / Desa" type="text" class="form-control">
+						</div>
+					</div>
+					<div class="position-relative row form-group">
+						<label class="col-sm-2 col-form-label">Latitude</label>
+						<div class="col-sm-4">
+							<input name="keldes_latitude" placeholder="Input latitude" type="text" class="form-control">
+						</div>
+					</div>
+					<div class="position-relative row form-group">
+						<label class="col-sm-2 col-form-label">Longtitude</label>
+						<div class="col-sm-4">
+							<input name="keldes_longtitude" placeholder="Input Longtitude" type="text" class="form-control">
 						</div>
 					</div>
 					<div class="position-relative row form-check">

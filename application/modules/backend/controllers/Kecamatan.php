@@ -23,7 +23,7 @@ class Kecamatan extends MX_Controller {
             [$this->tableProvinsi,'kecamatan_provinsi_kode = provinsi_kode','left'],
             [$this->tableKabkot,'(`kecamatan_kabkot_kode` = `kabkot_kode` AND kabkot_provinsi_kode = provinsi_kode)','left']
         ];
-		$select          = 'kecamatan_id,kecamatan_kode,kecamatan_nama,kecamatan_status,provinsi_kode,provinsi_nama,kabkot_kode,kabkot_nama';
+		$select          = 'kecamatan_id,kecamatan_kode,kecamatan_nama,kecamatan_status,provinsi_kode,provinsi_nama,kabkot_kode,kabkot_nama,kecamatan_latitude,kecamatan_longtitude';
         $data['records'] = $this->m_global->get($this->table,$join,null,$select,null,['kecamatan_lastupdate','DESC']);
         
         $this->templates->backend($this->prefix.'index', $data);
@@ -46,6 +46,8 @@ class Kecamatan extends MX_Controller {
         $data['kecamatan_kabkot_kode']   = $post['kecamatan_kabkot_id'];
         $data['kecamatan_kode']          = $post['kecamatan_kode'];
         $data['kecamatan_nama']          = $post['kecamatan_nama'];
+        $data['kecamatan_latitude']      = $post['kecamatan_latitude'];
+        $data['kecamatan_longtitude']    = $post['kecamatan_longtitude'];
         $data['kecamatan_createdby']     = getSession('user_id');
         $data['kecamatan_createddate']   = date('Y-m-d H:i:s');
         $data['kecamatan_ip']            = getUserIp();
@@ -72,18 +74,20 @@ class Kecamatan extends MX_Controller {
             [$this->tableProvinsi,'kecamatan_provinsi_kode = provinsi_kode','left'],
             [$this->tableKabkot,'kecamatan_kabkot_kode = kabkot_kode','left']
         ];
-        $select          = 'provinsi_nama,kecamatan_kode,kabkot_nama,kecamatan_nama,kecamatan_provinsi_kode';
+        $select          = 'provinsi_nama,kecamatan_kode,kabkot_nama,kecamatan_nama,kecamatan_provinsi_kode,kecamatan_latitude,kecamatan_longtitude';
 		$data['records'] = $this->m_global->get($this->table,$join,[md56('kecamatan_id',1) => $kecamatan_id],$select)[0];
 		
 		$this->templates->backend($this->prefix.'ubah',$data);
     }
 
     function update($kecamatan_id){
-        $post                        = $this->input->post();
-        $data['kecamatan_kode']      = $post['kecamatan_kode'];
-		$data['kecamatan_nama']      = $post['kecamatan_nama'];
-        $data['kecamatan_updatedby'] = getSession('user_id');
-        $data['kecamatan_ip']        = getUserIp();
+        $post                         = $this->input->post();
+        $data['kecamatan_kode']       = $post['kecamatan_kode'];
+        $data['kecamatan_nama']       = $post['kecamatan_nama'];
+        $data['kecamatan_latitude']   = $post['kecamatan_latitude'];
+        $data['kecamatan_longtitude'] = $post['kecamatan_longtitude'];
+        $data['kecamatan_updatedby']  = getSession('user_id');
+        $data['kecamatan_ip']         = getUserIp();
 		
 		$update = $this->m_global->update($this->table,$data,[md56('kecamatan_id',1) => $kecamatan_id]);
 		

@@ -6,7 +6,7 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Kategori</label>
+						<label class="col-sm-2 col-form-label">Kategori</label>
 						<div class="col-sm-4">
 							<select name="jnsbtn_kategori_id" class="form-control">
 								<option value="">Pilih Kategori</option>
@@ -19,25 +19,35 @@
 						</div>
 					</div>
 					<div class="position-relative row form-group formBantuan" style="display:none;">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Bantuan</label>
+						<label class="col-sm-2 col-form-label">Bantuan</label>
 						<div class="col-sm-4">
 							<div class="selectJenisBantuan"></div>
 						</div>
 					</div>
+					<div class="position-relative row form-group formBantuan">
+						<label class="col-sm-2 col-form-label">Tipe</label>
+						<div class="col-sm-4">
+							<select name="jnsbtn_tipe" class="form-control">
+								<option value="">Pilih Tipe</option>
+								<option value="1">Prasarana</option>
+								<option value="2">Sarana</option>
+							</select>
+						</div>
+					</div>
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Kode Janis Bantuan</label>
+						<label class="col-sm-2 col-form-label">Kode Janis Bantuan</label>
 						<div class="col-sm-4">
 							<input required name="jnsbtn_kode" placeholder="Input kode jenis bantuan" type="text" class="form-control">
 						</div>
 					</div>
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Janis Bantuan</label>
+						<label class="col-sm-2 col-form-label">Janis Bantuan</label>
 						<div class="col-sm-4">
 							<input required name="jnsbtn_nama" placeholder="Input jenis bantuan" type="text" class="form-control">
 						</div>
 					</div>
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Deskripsi</label>
+						<label class="col-sm-2 col-form-label">Deskripsi</label>
 						<div class="col-sm-4">
 							<textarea name="jnsbtn_deskripsi" class="form-control" cols="30" rows="6" placeholder="Input deskripsi jenis bantuan"></textarea>
 						</div>

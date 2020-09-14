@@ -18,6 +18,16 @@
 							</select>
 						</div>
 					</div>
+					<div class="position-relative row form-group formBantuan">
+						<label class="col-sm-2 col-form-label">Tipe</label>
+						<div class="col-sm-4">
+							<select name="jnsbtn_tipe" class="form-control">
+								<option value="">Pilih Tipe</option>
+								<option <?php echo ( $records->jnsbtn_tipe == '1' ? 'selected' : '' ) ?> value="1">Prasarana</option>
+								<option <?php echo ( $records->jnsbtn_tipe == '2' ? 'selected' : '' ) ?> value="2">Sarana</option>
+							</select>
+						</div>
+					</div>
 					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Kode Janis Bantuan</label>
 						<div class="col-sm-4">

@@ -174,7 +174,26 @@ $route['rekap_detail_update/(:any)']        = 'backend/rekap/update_detail/$1';
 $route['rekap_detail_hapus/(:any)/(:any)']  = 'backend/rekap/hapus_detail/$1/$2';
 $route['rekap_import']                      = 'backend/rekap/importData';
 $route['rekap_template']                    = 'backend/rekap/template';
-$route['A']                 = 'backend/rekap/apus_galeri';
+$route['A']                                 = 'backend/rekap/apus_galeri';
+// end rekap
+
+// start sarana
+$route['sarana']                             = 'backend/sarana';
+$route['sarana_tambah']                      = 'backend/sarana/tambah';
+$route['sarana_simpan']                      = 'backend/sarana/simpan';
+$route['sarana_ubah/(:any)']                 = 'backend/sarana/ubah/$1';
+$route['sarana_update/(:any)']               = 'backend/sarana/update/$1';
+$route['sarana_hapus/(:any)']                = 'backend/sarana/hapus/$1';
+$route['sarana_detail/(:any)']               = 'backend/sarana/detail/$1';
+$route['sarana_detail_tambah/(:any)/(:any)'] = 'backend/sarana/detail_tambah/$1/$2';
+$route['sarana_detail_ubah/(:any)']          = 'backend/sarana/detail_ubah/$1';
+$route['sarana_get_kelurahan']               = 'backend/sarana/getKelurahan';
+$route['sarana_detail_simpan/(:any)/(:any)'] = 'backend/sarana/simpan_detail/$1/$2';
+$route['sarana_detail_update/(:any)']        = 'backend/sarana/update_detail/$1';
+$route['sarana_detail_hapus/(:any)/(:any)']  = 'backend/sarana/hapus_detail/$1/$2';
+$route['sarana_import']                      = 'backend/sarana/importData';
+$route['sarana_template']                    = 'backend/sarana/template';
+$route['A']                                  = 'backend/sarana/apus_galeri';
 // end rekap
 
 // =============================================== End Routing Backend ======================================= 
