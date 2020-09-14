@@ -16,8 +16,6 @@ foreach ($records as $rekap) {
                                     <tr>
                                         <th width="1%"><center>No. </center></th>
                                         <th width="23%"><center>Lembaga</center></th>
-                                        <th width="14%"><center>Jenis Bantuan</center></th>
-                                        <th width="10%"><center>Bantuan</center></th>
                                         <th width="10%"><center>Desa</center></th>
                                         <th width="10%"><center>Kecamatan</center></th>
                                         <th width="10%"><center>Kabupaten</center></th>
@@ -45,20 +43,14 @@ foreach ($records as $rekap) {
         foreach ($records as $rowsJs) {
         ?>
             var ri = '<?php echo md56($rowsJs['rekap_id']); ?>';
-            var tp = '<?php echo $type; ?>';
             var pr = '<?php echo $provinsi; ?>';
+            var tp = '<?php echo $type; ?>';
             var kk = '<?php echo $kabupaten; ?>';
             var id = $('#tableBantuan_' + <?php echo $i++; ?> + '_' + <?php echo $provinsi; ?>);
             var baseUrl = 'pusatdata_table/' + ri + '/' + tp + '/' + pr + '/' + kk;
             var header = [
                 null,
                 null,
-                {
-                    "sClass": "text-center"
-                },
-                {
-                    "sClass": "text-center"
-                },
                 {
                     "sClass": "text-center"
                 },

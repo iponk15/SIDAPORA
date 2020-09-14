@@ -125,7 +125,7 @@
                 '<div id="siteNotice"></div>' +
                 '<h2 id="firstHeading" class="firstHeading">' +
                 datamap[i].provinsi_nama +
-                ' <a data-toggle="modal" href="#large" class="btn btn-xs bg-yellow-gold detailInfromasi" data-tahun="<?php echo $tahun; ?>" data-provinsi="' + datamap[i].provinsi_kode + '" data-kabupaten="<?php echo $kabupaten; ?>" title="Detail"> ' +
+                ' <a data-toggle="modal" href="#large" class="btn btn-xs bg-yellow-gold detailInfromasi" data-type="<?php echo $type ?>" data-tahun="<?php echo $tahun; ?>" data-provinsi="' + datamap[i].provinsi_kode + '" data-kabupaten="<?php echo $kabupaten; ?>" title="Detail"> ' +
                 'Detail <i class="fa fa-sign-in"></i>' +
                 '</a>' +
                 '</h2> ' +
@@ -152,9 +152,11 @@
     $(document).on('click', '.detailInfromasi', function() {
         var tahun = $(this).attr('data-tahun');
         var prov = $(this).attr('data-provinsi');
+        var type = $(this).attr('data-type');
         var url = base_url + 'pusatdata_cari/2';
         var xdta = {
             'tahun': tahun,
+            'type': type,
             'provinsi': prov
         };
 

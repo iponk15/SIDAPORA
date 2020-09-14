@@ -66,6 +66,7 @@ $route['pusatdata_pdf/(:any)/(:any)/(:any)']   = 'frontend/pusatdata/export_pdf/
 $route['pusatdata_table/(:any)']               = 'frontend/pusatdata/table/$1';
 $route['pusatdata_table/(:any)/(:any)']        = 'frontend/pusatdata/table/$1/$2';
 $route['pusatdata_table/(:any)/(:any)/(:any)'] = 'frontend/pusatdata/table/$1/$2/$3';
+$route['pusatdata_table/(:any)/(:any)/(:any)/(:any)'] = 'frontend/pusatdata/table/$1/$2/$3/$4';
 $route['pusatdata_dokumentasi']                = 'frontend/pusatdata/dokumentasi';
 
 
