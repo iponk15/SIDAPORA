@@ -6,7 +6,7 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Provinsi</label>
+						<label class="col-sm-2 col-form-label">Provinsi</label>
 						<div class="col-sm-4">
 							<select name="kabkot_provinsi_kode" class="form-control">
 								<option value="">Pilih Provinsi</option>
@@ -19,15 +19,27 @@
 						</div>
 					</div>
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Kode Kabupaten / Kota</label>
+						<label class="col-sm-2 col-form-label">Kode Kabkot</label>
 						<div class="col-sm-4">
 							<input required name="kabkot_kode" placeholder="Input kode kabupaten / kota" type="text" class="form-control">
 						</div>
 					</div>
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Kabupaten / Kota</label>
+						<label class="col-sm-2 col-form-label">Kabkot</label>
 						<div class="col-sm-4">
-							<input required name="kabkot_nama" placeholder="Input provinsi" type="text" class="form-control">
+							<input required name="kabkot_nama" placeholder="Input kabupaten / kota" type="text" class="form-control">
+						</div>
+					</div>
+					<div class="position-relative row form-group">
+						<label class="col-sm-2 col-form-label">Latitude</label>
+						<div class="col-sm-4">
+							<input name="kabkot_latitude" placeholder="Input latitude" type="text" class="form-control">
+						</div>
+					</div>
+					<div class="position-relative row form-group">
+						<label class="col-sm-2 col-form-label">Longtitude</label>
+						<div class="col-sm-4">
+							<input name="kabkot_longtitude" placeholder="Input longtitude" type="text" class="form-control">
 						</div>
 					</div>
 					<div class="position-relative row form-check">

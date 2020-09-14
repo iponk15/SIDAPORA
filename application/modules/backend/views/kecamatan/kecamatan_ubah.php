@@ -29,6 +29,18 @@
 							<input value="<?php echo $records->kecamatan_nama ?>" required name="kecamatan_nama" placeholder="Input provinsi" type="text" class="form-control">
 						</div>
 					</div>
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Latitude</label>
+						<div class="col-sm-4">
+							<input name="kecamatan_latitude" placeholder="Input latitude" type="text" class="form-control" value="<?php echo $records->kecamatan_latitude; ?>">
+						</div>
+					</div>
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Longtitude</label>
+						<div class="col-sm-4">
+							<input name="kecamatan_longtitude" placeholder="Input longtitude" type="text" class="form-control" value="<?php echo $records->kecamatan_longtitude; ?>">
+						</div>
+					</div>
 					<div class="position-relative row form-check">
 						<div class="col-sm-4 offset-sm-3">
 							<a href="<?php echo base_url($url); ?>" class="mb-2 mr-2 btn btn-light active">Kembali</a>

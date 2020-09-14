@@ -35,6 +35,18 @@
 							<input value="<?php echo $records->keldes_nama ?>" required name="keldes_nama" placeholder="Input provinsi" type="text" class="form-control">
 						</div>
 					</div>
+					<div class="position-relative row form-group">
+						<label class="col-sm-2 col-form-label">Latitude</label>
+						<div class="col-sm-4">
+							<input name="keldes_latitude" placeholder="Input latitude" type="text" class="form-control" value="<?php echo $records->keldes_latitude; ?>" >
+						</div>
+					</div>
+					<div class="position-relative row form-group">
+						<label class="col-sm-2 col-form-label">Longtitude</label>
+						<div class="col-sm-4">
+							<input name="keldes_longtitude" placeholder="Input Longtitude" type="text" class="form-control" value="<?php echo $records->keldes_longtitude; ?>" >
+						</div>
+					</div>
 					<div class="position-relative row form-check">
 						<div class="col-sm-4 offset-sm-3">
 							<a href="<?php echo base_url($url); ?>" class="mb-2 mr-2 btn btn-light active">Kembali</a>

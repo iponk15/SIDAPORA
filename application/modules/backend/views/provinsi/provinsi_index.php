@@ -10,6 +10,8 @@
 					<th><center>No.</center></th>
 					<th><center>Kode Provinsi</center></th>
 					<th><center>Provinsi</center></th>
+					<th><center>Latitude</center></th>
+					<th><center>Longtitude</center></th>
                     <th><center>Status</center></th>
 					<th><center>Action</center></th>
 				</tr>
@@ -23,6 +25,8 @@
                             <td scope="row" width="3%"><center>'.$i++.'</center></td>
                             <td align="center" width="10%">'.$row->provinsi_kode.'</td>
                             <td>'.$row->provinsi_nama.'</td>
+                            <td class="text-center">'.$row->provinsi_latitude.'</td>
+                            <td class="text-center">'.$row->provinsi_longtitude.'</td>
                             <td align="center" width="10%">'.($row->provinsi_status == 1 ? '<div class="mb-2 mr-2 badge badge-success">Aktif</div>' : '<div class="mb-2 mr-2 badge badge-danger">Tidak Aktif</div>').'</td>
                             <td width="10%">
                                 <center>

@@ -30,6 +30,18 @@
 							<input value="<?php echo $records->kabkot_nama ?>" required name="kabkot_nama" placeholder="Input provinsi" type="text" class="form-control">
 						</div>
 					</div>
+					<div class="position-relative row form-group">
+						<label class="col-sm-2 col-form-label">Latitude</label>
+						<div class="col-sm-4">
+							<input name="kabkot_latitude" placeholder="Input latitude" type="text" class="form-control" value="<?php echo $records->kabkot_latitude; ?>">
+						</div>
+					</div>
+					<div class="position-relative row form-group">
+						<label class="col-sm-2 col-form-label">Longtitude</label>
+						<div class="col-sm-4">
+							<input name="kabkot_longtitude" placeholder="Input longtitude" type="text" class="form-control" value="<?php echo $records->kabkot_longtitude; ?>">
+						</div>
+					</div>
 					<div class="position-relative row form-check">
 						<div class="col-sm-4 offset-sm-3">
 							<a href="<?php echo base_url($url); ?>" class="mb-2 mr-2 btn btn-light active">Kembali</a>

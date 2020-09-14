@@ -9,8 +9,9 @@
 				<tr>
 					<th><center>No.</center></th>
 					<th><center>Provinsi</center></th>
-					<th><center>Kode Kabupaten / Kota</center></th>
 					<th><center>Kabupaten / Kota</center></th>
+					<th><center>Latitude</center></th>
+					<th><center>Longtitude</center></th>
                     <th><center>Status</center></th>
 					<th><center>Action</center></th>
 				</tr>
@@ -23,8 +24,9 @@
                         <tr>
                             <td scope="row" width="3%"><center>'.$i++.'</center></td>
                             <td width="15%">'.$row->provinsi_nama.' (<b> '.$row->provinsi_kode.' </b>)</td>
-                            <td align="center" width="15%">'.$row->kabkot_kode.'</td>
-                            <td>'.$row->kabkot_nama.'</td>
+                            <td>'.$row->kabkot_nama.' ( <b> '.$row->kabkot_kode.' </b> )</td>
+                            <td class="text-center">'.$row->kabkot_latitude.'</td>
+                            <td class="text-center">'.$row->kabkot_longtitude.'</td>
                             <td align="center" width="10%">'.($row->kabkot_status == 1 ? '<div class="mb-2 mr-2 badge badge-success">Aktif</div>' : '<div class="mb-2 mr-2 badge badge-danger">Tidak Aktif</div>').'</td>
                             <td width="10%">
                                 <center>
