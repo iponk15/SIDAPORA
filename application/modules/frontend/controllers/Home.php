@@ -13,6 +13,7 @@ class Home extends MX_Controller
         $get  = $this->input->get();
 
         $data['tahun'] = $get['tahun'] ?? date('Y');
+        $data['type']   = $get['type'] ?? 1;
         $data['provinsi']   = $get['provinsi'] ?? '';
         $data['kabupaten']  = $get['kabupaten'] ?? '';
         $data['slider']     = 1;
@@ -23,7 +24,7 @@ class Home extends MX_Controller
                 rekdet_provinsi_kode,
                 COUNT(rekdet_provinsi_kode) jumlah
             FROM sdp_rekap_detail 
-            LEFT JOIN sdp_rekap ON rekap_id = rekdet_rekap_id
+            LEFT JOIN sdp_rekap ON rekap_id = rekdet_rekap_id AND rekap_tipe = "' . $data['type'] . '"
             WHERE rekdet_provinsi_kode IS NOT NULL AND rekap_tahun = "' . $data['tahun'] . '"
             GROUP BY rekdet_provinsi_kode
         ) temp';

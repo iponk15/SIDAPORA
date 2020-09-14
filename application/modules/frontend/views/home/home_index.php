@@ -19,6 +19,17 @@
                                                     <input type="text" class="form-control" placeholder="e.g. 2015" name="tahun" value="<?php echo $tahun ?>" required>
                                                 </div><!-- /.form-group -->
                                                 <div class="form-group col-sm-12">
+                                                    <label>Tipe</label>
+
+                                                    <div class="select-wrapper">
+                                                        <select id="select-type" class="form-control" name="type" required>
+                                                            <option value="">Pilih Tipe</option>
+                                                            <option value="1" <?php echo ($type == 1 ? 'selected' : '') ?>>Prasarana</option>
+                                                            <option value="2" <?php echo ($type == 2 ? 'selected' : '') ?>>Sarana</option>
+                                                        </select>
+                                                    </div><!-- /.select-wrapper -->
+                                                </div><!-- /.form-group -->
+                                                <div class="form-group col-sm-12">
                                                     <label>Provinsi</label>
 
                                                     <div class="select-wrapper">
