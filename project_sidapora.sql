@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : localhost-Mysql
  Source Server Type    : MySQL
- Source Server Version : 100134
+ Source Server Version : 100411
  Source Host           : localhost:3306
- Source Schema         : project_sidapora
+ Source Schema         : sidapora
 
  Target Server Type    : MySQL
- Target Server Version : 100134
+ Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 16/09/2020 00:18:17
+ Date: 16/09/2020 04:48:26
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `sdp_master_bantuan`  (
   `bantuan_createdby` int(11) DEFAULT NULL,
   `bantuan_createdate` datetime(0) DEFAULT NULL,
   `bantuan_updatedby` int(11) DEFAULT NULL,
-  `bantuan_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `bantuan_lastupdate` timestamp(0) NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP(0),
   `bantuan_ip` char(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`bantuan_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
@@ -63,7 +63,7 @@ CREATE TABLE `sdp_master_jenis_bantuan`  (
   `jnsbtn_createdby` int(11) DEFAULT NULL,
   `jnsbtn_createddate` datetime(0) DEFAULT NULL,
   `jnsbtn_updatedby` int(11) DEFAULT NULL,
-  `jnsbtn_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `jnsbtn_lastupdate` timestamp(0) NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP(0),
   `jnsbtn_ip` char(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`jnsbtn_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
@@ -108,7 +108,7 @@ CREATE TABLE `sdp_master_kabkot`  (
   `kabkot_createdby` int(11) DEFAULT NULL,
   `kabkot_createddate` datetime(0) DEFAULT NULL,
   `kabkot_updatedby` int(11) DEFAULT NULL,
-  `kabkot_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `kabkot_lastupdate` timestamp(0) NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP(0),
   `kabkot_ip` char(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`kabkot_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 579 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
@@ -677,7 +677,7 @@ CREATE TABLE `sdp_master_kategori`  (
   `kategori_createdby` int(11) DEFAULT NULL,
   `kategori_createddate` datetime(0) DEFAULT NULL,
   `kategori_udpatedby` int(11) DEFAULT NULL,
-  `kategori_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `kategori_lastupdate` timestamp(0) NOT NULL DEFAULT current_timestamp(),
   `kategori_ip` char(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`kategori_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
@@ -705,7 +705,7 @@ CREATE TABLE `sdp_master_kecamatan`  (
   `kecamatan_createdby` int(11) DEFAULT NULL,
   `kecamatan_createddate` datetime(0) DEFAULT NULL,
   `kecamatan_updatedby` int(11) DEFAULT NULL,
-  `kecamatan_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `kecamatan_lastupdate` timestamp(0) NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP(0),
   `kecamatan_ip` varchar(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`kecamatan_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 87 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
@@ -813,7 +813,7 @@ CREATE TABLE `sdp_master_keldes`  (
   `keldes_createdby` int(11) DEFAULT NULL,
   `keldes_createddate` datetime(0) DEFAULT NULL,
   `keldes_updatedby` int(11) DEFAULT NULL,
-  `keldes_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `keldes_lastupdate` timestamp(0) NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP(0),
   `keldes_ip` char(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`keldes_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 67 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
@@ -901,7 +901,7 @@ CREATE TABLE `sdp_master_provinsi`  (
   `provinsi_createdby` int(11) DEFAULT NULL,
   `provinsi_createddate` datetime(0) DEFAULT NULL,
   `provinsi_updatedby` int(11) DEFAULT NULL,
-  `provinsi_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `provinsi_lastupdate` timestamp(0) NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP(0),
   `provinsi_ip` char(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`provinsi_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
@@ -958,7 +958,7 @@ CREATE TABLE `sdp_master_step`  (
   `step_createdby` int(11) DEFAULT NULL,
   `step_createddate` datetime(0) DEFAULT NULL,
   `step_updatedby` int(11) DEFAULT NULL,
-  `step_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `step_lastupdate` timestamp(0) NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP(0),
   `step_ip` char(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`step_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
@@ -984,7 +984,7 @@ CREATE TABLE `sdp_master_user`  (
   `user_createdby` int(11) DEFAULT NULL,
   `user_createddate` datetime(0) DEFAULT NULL,
   `user_updatedby` int(11) DEFAULT NULL,
-  `user_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_lastupdate` timestamp(0) NOT NULL DEFAULT current_timestamp(),
   `user_ip` char(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
@@ -1009,7 +1009,7 @@ CREATE TABLE `sdp_rekap`  (
   `rekap_createdby` int(11) DEFAULT NULL,
   `rekap_createddate` datetime(0) DEFAULT NULL,
   `rekap_updatedby` int(11) DEFAULT NULL,
-  `rekap_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `rekap_lastupdate` timestamp(0) NOT NULL DEFAULT current_timestamp(),
   `rekap_ip` char(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`rekap_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
@@ -1052,7 +1052,7 @@ CREATE TABLE `sdp_rekap_detail`  (
   `rekdet_createdby` int(11) DEFAULT NULL,
   `rekdet_createddate` datetime(0) DEFAULT NULL,
   `rekdet_updatedby` int(11) DEFAULT NULL,
-  `rekdet_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `rekdet_lastupdate` timestamp(0) NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`rekdet_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2211 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
@@ -2672,19 +2672,19 @@ INSERT INTO `sdp_rekap_dokumen` VALUES (28, 2194, './assets/frontend/global/img/
 -- View structure for summary_d2
 -- ----------------------------
 DROP VIEW IF EXISTS `summary_d2`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `summary_d2` AS select `sdp_rekap`.`rekap_tahun` AS `rekap_tahun`,count(`sdp_rekap_detail`.`rekdet_provinsi_kode`) AS `jmlPerProvinsi`,count(`sdp_rekap_detail`.`rekdet_kabkot_kode`) AS `jmlPerKabkot`,count(`sdp_rekap_detail`.`rekdet_kecamatan_kode`) AS `jmlPerKecamatan`,count(`sdp_rekap_detail`.`rekdet_keldes_kode`) AS `jmlPerKeldes` from (`sdp_rekap` left join `sdp_rekap_detail` on((`sdp_rekap`.`rekap_id` = `sdp_rekap_detail`.`rekdet_rekap_id`))) group by `sdp_rekap`.`rekap_tahun` order by `sdp_rekap`.`rekap_tahun` ;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `summary_d2` AS select `sdp_rekap`.`rekap_tahun` AS `rekap_tahun`,count(`sdp_rekap_detail`.`rekdet_provinsi_kode`) AS `jmlPerProvinsi`,count(`sdp_rekap_detail`.`rekdet_kabkot_kode`) AS `jmlPerKabkot`,count(`sdp_rekap_detail`.`rekdet_kecamatan_kode`) AS `jmlPerKecamatan`,count(`sdp_rekap_detail`.`rekdet_keldes_kode`) AS `jmlPerKeldes` from (`sdp_rekap` left join `sdp_rekap_detail` on((`sdp_rekap`.`rekap_id` = `sdp_rekap_detail`.`rekdet_rekap_id`))) group by `sdp_rekap`.`rekap_tahun` order by `sdp_rekap`.`rekap_tahun` ; ;
 
 -- ----------------------------
 -- View structure for summary_perkategori
 -- ----------------------------
 DROP VIEW IF EXISTS `summary_perkategori`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `summary_perkategori` AS select `sdp_master_kategori`.`kategori_nama` AS `kategori_nama`,`sdp_rekap`.`rekap_tahun` AS `rekap_tahun`,count(`sdp_rekap`.`rekap_id`) AS `jmlData` from ((`sdp_rekap` left join `sdp_rekap_detail` on((`sdp_rekap_detail`.`rekdet_rekap_id` = `sdp_rekap`.`rekap_id`))) left join `sdp_master_kategori` on((`sdp_rekap`.`rekap_kategori_id` = `sdp_master_kategori`.`kategori_id`))) group by `sdp_rekap`.`rekap_tahun`,`sdp_master_kategori`.`kategori_id` order by `sdp_rekap`.`rekap_kategori_id`,`sdp_rekap`.`rekap_tahun` ;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `summary_perkategori` AS select `sdp_master_kategori`.`kategori_nama` AS `kategori_nama`,`sdp_rekap`.`rekap_tahun` AS `rekap_tahun`,count(`sdp_rekap`.`rekap_id`) AS `jmlData` from ((`sdp_rekap` left join `sdp_rekap_detail` on((`sdp_rekap_detail`.`rekdet_rekap_id` = `sdp_rekap`.`rekap_id`))) left join `sdp_master_kategori` on((`sdp_rekap`.`rekap_kategori_id` = `sdp_master_kategori`.`kategori_id`))) group by `sdp_rekap`.`rekap_tahun`,`sdp_master_kategori`.`kategori_id` order by `sdp_rekap`.`rekap_kategori_id`,`sdp_rekap`.`rekap_tahun` ; ;
 
 -- ----------------------------
 -- View structure for summary_region
 -- ----------------------------
 DROP VIEW IF EXISTS `summary_region`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `summary_region` AS select (select count(0) from `sdp_master_provinsi` where (`sdp_master_provinsi`.`provinsi_status` = '1')) AS `jml_provinsi`,(select count(0) from `sdp_master_kabkot` where (`sdp_master_kabkot`.`kabkot_status` = '1')) AS `jml_kabkot`,(select count(0) from `sdp_master_kecamatan` where (`sdp_master_kecamatan`.`kecamatan_status` = '1')) AS `jml_kecamatan`,(select count(0) from `sdp_master_keldes` where (`sdp_master_keldes`.`keldes_status` = '1')) AS `jml_keldes` ;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `summary_region` AS select (select count(0) from `sdp_master_provinsi` where (`sdp_master_provinsi`.`provinsi_status` = '1')) AS `jml_provinsi`,(select count(0) from `sdp_master_kabkot` where (`sdp_master_kabkot`.`kabkot_status` = '1')) AS `jml_kabkot`,(select count(0) from `sdp_master_kecamatan` where (`sdp_master_kecamatan`.`kecamatan_status` = '1')) AS `jml_kecamatan`,(select count(0) from `sdp_master_keldes` where (`sdp_master_keldes`.`keldes_status` = '1')) AS `jml_keldes` ; ;
 
 -- ----------------------------
 -- View structure for sumsarpras_kabkot
@@ -2693,9 +2693,12 @@ DROP VIEW IF EXISTS `sumsarpras_kabkot`;
 CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_kabkot` AS SELECT 
 	provinsi_id,
 	provinsi_kode,
+	rekap_tahun,
 	kabkot_id,
 	kabkot_kode,
-	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi,
+	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi_nama,
+	provinsi_latitude,
+	provinsi_longtitude,
 	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot,
 	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
 	SUM(CASE WHEN rekap_tipe = 2 THEN 1 ELSE 0 END) AS jml_sarana
@@ -2705,8 +2708,8 @@ LEFT JOIN sdp_master_provinsi ON rekdet_provinsi_kode = provinsi_kode
 LEFT JOIN sdp_master_kabkot ON rekdet_kabkot_kode = kabkot_kode AND kabkot_provinsi_kode = provinsi_kode
 WHERE rekap_status = '1' 
 	AND provinsi_id IS NOT NULL
-	AND kabkot_id IS NOT NULL
-GROUP BY rekdet_kabkot_kode ;
+-- 	AND kabkot_id IS NOT NULL
+GROUP BY rekap_tahun, rekdet_provinsi_kode ;
 
 -- ----------------------------
 -- View structure for sumsarpras_kecamatan
@@ -2715,11 +2718,14 @@ DROP VIEW IF EXISTS `sumsarpras_kecamatan`;
 CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_kecamatan` AS SELECT 
 	provinsi_id,
 	provinsi_kode,
+	rekap_tahun,
 	kabkot_id,
 	kabkot_kode,
 	kecamatan_id,
 	kecamatan_kode,
-	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi,
+	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi_nama,
+	provinsi_latitude,
+	provinsi_longtitude,
 	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot,
 	CONCAT(kecamatan_nama,' (',kecamatan_kode,')') AS kecamatan,
 	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
@@ -2736,9 +2742,9 @@ LEFT JOIN sdp_master_kecamatan
 	AND kecamatan_provinsi_kode = provinsi_kode
 WHERE rekap_status = '1' 
 	AND provinsi_id IS NOT NULL
-	AND kabkot_id IS NOT NULL
-	AND kecamatan_id IS NOT NULL
-GROUP BY rekdet_kecamatan_kode ;
+-- 	AND kabkot_id IS NOT NULL
+-- 	AND kecamatan_id IS NOT NULL
+GROUP BY rekap_tahun, rekdet_kecamatan_kode ;
 
 -- ----------------------------
 -- View structure for sumsarpras_keldes
@@ -2779,7 +2785,7 @@ WHERE rekap_status = '1'
 	AND kabkot_id IS NOT NULL
 	AND kecamatan_id IS NOT NULL
 	AND keldes_id IS NOT NULL
-GROUP BY rekdet_keldes_kode ;
+GROUP BY rekdet_keldes_kode ; ;
 
 -- ----------------------------
 -- View structure for sumsarpras_provinsi
@@ -2788,13 +2794,16 @@ DROP VIEW IF EXISTS `sumsarpras_provinsi`;
 CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_provinsi` AS SELECT 
 	provinsi_id,
 	provinsi_kode,
+	rekap_tahun,
 	provinsi_nama,
+	provinsi_latitude,
+	provinsi_longtitude,
 	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
 	SUM(CASE WHEN rekap_tipe = 2 THEN 1 ELSE 0 END) AS jml_sarana
 FROM sdp_rekap
 LEFT JOIN sdp_rekap_detail ON rekap_id = rekdet_rekap_id
 LEFT JOIN sdp_master_provinsi ON rekdet_provinsi_kode = provinsi_kode
 WHERE rekap_status = '1' AND provinsi_id IS NOT NULL
-GROUP BY rekdet_provinsi_kode ;
+GROUP BY rekap_tahun, rekdet_provinsi_kode ;
 
 SET FOREIGN_KEY_CHECKS = 1;
