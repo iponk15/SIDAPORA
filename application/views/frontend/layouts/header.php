@@ -4,7 +4,7 @@
             <div class="header-top">
                 <div class="container">
                     <div class="header-identity">
-                        <a href="index.html" class="header-identity-target">
+                        <a href="<?php echo base_url() ?>" class="header-identity-target">
                             <span class="header-icon"><i class="fa fa-home"></i></span>
                             <span class="header-title">SIDAPORA</span><!-- /.header-title -->
                             <span class="header-slogan">Bantuan Sarana <br> Bantuan Prasarana</span>
@@ -24,5 +24,5 @@
                 </div><!-- /.container -->
             </div><!-- .header-top -->
         </div><!-- /.header-inner -->
-    </div><!-- /#header -->    
+    </div><!-- /#header -->
 </div><!-- /#header-wrapper -->
