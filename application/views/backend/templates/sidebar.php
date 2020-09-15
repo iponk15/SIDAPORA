@@ -58,6 +58,11 @@
 						<i class="metismenu-icon pe-7s-plugin"></i> Jenis Bantuan
 					</a>
 				</li>
+				<li>
+					<a href="<?php echo base_url('step'); ?>" class="<?php echo (getCtrl() == 'step' ? 'mm-active' : ''); ?>">
+						<i class="metismenu-icon pe-7s-plugin"></i> Step
+					</a>
+				</li>
 				<li class="app-sidebar__heading"><h6><b>Wilayah Administratif</b></h4></li>
 				<li>
 					<a href="<?php echo base_url('provinsi'); ?>" class="<?php echo (getCtrl() == 'provinsi' ? 'mm-active' : ''); ?>">

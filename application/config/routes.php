@@ -197,4 +197,14 @@ $route['sarana_template']                    = 'backend/sarana/template';
 $route['A']                                  = 'backend/sarana/apus_galeri';
 // end rekap
 
+// start step
+$route['step']               = 'backend/step';
+$route['step_tambah']        = 'backend/step/tambah';
+$route['step_simpan']        = 'backend/step/simpan';
+$route['step_ubah/(:any)']   = 'backend/step/ubah/$1';
+$route['step_update/(:any)'] = 'backend/step/update/$1';
+$route['step_hapus/(:any)']  = 'backend/step/hapus/$1';
+$route['step_get_kecamatan'] = 'backend/step/getKecamatan';
+// end step
+
 // =============================================== End Routing Backend ======================================= 
