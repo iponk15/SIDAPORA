@@ -11,7 +11,7 @@
  Target Server Version : 100134
  File Encoding         : 65001
 
- Date: 14/09/2020 23:32:31
+ Date: 15/09/2020 23:41:00
 */
 
 SET NAMES utf8mb4;
@@ -943,6 +943,33 @@ INSERT INTO `sdp_master_provinsi` VALUES (31, '81', 'MALUKU', '-3.238462', '130.
 INSERT INTO `sdp_master_provinsi` VALUES (32, '82', 'MALUKU UTARA', '1.571860', '127.798799', '1', 1, '2019-10-13 20:34:41', 1, '2019-11-19 00:09:46', '::1');
 INSERT INTO `sdp_master_provinsi` VALUES (33, '92', 'PAPUA BARAT', '-1.336115', '133.174713', '1', 1, '2019-10-13 20:34:41', 1, '2019-11-18 23:47:19', '::1');
 INSERT INTO `sdp_master_provinsi` VALUES (34, '91', 'PAPUA', '-4.269928', '138.080353', '1', 1, '2019-10-13 20:34:41', 1, '2019-11-18 23:45:19', '::1');
+
+-- ----------------------------
+-- Table structure for sdp_master_step
+-- ----------------------------
+DROP TABLE IF EXISTS `sdp_master_step`;
+CREATE TABLE `sdp_master_step`  (
+  `step_id` int(11) NOT NULL AUTO_INCREMENT,
+  `step_kode` char(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `step_nama` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `step_order` char(2) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `step_deskripsi` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
+  `step_status` enum('0','1') CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT '1',
+  `step_createdby` int(11) DEFAULT NULL,
+  `step_createddate` datetime(0) DEFAULT NULL,
+  `step_updatedby` int(11) DEFAULT NULL,
+  `step_lastupdate` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
+  `step_ip` char(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  PRIMARY KEY (`step_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of sdp_master_step
+-- ----------------------------
+INSERT INTO `sdp_master_step` VALUES (1, 'STP01', 'Sebelum Pengerjaan', '1', 'Step pada saat sebelum pengerjaan', '1', 1, '2020-09-15 22:31:40', NULL, '2020-09-15 22:31:40', '::1');
+INSERT INTO `sdp_master_step` VALUES (3, 'STP02', 'Waktu Pengerjaan', '2', 'step pada saat waktu pengerjaan', '1', 1, '2020-09-15 22:36:55', NULL, '2020-09-15 22:36:55', '::1');
+INSERT INTO `sdp_master_step` VALUES (4, 'STP03', 'Setelah Pengerjaan', '3', 'step waktu setelah pengerjaan', '1', 1, '2020-09-15 22:37:32', NULL, '2020-09-15 22:37:32', '::1');
+INSERT INTO `sdp_master_step` VALUES (5, 'STP04', 'Serah Terima', '4', 'step pada saat serah terima', '1', 1, '2020-09-15 22:38:03', NULL, '2020-09-15 22:38:03', '::1');
 
 -- ----------------------------
 -- Table structure for sdp_master_user
@@ -2583,7 +2610,7 @@ INSERT INTO `sdp_rekap_detail` VALUES (2190, 17, 'PREB2', 'PRE04', '33', NULL, N
 INSERT INTO `sdp_rekap_detail` VALUES (2191, 17, 'PREB2', 'PRE05', '16', NULL, NULL, NULL, 'Tribun Lapangan Sepak Bola ICM Kelurahan Rahma (Tahap II) Kec Lubuk Linggau Selatan I Kota Lubuk Linggau Prov Sumatera Selatan ', 802011000, NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-20 23:25:58');
 INSERT INTO `sdp_rekap_detail` VALUES (2192, 17, 'PREB2', 'PRE05', '35', NULL, NULL, NULL, 'Prasarana Stadion Ratu Pemelingan, Kab.  Pamekasan, Provinsi Jawa Timur ', 1178256000, NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-20 23:25:58');
 INSERT INTO `sdp_rekap_detail` VALUES (2193, 17, 'PREB2', 'PRE05', '73', NULL, NULL, NULL, 'Gelanggang Olahraga dan Stadion Mini di Kab. Bulukumba, Provinsi Sulawesi Selatan', 2147483647, NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-20 23:25:58');
-INSERT INTO `sdp_rekap_detail` VALUES (2194, 17, 'PREB2', 'PRE05', '11', NULL, NULL, NULL, 'Prasarana Stadion Muara Batu Kab. Aceh Utara, Prov. Aceh ', 2147483647, NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-20 23:25:58');
+INSERT INTO `sdp_rekap_detail` VALUES (2194, 17, 'PREB2', 'PRE05', '11', '', '', '', 'Prasarana Stadion Muara Batu Kab. Aceh Utara, Prov. Aceh ', 2147483647, NULL, NULL, NULL, NULL, NULL, 1, '2020-09-15 21:25:58');
 INSERT INTO `sdp_rekap_detail` VALUES (2195, 17, 'PREB2', 'PRE05', '35', NULL, NULL, NULL, 'Lap Sepakbola dan Tribun IAIN Kab Jember, Jatim ', 2147483647, NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-20 23:25:58');
 INSERT INTO `sdp_rekap_detail` VALUES (2196, 17, 'PREB2', 'PRE05', '17', NULL, NULL, NULL, 'Lapangan Sepak Bola Kab. Bengkulu Utara, Provinsi Bengkulu', 1578500000, NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-20 23:25:58');
 INSERT INTO `sdp_rekap_detail` VALUES (2197, 17, 'PREB1', 'PRE03', '35', NULL, NULL, NULL, 'GOR Konang, Kab. Bangkalan, Provinsi Jawa Timur ', 2147483647, NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-20 23:25:58');
@@ -2606,35 +2633,40 @@ CREATE TABLE `sdp_rekap_dokumen`  (
   `rekdok_ringkasan` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `rekdok_deskripsi` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
   `rekdok_is_public` enum('0','1') CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL COMMENT '0=false, 1=true',
+  `rekdok_step_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`rekdok_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sdp_rekap_dokumen
 -- ----------------------------
-INSERT INTO `sdp_rekap_dokumen` VALUES (1, 8, './assets/frontend/global/img/galeri/Lapangan-Bola-Basket-dan-Bola-Voli1.jpg', 'Foto A', 'Tampak dari depan', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (2, 8, './assets/frontend/global/img/galeri/lap-volley-31.jpg', 'Foto B', 'Tampak dari belakang', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (3, 42, './assets/frontend/global/img/galeri/Lapangan-Bola-Basket-dan-Bola-Voli2.jpg', 'Foto kondisi awal', 'deskripisi', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (4, 1555, './assets/frontend/global/img/galeri/saat_awal.jpeg', 'Kondisi Awal', 'Dokumentasi foto pada saat kondisi awal pembangunan di MTS Ma\'arif NU 1', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (5, 1555, './assets/frontend/global/img/galeri/saat_berjalan.jpeg', 'Kondisi Sedang Pembangunan', 'Dokumentasi foto pada saat kondisi pembangunan di MTS Ma\'aruf NU 1', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (6, 1556, './assets/frontend/global/img/galeri/jawa_barat_awal.jpeg', 'Foto Awal', 'Foto dokumentasi awal pembangunan pada yayasan al ma\'sum', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (7, 1556, './assets/frontend/global/img/galeri/jawa_barat.jpeg', 'Foto Pembangunan', 'Foto dokumentasi pada saat pembangunan berlangsung di yayasan al ma\'sum', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (8, 1557, './assets/frontend/global/img/galeri/foto_awal.jpeg', 'Foto Awal', 'Foto dokumentasi awal pembangunan lapangan sepak bola di desa karya indah', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (9, 1558, './assets/frontend/global/img/galeri/foto_awal_lombok.jpeg', 'Foto Awal', 'Foto dokumentasi pembangunan awal lapangan futsal di desa keranji', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (10, 1558, './assets/frontend/global/img/galeri/foto_pembangunan_lomobok.jpeg', 'Foto Pembangunan', 'Foto dokumentasi pembangunan lapangan futsal di desa kuranji', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (11, 1557, './assets/frontend/global/img/galeri/foto_pembangunan_1.jpeg', 'Foto Pembangunan 1', 'Foto dokumentasi pembangunan lapangan sepakbola', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (12, 1557, './assets/frontend/global/img/galeri/foto_pembangunan_2.jpeg', 'Foto Pembangunan 2', 'Foto dokumentasi pembangunan lapangan sepakbola', '1');
-INSERT INTO `sdp_rekap_dokumen` VALUES (13, 2199, './assets/frontend/global/img/galeri/', '', '', '0');
-INSERT INTO `sdp_rekap_dokumen` VALUES (15, 2201, './assets/frontend/global/img/galeri/', '', '', '0');
-INSERT INTO `sdp_rekap_dokumen` VALUES (16, 2202, './assets/frontend/global/img/galeri/', '', '', '0');
-INSERT INTO `sdp_rekap_dokumen` VALUES (17, 2203, './assets/frontend/global/img/galeri/', '', '', '0');
-INSERT INTO `sdp_rekap_dokumen` VALUES (18, 2204, './assets/frontend/global/img/galeri/', '', '', '0');
-INSERT INTO `sdp_rekap_dokumen` VALUES (19, 2205, './assets/frontend/global/img/galeri/', '', '', '0');
-INSERT INTO `sdp_rekap_dokumen` VALUES (20, 2206, './assets/frontend/global/img/galeri/', '', '', '0');
-INSERT INTO `sdp_rekap_dokumen` VALUES (21, 2207, './assets/frontend/global/img/galeri/', '', '', '0');
-INSERT INTO `sdp_rekap_dokumen` VALUES (22, 2208, './assets/frontend/global/img/galeri/', '', '', '0');
-INSERT INTO `sdp_rekap_dokumen` VALUES (23, 2209, './assets/frontend/global/img/galeri/', '', '', '0');
-INSERT INTO `sdp_rekap_dokumen` VALUES (24, 2210, './assets/frontend/global/img/galeri/', '', '', '0');
+INSERT INTO `sdp_rekap_dokumen` VALUES (1, 8, './assets/frontend/global/img/galeri/Lapangan-Bola-Basket-dan-Bola-Voli1.jpg', 'Foto A', 'Tampak dari depan', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (2, 8, './assets/frontend/global/img/galeri/lap-volley-31.jpg', 'Foto B', 'Tampak dari belakang', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (3, 42, './assets/frontend/global/img/galeri/Lapangan-Bola-Basket-dan-Bola-Voli2.jpg', 'Foto kondisi awal', 'deskripisi', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (4, 1555, './assets/frontend/global/img/galeri/saat_awal.jpeg', 'Kondisi Awal', 'Dokumentasi foto pada saat kondisi awal pembangunan di MTS Ma\'arif NU 1', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (5, 1555, './assets/frontend/global/img/galeri/saat_berjalan.jpeg', 'Kondisi Sedang Pembangunan', 'Dokumentasi foto pada saat kondisi pembangunan di MTS Ma\'aruf NU 1', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (6, 1556, './assets/frontend/global/img/galeri/jawa_barat_awal.jpeg', 'Foto Awal', 'Foto dokumentasi awal pembangunan pada yayasan al ma\'sum', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (7, 1556, './assets/frontend/global/img/galeri/jawa_barat.jpeg', 'Foto Pembangunan', 'Foto dokumentasi pada saat pembangunan berlangsung di yayasan al ma\'sum', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (8, 1557, './assets/frontend/global/img/galeri/foto_awal.jpeg', 'Foto Awal', 'Foto dokumentasi awal pembangunan lapangan sepak bola di desa karya indah', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (9, 1558, './assets/frontend/global/img/galeri/foto_awal_lombok.jpeg', 'Foto Awal', 'Foto dokumentasi pembangunan awal lapangan futsal di desa keranji', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (10, 1558, './assets/frontend/global/img/galeri/foto_pembangunan_lomobok.jpeg', 'Foto Pembangunan', 'Foto dokumentasi pembangunan lapangan futsal di desa kuranji', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (11, 1557, './assets/frontend/global/img/galeri/foto_pembangunan_1.jpeg', 'Foto Pembangunan 1', 'Foto dokumentasi pembangunan lapangan sepakbola', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (12, 1557, './assets/frontend/global/img/galeri/foto_pembangunan_2.jpeg', 'Foto Pembangunan 2', 'Foto dokumentasi pembangunan lapangan sepakbola', '1', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (13, 2199, './assets/frontend/global/img/galeri/', '', '', '0', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (15, 2201, './assets/frontend/global/img/galeri/', '', '', '0', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (16, 2202, './assets/frontend/global/img/galeri/', '', '', '0', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (17, 2203, './assets/frontend/global/img/galeri/', '', '', '0', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (18, 2204, './assets/frontend/global/img/galeri/', '', '', '0', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (19, 2205, './assets/frontend/global/img/galeri/', '', '', '0', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (20, 2206, './assets/frontend/global/img/galeri/', '', '', '0', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (21, 2207, './assets/frontend/global/img/galeri/', '', '', '0', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (22, 2208, './assets/frontend/global/img/galeri/', '', '', '0', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (23, 2209, './assets/frontend/global/img/galeri/', '', '', '0', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (24, 2210, './assets/frontend/global/img/galeri/', '', '', '0', NULL);
+INSERT INTO `sdp_rekap_dokumen` VALUES (25, 2194, './assets/frontend/global/img/galeri/1.PNG', 'Sebelum Pengerjaan', 'foto sebelum pengerjaan', '1', 1);
+INSERT INTO `sdp_rekap_dokumen` VALUES (26, 2194, './assets/frontend/global/img/galeri/2.PNG', 'Waktu Pengerjaan', 'Waktu Pengerjaan', '1', 2);
+INSERT INTO `sdp_rekap_dokumen` VALUES (27, 2194, './assets/frontend/global/img/galeri/3.PNG', 'Setelah Pengerjaan', 'Setelah pengerjaan', '1', 3);
+INSERT INTO `sdp_rekap_dokumen` VALUES (28, 2194, './assets/frontend/global/img/galeri/4.PNG', 'Serah Terima', 'serah terima', '1', 4);
 
 -- ----------------------------
 -- View structure for summary_d2
