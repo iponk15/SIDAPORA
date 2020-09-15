@@ -16,7 +16,7 @@
 
                                                 <div class="form-group col-sm-6">
                                                     <label>Tahun</label>
-                                                    <input type="text" class="form-control" placeholder="e.g. 2015" name="tahun" value="<?php echo $tahun ?>" required>
+                                                    <input type="text" readonly class="form-control tahun" placeholder="e.g. 2015" name="tahun" value="<?php echo $tahun ?>" required>
                                                 </div><!-- /.form-group -->
                                                 <div class="form-group col-sm-12">
                                                     <label>Tipe</label>
@@ -147,6 +147,13 @@
 
     $(document).ready(function() {
         initialize();
+
+        var prm = {
+            format: "yyyy",
+            minViewMode: 2,
+            autoclose: true
+        };
+        global.init_dtrp(1, '.tahun', prm);
     });
 
     $(document).on('click', '.detailInfromasi', function() {
@@ -162,7 +169,7 @@
 
         $.post(url, xdta, function(html) {
             $('.listDataRekap').html(html);
-        })
+        });
     });
 
     $(document).on('click', '.listDokumentasi', function() {
