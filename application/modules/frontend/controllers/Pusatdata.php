@@ -30,17 +30,18 @@ class Pusatdata extends MX_Controller
         $get  = $this->input->get();
 
         $data['tahun'] = $get['tahun'] ?? date('Y');
-        $data['type']   = $get['type'] ?? 1;
+        $data['type']   = $get['type'] ?? 3;
         $data['provinsi']   = $get['provinsi'] ?? '';
         $data['kabupaten']  = $get['kabupaten'] ?? '';
 
         /*BEGIN GET DATA PETA MAP*/
+        $jointype = $data['type'] == 3 ? '' : 'AND rekap_tipe = "' . $data['type'] . '"';
         $selectjoinmap = '(
             SELECT
                 rekdet_provinsi_kode,
                 COUNT(rekdet_provinsi_kode) jumlah
             FROM sdp_rekap_detail 
-            LEFT JOIN sdp_rekap ON rekap_id = rekdet_rekap_id AND rekap_tipe = "' . $data['type'] . '"
+            LEFT JOIN sdp_rekap ON rekap_id = rekdet_rekap_id ' . $jointype . '
             WHERE rekdet_provinsi_kode IS NOT NULL AND rekap_tahun = "' . $data['tahun'] . '"
             GROUP BY rekdet_provinsi_kode
         ) temp';
@@ -49,17 +50,29 @@ class Pusatdata extends MX_Controller
             ['sdp_master_kabkot', 'sdp_master_kabkot.kabkot_provinsi_kode = sdp_master_provinsi.provinsi_kode', 'left']
         ];
         $selectmap  = 'provinsi_kode, provinsi_nama, provinsi_latitude, provinsi_longtitude, temp.jumlah, sdp_master_kabkot.kabkot_kode, sdp_master_kabkot.kabkot_nama';
-        $whereMap   = ['temp.jumlah IS NOT NULL' => NULL];
+
+        $view_db = 'sumsarpras_provinsi';
+        $whereMap['rekap_tahun'] = $data['tahun'];
+        if ($data['type'] == 1) {
+            $whereMap['jml_prasarana > 0'] = NULL;
+        } elseif ($data['type'] == 2) {
+            $whereMap['jml_sarana > 0'] = NULL;
+        } else {
+            $whereMap['(jml_prasarana > 0 OR jml_sarana > 0)'] = NULL;
+        }
+
 
         if ($data['provinsi'] != '') {
             $whereMap['provinsi_kode'] = $data['provinsi'];
+            // $view_db = 'sumsarpras_kabkot';
         }
 
         if ($data['kabupaten'] != '') {
             $whereMap['kabkot_kode'] = $data['kabupaten'];
         }
 
-        $data['getmap']  = $this->m_global->get('sdp_master_provinsi', $joinmap, $whereMap, $selectmap, null, ['provinsi_nama', 'asc']);
+        $data['getmap']  = $this->m_global->get($view_db, NULL, $whereMap, '*', null, ['provinsi_nama', 'asc']);
+        // pre($data['getmap'], 1);
         $data['getwil']  = $this->m_global->get('sdp_master_provinsi', $joinmap, NULL, $selectmap, null, ['provinsi_nama', 'asc']);
 
         // start get data map
@@ -69,7 +82,9 @@ class Pusatdata extends MX_Controller
             $result[$element->provinsi_kode]['provinsi_nama'] = $element->provinsi_nama;
             $result[$element->provinsi_kode]['provinsi_latitude'] = $element->provinsi_latitude;
             $result[$element->provinsi_kode]['provinsi_longtitude'] = $element->provinsi_longtitude;
-            $result[$element->provinsi_kode]['jumlah'] = $element->jumlah;
+            $result[$element->provinsi_kode]['jumlah_prasarana'] = $element->jml_prasarana;
+            $result[$element->provinsi_kode]['jumlah_sarana'] = $element->jml_sarana;
+            $result[$element->provinsi_kode]['jumlah_semua'] = $element->jml_sarana + $element->jml_prasarana;
             $result[$element->provinsi_kode]['kabupaten'][] = $element;
         }
         $data['records'] = array_values($result);

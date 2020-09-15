@@ -23,7 +23,7 @@
 
                                                     <div class="select-wrapper">
                                                         <select id="select-type" class="form-control" name="type" required>
-                                                            <option value="">Pilih Tipe</option>
+                                                            <option value="3" <?php echo ($type == 3 ? 'selected' : '') ?>>Semua</option>
                                                             <option value="1" <?php echo ($type == 1 ? 'selected' : '') ?>>Prasarana</option>
                                                             <option value="2" <?php echo ($type == 2 ? 'selected' : '') ?>>Sarana</option>
                                                         </select>
@@ -105,6 +105,7 @@
 <script>
     function initialize() {
         var datamap = $.parseJSON('<?php echo $datamap ?>');
+        var type = '<?php echo $type ?>';
         var propertiPeta = {
             center: new google.maps.LatLng(-1.203564, 118.285458),
             zoom: 5,
@@ -115,23 +116,30 @@
 
         // membuat Marker
         for (i = 0; i < datamap.length; i++) {
+
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(datamap[i].provinsi_latitude, datamap[i].provinsi_longtitude),
                 map: peta,
-                title: 'Jumlah = ' + datamap[i].jumlah + ' bantuan'
+                title: 'Jumlah = ' + datamap[i].jumlah_prasarana + ' bantuan'
             });
+            if (type == 1) {
+                var body_content = '<p><b>' + datamap[i].provinsi_nama + '</b>, jumlah bantuan pada provinsi ini ada <a href="">' + datamap[i].jumlah_prasarana + '</a> Bantuan.</p>';
+            } else if (type == 2) {
+                var body_content = '<p><b>' + datamap[i].provinsi_nama + '</b>, jumlah bantuan pada provinsi ini ada <a href="">' + datamap[i].jumlah_sarana + '</a> Bantuan.</p>';
+            } else {
+                var body_content = '<p><b>' + datamap[i].provinsi_nama + '</b>, jumlah bantuan pada provinsi ini ada <a href="">' + datamap[i].jumlah_semua + '</a> Bantuan.</p> (<b>Prasarana = ' + datamap[i].jumlah_prasarana + '</b>, <b>Sarana = ' + datamap[i].jumlah_sarana + '</b>)';
+
+            }
 
             var content = '<div id="content">' +
                 '<div id="siteNotice"></div>' +
                 '<h2 id="firstHeading" class="firstHeading">' +
                 datamap[i].provinsi_nama +
-                ' <a data-toggle="modal" href="#large" class="btn btn-xs bg-yellow-gold detailInfromasi" data-type="<?php echo $type ?>" data-tahun="<?php echo $tahun; ?>" data-provinsi="' + datamap[i].provinsi_kode + '" data-kabupaten="<?php echo $kabupaten; ?>" title="Detail"> ' +
+                ' <a data-toggle="modal" href="#large" class="btn btn-xs bg-yellow-gold detailInfromasi" data-type="' + type + '" data-tahun="<?php echo $tahun; ?>" data-provinsi="' + datamap[i].provinsi_kode + '" data-kabupaten="<?php echo $kabupaten; ?>" title="Detail"> ' +
                 'Detail <i class="fa fa-sign-in"></i>' +
                 '</a>' +
                 '</h2> ' +
-                '<div id="bodyContent">' +
-                '<p><b>' + datamap[i].provinsi_nama + '</b>, jumlah bantuan pada provinsi ini ada <a href="">' + datamap[i].jumlah + '</a> Bantuan.</p>' +
-                '</div>' +
+                '<div id="bodyContent">' + body_content + '</div>' +
                 '</div>';
 
             var infowindow = new google.maps.InfoWindow();
