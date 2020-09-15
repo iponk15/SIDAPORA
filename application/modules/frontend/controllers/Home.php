@@ -18,69 +18,44 @@ class Home extends MX_Controller
         $data['kabupaten']  = $get['kabupaten'] ?? '';
         $data['slider']     = 1;
         $data['breadcrumb'] = null;
-        /*BEGIN GET DATA PETA MAP*/
-        $selectjoinmap = '(
-            SELECT
-                rekdet_provinsi_kode,
-                COUNT(rekdet_provinsi_kode) jumlah
-            FROM sdp_rekap_detail 
-            LEFT JOIN sdp_rekap ON rekap_id = rekdet_rekap_id AND rekap_tipe = "' . $data['type'] . '"
-            WHERE rekdet_provinsi_kode IS NOT NULL AND rekap_tahun = "' . $data['tahun'] . '"
-            GROUP BY rekdet_provinsi_kode
-        ) temp';
-        $joinmap    = [
-            [$selectjoinmap, 'temp.rekdet_provinsi_kode = provinsi_kode', 'left'],
-            ['sdp_master_kabkot', 'sdp_master_kabkot.kabkot_provinsi_kode = sdp_master_provinsi.provinsi_kode', 'left']
+        $data['pagetitle']  = 'Beranda <br> Halaman Beranda';
+        $join = [
+            ['sdp_master_step', 'sdp_master_step.step_id = sdp_rekap_dokumen.rekdok_step_id', 'left']
         ];
-        $selectmap  = 'provinsi_kode, provinsi_nama, provinsi_latitude, provinsi_longtitude, temp.jumlah, sdp_master_kabkot.kabkot_kode, sdp_master_kabkot.kabkot_nama';
-        $whereMap   = ['temp.jumlah IS NOT NULL' => NULL];
+        $where = [
+            'rekdok_step_id IS NOT NULL' => NULL,
+            'rekdok_is_public'  => '1'
+        ];
 
-        if ($data['provinsi'] != '') {
-            $whereMap['provinsi_kode'] = $data['provinsi'];
+        $select = 'rekdok_file,
+                rekdok_ringkasan,
+                rekdok_deskripsi,
+                step_nama,
+                step_deskripsi,
+                step_order';
+        $records    = $this->m_global->get('sdp_rekap_dokumen', $join, $where, $select, null, ['step_order', 'asc']);
+        $data['records']        = $records;
+        $data['slider_utama']   = array_rand($records, 3);
+        foreach ($records as $value) {
+            $result[$value->step_order][]  = $value;
         }
 
-        if ($data['kabupaten'] != '') {
-            $whereMap['kabkot_kode'] = $data['kabupaten'];
-        }
-
-        $data['getmap']  = $this->m_global->get('sdp_master_provinsi', $joinmap, $whereMap, $selectmap, null, ['provinsi_nama', 'asc']);
-        $data['getwil']  = $this->m_global->get('sdp_master_provinsi', $joinmap, NULL, $selectmap, null, ['provinsi_nama', 'asc']);
-
-        // start get data map
-        $result = array();
-        foreach ($data['getmap'] as $element) {
-            $result[$element->provinsi_kode]['provinsi_kode'] = $element->provinsi_kode;
-            $result[$element->provinsi_kode]['provinsi_nama'] = $element->provinsi_nama;
-            $result[$element->provinsi_kode]['provinsi_latitude'] = $element->provinsi_latitude;
-            $result[$element->provinsi_kode]['provinsi_longtitude'] = $element->provinsi_longtitude;
-            $result[$element->provinsi_kode]['jumlah'] = $element->jumlah;
-            $result[$element->provinsi_kode]['kabupaten'][] = $element;
-        }
-        $data['records'] = array_values($result);
-        $data['datamap'] = json_encode($data['records']);
-        // end get data map
-
-        // start get data wilayah
-        foreach ($data['getwil'] as $element) {
-            $result_wil[$element->provinsi_kode]['provinsi_kode'] = $element->provinsi_kode;
-            $result_wil[$element->provinsi_kode]['provinsi_nama'] = $element->provinsi_nama;
-            $result_wil[$element->provinsi_kode]['provinsi_latitude'] = $element->provinsi_latitude;
-            $result_wil[$element->provinsi_kode]['provinsi_longtitude'] = $element->provinsi_longtitude;
-            $result_wil[$element->provinsi_kode]['jumlah'] = $element->jumlah;
-            $result_wil[$element->provinsi_kode]['kabupaten'][] = $element;
-        }
-        $data['provinsis'] = array_values($result_wil);
-        $kabupaten_array = [];
-        foreach ($data['provinsis'] as $provinsi) {
-            foreach ($provinsi['kabupaten'] as $kabupaten) {
-                if ($kabupaten->kabkot_kode != '' && $kabupaten->kabkot_nama != '') {
-                    $kabupaten_array[] = (array)$kabupaten;
+        // isi image harus 6 slider
+        $config_jml_image = 6;
+        foreach ($result as $key => $value) {
+            $count = count($value);
+            if ($count < $config_jml_image) {
+                $selisih = $config_jml_image - $count;
+                for ($i = 0; $i < $selisih; $i++) {
+                    $result[$key][] = $result[$key][$i];
                 }
+            } else {
+                $result[$key] = array_slice($value, 0, $config_jml_image);
             }
         }
-        $data['kabupatens'] = $kabupaten_array;
-        // end get data wilayah
-        /*END GET DATA PETA MAP*/
+
+        $data['result'] = array_values($result);
+
         $this->templates->frontend('home/home_index', $data);
     }
 }

@@ -24,6 +24,7 @@ class Pusatdata extends MX_Controller
     public function index()
     {
         $data['slider']     = 0;
+        $data['pagetitle']  = 'Bantuan Sarana <br> Bantuan Prasarana';
         $data['breadcrumb'] = ['Home' => base_url('home'), 'Pusat Data' => base_url($this->url)];
 
         $get  = $this->input->get();

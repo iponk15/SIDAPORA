@@ -47,34 +47,22 @@
                 <div class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        <?php foreach ($slider_utama as $key => $value) { ?>
+                            <li data-target="#carousel-example-generic" data-slide-to="<?php echo $key ?>" <?php echo ($key == 0 ? 'class="active"' : '') ?>></li>
+                        <?php } ?>
                     </ol>
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img class="center-block" src="<?php echo base_url('assets\frontend\global\img\galeri\1.png') ?>" alt="image slider">
-                            <div class="carousel-caption">
-                                <h3>First Slide</h3>
-                                <p>Deskrisi slide pertama</p>
+                        <?php foreach ($slider_utama as $key => $value) { ?>
+                            <div class="item  <?php echo $key == 0 ? 'active' : '' ?>">
+                                <img class="center-block" src="<?php echo $records[$value]->rekdok_file ?>" alt="image slider">
+                                <div class="carousel-caption">
+                                    <h3><?php echo $records[$value]->rekdok_ringkasan ?></h3>
+                                    <p><?php echo $records[$value]->rekdok_deskripsi ?></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <img class="center-block" src="<?php echo base_url('assets\frontend\global\img\galeri\2.png') ?>" alt="image slider">
-                            <div class="carousel-caption">
-                                <h3>Second Slide</h3>
-                                <p>Deskrisi slide kedua</p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img class="center-block" src="<?php echo base_url('assets\frontend\global\img\galeri\3.png') ?>" alt="image slider">
-                            <div class="carousel-caption">
-                                <h3>Third Slide</h3>
-                                <p>Deskrisi slide ketiga</p>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
 
                     <!-- Controls -->
@@ -100,50 +88,20 @@
                             <div class="carousel slide vertical" data-ride="carousel">
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner hidden-xs" role="listbox">
-                                    <div class="item active">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <a class="thumbnail" href="#">
-                                                    <img src="http://lorempixel.com/500/500" alt="" />
-                                                    <div class="carousel-caption">Lorem ipsum dolor.</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <a class="thumbnail" href="#">
-                                                    <img src="http://lorempixel.com/500/500" alt="" />
-                                                    <div class="carousel-caption">Lorem ipsum dolor.</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <a class="thumbnail" href="#">
-                                                    <img src="http://lorempixel.com/500/500" alt="" />
-                                                    <div class="carousel-caption">Lorem ipsum dolor.</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <a class="thumbnail" href="#">
-                                                    <img src="http://lorempixel.com/500/500" alt="" />
-                                                    <div class="carousel-caption">Lorem ipsum dolor.</div>
-                                                </a>
+                                    <?php for ($i = 0; $i < count($result[0]); $i++) { ?>
+                                        <div class="item <?php echo ($i == 0 ? 'active' : '') ?>">
+                                            <div class="row">
+                                                <?php for ($j = 0; $j < count($result); $j++) { ?>
+                                                    <div class="col-sm-3">
+                                                        <a class="thumbnail" href="#">
+                                                            <img src="<?php echo $result[$j][$i]->rekdok_file ?>" alt="<?php echo $result[$j][$i]->rekdok_ringkasan ?>" />
+                                                            <div class="carousel-caption"><?php echo $result[$j][$i]->step_nama ?></div>
+                                                        </a>
+                                                    </div>
+                                                <?php } ?>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <a class="thumbnail" href="#">
-                                                    <img src="http://lorempixel.com/500/500" alt="" />
-                                                    <div class="carousel-caption">Lorem ipsum dolor.</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <a class="thumbnail" href="#">
-                                                    <img src="http://lorempixel.com/500/500" alt="" />
-                                                    <div class="carousel-caption">Lorem ipsum dolor.</div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
