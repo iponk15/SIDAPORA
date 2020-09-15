@@ -93,9 +93,7 @@
     <script>
         const base_url = '<?php echo base_url() ?>';
     </script>
-    <title>
-        Realocation | Modern Real Estate Template
-    </title>
+    <title>SIDAPORA</title>
 </head>
 
 <body>
