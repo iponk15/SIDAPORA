@@ -11,7 +11,7 @@
  Target Server Version : 100134
  File Encoding         : 65001
 
- Date: 15/09/2020 23:41:00
+ Date: 16/09/2020 00:04:08
 */
 
 SET NAMES utf8mb4;
@@ -2685,5 +2685,97 @@ CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER V
 -- ----------------------------
 DROP VIEW IF EXISTS `summary_region`;
 CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `summary_region` AS select (select count(0) from `sdp_master_provinsi` where (`sdp_master_provinsi`.`provinsi_status` = '1')) AS `jml_provinsi`,(select count(0) from `sdp_master_kabkot` where (`sdp_master_kabkot`.`kabkot_status` = '1')) AS `jml_kabkot`,(select count(0) from `sdp_master_kecamatan` where (`sdp_master_kecamatan`.`kecamatan_status` = '1')) AS `jml_kecamatan`,(select count(0) from `sdp_master_keldes` where (`sdp_master_keldes`.`keldes_status` = '1')) AS `jml_keldes` ;
+
+-- ----------------------------
+-- View structure for sumsarpras_kabkot
+-- ----------------------------
+DROP VIEW IF EXISTS `sumsarpras_kabkot`;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_kabkot` AS SELECT 
+	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi,
+	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot,
+	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
+	SUM(CASE WHEN rekap_tipe = 2 THEN 1 ELSE 0 END) AS jml_sarana
+FROM sdp_rekap
+LEFT JOIN sdp_rekap_detail ON rekap_id = rekdet_rekap_id
+LEFT JOIN sdp_master_provinsi ON rekdet_provinsi_kode = provinsi_kode
+LEFT JOIN sdp_master_kabkot ON rekdet_kabkot_kode = kabkot_kode AND kabkot_provinsi_kode = provinsi_kode
+WHERE rekap_status = '1' 
+	AND provinsi_id IS NOT NULL
+	AND kabkot_id IS NOT NULL
+GROUP BY rekdet_kabkot_kode ;
+
+-- ----------------------------
+-- View structure for sumsarpras_kecamatan
+-- ----------------------------
+DROP VIEW IF EXISTS `sumsarpras_kecamatan`;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_kecamatan` AS SELECT 
+	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi,
+	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot,
+	CONCAT(kecamatan_nama,' (',kecamatan_kode,')') AS kecamatan,
+	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
+	SUM(CASE WHEN rekap_tipe = 2 THEN 1 ELSE 0 END) AS jml_sarana
+FROM sdp_rekap
+LEFT JOIN sdp_rekap_detail ON rekap_id = rekdet_rekap_id
+LEFT JOIN sdp_master_provinsi ON rekdet_provinsi_kode = provinsi_kode
+LEFT JOIN sdp_master_kabkot 
+	ON rekdet_kabkot_kode = kabkot_kode 
+	AND kabkot_provinsi_kode = provinsi_kode
+LEFT JOIN sdp_master_kecamatan 
+	ON rekdet_kecamatan_kode = kecamatan_kode
+	AND kecamatan_kabkot_kode = kabkot_kode
+	AND kecamatan_provinsi_kode = provinsi_kode
+WHERE rekap_status = '1' 
+	AND provinsi_id IS NOT NULL
+	AND kabkot_id IS NOT NULL
+	AND kecamatan_id IS NOT NULL
+GROUP BY rekdet_kecamatan_kode ;
+
+-- ----------------------------
+-- View structure for sumsarpras_keldes
+-- ----------------------------
+DROP VIEW IF EXISTS `sumsarpras_keldes`;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_keldes` AS SELECT 
+	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi,
+	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot,
+	CONCAT(kecamatan_nama,' (',kecamatan_kode,')') AS kecamatan,
+	CONCAT(keldes_nama,' (',keldes_kode,')') AS keldes,
+	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
+	SUM(CASE WHEN rekap_tipe = 2 THEN 1 ELSE 0 END) AS jml_sarana
+FROM sdp_rekap
+LEFT JOIN sdp_rekap_detail ON rekap_id = rekdet_rekap_id
+LEFT JOIN sdp_master_provinsi ON rekdet_provinsi_kode = provinsi_kode
+LEFT JOIN sdp_master_kabkot 
+	ON rekdet_kabkot_kode = kabkot_kode 
+	AND kabkot_provinsi_kode = provinsi_kode
+LEFT JOIN sdp_master_kecamatan 
+	ON rekdet_kecamatan_kode = kecamatan_kode
+	AND kecamatan_kabkot_kode = kabkot_kode
+	AND kecamatan_provinsi_kode = provinsi_kode
+LEFT JOIN sdp_master_keldes 
+	ON rekdet_keldes_kode = keldes_kode
+	AND keldes_kecamatan_kode = kecamatan_kode
+	AND keldes_kabkot_kode = kabkot_kode
+	AND keldes_provinsi_kode = provinsi_kode
+WHERE rekap_status = '1' 
+	AND provinsi_id IS NOT NULL
+	AND kabkot_id IS NOT NULL
+	AND kecamatan_id IS NOT NULL
+	AND keldes_id IS NOT NULL
+GROUP BY rekdet_keldes_kode ;
+
+-- ----------------------------
+-- View structure for sumsarpras_provinsi
+-- ----------------------------
+DROP VIEW IF EXISTS `sumsarpras_provinsi`;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_provinsi` AS SELECT 
+	provinsi_kode,
+	provinsi_nama,
+	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
+	SUM(CASE WHEN rekap_tipe = 2 THEN 1 ELSE 0 END) AS jml_sarana
+FROM sdp_rekap
+LEFT JOIN sdp_rekap_detail ON rekap_id = rekdet_rekap_id
+LEFT JOIN sdp_master_provinsi ON rekdet_provinsi_kode = provinsi_kode
+WHERE rekap_status = '1' AND provinsi_id IS NOT NULL
+GROUP BY rekdet_provinsi_kode ;
 
 SET FOREIGN_KEY_CHECKS = 1;
