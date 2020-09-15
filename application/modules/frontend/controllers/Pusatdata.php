@@ -64,14 +64,16 @@ class Pusatdata extends MX_Controller
 
         if ($data['provinsi'] != '') {
             $whereMap['provinsi_kode'] = $data['provinsi'];
-            // $view_db = 'sumsarpras_kabkot';
+            $view_db = 'sumsarpras_kabkot';
         }
 
         if ($data['kabupaten'] != '') {
             $whereMap['kabkot_kode'] = $data['kabupaten'];
+            $view_db = 'sumsarpras_kecamatan';
         }
 
         $data['getmap']  = $this->m_global->get($view_db, NULL, $whereMap, '*', null, ['provinsi_nama', 'asc']);
+        // pre($this->db->last_query());
         // pre($data['getmap'], 1);
         $data['getwil']  = $this->m_global->get('sdp_master_provinsi', $joinmap, NULL, $selectmap, null, ['provinsi_nama', 'asc']);
 
@@ -121,12 +123,14 @@ class Pusatdata extends MX_Controller
     {
         $post  = $this->input->post();
         /*BEGIN GET DATA PETA MAP*/
+        $post['type'] = 3;
+        $jointype = $post['type'] == 3 ? '' : 'AND rekap_tipe = "' . $post['type'] . '"';
         $selectjoinmap = '(
             SELECT
                 rekdet_provinsi_kode,
                 COUNT(rekdet_provinsi_kode) jumlah
             FROM sdp_rekap_detail 
-            LEFT JOIN sdp_rekap ON rekap_id = rekdet_rekap_id AND rekap_tipe = "' . $post['type'] . '"
+            LEFT JOIN sdp_rekap ON rekap_id = rekdet_rekap_id ' . $jointype . '
             WHERE rekdet_provinsi_kode IS NOT NULL AND rekap_tahun = "' . (empty($tahun) ? $post['tahun'] : $tahun) . '"
             GROUP BY rekdet_provinsi_kode
         ) temp';
@@ -148,16 +152,17 @@ class Pusatdata extends MX_Controller
                 kategori_id,
                 kategori_nama,
                 rekap_id,
+                rekap_tipe,
                 rekap_judul,
                 rekap_tahun
             FROM sdp_master_kategori 
-            LEFT JOIN sdp_rekap ON kategori_id = rekap_kategori_id AND rekap_tipe = "' . $post['type'] . '"
+            LEFT JOIN sdp_rekap ON kategori_id = rekap_kategori_id ' . $jointype . '
             WHERE kategori_status = "1" AND rekap_tahun = "' . (empty($tahun) ? $post['tahun'] : $tahun) . '"
-            GROUP BY kategori_id
+            GROUP BY rekap_tipe, kategori_id
         ) temp';
         $join   = [[$selectJoin, 'smk.kategori_id = temp.kategori_id', 'left']];
-        $select = 'smk.kategori_id,smk.kategori_nama,temp.rekap_id,temp.rekap_judul,temp.rekap_tahun';
-        $rekap  = $this->m_global->get($this->tableKategori . ' smk', $join, null, $select);
+        $select = 'smk.kategori_id,smk.kategori_nama,temp.rekap_id,temp.rekap_judul,temp.rekap_tahun,temp.rekap_tipe';
+        $rekap  = $this->m_global->get($this->tableKategori . ' smk', $join, null, $select, null, ['rekap_tipe', 'asc']);
 
         foreach ($rekap as $rows) {
             if (!empty($rows->rekap_id)) {
@@ -200,6 +205,7 @@ class Pusatdata extends MX_Controller
 
                 $tempRekap[] = [
                     'rekap_id'       => $rows->rekap_id,
+                    'rekap_tipe'     => $rows->rekap_tipe,
                     'rekap_judul'    => $rows->rekap_judul,
                     'rekap_kategori' => $rows->kategori_nama,
                     'rekap_tahun'    => $rows->rekap_tahun,
@@ -221,15 +227,17 @@ class Pusatdata extends MX_Controller
         } else if ($flag == '2') {
             $data['provinsi']  = $post['provinsi'];
             $data['type']      = $post['type'];
+            // $data['type']      = 1;
             $data['kabupaten'] = (empty($post['kabupaten']) ? null : $post['kabupaten']);
             $data['records']   = (empty($tempRekap) ? '' : $tempRekap);
-            if ($data['type'] == 1) {
-                //PRASARANA
-                $this->load->view($this->prefix . 'list_data_rekap', $data);
-            } else {
-                //SARANA
-                $this->load->view($this->prefix . 'list_data_rekap_sarana', $data);
-            }
+
+            $this->load->view($this->prefix . 'list_data_rekap', $data);
+            // if ($data['type'] == 1) {
+            //     //PRASARANA
+            // } else {
+            //     //SARANA
+            //     $this->load->view($this->prefix . 'list_data_rekap_sarana', $data);
+            // }
         } else {
             return $tempRekap;
         }
@@ -299,7 +307,9 @@ class Pusatdata extends MX_Controller
         ];
 
         $where[md56('rekdet_rekap_id', 1)] = $rekap_id;
-        $where['rekap_tipe']    = $type;
+        if ($type != 3) {
+            $where['rekap_tipe']    = $type;
+        }
 
         if ($provinsi != '') {
             $where['provinsi_kode'] = $provinsi;
@@ -322,37 +332,22 @@ class Pusatdata extends MX_Controller
         $select = 'rekdet_id,rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
         $result = $this->m_global->get($this->tableRekdet, $join, $where, $select, $where_e, $order, $iDisplayStart, $iDisplayLength);
         $i      = 1 + $iDisplayStart;
-        // pre($this->db->last_query(), 1);
+
         foreach ($result as $rows) {
-            if ($type == 1) {
-                $records["data"][] = array(
-                    $i++,
-                    $rows->rekdet_lembaga,
-                    $rows->bantuan_nama,
-                    $rows->jnsbtn_nama,
-                    $rows->keldes_nama,
-                    $rows->kecamatan_nama,
-                    $rows->kabkot_nama,
-                    $rows->provinsi_nama,
-                    uang($rows->rekdet_nominal),
-                    '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
-                        <i class="fa fa-file-image-o"> </i>
-                    </a>'
-                );
-            } else {
-                $records["data"][] = array(
-                    $i++,
-                    $rows->rekdet_lembaga,
-                    $rows->keldes_nama,
-                    $rows->kecamatan_nama,
-                    $rows->kabkot_nama,
-                    $rows->provinsi_nama,
-                    uang($rows->rekdet_nominal),
-                    '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
-                        <i class="fa fa-file-image-o"> </i>
-                    </a>'
-                );
-            }
+            $records["data"][] = array(
+                $i++,
+                $rows->rekdet_lembaga,
+                $rows->bantuan_nama,
+                $rows->jnsbtn_nama,
+                $rows->keldes_nama,
+                $rows->kecamatan_nama,
+                $rows->kabkot_nama,
+                $rows->provinsi_nama,
+                uang($rows->rekdet_nominal),
+                '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
+                    <i class="fa fa-file-image-o"> </i>
+                </a>'
+            );
         }
 
         if (isset($_REQUEST["customActionType"]) && $_REQUEST["customActionType"] == "group_action") {

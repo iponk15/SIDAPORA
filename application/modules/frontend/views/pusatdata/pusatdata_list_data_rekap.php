@@ -16,7 +16,7 @@ foreach ($records as $rekap) {
                                     <tr>
                                         <th width="1%"><center>No. </center></th>
                                         <th width="23%"><center>Lembaga</center></th>
-                                        <th width="14%"><center>Jenis Bantuan</center></th>
+                                        <th width="14%" ' . ($rekap['rekap_tipe'] == 2 ? 'style="display:none;"' : '') . '><center>Jenis Bantuan</center></th>
                                         <th width="10%"><center>Bantuan</center></th>
                                         <th width="10%"><center>Desa</center></th>
                                         <th width="10%"><center>Kecamatan</center></th>

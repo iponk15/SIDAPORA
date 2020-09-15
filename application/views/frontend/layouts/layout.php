@@ -44,7 +44,7 @@
     <!-- END CSS TEMPLATE OLD -->
 
     <script type="text/javascript" src="<?php echo base_url('assets/frontend/js/jquery.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/frontend/libraries/isotope/jquery.isotope.min.js'); ?>"></script>
+
 
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC7CSCe8aaJrXWkX7SZNKSiB94SEMWC6Sk"></script>
     <!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0G3cn2a4B2ndpi385BfwtS3fyjTW9IaQ"></script> -->
@@ -52,12 +52,7 @@
     <script type="text/javascript" src="<?php echo base_url('assets/frontend/js/gmap3.clusterer.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/frontend/js/map.js'); ?>"></script>
 
-    <script type="text/javascript" src="<?php echo base_url('assets/frontend/libraries/bootstrap-sass/vendor/assets/javascripts/bootstrap/transition.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/frontend/libraries/bootstrap-sass/vendor/assets/javascripts/bootstrap/collapse.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/frontend/libraries/jquery-bxslider/jquery.bxslider.min.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/frontend/libraries/flexslider/jquery.flexslider.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/frontend/js/jquery.chained.min.js'); ?>"></script>
-    <!-- <script type="text/javascript" src="<?php echo base_url('assets/frontend/js/realocation.js'); ?>"></script> -->
+
 
     <!-- START JS TEMPLATE OLD -->
     <script src="<?php echo base_url('assets/frontend_old/global/plugins/jquery.min.js'); ?>" type="text/javascript"></script>
@@ -89,6 +84,13 @@
 
     <script src="<?php echo base_url('assets/frontend_old/layout/js/back-to-top.js'); ?>" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/frontend_old/layout/js/layout.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/frontend/libraries/isotope/jquery.isotope.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/frontend/libraries/bootstrap-sass/vendor/assets/javascripts/bootstrap/transition.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/frontend/libraries/bootstrap-sass/vendor/assets/javascripts/bootstrap/collapse.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/frontend/libraries/jquery-bxslider/jquery.bxslider.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/frontend/libraries/flexslider/jquery.flexslider.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/frontend/js/jquery.chained.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/frontend/js/realocation.js'); ?>"></script>
     <!-- END JS TEMPLATE OLD -->
     <script>
         const base_url = '<?php echo base_url() ?>';
