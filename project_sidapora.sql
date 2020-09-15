@@ -11,7 +11,7 @@
  Target Server Version : 100134
  File Encoding         : 65001
 
- Date: 16/09/2020 00:04:08
+ Date: 16/09/2020 00:18:17
 */
 
 SET NAMES utf8mb4;
@@ -2691,6 +2691,10 @@ CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER V
 -- ----------------------------
 DROP VIEW IF EXISTS `sumsarpras_kabkot`;
 CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_kabkot` AS SELECT 
+	provinsi_id,
+	provinsi_kode,
+	kabkot_id,
+	kabkot_kode,
 	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi,
 	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot,
 	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
@@ -2709,6 +2713,12 @@ GROUP BY rekdet_kabkot_kode ;
 -- ----------------------------
 DROP VIEW IF EXISTS `sumsarpras_kecamatan`;
 CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_kecamatan` AS SELECT 
+	provinsi_id,
+	provinsi_kode,
+	kabkot_id,
+	kabkot_kode,
+	kecamatan_id,
+	kecamatan_kode,
 	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi,
 	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot,
 	CONCAT(kecamatan_nama,' (',kecamatan_kode,')') AS kecamatan,
@@ -2735,6 +2745,14 @@ GROUP BY rekdet_kecamatan_kode ;
 -- ----------------------------
 DROP VIEW IF EXISTS `sumsarpras_keldes`;
 CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_keldes` AS SELECT 
+	provinsi_id,
+	provinsi_kode,
+	kabkot_id,
+	kabkot_kode,
+	kecamatan_id,
+	kecamatan_kode,
+	keldes_id,
+	keldes_kode,
 	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi,
 	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot,
 	CONCAT(kecamatan_nama,' (',kecamatan_kode,')') AS kecamatan,
@@ -2768,6 +2786,7 @@ GROUP BY rekdet_keldes_kode ;
 -- ----------------------------
 DROP VIEW IF EXISTS `sumsarpras_provinsi`;
 CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_provinsi` AS SELECT 
+	provinsi_id,
 	provinsi_kode,
 	provinsi_nama,
 	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
