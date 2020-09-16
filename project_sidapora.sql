@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 16/09/2020 09:18:49
+ Date: 17/09/2020 02:28:41
 */
 
 SET NAMES utf8mb4;
@@ -2667,6 +2667,39 @@ INSERT INTO `sdp_rekap_dokumen` VALUES (25, 2194, './assets/frontend/global/img/
 INSERT INTO `sdp_rekap_dokumen` VALUES (26, 2194, './assets/frontend/global/img/galeri/2.PNG', 'Waktu Pengerjaan', 'Waktu Pengerjaan', '1', 2);
 INSERT INTO `sdp_rekap_dokumen` VALUES (27, 2194, './assets/frontend/global/img/galeri/3.PNG', 'Setelah Pengerjaan', 'Setelah pengerjaan', '1', 3);
 INSERT INTO `sdp_rekap_dokumen` VALUES (28, 2194, './assets/frontend/global/img/galeri/4.PNG', 'Serah Terima', 'serah terima', '1', 4);
+
+-- ----------------------------
+-- View structure for grafik_sarpras
+-- ----------------------------
+DROP VIEW IF EXISTS `grafik_sarpras`;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `grafik_sarpras` AS SELECT
+	rekap_tahun,
+	rekap_tipe,
+	rekdet_id,
+	provinsi_id,
+	provinsi_kode,
+	provinsi_nama,
+	kabkot_id,
+	kabkot_kode,
+	kabkot_nama,
+	kecamatan_id,
+	kecamatan_kode,
+	kecamatan_nama,
+	keldes_id,
+	keldes_kode,
+	keldes_nama
+FROM
+	sdp_rekap
+	LEFT JOIN sdp_rekap_detail ON rekap_id = rekdet_rekap_id 
+	LEFT JOIN sdp_master_provinsi ON rekdet_provinsi_kode = provinsi_kode
+	LEFT JOIN sdp_master_kabkot ON rekdet_kabkot_kode = kabkot_kode
+	LEFT JOIN sdp_master_kecamatan ON rekdet_kecamatan_kode = kecamatan_kode
+	LEFT JOIN sdp_master_keldes ON rekdet_keldes_kode = keldes_kode 
+	where rekap_status = '1'
+GROUP BY
+rekdet_id
+ORDER BY
+	rekap_tahun, provinsi_nama ;
 
 -- ----------------------------
 -- View structure for summary_d2
