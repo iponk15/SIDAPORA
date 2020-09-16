@@ -15,6 +15,9 @@ class Pusatdata extends MX_Controller
     private $tableRekap        = 'sdp_rekap';
     private $tableRekapDetail  = 'sdp_rekap_detail';
     private $tableRekapDokumen = 'sdp_rekap_dokumen';
+    private $latitude          = '-1.203564';
+    private $longtitude        = '118.285458';
+    private $zoom              = 5;
 
     public function __construct()
     {
@@ -23,6 +26,9 @@ class Pusatdata extends MX_Controller
 
     public function index()
     {
+        $latitude           = '-1.203564';
+        $longtitude         = '118.285458';
+        $zoom               = 5;
         $data['slider']     = 0;
         $data['pagetitle']  = 'Bantuan Sarana <br> Bantuan Prasarana';
         $data['breadcrumb'] = ['Home' => base_url('home'), 'Pusat Data' => base_url($this->url)];
@@ -73,27 +79,82 @@ class Pusatdata extends MX_Controller
             $view_db = 'sumsarpras_kecamatan';
         }
 
+        if ($data['kecamatan'] != '') {
+            $whereMap['kecamatan_kode'] = $data['kecamatan'];
+            $view_db = 'sumsarpras_keldes';
+        }
+
         $data['getmap']  = $this->m_global->get($view_db, NULL, $whereMap, '*', null, ['provinsi_nama', 'asc']);
+        //START SET LATITUDE LONGTITUDE
+        if ($data['provinsi'] != '') {
+            $latitude = $data['getmap'][0]->provinsi_latitude ?? $latitude;
+            $longtitude = $data['getmap'][0]->provinsi_longtitude ?? $longtitude;
+            $zoom = 7;
+        }
+
+        if ($data['kabupaten'] != '') {
+            $latitude = $data['getmap'][0]->kabkot_latitude ?? $latitude;
+            $longtitude = $data['getmap'][0]->kabkot_longtitude ?? $longtitude;
+            $zoom = 9;
+        }
+
+        if ($data['kecamatan'] != '') {
+            $latitude = $data['getmap'][0]->keldes_latitude ?? $latitude;
+            $longtitude = $data['getmap'][0]->keldes_longtitude ?? $longtitude;
+            $zoom = 11;
+        }
+        //END SET LATITUDE LONGTITUDE
+
         // pre($this->db->last_query());
         // pre($data['getmap'], 1);
-        $data['getwil']  = $this->m_global->get('sdp_master_provinsi', $joinmap, NULL, $selectmap, null, ['provinsi_nama', 'asc']);
 
         // start get data map
         $result = array();
         foreach ($data['getmap'] as $element) {
-            $result[$element->provinsi_kode]['provinsi_kode'] = $element->provinsi_kode;
-            $result[$element->provinsi_kode]['provinsi_nama'] = $element->provinsi_nama;
-            $result[$element->provinsi_kode]['provinsi_latitude'] = $element->provinsi_latitude;
-            $result[$element->provinsi_kode]['provinsi_longtitude'] = $element->provinsi_longtitude;
-            $result[$element->provinsi_kode]['jumlah_prasarana'] = $element->jml_prasarana;
-            $result[$element->provinsi_kode]['jumlah_sarana'] = $element->jml_sarana;
-            $result[$element->provinsi_kode]['jumlah_semua'] = $element->jml_sarana + $element->jml_prasarana;
-            $result[$element->provinsi_kode]['kabupaten'][] = $element;
+            $grouping = $element->provinsi_kode;
+            $result[$grouping]['nama']          = $element->provinsi_nama;
+            $result[$grouping]['provinsi_kode'] = $element->provinsi_kode;
+            $result[$grouping]['latitude']      = $element->provinsi_latitude;
+            $result[$grouping]['longtitude']    = $element->provinsi_longtitude;
+            if ($data['provinsi'] != '') {
+                $grouping = $element->kabkot_kode;
+                $result[$grouping]['nama']          = $element->kabkot_nama;
+                $result[$grouping]['kabkot_kode']   = $element->kabkot_kode;
+                $result[$grouping]['latitude']      = $element->kabkot_latitude;
+                $result[$grouping]['longtitude']    = $element->kabkot_longtitude;
+            }
+
+            if ($data['kabupaten'] != '') {
+                $grouping = $element->kecamatan_kode;
+                $result[$grouping]['nama']              = $element->kecamatan_nama;
+                $result[$grouping]['kecamatan_kode']    = $element->kecamatan_kode;
+                $result[$grouping]['latitude']          = $element->kecamatan_latitude;
+                $result[$grouping]['longtitude']        = $element->kecamatan_longtitude;
+            }
+
+            if ($data['kecamatan'] != '') {
+                $grouping = $element->keldes_kode;
+                $result[$grouping]['nama']          = $element->keldes_nama;
+                $result[$grouping]['keldes_kode']   = $element->keldes_kode;
+                $result[$grouping]['latitude']      = $element->keldes_latitude;
+                $result[$grouping]['longtitude']    = $element->keldes_longtitude;
+            }
+
+            $result[$grouping]['jumlah_prasarana'] = $element->jml_prasarana;
+            $result[$grouping]['jumlah_sarana'] = $element->jml_sarana;
+            $result[$grouping]['jumlah_semua'] = $element->jml_sarana + $element->jml_prasarana;
         }
         $data['records'] = array_values($result);
         $data['datamap'] = json_encode($data['records']);
+        if (empty($data['records'])) {
+            $latitude           = $this->latitude;
+            $longtitude         = $this->longtitude;
+            $zoom = $this->zoom;
+        }
+        // pre($data['records'], 1);
         // end get data map
 
+        $data['getwil']  = $this->m_global->get('sdp_master_provinsi', $joinmap, NULL, $selectmap, null, ['provinsi_nama', 'asc']);
         // start get data wilayah
         foreach ($data['getwil'] as $element) {
             $result_wil[$element->provinsi_kode]['provinsi_kode'] = $element->provinsi_kode;
@@ -117,7 +178,10 @@ class Pusatdata extends MX_Controller
         $data['kabupatens'] = $kabupaten_array;
         // end get data wilayah
         /*END GET DATA PETA MAP*/
-
+        // pre($data, 1);
+        $data['latitude'] = $latitude;
+        $data['longtitude'] = $longtitude;
+        $data['zoom']       = $zoom;
         $this->templates->frontend($this->prefix . 'index', $data);
         // $this->templates->frontend($this->prefix.'map', $data);
     }

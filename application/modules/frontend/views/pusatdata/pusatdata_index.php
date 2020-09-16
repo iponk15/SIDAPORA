@@ -126,11 +126,14 @@
     }
 
     function initialize() {
+        var latitude = '<?php echo $latitude ?>';
+        var longtitude = '<?php echo $longtitude ?>';
+        var zoomdef = parseInt('<?php echo $zoom ?>');
         var datamap = $.parseJSON('<?php echo $datamap ?>');
         var type = '<?php echo $type ?>';
         var propertiPeta = {
-            center: new google.maps.LatLng(-1.203564, 118.285458),
-            zoom: 5,
+            center: new google.maps.LatLng(latitude, longtitude),
+            zoom: zoomdef,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
@@ -138,26 +141,33 @@
 
         // membuat Marker
         for (i = 0; i < datamap.length; i++) {
+            var kabkot_kode = typeof(datamap[i].kabkot_kode) != "undefined" && datamap[i].kabkot_kode !== null ? datamap[i].kabkot_kode : '';
+            var kecamatan_kode = typeof(datamap[i].kecamatan_kode) != "undefined" && datamap[i].kecamatan_kode !== null ? datamap[i].kecamatan_kode : '';
+            var keldes_kode = typeof(datamap[i].keldes_kode) != "undefined" && datamap[i].keldes_kode !== null ? datamap[i].keldes_kode : '';
+            var jumlah_prasarana = typeof(datamap[i].jumlah_prasarana) != "undefined" && datamap[i].jumlah_prasarana !== null ? datamap[i].jumlah_prasarana : 0;
+            var jumlah_sarana = typeof(datamap[i].jumlah_sarana) != "undefined" && datamap[i].jumlah_sarana !== null ? datamap[i].jumlah_sarana : 0;
+            var jumlah_semua = typeof(datamap[i].jumlah_semua) != "undefined" && datamap[i].jumlah_semua !== null ? datamap[i].jumlah_semua : 0;
+
 
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(datamap[i].provinsi_latitude, datamap[i].provinsi_longtitude),
+                position: new google.maps.LatLng(datamap[i].latitude, datamap[i].longtitude),
                 map: peta,
-                title: 'Jumlah = ' + datamap[i].jumlah_prasarana + ' bantuan'
+                title: 'Jumlah = ' + jumlah_prasarana + ' bantuan'
             });
             if (type == 1) {
-                var body_content = '<p><b>' + datamap[i].provinsi_nama + '</b>, jumlah bantuan pada provinsi ini ada <a href="">' + datamap[i].jumlah_prasarana + '</a> Bantuan.</p>';
+                var body_content = '<p><b>' + datamap[i].nama + '</b>, jumlah bantuan pada provinsi ini ada <a href="">' + jumlah_prasarana + '</a> Bantuan.</p>';
             } else if (type == 2) {
-                var body_content = '<p><b>' + datamap[i].provinsi_nama + '</b>, jumlah bantuan pada provinsi ini ada <a href="">' + datamap[i].jumlah_sarana + '</a> Bantuan.</p>';
+                var body_content = '<p><b>' + datamap[i].nama + '</b>, jumlah bantuan pada provinsi ini ada <a href="">' + jumlah_sarana + '</a> Bantuan.</p>';
             } else {
-                var body_content = '<p><b>' + datamap[i].provinsi_nama + '</b>, jumlah bantuan pada provinsi ini ada <a href="">' + datamap[i].jumlah_semua + '</a> Bantuan.</p> (<b>Prasarana = ' + datamap[i].jumlah_prasarana + '</b>, <b>Sarana = ' + datamap[i].jumlah_sarana + '</b>)';
+                var body_content = '<p><b>' + datamap[i].nama + '</b>, jumlah bantuan pada provinsi ini ada <a href="">' + jumlah_semua + '</a> Bantuan.</p> (<b>Prasarana = ' + jumlah_prasarana + '</b>, <b>Sarana = ' + jumlah_sarana + '</b>)';
 
             }
 
             var content = '<div id="content">' +
                 '<div id="siteNotice"></div>' +
                 '<h2 id="firstHeading" class="firstHeading">' +
-                datamap[i].provinsi_nama +
-                ' <a data-toggle="modal" href="#large" class="btn btn-xs bg-yellow-gold detailInfromasi" data-type="' + type + '" data-tahun="<?php echo $tahun; ?>" data-provinsi="' + datamap[i].provinsi_kode + '" data-kabupaten="<?php echo $kabupaten; ?>" title="Detail"> ' +
+                datamap[i].nama +
+                ' <a data-toggle="modal" href="#large" class="btn btn-xs bg-yellow-gold detailInfromasi" data-type="' + type + '" data-tahun="<?php echo $tahun; ?>" data-provinsi="' + datamap[i].provinsi_kode + '" data-kabupaten="' + kabkot_kode + '" data-kecamatan="' + kecamatan_kode + '" data-keldes="' + keldes_kode + '" title="Detail"> ' +
                 'Detail <i class="fa fa-sign-in"></i>' +
                 '</a>' +
                 '</h2> ' +
