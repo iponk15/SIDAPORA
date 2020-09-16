@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 // Start Frontend
 $route['home'] = 'frontend/home';
+$route['load_grafik'] = 'frontend/home/load_grafik';
 
 $route['pusatdata']                            = 'frontend/pusatdata';
 $route['pusatdata_cari/(:any)']                = 'frontend/pusatdata/cariData/$1';
