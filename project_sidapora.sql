@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 17/09/2020 02:28:41
+ Date: 17/09/2020 04:28:03
 */
 
 SET NAMES utf8mb4;
@@ -139,7 +139,7 @@ INSERT INTO `sdp_master_kabkot` VALUES (47, NULL, NULL, 'KABUPATEN NIAS UTARA', 
 INSERT INTO `sdp_master_kabkot` VALUES (48, NULL, NULL, 'KABUPATEN NIAS BARAT', NULL, NULL, '1', NULL, NULL, NULL, '2019-10-20 11:32:46', NULL);
 INSERT INTO `sdp_master_kabkot` VALUES (49, NULL, NULL, 'KOTA SIBOLGA', NULL, NULL, '1', NULL, NULL, NULL, '2019-10-20 11:32:46', NULL);
 INSERT INTO `sdp_master_kabkot` VALUES (50, NULL, NULL, 'KOTA TANJUNG BALAI', NULL, NULL, '1', NULL, NULL, NULL, '2019-10-20 11:32:46', NULL);
-INSERT INTO `sdp_master_kabkot` VALUES (52, '11', '10', 'KABUPATEN ACEH SINGKIL', NULL, NULL, '1', NULL, NULL, 1, '2019-10-20 14:07:17', '::1');
+INSERT INTO `sdp_master_kabkot` VALUES (52, '11', '10', 'KABUPATEN ACEH SINGKIL', '2.412810', '97.952710', '1', NULL, NULL, 1, '2020-09-17 02:42:55', '::1');
 INSERT INTO `sdp_master_kabkot` VALUES (53, '11', '01', 'KABUPATEN ACEH SELATAN', NULL, NULL, '1', NULL, NULL, 1, '2019-10-20 14:07:02', '::1');
 INSERT INTO `sdp_master_kabkot` VALUES (54, '11', '02', 'KABUPATEN ACEH TENGGARA', NULL, NULL, '1', NULL, NULL, 1, '2019-10-20 14:08:32', '::1');
 INSERT INTO `sdp_master_kabkot` VALUES (55, '11', '03', 'KABUPATEN ACEH TIMUR', NULL, NULL, '1', NULL, NULL, 1, '2019-10-20 14:08:59', '::1');
@@ -741,7 +741,7 @@ INSERT INTO `sdp_master_kecamatan` VALUES (25, '32', '76', '02', 'Cimanggis', NU
 INSERT INTO `sdp_master_kecamatan` VALUES (26, '32', '01', '29', 'Ciomas', NULL, NULL, '1', 1, '2019-11-04 18:58:36', NULL, '2019-11-04 18:58:36', '::1');
 INSERT INTO `sdp_master_kecamatan` VALUES (27, '32', '09', '27', 'Susukan', NULL, NULL, '1', 1, '2019-11-04 19:00:29', NULL, '2019-11-04 19:00:29', '::1');
 INSERT INTO `sdp_master_kecamatan` VALUES (28, '11', '14', '05', 'Jaya', NULL, NULL, '1', 1, '2019-11-04 19:28:54', NULL, '2019-11-04 19:28:54', '::1');
-INSERT INTO `sdp_master_kecamatan` VALUES (29, '11', '10', '04', 'Singkil', NULL, NULL, '1', 1, '2019-11-04 19:30:40', NULL, '2019-11-04 19:30:40', '::1');
+INSERT INTO `sdp_master_kecamatan` VALUES (29, '11', '10', '04', 'Singkil', '2.278979', '97.794147', '1', 1, '2019-11-04 19:30:40', NULL, '2020-09-17 02:46:28', '::1');
 INSERT INTO `sdp_master_kecamatan` VALUES (30, '11', '04', '02', 'Silih Nara', NULL, NULL, '1', 1, '2019-11-04 19:35:21', NULL, '2019-11-04 19:35:21', '::1');
 INSERT INTO `sdp_master_kecamatan` VALUES (31, '11', '02', '12', 'Ketambe', NULL, NULL, '1', 1, '2019-11-04 19:38:27', NULL, '2019-11-04 19:38:27', '::1');
 INSERT INTO `sdp_master_kecamatan` VALUES (32, '32', '09', '10', 'Astanajapura', NULL, NULL, '1', 1, '2019-11-11 10:03:22', NULL, '2019-11-11 10:03:22', '::1');
@@ -838,10 +838,10 @@ INSERT INTO `sdp_master_keldes` VALUES (14, '32', '76', '02', '1011', 'Tugu', NU
 INSERT INTO `sdp_master_keldes` VALUES (15, '32', '01', '29', '1003', 'Padasuka', NULL, NULL, '1', 1, '2019-11-04 18:59:25', NULL, '2019-11-04 18:59:25', '::1');
 INSERT INTO `sdp_master_keldes` VALUES (17, '32', '09', '27', '2009', 'Bunder', NULL, NULL, '1', 1, '2019-11-04 19:06:27', NULL, '2019-11-04 19:06:27', '::1');
 INSERT INTO `sdp_master_keldes` VALUES (18, '11', '14', '05', '2038', 'Lhuet', NULL, NULL, '1', 1, '2019-11-04 19:29:20', NULL, '2019-11-04 19:29:20', '::1');
-INSERT INTO `sdp_master_keldes` VALUES (19, '11', '10', '04', '2007', 'Teluk Ambun', NULL, NULL, '1', 1, '2019-11-04 19:32:35', NULL, '2019-11-04 19:32:35', '::1');
-INSERT INTO `sdp_master_keldes` VALUES (20, '11', '10', '04', '2016', 'Suka Makmur', NULL, NULL, '1', 1, '2019-11-04 19:32:57', NULL, '2019-11-04 19:32:57', '::1');
+INSERT INTO `sdp_master_keldes` VALUES (19, '11', '10', '04', '2007', 'Teluk Ambun', '2.297482', '97.806553', '1', 1, '2019-11-04 19:32:35', NULL, '2020-09-17 02:48:40', '::1');
+INSERT INTO `sdp_master_keldes` VALUES (20, '11', '10', '04', '2016', 'Suka Makmur', '2.365489', '97.955438', '1', 1, '2019-11-04 19:32:57', NULL, '2020-09-17 03:13:09', '::1');
 INSERT INTO `sdp_master_keldes` VALUES (21, '11', '10', '04', '2012', 'Takal Pasir', NULL, NULL, '1', 1, '2019-11-04 19:33:12', NULL, '2019-11-04 19:33:12', '::1');
-INSERT INTO `sdp_master_keldes` VALUES (22, '11', '10', '04', '2017', 'Ujung Bawang', NULL, NULL, '1', 1, '2019-11-04 19:33:30', NULL, '2019-11-04 19:33:30', '::1');
+INSERT INTO `sdp_master_keldes` VALUES (22, '11', '10', '04', '2017', 'Ujung Bawang', '2.289288', '97.847022', '1', 1, '2019-11-04 19:33:30', NULL, '2020-09-17 03:14:23', '::1');
 INSERT INTO `sdp_master_keldes` VALUES (23, '11', '10', '04', '2010', 'Pea Bumbung', NULL, NULL, '1', 1, '2019-11-04 19:34:19', NULL, '2019-11-04 19:34:19', '::1');
 INSERT INTO `sdp_master_keldes` VALUES (24, '11', '10', '04', '2002', 'Ujung', NULL, NULL, '1', 1, '2019-11-04 19:34:34', NULL, '2019-11-04 19:34:34', '::1');
 INSERT INTO `sdp_master_keldes` VALUES (25, '11', '04', '02', '2035', 'Mekar Indah', NULL, NULL, '1', 1, '2019-11-04 19:35:50', NULL, '2019-11-04 19:35:50', '::1');
@@ -2732,7 +2732,9 @@ CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER V
 	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi_nama,
 	provinsi_latitude,
 	provinsi_longtitude,
-	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot,
+	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot_nama,
+	kabkot_latitude,
+	kabkot_longtitude,
 	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
 	SUM(CASE WHEN rekap_tipe = 2 THEN 1 ELSE 0 END) AS jml_sarana
 FROM sdp_rekap
@@ -2759,8 +2761,12 @@ CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER V
 	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi_nama,
 	provinsi_latitude,
 	provinsi_longtitude,
-	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot,
-	CONCAT(kecamatan_nama,' (',kecamatan_kode,')') AS kecamatan,
+	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot_nama,
+	kabkot_latitude,
+	kabkot_longtitude,
+	CONCAT(kecamatan_nama,' (',kecamatan_kode,')') AS kecamatan_nama,
+	kecamatan_latitude,
+	kecamatan_longtitude,
 	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
 	SUM(CASE WHEN rekap_tipe = 2 THEN 1 ELSE 0 END) AS jml_sarana
 FROM sdp_rekap
@@ -2784,6 +2790,7 @@ GROUP BY rekap_tahun, rekdet_kecamatan_kode ;
 -- ----------------------------
 DROP VIEW IF EXISTS `sumsarpras_keldes`;
 CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `sumsarpras_keldes` AS SELECT 
+	rekap_tahun,
 	provinsi_id,
 	provinsi_kode,
 	kabkot_id,
@@ -2792,10 +2799,18 @@ CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER V
 	kecamatan_kode,
 	keldes_id,
 	keldes_kode,
-	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi,
-	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot,
-	CONCAT(kecamatan_nama,' (',kecamatan_kode,')') AS kecamatan,
-	CONCAT(keldes_nama,' (',keldes_kode,')') AS keldes,
+	CONCAT(provinsi_nama,' (',provinsi_kode,')') AS provinsi_nama,
+	provinsi_latitude,
+	provinsi_longtitude,
+	CONCAT(kabkot_nama,' (',kabkot_kode,')') AS kabkot_nama,
+	kabkot_latitude,
+	kabkot_longtitude,
+	CONCAT(kecamatan_nama,' (',kecamatan_kode,')') AS kecamatan_nama,
+	kecamatan_latitude,
+	kecamatan_longtitude,
+	CONCAT(keldes_nama,' (',keldes_kode,')') AS keldes_nama,
+	keldes_latitude,
+	keldes_longtitude,
 	SUM(CASE WHEN rekap_tipe = 1 THEN 1 ELSE 0 END) AS jml_prasarana,
 	SUM(CASE WHEN rekap_tipe = 2 THEN 1 ELSE 0 END) AS jml_sarana
 FROM sdp_rekap
@@ -2818,7 +2833,7 @@ WHERE rekap_status = '1'
 	AND kabkot_id IS NOT NULL
 	AND kecamatan_id IS NOT NULL
 	AND keldes_id IS NOT NULL
-GROUP BY rekdet_keldes_kode ; ;
+GROUP BY rekdet_keldes_kode ;
 
 -- ----------------------------
 -- View structure for sumsarpras_provinsi
