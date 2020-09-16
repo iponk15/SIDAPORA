@@ -190,7 +190,9 @@
         disablekecamatan();
         var kecamatan = '<?php echo $kecamatan ?>';
         var kabupaten = '<?php echo $kabupaten ?>';
-        $('#select-kecamatan.' + kabupaten).val(kecamatan);
+        if (kecamatan != '') {
+            $('#select-kecamatan.' + kabupaten).val(kecamatan);
+        }
         var prm = {
             format: "yyyy",
             minViewMode: 2,
