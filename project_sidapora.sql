@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 16/09/2020 04:48:26
+ Date: 16/09/2020 09:18:49
 */
 
 SET NAMES utf8mb4;
@@ -967,9 +967,9 @@ CREATE TABLE `sdp_master_step`  (
 -- Records of sdp_master_step
 -- ----------------------------
 INSERT INTO `sdp_master_step` VALUES (1, 'STP01', 'Sebelum Pengerjaan', '1', 'Step pada saat sebelum pengerjaan', '1', 1, '2020-09-15 22:31:40', NULL, '2020-09-15 22:31:40', '::1');
-INSERT INTO `sdp_master_step` VALUES (3, 'STP02', 'Waktu Pengerjaan', '2', 'step pada saat waktu pengerjaan', '1', 1, '2020-09-15 22:36:55', NULL, '2020-09-15 22:36:55', '::1');
-INSERT INTO `sdp_master_step` VALUES (4, 'STP03', 'Setelah Pengerjaan', '3', 'step waktu setelah pengerjaan', '1', 1, '2020-09-15 22:37:32', NULL, '2020-09-15 22:37:32', '::1');
-INSERT INTO `sdp_master_step` VALUES (5, 'STP04', 'Serah Terima', '4', 'step pada saat serah terima', '1', 1, '2020-09-15 22:38:03', NULL, '2020-09-15 22:38:03', '::1');
+INSERT INTO `sdp_master_step` VALUES (2, 'STP02', 'Waktu Pengerjaan', '2', 'step pada saat waktu pengerjaan', '1', 1, '2020-09-15 22:36:55', NULL, '2020-09-16 09:18:22', '::1');
+INSERT INTO `sdp_master_step` VALUES (3, 'STP03', 'Setelah Pengerjaan', '3', 'step waktu setelah pengerjaan', '1', 1, '2020-09-15 22:37:32', NULL, '2020-09-16 09:18:24', '::1');
+INSERT INTO `sdp_master_step` VALUES (4, 'STP04', 'Serah Terima', '4', 'step pada saat serah terima', '1', 1, '2020-09-15 22:38:03', NULL, '2020-09-16 09:18:27', '::1');
 
 -- ----------------------------
 -- Table structure for sdp_master_user
