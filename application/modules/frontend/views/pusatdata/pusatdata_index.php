@@ -56,6 +56,19 @@
                                                 </div><!-- /.form-group -->
 
                                                 <div class="form-group col-sm-12">
+                                                    <label>Kecamatan</label>
+
+                                                    <div class="select-wrapper">
+                                                        <select id="select-kecamatan" class="form-control" name="kecamatan" <?php echo ($kabupaten == '' ? 'disabled' : '') ?>>
+                                                            <option value="" class="parent">Pilih Kecamatan</option>
+                                                            <?php foreach ($kecamatans as $kec) { ?>
+                                                                <option value="<?php echo $kec->kecamatan_kode ?>" <?php echo ($kec->kecamatan_kode == $kecamatan ? 'selected' : '') ?> class="<?php echo $kec->kecamatan_kabkot_kode ?>"><?php echo $kec->kecamatan_nama ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div><!-- /.select-wrapper -->
+                                                </div><!-- /.form-group -->
+
+                                                <div class="form-group col-sm-12">
                                                     <input type="submit" class="btn btn-primary btn-inversed btn-block" value="Filter Properties">
                                                 </div><!-- /.form-group -->
                                             </form>
@@ -103,6 +116,15 @@
 </div>
 
 <script>
+    function cek_kecamatan() {
+        var kab = $('#select-location').val() == '' ? false : true;
+        if (kab == false) {
+            $('#select-kecamatan').attr('disabled');
+        } else {
+            $('#select-kecamatan').removeAttr('disabled');
+        };
+    }
+
     function initialize() {
         var datamap = $.parseJSON('<?php echo $datamap ?>');
         var type = '<?php echo $type ?>';
@@ -162,6 +184,38 @@
             autoclose: true
         };
         global.init_dtrp(1, '.tahun', prm);
+
+        $('#select-country').on('change', function() {
+            var val = $('#select-location').val();
+            var option = $('#select-kecamatan').find('option');
+            $('#select-kecamatan').val('');
+            cek_kecamatan();
+            $.each(option, function(index, value) {
+                var clas = $(this).attr('class');
+                if (clas != val && clas != 'parent') {
+                    $(this).attr('style', "display:none;");
+                } else {
+                    $(this).removeAttr('style');
+                }
+            });
+        });
+
+        $('#select-location').on('change', function() {
+            var val = $(this).val();
+            var option = $('#select-kecamatan').find('option');
+            $('#select-kecamatan').val('');
+            cek_kecamatan();
+            $.each(option, function(index, value) {
+                var clas = $(this).attr('class');
+                if (clas != val && clas != 'parent') {
+                    $(this).attr('style', "display:none;");
+                } else {
+                    $(this).removeAttr('style');
+                }
+            });
+        });
+
+
     });
 
     $(document).on('click', '.detailInfromasi', function() {

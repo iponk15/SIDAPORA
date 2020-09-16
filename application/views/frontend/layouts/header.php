@@ -1,6 +1,13 @@
 <div id="header-wrapper">
     <div id="header">
         <div id="header-inner">
+            <div class="header-bar">
+                <div class="container">
+                    <ul class="header-bar-nav nav nav-register">
+                        <li><a href="<?php echo base_url('login') ?>">Login</a></li>
+                    </ul>
+                </div><!-- /.container -->
+            </div>
             <div class="header-top">
                 <div class="container">
                     <div class="header-identity">

@@ -33,6 +33,7 @@ class Pusatdata extends MX_Controller
         $data['type']   = $get['type'] ?? 3;
         $data['provinsi']   = $get['provinsi'] ?? '';
         $data['kabupaten']  = $get['kabupaten'] ?? '';
+        $data['kecamatan']  = $get['kecamatan'] ?? '';
 
         /*BEGIN GET DATA PETA MAP*/
         $jointype = $data['type'] == 3 ? '' : 'AND rekap_tipe = "' . $data['type'] . '"';
@@ -111,6 +112,8 @@ class Pusatdata extends MX_Controller
                 }
             }
         }
+        $data['kecamatans'] = $this->m_global->get('sdp_master_kecamatan');
+        // pre($data['kecamatans']);
         $data['kabupatens'] = $kabupaten_array;
         // end get data wilayah
         /*END GET DATA PETA MAP*/
