@@ -62,7 +62,7 @@
                                                         <select id="select-kecamatan" class="form-control" name="kecamatan" <?php echo ($kabupaten == '' ? 'disabled' : '') ?>>
                                                             <option value="" class="parent">Pilih Kecamatan</option>
                                                             <?php foreach ($kecamatans as $kec) { ?>
-                                                                <option value="<?php echo $kec->kecamatan_kode ?>" <?php echo ($kec->kecamatan_kode == $kecamatan ? 'selected' : '') ?> class="<?php echo $kec->kecamatan_kabkot_kode ?>"><?php echo $kec->kecamatan_nama ?></option>
+                                                                <option value="<?php echo $kec->kecamatan_kode ?>" <?php echo ($kec->kecamatan_kode == $kecamatan && $kec->kecamatan_kabkot_kode == $kabupaten ? 'selected' : '') ?> class="<?php echo $kec->kecamatan_kabkot_kode ?>" data-kabkot=""><?php echo $kec->kecamatan_nama ?></option>
                                                             <?php } ?>
                                                         </select>
                                                     </div><!-- /.select-wrapper -->
@@ -187,7 +187,10 @@
 
     $(document).ready(function() {
         initialize();
-
+        disablekecamatan();
+        var kecamatan = '<?php echo $kecamatan ?>';
+        var kabupaten = '<?php echo $kabupaten ?>';
+        $('#select-kecamatan.' + kabupaten).val(kecamatan);
         var prm = {
             format: "yyyy",
             minViewMode: 2,
@@ -196,37 +199,28 @@
         global.init_dtrp(1, '.tahun', prm);
 
         $('#select-country').on('change', function() {
-            var val = $('#select-location').val();
-            var option = $('#select-kecamatan').find('option');
-            $('#select-kecamatan').val('');
-            cek_kecamatan();
-            $.each(option, function(index, value) {
-                var clas = $(this).attr('class');
-                if (clas != val && clas != 'parent') {
-                    $(this).attr('style', "display:none;");
-                } else {
-                    $(this).removeAttr('style');
-                }
-            });
+            disablekecamatan();
         });
 
         $('#select-location').on('change', function() {
-            var val = $(this).val();
-            var option = $('#select-kecamatan').find('option');
-            $('#select-kecamatan').val('');
-            cek_kecamatan();
-            $.each(option, function(index, value) {
-                var clas = $(this).attr('class');
-                if (clas != val && clas != 'parent') {
-                    $(this).attr('style', "display:none;");
-                } else {
-                    $(this).removeAttr('style');
-                }
-            });
+            disablekecamatan();
         });
-
-
     });
+
+    function disablekecamatan() {
+
+        var val = $('#select-location').val();
+        var option = $('#select-kecamatan').find('option');
+        cek_kecamatan();
+        $.each(option, function(index, value) {
+            var clas = $(this).attr('class');
+            if (clas != val && clas != 'parent') {
+                $(this).attr('style', "display:none;");
+            } else {
+                $(this).removeAttr('style');
+            }
+        });
+    }
 
     $(document).on('click', '.detailInfromasi', function() {
         var tahun = $(this).attr('data-tahun');
