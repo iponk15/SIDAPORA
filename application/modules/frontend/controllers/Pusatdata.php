@@ -337,20 +337,36 @@ class Pusatdata extends MX_Controller
         $i      = 1 + $iDisplayStart;
 
         foreach ($result as $rows) {
-            $records["data"][] = array(
-                $i++,
-                $rows->rekdet_lembaga,
-                $rows->bantuan_nama,
-                $rows->jnsbtn_nama,
-                $rows->keldes_nama,
-                $rows->kecamatan_nama,
-                $rows->kabkot_nama,
-                $rows->provinsi_nama,
-                uang($rows->rekdet_nominal),
-                '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
-                    <i class="fa fa-file-image-o"> </i>
-                </a>'
-            );
+            if ($type == 1) {
+                $records["data"][] = array(
+                    $i++,
+                    $rows->rekdet_lembaga,
+                    $rows->bantuan_nama,
+                    $rows->jnsbtn_nama,
+                    $rows->keldes_nama,
+                    $rows->kecamatan_nama,
+                    $rows->kabkot_nama,
+                    $rows->provinsi_nama,
+                    uang($rows->rekdet_nominal),
+                    '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
+                        <i class="fa fa-file-image-o"> </i>
+                    </a>'
+                );
+            } else {
+                $records["data"][] = array(
+                    $i++,
+                    $rows->rekdet_lembaga,
+                    $rows->jnsbtn_nama,
+                    $rows->keldes_nama,
+                    $rows->kecamatan_nama,
+                    $rows->kabkot_nama,
+                    $rows->provinsi_nama,
+                    uang($rows->rekdet_nominal),
+                    '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
+                        <i class="fa fa-file-image-o"> </i>
+                    </a>'
+                );
+            }
         }
 
         if (isset($_REQUEST["customActionType"]) && $_REQUEST["customActionType"] == "group_action") {

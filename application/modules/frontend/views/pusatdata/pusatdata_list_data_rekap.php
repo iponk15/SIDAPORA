@@ -45,37 +45,64 @@ foreach ($records as $rekap) {
         foreach ($records as $rowsJs) {
         ?>
             var ri = '<?php echo md56($rowsJs['rekap_id']); ?>';
-            var tp = '<?php echo $type; ?>';
+            var tp = '<?php echo $rowsJs['rekap_tipe']; ?>';
             var pr = '<?php echo $provinsi; ?>';
             var kk = '<?php echo $kabupaten; ?>';
             var id = $('#tableBantuan_' + <?php echo $i++; ?> + '_' + <?php echo $provinsi; ?>);
             var baseUrl = 'pusatdata_table/' + ri + '/' + tp + '/' + pr + '/' + kk;
-            var header = [
-                null,
-                null,
-                {
-                    "sClass": "text-center"
-                },
-                {
-                    "sClass": "text-center"
-                },
-                {
-                    "sClass": "text-center"
-                },
-                {
-                    "sClass": "text-center"
-                },
-                {
-                    "sClass": "text-center"
-                },
-                {
-                    "sClass": "text-center"
-                },
-                null,
-                {
-                    "sClass": "text-center"
-                }
-            ];
+            <?php if ($rowsJs['rekap_tipe'] == 2) { ?>
+                var header = [
+                    null,
+                    null,
+                    {
+                        "sClass": "text-center"
+                    },
+                    {
+                        "sClass": "text-center"
+                    },
+                    {
+                        "sClass": "text-center"
+                    },
+                    {
+                        "sClass": "text-center"
+                    },
+                    {
+                        "sClass": "text-center"
+                    },
+                    null,
+                    {
+                        "sClass": "text-center"
+                    }
+                ];
+            <?php } else { ?>
+                var header = [
+                    null,
+                    null,
+                    {
+                        "sClass": "text-center"
+                    },
+                    {
+                        "sClass": "text-center"
+                    },
+                    {
+                        "sClass": "text-center"
+                    },
+                    {
+                        "sClass": "text-center"
+                    },
+                    {
+                        "sClass": "text-center"
+                    },
+                    {
+                        "sClass": "text-center"
+                    },
+                    null,
+                    {
+                        "sClass": "text-center"
+                    }
+                ];
+
+            <?php } ?>
             var order = [
                 [2, "asc"]
             ];
