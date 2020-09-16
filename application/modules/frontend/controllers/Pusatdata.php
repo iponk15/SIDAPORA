@@ -111,35 +111,35 @@ class Pusatdata extends MX_Controller
         // start get data map
         $result = array();
         foreach ($data['getmap'] as $element) {
-            $grouping = $element->provinsi_kode;
-            $result[$grouping]['nama']          = $element->provinsi_nama;
-            $result[$grouping]['provinsi_kode'] = $element->provinsi_kode;
-            $result[$grouping]['latitude']      = $element->provinsi_latitude;
-            $result[$grouping]['longtitude']    = $element->provinsi_longtitude;
-            if ($data['provinsi'] != '') {
+            if ($data['kecamatan'] != '') {
+                $grouping = $element->keldes_kode;
+                $result[$grouping]['nama']          = $element->keldes_nama;
+                $result[$grouping]['keldes_kode']   = $element->keldes_kode;
+                $result[$grouping]['kecamatan_kode']    = $element->kecamatan_kode;
+                $result[$grouping]['kabkot_kode']   = $element->kabkot_kode;
+                $result[$grouping]['latitude']      = $element->keldes_latitude;
+                $result[$grouping]['longtitude']    = $element->keldes_longtitude;
+            } elseif ($data['kabupaten'] != '') {
+                $grouping = $element->kecamatan_kode;
+                $result[$grouping]['nama']              = $element->kecamatan_nama;
+                $result[$grouping]['kecamatan_kode']    = $element->kecamatan_kode;
+                $result[$grouping]['kabkot_kode']   = $element->kabkot_kode;
+                $result[$grouping]['latitude']          = $element->kecamatan_latitude;
+                $result[$grouping]['longtitude']        = $element->kecamatan_longtitude;
+            } elseif ($data['provinsi'] != '') {
                 $grouping = $element->kabkot_kode;
                 $result[$grouping]['nama']          = $element->kabkot_nama;
                 $result[$grouping]['kabkot_kode']   = $element->kabkot_kode;
                 $result[$grouping]['latitude']      = $element->kabkot_latitude;
                 $result[$grouping]['longtitude']    = $element->kabkot_longtitude;
+            } else {
+                $grouping = $element->provinsi_kode;
+                $result[$grouping]['nama']          = $element->provinsi_nama;
+                $result[$grouping]['latitude']      = $element->provinsi_latitude;
+                $result[$grouping]['longtitude']    = $element->provinsi_longtitude;
             }
 
-            if ($data['kabupaten'] != '') {
-                $grouping = $element->kecamatan_kode;
-                $result[$grouping]['nama']              = $element->kecamatan_nama;
-                $result[$grouping]['kecamatan_kode']    = $element->kecamatan_kode;
-                $result[$grouping]['latitude']          = $element->kecamatan_latitude;
-                $result[$grouping]['longtitude']        = $element->kecamatan_longtitude;
-            }
-
-            if ($data['kecamatan'] != '') {
-                $grouping = $element->keldes_kode;
-                $result[$grouping]['nama']          = $element->keldes_nama;
-                $result[$grouping]['keldes_kode']   = $element->keldes_kode;
-                $result[$grouping]['latitude']      = $element->keldes_latitude;
-                $result[$grouping]['longtitude']    = $element->keldes_longtitude;
-            }
-
+            $result[$grouping]['provinsi_kode'] = $element->provinsi_kode;
             $result[$grouping]['jumlah_prasarana'] = $element->jml_prasarana;
             $result[$grouping]['jumlah_sarana'] = $element->jml_sarana;
             $result[$grouping]['jumlah_semua'] = $element->jml_sarana + $element->jml_prasarana;
@@ -189,6 +189,7 @@ class Pusatdata extends MX_Controller
     function cariData($flag = null, $tahun = null, $provinsi = null, $kabupaten = null)
     {
         $post  = $this->input->post();
+        // pre($post, 1);
         /*BEGIN GET DATA PETA MAP*/
         $post['type'] = 3;
         $jointype = $post['type'] == 3 ? '' : 'AND rekap_tipe = "' . $post['type'] . '"';
@@ -282,11 +283,13 @@ class Pusatdata extends MX_Controller
         }
         // pre($tempRekap, 1);
         if ($flag == '1') {
-            $data['tahun']     = $post['tahun'];
-            $data['type']      = $post['type'];
-            $data['galeri']    = getGaleriPusdat($data['tahun']);
-            $data['provinsi']  = $post['provinsi'];
-            $data['kabupaten'] = $post['kabupaten'];
+            $data['tahun']      = $post['tahun'];
+            $data['type']       = $post['type'];
+            $data['galeri']     = getGaleriPusdat($data['tahun']);
+            $data['provinsi']   = $post['provinsi'];
+            $data['kabupaten']  = $post['kabupaten'] ?? null;
+            $data['kecamatan']  = $post['kecamatan'] ?? null;
+            $data['keldes']     = $post['keldes'] ?? null;
 
             // get data rekap dan rekap detail
             $data['records'] = (empty($tempRekap) ? null : $tempRekap);
@@ -294,8 +297,9 @@ class Pusatdata extends MX_Controller
         } else if ($flag == '2') {
             $data['provinsi']  = $post['provinsi'];
             $data['type']      = $post['type'];
-            // $data['type']      = 1;
-            $data['kabupaten'] = (empty($post['kabupaten']) ? null : $post['kabupaten']);
+            $data['kabupaten'] = $post['kabupaten'] ?? null;
+            $data['kecamatan']  = $post['kecamatan'] ?? null;
+            $data['keldes']     = $post['keldes'] ?? null;
             $data['records']   = (empty($tempRekap) ? '' : $tempRekap);
 
             $this->load->view($this->prefix . 'list_data_rekap', $data);
@@ -321,7 +325,7 @@ class Pusatdata extends MX_Controller
         $mpdf->Output('Laporan Rekapitulasi Tahun ' . $tahun . '.pdf', 'D');
     }
 
-    function table($rekap_id = '', $type = '', $provinsi = '', $kabupaten = '')
+    function table($rekap_id = '', $type = '', $provinsi = '', $kabupaten = '', $kecamatan = '', $keldes = '')
     {
         if (@$_REQUEST['customActionType'] == 'group_action') {
             $aChk = [0, 1, 99];
@@ -384,6 +388,14 @@ class Pusatdata extends MX_Controller
 
         if ($kabupaten != '') {
             $where['kabkot_kode']   = $kabupaten;
+        }
+
+        if ($kecamatan != '') {
+            $where['kecamatan_kode']   = $kecamatan;
+        }
+
+        if ($keldes != '') {
+            $where['keldes_kode']   = $keldes;
         }
 
         $iTotalRecords   = $this->m_global->count($this->tableRekdet, $join, $where);

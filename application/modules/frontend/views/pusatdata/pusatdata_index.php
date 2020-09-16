@@ -208,7 +208,6 @@
     });
 
     function disablekecamatan() {
-
         var val = $('#select-location').val();
         var option = $('#select-kecamatan').find('option');
         cek_kecamatan();
@@ -224,13 +223,19 @@
 
     $(document).on('click', '.detailInfromasi', function() {
         var tahun = $(this).attr('data-tahun');
-        var prov = $(this).attr('data-provinsi');
+        var provinsi = $(this).attr('data-provinsi');
+        var kabupaten = $(this).attr('data-kabupaten');
+        var kecamatan = $(this).attr('data-kecamatan');
+        var keldes = $(this).attr('data-keldes');
         var type = $(this).attr('data-type');
         var url = base_url + 'pusatdata_cari/2';
         var xdta = {
             'tahun': tahun,
             'type': type,
-            'provinsi': prov
+            'provinsi': provinsi,
+            'kabupaten': kabupaten,
+            'kecamatan': kecamatan,
+            'keldes': keldes,
         };
 
         $.post(url, xdta, function(html) {

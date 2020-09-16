@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 17/09/2020 04:28:03
+ Date: 17/09/2020 04:57:59
 */
 
 SET NAMES utf8mb4;
@@ -2833,7 +2833,7 @@ WHERE rekap_status = '1'
 	AND kabkot_id IS NOT NULL
 	AND kecamatan_id IS NOT NULL
 	AND keldes_id IS NOT NULL
-GROUP BY rekdet_keldes_kode ;
+GROUP BY rekdet_keldes_kode, rekap_tahun ;
 
 -- ----------------------------
 -- View structure for sumsarpras_provinsi

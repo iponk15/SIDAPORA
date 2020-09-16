@@ -48,8 +48,10 @@ foreach ($records as $rekap) {
             var tp = '<?php echo $rowsJs['rekap_tipe']; ?>';
             var pr = '<?php echo $provinsi; ?>';
             var kk = '<?php echo $kabupaten; ?>';
+            var kc = '<?php echo $kecamatan; ?>';
+            var kd = '<?php echo $keldes; ?>';
             var id = $('#tableBantuan_' + <?php echo $i++; ?> + '_' + <?php echo $provinsi; ?>);
-            var baseUrl = 'pusatdata_table/' + ri + '/' + tp + '/' + pr + '/' + kk;
+            var baseUrl = 'pusatdata_table/' + ri + '/' + tp + '/' + pr + '/' + kk + '/' + kc + '/' + kd;
             <?php if ($rowsJs['rekap_tipe'] == 2) { ?>
                 var header = [
                     null,
