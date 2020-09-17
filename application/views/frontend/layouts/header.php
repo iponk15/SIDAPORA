@@ -25,6 +25,7 @@
                         ?>
                         <a href="<?php echo base_url() ?>" class="btn btn-regular" <?php echo ($curr_url == base_url() ? $active : '') ?>>Beranda</a>
                         <a href="<?php echo base_url('pusatdata') ?>" class="btn btn-regular" <?php echo ($curr_url == base_url('pusatdata') ? $active : '') ?>>Pusat Data</a>
+                        <a href="<?php echo base_url('profil') ?>" class="btn btn-regular" <?php echo ($curr_url == base_url('profil') ? $active : '') ?>>Profil</a>
                     </div>
 
                     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".header-navigation">
