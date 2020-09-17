@@ -56,7 +56,7 @@
                     <div class="carousel-inner" role="listbox">
                         <?php foreach ($slider_utama as $key => $value) { ?>
                             <div class="item  <?php echo $key == 0 ? 'active' : '' ?>">
-                                <img class="center-block" src="<?php echo $records[$value]->rekdok_file ?>" alt="image slider" style="top: 0;left: 0;min-width: 100%;height: 500px;">
+                                <img class="center-block" src="<?php echo $records[$value]->rekdok_file ?>" alt="image slider" style="top: 0;left: 0;min-width: 100%;height: 600px;">
                                 <div class="carousel-caption">
                                     <h3><?php echo $records[$value]->rekdok_ringkasan ?></h3>
                                     <p><?php echo $records[$value]->rekdok_deskripsi ?></p>
