@@ -41,7 +41,7 @@
     }
 </style>
 <div id="main-wrapper">
-    <div id="main" style="margin-top: 4%;">
+    <div id="main" style="margin-top: 1%;">
         <div id="main-inner">
             <div class="row">
                 <div id="myCarousal" class="carousel slide" data-ride="carousel">
@@ -56,7 +56,7 @@
                     <div class="carousel-inner" role="listbox">
                         <?php foreach ($slider_utama as $key => $value) { ?>
                             <div class="item  <?php echo $key == 0 ? 'active' : '' ?>">
-                                <img class="center-block" src="<?php echo $records[$value]->rekdok_file ?>" alt="image slider" style="top: 0;left: 0;min-width: 100%;height: 600px;">
+                                <img class="center-block" src="<?php echo $records[$value]->rekdok_file ?>" alt="image slider" style="top: 0;left: 0;min-width: 90%;height: 700px;">
                                 <div class="carousel-caption">
                                     <h3><?php echo $records[$value]->rekdok_ringkasan ?></h3>
                                     <p><?php echo $records[$value]->rekdok_deskripsi ?></p>
