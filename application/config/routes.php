@@ -75,6 +75,7 @@ $route['pusatdata_dokumentasi']                = 'frontend/pusatdata/dokumentasi
 
 $route['galeri'] = 'frontend/galeri';
 $route['faq']    = 'frontend/faq';
+$route['profil']    = 'frontend/profil';
 // =============================================== Start routing frontend ========================================
 
 

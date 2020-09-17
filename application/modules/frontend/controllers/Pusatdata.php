@@ -408,7 +408,7 @@ class Pusatdata extends MX_Controller
         $end             = $iDisplayStart + $iDisplayLength;
         $end             = $end > $iTotalRecords ? $iTotalRecords : $end;
 
-        $select = 'rekdet_id,rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
+        $select = 'rekdet_id,rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal,rekdet_luas,rekdet_jmlbarang';
         $result = $this->m_global->get($this->tableRekdet, $join, $where, $select, $where_e, $order, $iDisplayStart, $iDisplayLength);
         $i      = 1 + $iDisplayStart;
 
@@ -423,6 +423,7 @@ class Pusatdata extends MX_Controller
                     $rows->kecamatan_nama,
                     $rows->kabkot_nama,
                     $rows->provinsi_nama,
+                    $rows->rekdet_luas,
                     uang($rows->rekdet_nominal),
                     '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
                         <i class="fa fa-file-image-o"> </i>
@@ -437,7 +438,7 @@ class Pusatdata extends MX_Controller
                     $rows->kecamatan_nama,
                     $rows->kabkot_nama,
                     $rows->provinsi_nama,
-                    uang($rows->rekdet_nominal),
+                    $rows->rekdet_jmlbarang,
                     '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
                         <i class="fa fa-file-image-o"> </i>
                     </a>'
