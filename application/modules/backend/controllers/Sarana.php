@@ -220,6 +220,7 @@ class Sarana extends MX_Controller {
                 $this->image_lib->resize();
 
                 $dataGlr['rekdok_rekdet_id'] = $lastId;
+                $dataGlr['rekdok_step_id']   = $post['rekdok_step_id'][$i];
                 $dataGlr['rekdok_ringkasan'] = $post['rekdok_ringkasan'][$i];
                 $dataGlr['rekdok_deskripsi'] = $post['rekdok_deskripsi'][$i];
                 $dataGlr['rekdok_file']      = $conRes['new_image'];
@@ -270,7 +271,7 @@ class Sarana extends MX_Controller {
         $data['kabkot']    = $this->m_global->get($this->tableKabkot,null,['kabkot_provinsi_kode' => $data['records']->rekdet_provinsi_kode ],'kabkot_kode,kabkot_nama');
         $data['kecamatan'] = $this->m_global->get($this->tableKecamatan,null,['kecamatan_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'kecamatan_kode,kecamatan_nama');
         $data['kelurahan'] = $this->m_global->get($this->tableKeldes,null,['keldes_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'keldes_kode,keldes_nama');
-        $data['galeri']    = $this->m_global->get($this->tableDokumen,null,[md56('rekdok_rekdet_id',1) => $rekdet_id],'rekdok_id,rekdok_rekdet_id,rekdok_file,rekdok_ringkasan,rekdok_deskripsi,rekdok_is_public');
+        $data['galeri']    = $this->m_global->get($this->tableDokumen,null,[md56('rekdok_rekdet_id',1) => $rekdet_id],'rekdok_id,rekdok_rekdet_id,rekdok_file,rekdok_ringkasan,rekdok_deskripsi,rekdok_is_public,rekdok_step_id');
 
         $this->templates->backend($this->prefix.'detail_ubah', $data);
     }
@@ -320,6 +321,7 @@ class Sarana extends MX_Controller {
                     }
                 }
 
+                $dataGlr['rekdok_step_id']   = $post['rekdok_step_id'][$i];
                 $dataGlr['rekdok_ringkasan'] = $post['rekdok_ringkasan'][$i];
                 $dataGlr['rekdok_deskripsi'] = $post['rekdok_deskripsi'][$i];
                 $dataGlr['rekdok_is_public'] = (empty($post['rekdok_is_public'][$i]) ? '0' : '1');

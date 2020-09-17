@@ -36,7 +36,7 @@ class Home extends MX_Controller
                 step_order';
         $records    = $this->m_global->get('sdp_rekap_dokumen', $join, $where, $select, null, ['step_order', 'asc']);
         $data['records']        = $records;
-        $data['slider_utama']   = array_rand($records, 3);
+        $data['slider_utama']   = array_rand($records, 2);
         foreach ($records as $value) {
             $result[$value->step_order][]  = $value;
         }

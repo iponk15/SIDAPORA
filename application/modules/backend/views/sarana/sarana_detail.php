@@ -33,11 +33,11 @@
 				<tr>
 					<th><center>No.</center></th>
 					<th><center>Penerima</center></th>
-					<th><center>Jenis</center></th>
 					<th><center>Desa</center></th>
 					<th><center>Kecamatan</center></th>
 					<th><center>Kabupaten</center></th>
 					<th><center>Provinsi</center></th>
+					<th><center>Jenis</center></th>
 					<th><center>Jumlah</center></th>
 					<th><center>Action</center></th>
 				</tr>
@@ -50,11 +50,11 @@
                         <tr>
                             <td scope="row" width="3%"><center>'.$i++.'</center></td>
                             <td>'.$row->rekdet_lembaga.'</td>
-                            <td width="10%" class="text-center">'.$row->jnsbtn_nama.'</td>
 							<td>'.$row->keldes_nama.'</td>
 							<td>'.$row->kecamatan_nama.'</td>
 							<td>'.$row->kabkot_nama.'</td>
 							<td>'.$row->provinsi_nama.'</td>
+                            <td width="10%" class="text-center">'.$row->jnsbtn_nama.'</td>
 							<td width="10%" class="text-center">'.$row->rekdet_jmlbarang.'</td>
                             <td width="10%">
 								<center>

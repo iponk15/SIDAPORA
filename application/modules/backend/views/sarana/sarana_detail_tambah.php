@@ -3,8 +3,8 @@
 	<div class="card-body">
 		<form enctype="multipart/form-data" class="" method="POST" action="<?php echo base_url('sarana_detail_simpan/'.$rekap_id.'/'.$ktgrId); ?>">
 			<div class="row">
-				<div class="col-sm-2"></div>
-				<div class="col-sm-8">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-11">
 					<h4><b> <?php echo $header; ?> </b></h4> <hr>
 					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Lembaga</label>
@@ -66,19 +66,31 @@
 					<hr> <h4><b> Upload Galeri ( Foto ) </b></h4> <hr>
 					<div class="input_fields_wrap">
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-2">
+								<div class="position-relative form-group">
+									<label for="exampleFile" class=""> Step </label>
+									<select name="rekdok_step_id[]" class="form-control">
+										<option value="">Pilih Step</option>
+										<option value="1">Sebelum Pengerjaan</option>
+										<option value="2">Waktu Pengerjaan</option>
+										<option value="3">Setelah Pengerjaan</option>
+										<option value="4">Serah Terima</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-2">
 								<div class="position-relative form-group">
 									<label for="exampleFile" class=""> Ringkasan </label>
-									<input name="rekdok_ringkasan[]" type="text" class="form-control">
+									<input name="rekdok_ringkasan[]" type="text" class="form-control" placeholder="Ringkasan">
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="position-relative form-group">
 									<label for="exampleFile" class=""> Deskripsi </label>
-									<textarea name="rekdok_deskripsi[]" class="form-control" cols="30" rows="2"></textarea>
+									<textarea name="rekdok_deskripsi[]" class="form-control" cols="30" rows="2" placeholder="Deskripsi"></textarea>
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<div class="position-relative form-group">
 									<label for="exampleFile" class="">File Gambar </label>
 									<input name="rekdok_file[]" type="file" class="form-control-file">
@@ -105,7 +117,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-2"></div>
 			</div>
 		</form>
 	</div>
@@ -123,19 +134,31 @@
 			if(x < max_fields){ //max input box allowed
 				x++; //text box increment
 				var content = '<div class="row formDel">' +
-									'<div class="col-md-3">' +
+									'<div class="col-md-2">' +
+										'<div class="position-relative form-group">' +
+											'<label for="exampleFile" class=""> Step </label>' +
+											'<select name="rekdok_step_id[]" class="form-control">' +
+												'<option value="">Pilih Step</option>' +
+												'<option value="1">Sebelum Pengerjaan</option>' +
+												'<option value="2">Waktu Pengerjaan</option>' +
+												'<option value="3">Setelah Pengerjaan</option>' +
+												'<option value="4">Serah Terima</option>' +
+											'</select>' +
+										'</div>' +
+									'</div>' +
+									'<div class="col-md-2">' +
 										'<div class="position-relative form-group">' +
 											'<label for="exampleFile" class=""> Ringkasan </label>' +
-											'<input name="rekdok_ringkasan[]" type="text" class="form-control">' +
+											'<input name="rekdok_ringkasan[]" type="text" class="form-control" placeholder="Ringkasan">' +
 										'</div>' +
 									'</div>' +
 									'<div class="col-md-3">' +
 										'<div class="position-relative form-group">' +
 											'<label for="exampleFile" class=""> Deskripsi </label>' +
-											'<textarea name="rekdok_deskripsi[]" class="form-control" cols="30" rows="2"></textarea>' +
+											'<textarea name="rekdok_deskripsi[]" class="form-control" cols="30" rows="2" placeholder="Deskripsi"></textarea>' +
 										'</div>' +
 									'</div>' +
-									'<div class="col-md-3">' +
+									'<div class="col-md-2">' +
 										'<div class="position-relative form-group">' +
 											'<label for="exampleFile" class="">File Gambar </label>' +
 											'<input name="rekdok_file[]" type="file" class="form-control-file">' +

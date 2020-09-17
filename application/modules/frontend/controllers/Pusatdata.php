@@ -179,7 +179,7 @@ class Pusatdata extends MX_Controller
         // end get data wilayah
         /*END GET DATA PETA MAP*/
         // pre($data, 1);
-        $data['latitude'] = $latitude;
+        $data['latitude']   = $latitude;
         $data['longtitude'] = $longtitude;
         $data['zoom']       = $zoom;
         $this->templates->frontend($this->prefix . 'index', $data);

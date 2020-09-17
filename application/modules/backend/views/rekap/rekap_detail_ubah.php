@@ -3,8 +3,8 @@
 	<div class="card-body">
 		<form enctype="multipart/form-data" class="" method="POST" action="<?php echo base_url('rekap_detail_update/'.$rekdet_id); ?>">
 			<div class="row">
-				<div class="col-sm-2"></div>
-				<div class="col-sm-8">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-11">
 					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Lembaga</label>
 						<div class="col-sm-6">
@@ -101,46 +101,64 @@
 							<input type="number" class="form-control" name="rekdet_nominal" placeholder="Input Nominal" value="<?php echo $records->rekdet_nominal; ?>">
 						</div>
 					</div>
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Luas (m)</label>
+						<div class="col-sm-3">
+							<input type="number" class="form-control" name="rekdet_luas" placeholder="Input Luas" value="<?php echo $records->rekdet_luas; ?>" >
+						</div>
+					</div>
 					<input type="hidden" value="<?php echo $records->rekdet_id; ?>" name="rekdet_id">
 					<hr> <h4><b> Upload Galeri ( Foto ) </b></h4> <hr>
 					<div class="input_fields_wrap">
 						<?php 
 							foreach ($galeri as $glrs) {
 						?>
-								<input type="hidden" value="<?php echo md56($glrs->rekdok_id); ?>" name="rekdok_id[]" class="bewokAjag">
-								<div class="row formDel" data-rekdok_id="<?php echo md56($glrs->rekdok_id); ?>" data-rekdok_file="<?php echo $glrs->rekdok_file; ?>">
-									<div class="col-md-3">
-										<div class="position-relative form-group">
-											<label for="exampleFile" class=""> Ringkasan </label>
-											<input value="<?php echo $glrs->rekdok_ringkasan; ?>" name="rekdok_ringkasan[]" type="text" class="form-control">
-										</div>
+							<input type="hidden" value="<?php echo md56($glrs->rekdok_id); ?>" name="rekdok_id[]" class="bewokAjag">
+							<div class="row formDel" data-rekdok_id="<?php echo md56($glrs->rekdok_id); ?>" data-rekdok_file="<?php echo $glrs->rekdok_file; ?>">
+								<div class="col-md-2">
+									<div class="position-relative form-group">
+										<label for="exampleFile" class=""> Step </label>
+										<select name="rekdok_step_id[]" class="form-control">
+											<option value="">Pilih Step</option>
+											<option <?php echo ($glrs->rekdok_step_id == '1' ? 'selected' : '' ); ?> value="1">Sebelum Pengerjaan</option>
+											<option <?php echo ($glrs->rekdok_step_id == '2' ? 'selected' : '' ); ?> value="2">Waktu Pengerjaan</option>
+											<option <?php echo ($glrs->rekdok_step_id == '3' ? 'selected' : '' ); ?> value="3">Setelah Pengerjaan</option>
+											<option <?php echo ($glrs->rekdok_step_id == '4' ? 'selected' : '' ); ?> value="4">Serah Terima</option>
+										</select>
 									</div>
-									<div class="col-md-3">
-										<div class="position-relative form-group">
-											<label for="exampleFile" class=""> Deskripsi </label>
-											<textarea name="rekdok_deskripsi[]" class="form-control" cols="30" rows="2"><?php echo $glrs->rekdok_deskripsi; ?></textarea>
-										</div>
-									</div>
-									<div class="col-md-3">
-										<div class="position-relative form-group">
-											<label for="exampleFile" class="">File Gambar </label>
-											<input name="rekdok_file[]" type="file" class="form-control-file">
-											<input type="hidden" value="<?php echo $glrs->rekdok_file; ?>" name="rekdok_file_old[]">
-											<?php echo $glrs->rekdok_file; ?>
-										</div>
-									</div>
-									<div class="col-md-2" style="margin-left: -1%;">
-										<div class="position-relative form-group">
-											<label for="exampleFile" class=""> &nbsp; </label>
-											<div class="custom-checkbox custom-control">
-												<input <?php echo ($glrs->rekdok_is_public == '1' ? 'checked' : ''); ?> type="checkbox" name="rekdok_is_public[]">
-												<label> <div style="margin-top: -10%;"> &nbsp; Tampil Galeri </div> </label>
-											</div>
-										</div>
-									</div>
-									<div><a style="margin-top: 40%;" data-repeater-delete class="mb-2 mr-2 btn btn-danger active btn-sm remove_field" data-swall="true">Hapus</a></div>
 								</div>
-							<?php } ?>
+								<div class="col-md-2">
+									<div class="position-relative form-group">
+										<label for="exampleFile" class=""> Ringkasan </label>
+										<input value="<?php echo $glrs->rekdok_ringkasan; ?>" name="rekdok_ringkasan[]" type="text" class="form-control">
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="position-relative form-group">
+										<label for="exampleFile" class=""> Deskripsi </label>
+										<textarea name="rekdok_deskripsi[]" class="form-control" cols="30" rows="2"><?php echo $glrs->rekdok_deskripsi; ?></textarea>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="position-relative form-group">
+										<label for="exampleFile" class="">File Gambar </label>
+										<input name="rekdok_file[]" type="file" class="form-control-file">
+										<input type="hidden" value="<?php echo $glrs->rekdok_file; ?>" name="rekdok_file_old[]">
+										<?php echo $glrs->rekdok_file; ?>
+									</div>
+								</div>
+								<div class="col-md-2" style="margin-left: -1%;">
+									<div class="position-relative form-group">
+										<label for="exampleFile" class=""> &nbsp; </label>
+										<div class="custom-checkbox custom-control">
+											<input <?php echo ($glrs->rekdok_is_public == '1' ? 'checked' : ''); ?> type="checkbox" name="rekdok_is_public[]">
+											<label> <div style="margin-top: -10%;"> &nbsp; Tampil Galeri </div> </label>
+										</div>
+									</div>
+								</div>
+								<div><a style="margin-top: 40%;" data-repeater-delete class="mb-2 mr-2 btn btn-danger active btn-sm remove_field" data-swall="true">Hapus</a></div>
+							</div>
+						<?php } ?>
 					</div>
 
 					<a class="mb-2 mr-2 btn btn-info active btn-sm add_field_button">Tambah</a>
@@ -152,7 +170,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-2"></div>
 			</div>
 		</form>
 	</div>
@@ -172,19 +189,31 @@
 			if(x < max_fields){ //max input box allowed
 				x++; //text box increment
 				var content = '<div class="row formDel">' +
-									'<div class="col-md-3">' +
+									'<div class="col-md-2">' +
+										'<div class="position-relative form-group">' +
+											'<label for="exampleFile" class=""> Step </label>' +
+											'<select name="rekdok_step_id[]" class="form-control">' +
+												'<option value="">Pilih Step</option>' +
+												'<option value="1">Sebelum Pengerjaan</option>' +
+												'<option value="2">Waktu Pengerjaan</option>' +
+												'<option value="3">Setelah Pengerjaan</option>' +
+												'<option value="4">Serah Terima</option>' +
+											'</select>' +
+										'</div>' +
+									'</div>' +
+									'<div class="col-md-2">' +
 										'<div class="position-relative form-group">' +
 											'<label for="exampleFile" class=""> Ringkasan </label>' +
-											'<input name="rekdok_ringkasan[]" type="text" class="form-control">' +
+											'<input name="rekdok_ringkasan[]" type="text" class="form-control" placeholder="Ringkasan">' +
 										'</div>' +
 									'</div>' +
 									'<div class="col-md-3">' +
 										'<div class="position-relative form-group">' +
 											'<label for="exampleFile" class=""> Deskripsi </label>' +
-											'<textarea name="rekdok_deskripsi[]" class="form-control" cols="30" rows="2"></textarea>' +
+											'<textarea name="rekdok_deskripsi[]" class="form-control" cols="30" rows="2" placeholder="Deskripsi"></textarea>' +
 										'</div>' +
 									'</div>' +
-									'<div class="col-md-3">' +
+									'<div class="col-md-2">' +
 										'<div class="position-relative form-group">' +
 											'<label for="exampleFile" class="">File Gambar </label>' +
 											'<input name="rekdok_file[]" type="file" class="form-control-file">' +

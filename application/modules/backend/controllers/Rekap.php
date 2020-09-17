@@ -14,6 +14,7 @@ class Rekap extends MX_Controller {
 	private $tableKecamatan    = 'sdp_master_kecamatan';
     private $tableKeldes       = 'sdp_master_keldes';
     private $tableDokumen      = 'sdp_rekap_dokumen';
+    private $tableStep         = 'sdp_master_step';
 
     public function __construct(){
         parent::__construct();
@@ -154,8 +155,15 @@ class Rekap extends MX_Controller {
         $data['ktgrId']    = $kategori_id;
 
         // get data foreign
+        $whereJnsbtn      = [
+            'jnsbtn_status'              => '1', 
+            md56('jnsbtn_kategori_id',1) => $kategori_id,
+            'jnsbtn_tipe'                => '1'
+        ];
+
+        $data['step']     = $this->m_global->get($this->tableStep,null,['step_status' => '1'],'step_id,step_kode,step_nama');
         $data['bantuan']  = $this->m_global->get($this->tableBantuan,null,['bantuan_status' => '1', md56('bantuan_kategori_id',1) => $kategori_id],'bantuan_kode,bantuan_nama');
-        $data['jnsbtn']   = $this->m_global->get($this->tableJenisBantuan,null,['jnsbtn_status' => '1', md56('jnsbtn_kategori_id',1) => $kategori_id],'jnsbtn_kode,jnsbtn_nama');
+        $data['jnsbtn']   = $this->m_global->get($this->tableJenisBantuan,null,$whereJnsbtn,'jnsbtn_kode,jnsbtn_nama');
         $data['provinsi'] = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama');
 
         $this->templates->backend($this->prefix.'detail_tambah', $data);
@@ -219,6 +227,7 @@ class Rekap extends MX_Controller {
                 $this->image_lib->resize();
 
                 $dataGlr['rekdok_rekdet_id'] = $lastId;
+                $dataGlr['rekdok_step_id']   = $post['rekdok_step_id'][$i];
                 $dataGlr['rekdok_ringkasan'] = $post['rekdok_ringkasan'][$i];
                 $dataGlr['rekdok_deskripsi'] = $post['rekdok_deskripsi'][$i];
                 $dataGlr['rekdok_file']      = $conRes['new_image'];
@@ -254,7 +263,7 @@ class Rekap extends MX_Controller {
             [$this->tableKecamatan,'rekdet_kecamatan_kode = kecamatan_kode','left'],
             [$this->tableKeldes,'rekdet_keldes_kode = keldes_kode','left']
         ];
-        $select          = 'rekdet_id,rekdet_rekap_id,rekdet_lembaga,rekdet_nominal,rekap_kategori_id,rekdet_bantuan_kode,rekdet_jnsbtn_kode,rekdet_provinsi_kode,rekdet_kabkot_kode,rekdet_kecamatan_kode,rekdet_keldes_kode';
+        $select          = 'rekdet_id,rekdet_rekap_id,rekdet_lembaga,rekdet_nominal,rekap_kategori_id,rekdet_bantuan_kode,rekdet_jnsbtn_kode,rekdet_provinsi_kode,rekdet_kabkot_kode,rekdet_kecamatan_kode,rekdet_keldes_kode,rekdet_luas';
         $data['records'] = $this->m_global->get($this->tableRekapDetail,$join,[md56('rekdet_id',1) => $rekdet_id],$select)[0];
 
         // get data foreign
@@ -264,7 +273,7 @@ class Rekap extends MX_Controller {
         $data['kabkot']    = $this->m_global->get($this->tableKabkot,null,['kabkot_provinsi_kode' => $data['records']->rekdet_provinsi_kode ],'kabkot_kode,kabkot_nama');
         $data['kecamatan'] = $this->m_global->get($this->tableKecamatan,null,['kecamatan_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'kecamatan_kode,kecamatan_nama');
         $data['kelurahan'] = $this->m_global->get($this->tableKeldes,null,['keldes_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'keldes_kode,keldes_nama');
-        $data['galeri']    = $this->m_global->get($this->tableDokumen,null,[md56('rekdok_rekdet_id',1) => $rekdet_id],'rekdok_id,rekdok_rekdet_id,rekdok_file,rekdok_ringkasan,rekdok_deskripsi,rekdok_is_public');
+        $data['galeri']    = $this->m_global->get($this->tableDokumen,null,[md56('rekdok_rekdet_id',1) => $rekdet_id],'rekdok_id,rekdok_rekdet_id,rekdok_file,rekdok_ringkasan,rekdok_deskripsi,rekdok_is_public,rekdok_step_id');
 
         $this->templates->backend($this->prefix.'detail_ubah', $data);
     }
@@ -314,6 +323,7 @@ class Rekap extends MX_Controller {
                     }
                 }
 
+                $dataGlr['rekdok_step_id']   = $post['rekdok_step_id'][$i];
                 $dataGlr['rekdok_ringkasan'] = $post['rekdok_ringkasan'][$i];
                 $dataGlr['rekdok_deskripsi'] = $post['rekdok_deskripsi'][$i];
                 $dataGlr['rekdok_is_public'] = (empty($post['rekdok_is_public'][$i]) ? '0' : '1');
@@ -549,7 +559,6 @@ class Rekap extends MX_Controller {
         header('Cache-Control: max-age=0');
 
         $objWriter->save('php://output');
-
     }
 
     function apus_galeri(){
