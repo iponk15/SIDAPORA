@@ -22,7 +22,8 @@ foreach ($records as $rekap) {
                                         <th width="10%"><center>Kecamatan</center></th>
                                         <th width="10%"><center>Kabupaten</center></th>
                                         <th width="10%"><center>Provinsi</center></th>
-                                        <th class="numeric" width="10%"><center>Jumlah</center></th>
+                                        <th width="10%" ' . ($rekap['rekap_tipe'] == 2 ? 'style="display:none;"' : '') . '><center>Luas(m2)</center></th>
+                                        <th class="numeric" width="10%"><center>' . ($rekap['rekap_tipe'] == 2 ? 'Jumlah' : 'Nominal') . '</center></th>
                                         <th width="10%"><center>Dokumentasi</center></th>
                                     </tr>
                                 </thead>
@@ -98,6 +99,7 @@ foreach ($records as $rekap) {
                     {
                         "sClass": "text-center"
                     },
+                    null,
                     null,
                     {
                         "sClass": "text-center"
