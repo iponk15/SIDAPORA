@@ -8,8 +8,8 @@
 			<thead>
 				<tr>
 					<th><center>No.</center></th>
-					<th><center>Kategori</center></th>
 					<th><center>Tipe</center></th>
+					<th><center>Kategori</center></th>
 					<th><center>Kode Jenis Bantuan</center></th>
 					<th><center>Jenis Bantuan</center></th>
 					<th><center>Deskripsi</center></th>
@@ -24,8 +24,8 @@
                         echo '
                         <tr>
                             <td scope="row" width="3%"><center>'.$i++.'</center></td>
-                            <td>'.$row->kategori_nama.'</td>
                             <td class="text-center">'.($row->jnsbtn_tipe == '1' ? 'Prasarana' : 'Sarana').'</td>
+                            <td>'.$row->kategori_nama.'</td>
                             <td align="center">'.$row->jnsbtn_kode.'</td>
                             <td>'.$row->jnsbtn_nama.'</td>
                             <td>'.$row->jnsbtn_deskripsi.'</td>

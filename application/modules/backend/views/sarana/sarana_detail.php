@@ -37,8 +37,7 @@
 					<th><center>Kecamatan</center></th>
 					<th><center>Kabupaten</center></th>
 					<th><center>Provinsi</center></th>
-					<th><center>Jenis</center></th>
-					<th><center>Total Jumlah</center></th>
+					<th><center>Cabor</center></th>
 					<th><center>Action</center></th>
 				</tr>
 			</thead>
@@ -54,8 +53,7 @@
 							<td>'.$row->kecamatan_nama.'</td>
 							<td>'.$row->kabkot_nama.'</td>
 							<td>'.$row->provinsi_nama.'</td>
-                            <td width="10%" class="text-center"><a href="#"> List Item </a></td>
-							<td width="10%" class="text-center">'.$row->rekdet_jmlbarang.'</td>
+                            <td width="10%" class="text-center"><a href="#"> Daftar Cabor </a></td>
                             <td width="10%">
 								<center>
 									<a href="'.base_url('sarana_detail_tambahitem/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-info"><i class="nav-link-icon fa fa-bars"></i></a>

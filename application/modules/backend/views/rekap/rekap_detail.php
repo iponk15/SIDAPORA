@@ -41,12 +41,14 @@
 					<th><center>Provinsi</center></th>
 					<th><center>Nominal</center></th>
 					<th><center>Luas</center></th>
+					<th><center>Kat. Bangunan</center></th>
 					<th><center>Action</center></th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php 
-                    $i = 1;
+					$i = 1;
+					$bangunan = [ null => '-', 1 => 'Pembangunan Baru', 2 => 'Rehabilitasi', 3 => 'Renovasi', 4 => 'Pembangunan Lanjutan' ];
                     foreach($rkpDetail as $row){
                         echo '
                         <tr>
@@ -60,6 +62,7 @@
 							<td>'.$row->provinsi_nama.'</td>
 							<td width="10%">'.uang($row->rekdet_nominal).'</td>
 							<td class="text-center">'.(!empty($row->rekdet_luas) ? $row->rekdet_luas . ' m' : '' ).'</td>
+							<td>'.$bangunan[$row->rekdet_tipe_bangunan].'</td>
                             <td width="10%">
 								<center>
                                     <a href="'.base_url('rekap_detail_ubah/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="nav-link-icon fa fa-edit"></i></a>

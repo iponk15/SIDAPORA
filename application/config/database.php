@@ -85,7 +85,7 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
-	'database' => 'sidapora',
+	'database' => 'project_sidapora',
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
