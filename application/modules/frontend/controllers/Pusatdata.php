@@ -268,7 +268,7 @@ class Pusatdata extends MX_Controller
                         'rekdet_kecamatan' => $rekdet->kecamatan_nama,
                         'rekdet_keldes'    => $rekdet->keldes_nama,
                         'rekdet_nominal'   => $rekdet->rekdet_nominal,
-						'rekdet_jmlbarang' => $rekdet->rekdet_jmlbarang
+                        'rekdet_jmlbarang' => $rekdet->rekdet_jmlbarang
                     ];
                 }
 
@@ -302,7 +302,7 @@ class Pusatdata extends MX_Controller
             $data['kecamatan']  = $post['kecamatan'] ?? null;
             $data['keldes']     = $post['keldes'] ?? null;
             $data['records']   = (empty($tempRekap) ? '' : $tempRekap);
-			
+
 
             $this->load->view($this->prefix . 'list_data_rekap', $data);
             // if ($data['type'] == 1) {
@@ -410,13 +410,14 @@ class Pusatdata extends MX_Controller
         $end             = $iDisplayStart + $iDisplayLength;
         $end             = $end > $iTotalRecords ? $iTotalRecords : $end;
 
-        $select = 'rekdet_id,rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal,rekdet_jmlbarang,rekap_tipe';
+        $select = 'rekdet_id,rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal,rekdet_jmlbarang,rekap_tipe,rekdet_luas';
         $result = $this->m_global->get($this->tableRekdet, $join, $where, $select, $where_e, $order, $iDisplayStart, $iDisplayLength);
         $i      = 1 + $iDisplayStart;
 
-        foreach ($result as $rows) {
+        foreach ($result as $key => $rows) {
             if ($type == 1) {
-                $records["data"][] = array(
+                //PRASARANA
+                $records["data"][$key] = array(
                     $i++,
                     $rows->rekdet_lembaga,
                     $rows->bantuan_nama,
@@ -425,22 +426,25 @@ class Pusatdata extends MX_Controller
                     $rows->kecamatan_nama,
                     $rows->kabkot_nama,
                     $rows->provinsi_nama,
+                    $rows->rekdet_luas,
                     uang($rows->rekdet_nominal),
                     '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
                         <i class="fa fa-file-image-o"> </i>
                     </a>'
                 );
             } else {
-                $records["data"][] = array(
+                //SARANA
+                $records["data"][$key] = array(
                     $i++,
                     $rows->rekdet_lembaga,
-                    $rows->jnsbtn_nama,
                     $rows->keldes_nama,
                     $rows->kecamatan_nama,
                     $rows->kabkot_nama,
                     $rows->provinsi_nama,
-                    $rows->rekdet_jmlbarang,
-                    '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
+                    '<a data-toggle="modal" href="#list_item" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm blue listItem" title="Lihat Item">
+                        <i class="fa fa-list"> </i>
+                    </a>' .
+                        '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
                         <i class="fa fa-file-image-o"> </i>
                     </a>'
                 );
@@ -464,6 +468,25 @@ class Pusatdata extends MX_Controller
         $post        = $this->input->post();
         $data['dok'] = $this->m_global->get($this->tableRekapDokumen, null, [md56('rekdok_rekdet_id', 1) => $post['rekdet_id']], 'rekdok_ringkasan,rekdok_file,rekdok_deskripsi');
         $this->load->view($this->prefix . 'dokumentasi', $data);
+    }
+
+    function list_item()
+    {
+        $post        = $this->input->post();
+        $join = [
+            ['sdp_rekap_detail', 'sdp_rekap_detail.rekdet_id = sdp_rekap_item.sartem_rekdet_id', 'left'],
+            ['sdp_master_jenis_bantuan', 'sdp_master_jenis_bantuan.jnsbtn_kode = sdp_rekap_item.sartem_jnsbtn_kode', 'left']
+        ];
+
+        $select = 'sartem_jml,
+            rekdet_lembaga,
+            jnsbtn_nama';
+
+        $where['jnsbtn_tipe']   = 2;
+        $where[md56('rekdet_id', 1)] = $post['rekdet_id'];
+        $data['records'] = $this->m_global->get('sdp_rekap_item', $join, $where, $select, null, ['rekdet_lembaga', 'asc']);
+
+        $this->load->view($this->prefix . 'list_item', $data);
     }
 }
 

@@ -1,46 +1,71 @@
-<!-- <form action="<?php echo base_url('pusatdata_cari/4'); ?>" method="POST">
-	<input type="text" value="<?php echo $tahun; ?>" name="tahun">
-	<input type="text" value="<?php echo $provinsi; ?>" name="provinsi">
-	<input type="text" value="<?php echo $kabupaten; ?>" name="kabupaten">
-	<input type="text" value="<?php echo $kecamatan; ?>" name="kecamatan">
-	<input type="text" value="<?php echo $keldes; ?>" name="keldes">
-	<button type="submit" class="btn"> Export Excel </button>
-</form>
--->
 <?php
+// pre($records, 1);
 $i = 1;
 foreach ($records as $rekap) {
-    $html = '<div class="panel panel-success">
-                    <div class="panel-heading" style="background: #E69C39;">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_' . $i . '" style="color: #EDEDED;">
-                                <b>' . $rekap['rekap_judul'] . '</b>
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="accordion1_' . $i . '" class="panel-collapse collapse in">
-                        <div class="panel-body flip-scroll">
-                            <table class="table table-striped table-bordered table-hover" id="tableBantuan_' . $i . '_' . $provinsi . '">
-                                <thead role="row" class="heading">
-                                    <tr>
-                                        <th width="1%"><center>No. </center></th>
-                                        <th width="23%"><center>Lembaga</center></th>
-                                        <th width="14%" ' . ($rekap['rekap_tipe'] == 2 ? 'style="display:none;"' : '') . '><center>Jenis Bantuan</center></th>
-                                        <th width="10%"><center>Bantuan</center></th>
-                                        <th width="10%"><center>Desa</center></th>
-                                        <th width="10%"><center>Kecamatan</center></th>
-                                        <th width="10%"><center>Kabupaten</center></th>
-                                        <th width="10%"><center>Provinsi</center></th>
-                                        <th width="10%" ' . ($rekap['rekap_tipe'] == 2 ? 'style="display:none;"' : '') . '><center>Luas(m2)</center></th>
-                                        <th class="numeric" width="10%"><center>' . ($rekap['rekap_tipe'] == 2 ? 'Jumlah' : 'Nominal') . '</center></th>
-                                        <th width="10%"><center>Dokumentasi</center></th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+    if ($rekap['rekap_tipe'] == 1) {
+        //PRASARANA
+        $html = '<div class="panel panel-success">
+                        <div class="panel-heading" style="background: #E69C39;">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_' . $i . '" style="color: #EDEDED;">
+                                    <b>' . $rekap['rekap_judul'] . '</b>
+                                </a>
+                            </h4>
                         </div>
-                    </div>
-                </div>';
+                        <div id="accordion1_' . $i . '" class="panel-collapse collapse in">
+                            <div class="panel-body flip-scroll">
+                                <table class="table table-striped table-bordered table-hover" id="tableBantuan_' . $i . '_' . $provinsi . '">
+                                    <thead role="row" class="heading">
+                                        <tr>
+                                            <th width="1%"><center>No. </center></th>
+                                            <th width="23%"><center>Lembaga</center></th>
+                                            <th width="14%" ' . ($rekap['rekap_tipe'] == 2 ? 'style="display:none;"' : '') . '><center>Jenis Bantuan</center></th>
+                                            <th width="10%"><center>Bantuan</center></th>
+                                            <th width="10%"><center>Desa</center></th>
+                                            <th width="10%"><center>Kecamatan</center></th>
+                                            <th width="10%"><center>Kabupaten</center></th>
+                                            <th width="10%"><center>Provinsi</center></th>
+                                            <th width="10%"><center>Luas(m2)</center></th>
+                                            <th class="numeric" width="10%"><center>Nominal</center></th>
+                                            <th width="10%"><center>Dokumentasi</center></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>';
+    } else {
+        // SARANA
+        $html = '<div class="panel panel-success">
+                        <div class="panel-heading" style="background: #E69C39;">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_' . $i . '" style="color: #EDEDED;">
+                                    <b>' . $rekap['rekap_judul'] . '</b>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="accordion1_' . $i . '" class="panel-collapse collapse in">
+                            <div class="panel-body flip-scroll">
+                                <table class="table table-striped table-bordered table-hover" id="tableBantuan_' . $i . '_' . $provinsi . '">
+                                    <thead role="row" class="heading">
+                                        <tr>
+                                            <th width="1%"><center>No. </center></th>
+                                            <th width="23%"><center>Lembaga</center></th>
+                                            <th width="10%"><center>Desa</center></th>
+                                            <th width="10%"><center>Kecamatan</center></th>
+                                            <th width="10%"><center>Kabupaten</center></th>
+                                            <th width="10%"><center>Provinsi</center></th>
+                                            <th width="10%"><center>Aksi</center></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>';
+    }
+
 
     $i++;
     echo $html;
@@ -65,7 +90,6 @@ foreach ($records as $rekap) {
             <?php if ($rowsJs['rekap_tipe'] == 2) { ?>
                 var header = [
                     null,
-                    null,
                     {
                         "sClass": "text-center"
                     },
@@ -81,10 +105,9 @@ foreach ($records as $rekap) {
                     {
                         "sClass": "text-center"
                     },
-                    null,
                     {
                         "sClass": "text-center"
-                    }
+                    },
                 ];
             <?php } else { ?>
                 var header = [

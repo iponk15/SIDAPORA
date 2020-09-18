@@ -71,6 +71,7 @@ $route['pusatdata_table/(:any)/(:any)/(:any)/(:any)'] = 'frontend/pusatdata/tabl
 $route['pusatdata_table/(:any)/(:any)/(:any)/(:any)/(:any)'] = 'frontend/pusatdata/table/$1/$2/$3/$4/$5';
 $route['pusatdata_table/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)'] = 'frontend/pusatdata/table/$1/$2/$3/$4/$5/$6';
 $route['pusatdata_dokumentasi']                = 'frontend/pusatdata/dokumentasi';
+$route['pusatdata_item_sarana']                = 'frontend/pusatdata/list_item';
 
 
 $route['galeri'] = 'frontend/galeri';

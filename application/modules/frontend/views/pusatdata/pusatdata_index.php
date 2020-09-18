@@ -115,6 +115,21 @@
     </div>
 </div>
 
+<div class="modal fade bs-modal-lg" id="list_item" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:1350px;">
+        <div class="modal-content" style="top: 120px;">
+            <div class="modal-header" style="background-color: turquoise;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" style="color: black;"><i class="fa fa-file-image-o"></i> <b>List Item</b></h4>
+            </div>
+            <div class="modal-body">
+                <div id="ctnListItem"></div>
+            </div>
+            <div class="modal-footer"> <button type="button" class="btn default" data-dismiss="modal">Close</button> </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function cek_kecamatan() {
         var kab = $('#select-location').val() == '' ? false : true;
@@ -254,6 +269,18 @@
 
         $.post(url, xdt, function(res) {
             $('#ctnDokumentasi').html(res);
+        });
+    });
+
+    $(document).on('click', '.listItem', function() {
+        var id = $(this).attr('data-id');
+        var url = base_url + 'pusatdata_item_sarana';
+        var xdt = {
+            'rekdet_id': id
+        };
+
+        $.post(url, xdt, function(res) {
+            $('#ctnListItem').html(res);
         });
     });
 </script>
