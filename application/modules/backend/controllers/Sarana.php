@@ -174,12 +174,10 @@ class Sarana extends MX_Controller {
 
         $data['rekdet_rekap_id']       = $rekap_id;
         $data['rekdet_lembaga']        = $post['rekdet_lembaga'];
-        $data['rekdet_jnsbtn_kode']    = $post['rekdet_jnsbtn_id'];
         $data['rekdet_provinsi_kode']  = $post['rekdet_provinsi_id'];
         $data['rekdet_kabkot_kode']    = $post['kecamatan_kabkot_id'];
         $data['rekdet_kecamatan_kode'] = $post['keldes_kecamatan_id'];
         $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
-        $data['rekdet_jmlbarang']      = $post['rekdet_jmlbarang'];
         $data['rekdet_createdby']      = getSession('user_id');
         $data['rekdet_createddate']    = date('Y-m-d H:i:s');
         
@@ -233,7 +231,7 @@ class Sarana extends MX_Controller {
         $this->db->insert_batch($this->tableDokumen, $tempGaleri);
         
         if($input){
-            redirect('sarana_detail_tambah/'.md56($rekap_id).'/'.$kategori_id);
+            redirect('sarana_detail_tambahitem/'.md56($lastId));
         }else{
             pre('data gagal disimpan');
         }
@@ -337,12 +335,10 @@ class Sarana extends MX_Controller {
         }
 
         $data['rekdet_lembaga']        = $post['rekdet_lembaga'];
-        $data['rekdet_jnsbtn_kode']    = $post['rekdet_jnsbtn_id'];
         $data['rekdet_provinsi_kode']  = $post['rekdet_provinsi_id'];
         $data['rekdet_kabkot_kode']    = $post['kecamatan_kabkot_id'];
         $data['rekdet_kecamatan_kode'] = $post['keldes_kecamatan_id'];
         $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
-        $data['rekdet_jmlbarang']      = $post['rekdet_jmlbarang'];
         $data['rekdet_updatedby']      = getSession('user_id');
         
         $input = $this->m_global->update($this->tablesaranaDetail, $data, [md56('rekdet_id',1) => $rekdet_id]); 
@@ -570,6 +566,62 @@ class Sarana extends MX_Controller {
         }
 
         echo json_encode($data);
+    }
+
+    function tambah_item($rekdet_id){
+        $data['pagetitle'] = 'Halaman sarana Detail';
+		$data['subtitle']  = 'Tambah data sarana Detail';
+		$data['icon']      = 'news-paper';
+        $data['header']    = 'Form Item Jenis Bantuan';
+        $data['url']       = $this->url;
+        $data['rekdet_id'] = $rekdet_id;
+
+        $whereRecords      = [md56('rekdet_id',1) => $rekdet_id];
+        $joinRecords       = [
+            [$this->tableProvinsi,'rekdet_provinsi_kode = provinsi_kode', 'left'],
+			[$this->tableKabkot,'(rekdet_kabkot_kode = kabkot_kode AND kabkot_provinsi_kode = provinsi_kode)','left'],
+			[$this->tableKecamatan,'(rekdet_kecamatan_kode = kecamatan_kode AND kecamatan_provinsi_kode = provinsi_kode AND kecamatan_kabkot_kode = kabkot_kode)','left'],
+			[$this->tableKeldes,'(rekdet_keldes_kode = keldes_kode AND keldes_provinsi_kode = provinsi_kode AND keldes_kabkot_kode = kabkot_kode AND keldes_kecamatan_kode = kecamatan_kode)','left']
+        ];
+        $data['records']   = $this->m_global->get('sdp_rekap_detail',$joinRecords,$whereRecords,'rekdet_lembaga,rekdet_rekap_id,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama')[0];
+        $data['jnsbtn']    = $this->m_global->get($this->tableJenisBantuan,null,['jnsbtn_tipe' => '2'],'jnsbtn_kode,jnsbtn_nama');
+
+        $itemsJoin     = [ ['sdp_master_jenis_bantuan', 'sartem_jnsbtn_kode = jnsbtn_kode', 'left'] ];
+        $data['items'] = $this->m_global->get('sdp_rekap_item',$itemsJoin,[md56('sartem_rekdet_id',1) => $rekdet_id],'sartem_id,jnsbtn_kode,jnsbtn_nama,sartem_jml');
+
+        $this->templates->backend($this->prefix.'tambah_item', $data);
+    }
+
+    function simpan_item($rekdet_id){
+        $post = $this->input->post();
+
+        // get data sarana
+        $where[md56('rekdet_id',1)] = $rekdet_id;
+        $ID = $this->m_global->get('sdp_rekap_detail',null,$where,'rekdet_id')[0]->rekdet_id;
+
+        $data['sartem_rekdet_id']   = $ID;
+        $data['sartem_jnsbtn_kode'] = $post['sartem_jnsbtn_kode'];
+        $data['sartem_jml']         = $post['sartem_jml'];
+        
+        $input = $this->m_global->insert('sdp_rekap_item', $data); 
+        
+        if($input){
+            redirect('sarana_detail_tambahitem/'.$rekdet_id);
+        }else{
+            pre('data gagal disimpan');
+        }
+    }
+
+    function hapus_item($sartem_id){
+        $where[md56('sartem_id',1)] = $sartem_id;
+        $rekdet_id = $this->m_global->get('sdp_rekap_item',null,$where,'sartem_rekdet_id')[0]->sartem_rekdet_id;
+        $delete    = $this->m_global->delete('sdp_rekap_item',[md56('sartem_id',1) => $sartem_id]);
+        
+        if($delete == TRUE){
+            redirect('sarana_detail_tambahitem/'.md56($rekdet_id));
+        }else{
+            pre('data gagal disimpan');
+        }
     }
 
 }

@@ -179,7 +179,7 @@ class Pusatdata extends MX_Controller
         // end get data wilayah
         /*END GET DATA PETA MAP*/
         // pre($data, 1);
-        $data['latitude']   = $latitude;
+        $data['latitude'] = $latitude;
         $data['longtitude'] = $longtitude;
         $data['zoom']       = $zoom;
         $this->templates->frontend($this->prefix . 'index', $data);
@@ -244,7 +244,7 @@ class Pusatdata extends MX_Controller
                     [$this->tableKeldes, '(rekdet_keldes_kode = keldes_kode AND keldes_provinsi_kode = provinsi_kode AND keldes_kabkot_kode = kabkot_kode AND keldes_kecamatan_kode = kecamatan_kode)', 'left'],
                 ];
 
-                $select                   = 'rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal';
+                $select                   = 'rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal,rekdet_jmlbarang';
                 $where['rekdet_rekap_id'] = $rows->rekap_id;
 
                 if (!empty($post['provinsi'])) {
@@ -267,7 +267,8 @@ class Pusatdata extends MX_Controller
                         'rekdet_kabkot'    => $rekdet->kabkot_nama,
                         'rekdet_kecamatan' => $rekdet->kecamatan_nama,
                         'rekdet_keldes'    => $rekdet->keldes_nama,
-                        'rekdet_nominal'   => $rekdet->rekdet_nominal
+                        'rekdet_nominal'   => $rekdet->rekdet_nominal,
+						'rekdet_jmlbarang' => $rekdet->rekdet_jmlbarang
                     ];
                 }
 
@@ -301,6 +302,7 @@ class Pusatdata extends MX_Controller
             $data['kecamatan']  = $post['kecamatan'] ?? null;
             $data['keldes']     = $post['keldes'] ?? null;
             $data['records']   = (empty($tempRekap) ? '' : $tempRekap);
+			
 
             $this->load->view($this->prefix . 'list_data_rekap', $data);
             // if ($data['type'] == 1) {
@@ -408,7 +410,7 @@ class Pusatdata extends MX_Controller
         $end             = $iDisplayStart + $iDisplayLength;
         $end             = $end > $iTotalRecords ? $iTotalRecords : $end;
 
-        $select = 'rekdet_id,rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal,rekdet_luas,rekdet_jmlbarang';
+        $select = 'rekdet_id,rekdet_lembaga,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_nominal,rekdet_jmlbarang,rekap_tipe';
         $result = $this->m_global->get($this->tableRekdet, $join, $where, $select, $where_e, $order, $iDisplayStart, $iDisplayLength);
         $i      = 1 + $iDisplayStart;
 
@@ -423,7 +425,6 @@ class Pusatdata extends MX_Controller
                     $rows->kecamatan_nama,
                     $rows->kabkot_nama,
                     $rows->provinsi_nama,
-                    $rows->rekdet_luas,
                     uang($rows->rekdet_nominal),
                     '<a data-toggle="modal" href="#dokumentasi" data-id="' . md56($rows->rekdet_id) . '" class="btn btn-sm green listDokumentasi" title="Lihat Dokumentasi">
                         <i class="fa fa-file-image-o"> </i>

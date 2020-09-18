@@ -13,19 +13,6 @@
 						</div>
 					</div>
                     <div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Jenis Bantuan</label>
-						<div class="col-sm-3">
-							<select name="rekdet_jnsbtn_id" class="form-control">
-								<option value="">Pilih Jenis Bantuan</option>
-								<?php 
-									foreach ($jnsbtn as $jns) {
-										echo '<option value="'.$jns->jnsbtn_kode.'"> '.$jns->jnsbtn_nama.' </option>';
-									}
-								?>
-							</select>
-						</div>
-					</div>
-                    <div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Provinsi</label>
 						<div class="col-sm-3">
 							<select name="rekdet_provinsi_id" class="form-control rekdet_provinsi_id">
@@ -56,13 +43,6 @@
 							<div class="selectKelurahan"></div>
 						</div>
 					</div>
-					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Jumla Barang</label>
-						<div class="col-sm-3">
-							<input type="number" class="form-control" name="rekdet_jmlbarang" placeholder="Input jumlah barang">
-						</div>
-					</div>
-
 					<hr> <h4><b> Upload Galeri ( Foto ) </b></h4> <hr>
 					<div class="input_fields_wrap">
 						<div class="row">

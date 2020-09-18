@@ -131,8 +131,8 @@ class Rekap extends MX_Controller {
         $data['rekap'] = $this->m_global->get($this->table,$joinRekap,[md56('rekap_id',1) => $rekap_id], $selectRekap )[0];
 		
 		// get data rekap detail
-		$select            = 'rekdet_id,rekdet_lembaga,rekdet_nominal,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_luas';
-		$join              = [
+		$select = 'rekdet_id,rekdet_lembaga,rekdet_nominal,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_luas';
+		$join   = [
 			[$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],
 			[$this->tableJenisBantuan,'rekdet_jnsbtn_kode = jnsbtn_kode','left'],
 			[$this->tableProvinsi,'rekdet_provinsi_kode = provinsi_kode', 'left'],
@@ -267,8 +267,13 @@ class Rekap extends MX_Controller {
         $data['records'] = $this->m_global->get($this->tableRekapDetail,$join,[md56('rekdet_id',1) => $rekdet_id],$select)[0];
 
         // get data foreign
-        $data['bantuan']   = $this->m_global->get($this->tableBantuan,null,['bantuan_status' => '1', 'bantuan_kategori_id' => $data['records']->rekap_kategori_id ],'bantuan_kode,bantuan_nama');
-        $data['jnsbtn']    = $this->m_global->get($this->tableJenisBantuan,null,['jnsbtn_status' => '1', 'jnsbtn_kategori_id' => $data['records']->rekap_kategori_id ],'jnsbtn_kode,jnsbtn_nama');
+        $data['bantuan'] = $this->m_global->get($this->tableBantuan,null,['bantuan_status' => '1', 'bantuan_kategori_id' => $data['records']->rekap_kategori_id ],'bantuan_kode,bantuan_nama');
+        $whereJnsbtn     = [
+            'jnsbtn_status'      => '1', 
+            'jnsbtn_kategori_id' => $data['records']->rekap_kategori_id,
+            'jnsbtn_tipe'        => '1'
+        ];
+        $data['jnsbtn']    = $this->m_global->get($this->tableJenisBantuan,null,$whereJnsbtn,'jnsbtn_kode,jnsbtn_nama');
         $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama',null,['provinsi_nama','ASC']);
         $data['kabkot']    = $this->m_global->get($this->tableKabkot,null,['kabkot_provinsi_kode' => $data['records']->rekdet_provinsi_kode ],'kabkot_kode,kabkot_nama');
         $data['kecamatan'] = $this->m_global->get($this->tableKecamatan,null,['kecamatan_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'kecamatan_kode,kecamatan_nama');

@@ -1,3 +1,12 @@
+<!-- <form action="<?php echo base_url('pusatdata_cari/4'); ?>" method="POST">
+	<input type="text" value="<?php echo $tahun; ?>" name="tahun">
+	<input type="text" value="<?php echo $provinsi; ?>" name="provinsi">
+	<input type="text" value="<?php echo $kabupaten; ?>" name="kabupaten">
+	<input type="text" value="<?php echo $kecamatan; ?>" name="kecamatan">
+	<input type="text" value="<?php echo $keldes; ?>" name="keldes">
+	<button type="submit" class="btn"> Export Excel </button>
+</form>
+-->
 <?php
 $i = 1;
 foreach ($records as $rekap) {

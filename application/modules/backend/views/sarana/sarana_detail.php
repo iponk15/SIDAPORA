@@ -38,7 +38,7 @@
 					<th><center>Kabupaten</center></th>
 					<th><center>Provinsi</center></th>
 					<th><center>Jenis</center></th>
-					<th><center>Jumlah</center></th>
+					<th><center>Total Jumlah</center></th>
 					<th><center>Action</center></th>
 				</tr>
 			</thead>
@@ -54,11 +54,12 @@
 							<td>'.$row->kecamatan_nama.'</td>
 							<td>'.$row->kabkot_nama.'</td>
 							<td>'.$row->provinsi_nama.'</td>
-                            <td width="10%" class="text-center">'.$row->jnsbtn_nama.'</td>
+                            <td width="10%" class="text-center"><a href="#"> List Item </a></td>
 							<td width="10%" class="text-center">'.$row->rekdet_jmlbarang.'</td>
                             <td width="10%">
 								<center>
-                                    <a href="'.base_url('sarana_detail_ubah/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="nav-link-icon fa fa-edit"></i></a>
+									<a href="'.base_url('sarana_detail_tambahitem/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-info"><i class="nav-link-icon fa fa-bars"></i></a>
+									<a href="'.base_url('sarana_detail_ubah/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="nav-link-icon fa fa-edit"></i></a>
                                     <a href="'.base_url('sarana_detail_hapus/'.$rekap_id.'/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-danger"><i class="nav-link-icon fa fa-trash"></i></a>
                                 </center>
                             </td>

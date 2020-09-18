@@ -63,7 +63,9 @@ foreach ($records as $rekap) {
                 {
                     "sClass": "text-center"
                 },
-                null,
+                {
+                    "sClass": "text-center"
+                },
                 {
                     "sClass": "text-center"
                 }

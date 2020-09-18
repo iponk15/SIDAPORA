@@ -199,6 +199,9 @@ $route['sarana_detail_hapus/(:any)/(:any)']  = 'backend/sarana/hapus_detail/$1/$
 $route['sarana_import']                      = 'backend/sarana/importData';
 $route['sarana_template']                    = 'backend/sarana/template';
 $route['sarana_apus_galeri']                 = 'backend/sarana/apus_galeri';
+$route['sarana_detail_tambahitem/(:any)']    = 'backend/sarana/tambah_item/$1';
+$route['sarana_item_simpan/(:any)']          = 'backend/sarana/simpan_item/$1';
+$route['sarana_item_hapus/(:any)']           = 'backend/sarana/hapus_item/$1';
 // end rekap
 
 // start step
