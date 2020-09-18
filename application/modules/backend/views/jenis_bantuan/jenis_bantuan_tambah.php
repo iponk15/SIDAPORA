@@ -6,6 +6,16 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<div class="position-relative row form-group">
+						<label class="col-sm-2 col-form-label">Tipe</label>
+						<div class="col-sm-4">
+							<select name="jnsbtn_tipe" class="form-control jnsbtn_tipe">
+								<option value="">Pilih Tipe</option>
+								<option value="1">Prasarana</option>
+								<option value="2">Sarana</option>
+							</select>
+						</div>
+					</div>
+					<div class="position-relative row form-group" id="jnsbtn_kategori_id" style="display:none;">
 						<label class="col-sm-2 col-form-label">Kategori</label>
 						<div class="col-sm-4">
 							<select name="jnsbtn_kategori_id" class="form-control">
@@ -15,22 +25,6 @@
 										echo '<option value="'.$rows->kategori_id.'">'.$rows->kategori_nama.'</option>';
 									} 
 								?>
-							</select>
-						</div>
-					</div>
-					<div class="position-relative row form-group formBantuan" style="display:none;">
-						<label class="col-sm-2 col-form-label">Bantuan</label>
-						<div class="col-sm-4">
-							<div class="selectJenisBantuan"></div>
-						</div>
-					</div>
-					<div class="position-relative row form-group formBantuan">
-						<label class="col-sm-2 col-form-label">Tipe</label>
-						<div class="col-sm-4">
-							<select name="jnsbtn_tipe" class="form-control">
-								<option value="">Pilih Tipe</option>
-								<option value="1">Prasarana</option>
-								<option value="2">Sarana</option>
 							</select>
 						</div>
 					</div>
@@ -67,15 +61,14 @@
 
 <script>
 	$(document).ready(function(){
-		$('.bantuan_kategori_id').on('change', function(){
-			$('.formBantuan').fadeIn('slow');
-			var kategoriId = $(this).val();
-			var url        = base_url + 'jenis_bantuan_get_bantuan';
-			var xdta       = { 'jnsbtn_kategori_id' : kategoriId  };
+		$('.jnsbtn_tipe').on('change', function(){
+			var val = $(this).val();
 
-			$.post(url,xdta,function(res){
-				$('.selectBantuan').html(res);
-			});
+			if(val == 1){
+				$('#jnsbtn_kategori_id').fadeIn('slow');
+			}else{
+				$('#jnsbtn_kategori_id').fadeOut('slow');
+			}
 		});
 	});
 </script>

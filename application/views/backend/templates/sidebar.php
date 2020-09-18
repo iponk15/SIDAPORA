@@ -55,7 +55,7 @@
 				</li>
 				<li>
 					<a href="<?php echo base_url('jenis_bantuan'); ?>" class="<?php echo (getCtrl() == 'jenis_bantuan' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-plugin"></i> Jenis Bantuan
+						<i class="metismenu-icon pe-7s-plugin"></i> Cabang Olahraga
 					</a>
 				</li>
 				<li>

@@ -131,7 +131,7 @@ class Rekap extends MX_Controller {
         $data['rekap'] = $this->m_global->get($this->table,$joinRekap,[md56('rekap_id',1) => $rekap_id], $selectRekap )[0];
 		
 		// get data rekap detail
-		$select = 'rekdet_id,rekdet_lembaga,rekdet_nominal,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_luas';
+		$select = 'rekdet_id,rekdet_lembaga,rekdet_nominal,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_luas,rekdet_tipe_bangunan';
 		$join   = [
 			[$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],
 			[$this->tableJenisBantuan,'rekdet_jnsbtn_kode = jnsbtn_kode','left'],
@@ -187,6 +187,7 @@ class Rekap extends MX_Controller {
         $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
         $data['rekdet_nominal']        = $post['rekdet_nominal'];
         $data['rekdet_luas']           = $post['rekdet_luas'];
+        $data['rekdet_tipe_bangunan']  = $post['rekdet_tipe_bangunan'];
         $data['rekdet_createdby']      = getSession('user_id');
         $data['rekdet_createddate']    = date('Y-m-d H:i:s');
         
@@ -263,7 +264,7 @@ class Rekap extends MX_Controller {
             [$this->tableKecamatan,'rekdet_kecamatan_kode = kecamatan_kode','left'],
             [$this->tableKeldes,'rekdet_keldes_kode = keldes_kode','left']
         ];
-        $select          = 'rekdet_id,rekdet_rekap_id,rekdet_lembaga,rekdet_nominal,rekap_kategori_id,rekdet_bantuan_kode,rekdet_jnsbtn_kode,rekdet_provinsi_kode,rekdet_kabkot_kode,rekdet_kecamatan_kode,rekdet_keldes_kode,rekdet_luas';
+        $select          = 'rekdet_id,rekdet_rekap_id,rekdet_lembaga,rekdet_nominal,rekap_kategori_id,rekdet_bantuan_kode,rekdet_jnsbtn_kode,rekdet_provinsi_kode,rekdet_kabkot_kode,rekdet_kecamatan_kode,rekdet_keldes_kode,rekdet_luas,rekdet_tipe_bangunan';
         $data['records'] = $this->m_global->get($this->tableRekapDetail,$join,[md56('rekdet_id',1) => $rekdet_id],$select)[0];
 
         // get data foreign
@@ -352,6 +353,7 @@ class Rekap extends MX_Controller {
         $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
         $data['rekdet_nominal']        = $post['rekdet_nominal'];
         $data['rekdet_luas']           = $post['rekdet_luas'];
+        $data['rekdet_tipe_bangunan']  = $post['rekdet_tipe_bangunan'];
         $data['rekdet_updatedby']      = getSession('user_id');
         
         $input = $this->m_global->update($this->tableRekapDetail, $data, [md56('rekdet_id',1) => $rekdet_id]); 

@@ -75,7 +75,7 @@ class Jenis_bantuan extends MX_Controller {
 
     function update($jenis_bantuan_id){
         $post                       = $this->input->post();
-        $data['jnsbtn_kategori_id'] = $post['jnsbtn_kategori_id'];
+        $data['jnsbtn_kategori_id'] = ( $post['jnsbtn_tipe'] == '2' ? null : $post['jnsbtn_kategori_id']);
         $data['jnsbtn_tipe']        = $post['jnsbtn_tipe'];
         $data['jnsbtn_kode']        = strtoupper($post['jnsbtn_kode']);
 		$data['jnsbtn_nama']        = $post['jnsbtn_nama'];

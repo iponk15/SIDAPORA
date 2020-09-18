@@ -76,12 +76,23 @@
 						</div>
 					</div>
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Luas (m)</label>
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Luas (m2)</label>
 						<div class="col-sm-3">
 							<input type="number" class="form-control" name="rekdet_luas" placeholder="Input Luas">
 						</div>
 					</div>
-
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Kat. Bangunan</label>
+						<div class="col-sm-3">
+							<select name="rekdet_tipe_bangunan" class="form-control">
+								<option value="">Pilih Kategori Bangunan</option>
+								<option value="1">Pembangunan Baru</option>
+								<option value="2">Rehabilitasi</option>
+								<option value="3">Renovasi</option>
+								<option value="4">Pembangunan</option>
+							</select>
+						</div>
+					</div>
 					<hr> <h4><b> Upload Galeri ( Foto ) </b></h4> <hr>
 					<div class="input_fields_wrap">
 						<div class="row">

@@ -107,6 +107,18 @@
 							<input type="number" class="form-control" name="rekdet_luas" placeholder="Input Luas" value="<?php echo $records->rekdet_luas; ?>" >
 						</div>
 					</div>
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Kat. Bangunan</label>
+						<div class="col-sm-3">
+							<select name="rekdet_tipe_bangunan" class="form-control">
+								<option value="">Pilih Kategori Bangunan</option>
+								<option <?php echo ($records->rekdet_tipe_bangunan == '1' ? 'selected' : '' ); ?> value="1">Pembangunan Baru</option>
+								<option <?php echo ($records->rekdet_tipe_bangunan == '2' ? 'selected' : '' ); ?> value="2">Rehabilitasi</option>
+								<option <?php echo ($records->rekdet_tipe_bangunan == '3' ? 'selected' : '' ); ?> value="3">Renovasi</option>
+								<option <?php echo ($records->rekdet_tipe_bangunan == '4' ? 'selected' : '' ); ?> value="4">Pembangunan</option>
+							</select>
+						</div>
+					</div>
 					<input type="hidden" value="<?php echo $records->rekdet_id; ?>" name="rekdet_id">
 					<hr> <h4><b> Upload Galeri ( Foto ) </b></h4> <hr>
 					<div class="input_fields_wrap">
