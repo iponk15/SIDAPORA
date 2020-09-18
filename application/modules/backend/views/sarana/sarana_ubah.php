@@ -1,7 +1,7 @@
 <div class="main-card mb-3 card">
 	<div class="card-header"><h5><b><?php echo $header; ?></b></h5></div>
 	<div class="card-body">
-		<form enctype="multipart/form-data" class="" method="POST" action="<?php echo base_url('rekap_update/'.$rekap_id); ?>">
+		<form enctype="multipart/form-data" class="" method="POST" action="<?php echo base_url('sarana_update/'.$rekap_id); ?>">
 			<div class="row">
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
