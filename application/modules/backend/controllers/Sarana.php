@@ -93,6 +93,7 @@ class Sarana extends MX_Controller {
 		$data['rekap_kategori_id'] = $post['rekap_kategori_id'];
         $data['rekap_judul']       = $post['rekap_judul'];
         $data['rekap_tahun']       = $post['rekap_tahun'];
+        $data['rekap_tipe']        = 2;
         $data['rekap_updatedby']   = getSession('user_id');
         $data['rekap_ip']          = getUserIp();
 		
@@ -584,7 +585,7 @@ class Sarana extends MX_Controller {
 			[$this->tableKeldes,'(rekdet_keldes_kode = keldes_kode AND keldes_provinsi_kode = provinsi_kode AND keldes_kabkot_kode = kabkot_kode AND keldes_kecamatan_kode = kecamatan_kode)','left']
         ];
         $data['records']   = $this->m_global->get('sdp_rekap_detail',$joinRecords,$whereRecords,'rekdet_lembaga,rekdet_rekap_id,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama')[0];
-        $data['jnsbtn']    = $this->m_global->get($this->tableJenisBantuan,null,['jnsbtn_tipe' => '2'],'jnsbtn_kode,jnsbtn_nama');
+        $data['jnsbtn']    = $this->m_global->get($this->tableJenisBantuan,null,['jnsbtn_tipe' => '2'],'jnsbtn_kode,jnsbtn_nama',null,['jnsbtn_nama', 'ASC']);
 
         $itemsJoin     = [ ['sdp_master_jenis_bantuan', 'sartem_jnsbtn_kode = jnsbtn_kode', 'left'] ];
         $data['items'] = $this->m_global->get('sdp_rekap_item',$itemsJoin,[md56('sartem_rekdet_id',1) => $rekdet_id],'sartem_id,jnsbtn_kode,jnsbtn_nama,sartem_jml');
