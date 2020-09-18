@@ -10,6 +10,7 @@ class Home extends MX_Controller
 
     public function index()
     {
+        $img_ext = ['jpg', 'jpeg', 'png', 'bmp'];
         $get  = $this->input->get();
 
         $data['tahun'] = $get['tahun'] ?? date('Y');
@@ -24,23 +25,38 @@ class Home extends MX_Controller
             ['sdp_master_step', 'sdp_master_step.step_id = sdp_rekap_dokumen.rekdok_step_id', 'left']
         ];
         $where = [
-            'rekdok_step_id IS NOT NULL' => NULL,
-            'rekdok_is_public'  => '1'
+            '(rekdok_step_id IS NOT NULL AND rekdok_step_id <> 0)' => NULL,
+            'rekdok_is_public'  => '1',
         ];
 
         $select = 'rekdok_file,
+                rekdok_step_id,
                 rekdok_ringkasan,
                 rekdok_deskripsi,
                 step_nama,
                 step_deskripsi,
                 step_order';
         $records    = $this->m_global->get('sdp_rekap_dokumen', $join, $where, $select, null, ['step_order', 'asc']);
-        $data['records']        = $records;
-        $data['slider_utama']   = array_rand($records, 2);
+
+        $result = [];
         foreach ($records as $value) {
-            $result[$value->step_order][]  = $value;
+            $get_ext = strtolower(pathinfo($value->rekdok_file, PATHINFO_EXTENSION));
+
+            if (in_array($get_ext, $img_ext)) {
+                $result[] = $value;
+            }
         }
 
+        $records = $result;
+        $data['records']        = $records;
+        // pre($records);
+
+        $data['slider_utama']   = array_rand($records, 2);
+        $result = [];
+        foreach ($records as $value) {
+            // pre($value, 1);
+            $result[$value->step_order][]  = $value;
+        }
         // isi image harus 6 slider
         $config_jml_image = 6;
         foreach ($result as $key => $value) {
