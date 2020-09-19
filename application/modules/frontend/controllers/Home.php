@@ -51,7 +51,7 @@ class Home extends MX_Controller
         $data['records']        = $records;
         // pre($records);
 
-        $data['slider_utama']   = array_rand($records, 2);
+        $data['slider_utama']   = array_rand($records, 4);
         $result = [];
         foreach ($records as $value) {
             // pre($value, 1);

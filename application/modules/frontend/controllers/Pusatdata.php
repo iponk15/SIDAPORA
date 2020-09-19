@@ -189,10 +189,9 @@ class Pusatdata extends MX_Controller
     function cariData($flag = null, $tahun = null, $provinsi = null, $kabupaten = null)
     {
         $post  = $this->input->post();
-        // pre($post, 1);
         /*BEGIN GET DATA PETA MAP*/
-        $post['type'] = 3;
         $jointype = $post['type'] == 3 ? '' : 'AND rekap_tipe = "' . $post['type'] . '"';
+
         $selectjoinmap = '(
             SELECT
                 rekdet_provinsi_kode,
@@ -466,7 +465,25 @@ class Pusatdata extends MX_Controller
     function dokumentasi()
     {
         $post        = $this->input->post();
-        $data['dok'] = $this->m_global->get($this->tableRekapDokumen, null, [md56('rekdok_rekdet_id', 1) => $post['rekdet_id']], 'rekdok_ringkasan,rekdok_file,rekdok_deskripsi');
+        $join = [
+            ['sdp_master_step', 'sdp_master_step.step_id = rekdok_step_id', 'left']
+        ];
+        $where[md56('rekdok_rekdet_id', 1)] = $post['rekdet_id'];
+        $where['rekdok_is_public']  = '1';
+        $dok         = $this->m_global->get($this->tableRekapDokumen, $join, $where, 'rekdok_ringkasan,rekdok_id,rekdok_file,rekdok_deskripsi', null, ['step_order', 'asc']);
+        $result = [];
+        foreach ($dok as $key => $value) {
+            $extension = pathinfo($value->rekdok_file, PATHINFO_EXTENSION);
+
+            if ($extension != '') {
+                $result[] = $value;
+                $is_file_exist = file_exists($value->rekdok_file) ? 'true' : 'false';
+                if ($is_file_exist == 'true') {
+                }
+            }
+        }
+        $data['dok']    = $result;
+        // pre($result, 1);
         $this->load->view($this->prefix . 'dokumentasi', $data);
     }
 

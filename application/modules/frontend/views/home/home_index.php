@@ -1,4 +1,5 @@
 <style>
+    /* START CSS FOR IMG CAROUSAL */
     .vertical .carousel-inner {
         height: 100%;
     }
@@ -39,6 +40,119 @@
     .carousel.vertical .item {
         left: 0;
     }
+
+    /* END CSS FOR IMG CAROUSAL */
+
+    /* START CSS FOR IMG PREVIEW */
+    .myImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .myImg:hover {
+        opacity: 0.7;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.9);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content (image) */
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    /* Caption of Modal Image */
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    /* Add Animation */
+    .modal-content,
+    #caption {
+        -webkit-animation-name: zoom;
+        -webkit-animation-duration: 0.6s;
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    @-webkit-keyframes zoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* The Close Button */
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+        .modal-content {
+            width: 100%;
+        }
+    }
+
+    /* END CSS FOR IMG PREVIEW */
 </style>
 <div id="main-wrapper">
     <div id="main" style="margin-top: 1%;">
@@ -93,7 +207,7 @@
                                             <div class="row">
                                                 <?php for ($j = 0; $j < count($result); $j++) { ?>
                                                     <div class="col-sm-3">
-                                                        <a class="thumbnail" href="#">
+                                                        <a class="thumbnail fancybox<?php echo $j ?> img-fancy" data-fancy="fancybox<?php echo $j ?>" href="<?php echo $result[$j][$i]->rekdok_file ?>">
                                                             <img src="<?php echo $result[$j][$i]->rekdok_file ?>" alt="<?php echo $result[$j][$i]->rekdok_ringkasan ?>" />
                                                             <div class="carousel-caption"><?php echo $result[$j][$i]->step_nama ?></div>
                                                         </a>
@@ -197,10 +311,20 @@
         <!-- /#main-inner -->
     </div><!-- /#main -->
 </div><!-- /#main-wrapper -->
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+</div>
 
 <script src="<?php echo base_url('assets\frontend\libraries\flot\jquery.flot.min.js') ?>"></script>
 <script>
     $(document).ready(function() {
+        $('.img-fancy').on('click', function() {
+            var fancy = $(this).data('fancy');
+            $("." + fancy).fancybox();
+        });
         $('.vertical').carousel({
             interval: 3000
         });
