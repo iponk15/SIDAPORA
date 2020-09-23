@@ -89,7 +89,7 @@
     <div class="modal-dialog modal-lg" style="width:1550px;">
         <div class="modal-content" style="top: 60px;">
             <div class="modal-header" style="background-color: turquoise;">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <button type="button" class="btn default" data-dismiss="modal" style="float: right;">Close</button>
                 <h4 class="modal-title" style="color: black;"><i class="fa fa-info-circle"></i> <b>Detail Informasi</b></h4>
             </div>
             <div class="modal-body">
