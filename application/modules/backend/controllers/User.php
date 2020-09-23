@@ -16,9 +16,13 @@ class User extends MX_Controller {
 		$data['icon']      = 'user';
 		$data['header']    = 'Table User';
 		
-		// get data
-		$select          = 'user_id,user_nama,user_email,user_status';
-        $data['records'] = $this->m_global->get($this->table,null,null,$select);
+        // get data
+        $recordsJoin     = [
+            ['sdp_master_kategori','user_kategori_id = kategori_id', 'left'],
+            ['sdp_master_cabang','user_cabang_id = cabang_id', 'left']
+        ];
+		$select          = 'user_id,user_nama,user_email,user_status,user_role,kategori_nama,cabang_nama';
+        $data['records'] = $this->m_global->get($this->table,$recordsJoin,null,$select);
         
         $this->templates->backend($this->prefix.'index', $data);
     }
@@ -36,6 +40,9 @@ class User extends MX_Controller {
         $post                     = $this->input->post();
         $data['user_nama']        = $post['user_nama'];
         $data['user_email']       = $post['user_email'];
+        $data['user_role']        = $post['user_role'];
+        $data['user_kategori_id'] = $post['user_kategori_id'];
+        $data['user_cabang_id']   = $post['user_cabang_id'];
         $data['user_password']    = md5_mod($post['user_password'], $post['user_email']);
         $data['user_createdby']   = getSession('user_id');
         $data['user_createddate'] = date('Y-m-d H:i:s');
@@ -54,18 +61,26 @@ class User extends MX_Controller {
         $data['pagetitle'] = 'Halaman User';
 		$data['subtitle']  = 'Edit data user';
 		$data['icon']      = 'user';
-		$data['header']    = 'Form User';
-		$data['user']      = $this->m_global->get($this->table,null,['user_id' => $user_id]);
+        $data['header']    = 'Form User';
+        $userJoin          = [
+            ['sdp_master_kategori','user_kategori_id = kategori_id', 'left'],
+            ['sdp_master_cabang','user_cabang_id = cabang_id', 'left']
+        ];
+        $userSelect        = 'user_id,user_nama,user_email,user_role,kategori_id,kategori_nama,cabang_id,cabang_nama';
+		$data['user']      = $this->m_global->get($this->table,$userJoin,['user_id' => $user_id],$userSelect);
 		
 		$this->templates->backend('user/user_ubah',$data);
     }
 
     function update($user_id){
-        $post                   = $this->input->post();
-		$data['user_nama']      = $post['user_nama'];
-		$data['user_email']     = $post['user_email'];
-		$data['user_updatedby'] = getSession('user_id');
-		$data['user_ip']        = getUserIP();
+        $post                     = $this->input->post();
+		$data['user_nama']        = $post['user_nama'];
+		$data['user_email']       = $post['user_email'];
+		$data['user_role']        = $post['user_role'];
+        $data['user_kategori_id'] = ( $post['user_role'] == '1' ? null : $post['user_kategori_id'] );
+        $data['user_cabang_id']   = ( $post['user_role'] == '1' ? null : $post['user_cabang_id'] );
+		$data['user_updatedby']   = getSession('user_id');
+		$data['user_ip']          = getUserIP();
 		
 		if(!empty($post['user_password'])){
 			$data['user_password'] = md5_mod($post['user_password'], $post['user_email']);

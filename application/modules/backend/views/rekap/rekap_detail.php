@@ -53,7 +53,7 @@
                         echo '
                         <tr>
                             <td scope="row" width="3%"><center>'.$i++.'</center></td>
-                            <td>'.$row->rekdet_lembaga.'</td>
+                            <td><a href="'.base_url('rekap_detail_ubah/'.md56($row->rekdet_id)).'" class="mb-2 mr-2" title="Edit Data">'.$row->rekdet_lembaga.'</a></td>
                             <td width="10%">'.$row->jnsbtn_nama.'</td>
                             <td>'.$row->bantuan_nama.'</td>
 							<td>'.$row->keldes_nama.'</td>
@@ -65,7 +65,6 @@
 							<td>'.$bangunan[$row->rekdet_tipe_bangunan].'</td>
                             <td width="10%">
 								<center>
-                                    <a href="'.base_url('rekap_detail_ubah/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="nav-link-icon fa fa-edit"></i></a>
                                     <a href="'.base_url('rekap_detail_hapus/'.$rekap_id.'/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-danger"><i class="nav-link-icon fa fa-trash"></i></a>
                                 </center>
                             </td>

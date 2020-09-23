@@ -38,6 +38,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/css/dataTables.bootstrap.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/datepicker/css/bootstrap-datepicker.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/plugins/sweetalert2/dist/sweetalert2.min.css'); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/backend/css/custom.css'); ?>">
 </head>
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
@@ -57,6 +58,6 @@
 			<!-- <script src="http://maps.google.com/maps/api/js?sensor=true"></script> -->
         </div>
     </div>
-	<script type="text/javascript" src="<?php echo base_url('assets/backend/js/main.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/backend/js/main.js'); ?>"></script>
 </body>
 </html>

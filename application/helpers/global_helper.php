@@ -90,4 +90,50 @@ function getGaleriPusdat($tahun){
     return $hasil;
 }
 
+function get_bidang($param){
+    $CI        =& get_instance();
+    $gettipe   = $CI->input->get('tipe');
+    $getbidang = $CI->input->get('bidang');
+    $rekap     = ['1' => 'Rekap', '2' => 'Sarana'];
+    $where     = ( $param->user_role == 1 ? ['kategori_status' => '1'] : ['kategori_id' => $param->user_kategori_id, 'kategori_status' => '1'] );
+    $bidang    =  $CI->m_global->get('sdp_master_kategori',null,$where,'kategori_id,kategori_nama',null,['kategori_nama','ASC']);
+    $menu      = '';
+    $hrrk      = [];
+
+    foreach ($rekap as $key => $rkp) {
+        if($param->user_role == 1){
+            $menu .= '<li>
+                        <a href="'.strtolower($rkp).'#" class="'.(getCtrl() == strtolower($rkp) ? 'mm-active' : '').'">
+                            <i class="metismenu-icon pe-7s-diamond"></i>'.( $rkp == 'Rekap' ? 'Prasarana' : $rkp ).'<i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        </a>
+                        <ul class="'.(getCtrl() == strtolower($rkp) ? 'mm-show mm-collapse' : '').'">';
+
+                            foreach ($bidang as $bdg) {
+                                $menu .= '<li style="margin-bottom: 2%;">
+                                            <a href="'.( $key == 1 ? base_url( 'rekap?tipe=' . $key .'&bidang=' . $bdg->kategori_id ) : base_url( 'sarana?tipe=' . $key .'&bidang=' . $bdg->kategori_id ) ).'"  class="'.(getCtrl() == strtolower($rkp) && $key == $gettipe && $bdg->kategori_id == $getbidang ? 'mm-active' : '').'" >
+                                                <i class="metismenu-icon"></i> '. $bdg->kategori_nama .'
+                                            </a>
+                                        </li>';
+                            }
+
+            $menu .= '  </ul>
+                    </li>';
+        }else{
+            $menu .= '<li>
+                        <a href="'.( $key == 1 ? base_url( 'rekap?tipe=' . $key .'&bidang=' . $param->user_kategori_id ) : base_url( 'sarana?tipe=' . $key .'&bidang=' . $param->user_kategori_id ) ).'" class="'.(getCtrl() == strtolower($rkp) ? 'mm-active' : '').'">
+                            <i class="metismenu-icon pe-7s-news-paper"></i> '.( $rkp == 'Rekap' ? 'Prasarana' : $rkp ).'
+                        </a>
+                    </li>';
+        }
+    }
+
+    return $menu;
+}
+
+function getInfo($field){
+    $CI     =& get_instance();
+    $result = $CI->m_global->get('sdp_master_user',null,[ 'user_id' => $CI->session->userdata('sidaporaSes')->user_id, 'user_status' => '1' ],$field)[0];
+    return $result;
+}
+
 ?>

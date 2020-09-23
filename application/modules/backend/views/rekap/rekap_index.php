@@ -10,18 +10,12 @@
 					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Kategori</label>
 						<div class="col-sm-3">
-							<select name="data_kategori" class="form-control">
-								<option value="">Pilih Kategori</option>
-								<?php 
-									foreach ($kategori as $ktgrs) {
-										echo '<option value="'.$ktgrs->kategori_id.'"> '.$ktgrs->kategori_nama.' </option>';
-									}
-								?>
-							</select>
+							<input type="hidden" name="data_kategori" value="<?php echo $kategori->kategori_id ?>">
+							<input type="text" disabled class="form-control" value="<?php echo $kategori->kategori_nama ?>">
 						</div>
 					</div>
 					<div class="position-relative row form-group">
-						<label for="exampleEmail" class="col-sm-2 col-form-label">Masukan file excel</label>
+						<label for="exampleEmail" class="col-sm-2 col-form-label">File excel</label>
 						<div class="col-sm-3">
 							<input type="file" class="form-control" name="data_rekap" placeholder="import data excel">
 						</div>
@@ -45,7 +39,11 @@
 	</div>
 	<div class="card-body">
 		<div class="text-right"> 
-			<a href="<?php echo base_url('rekap_tambah'); ?>" class="mb-2 mr-2 btn btn-primary active">Tambah Data Rekap</a> 
+			<?php
+				if(empty(getInfo('user_kategori_id')->user_kategori_id)){
+					echo '<a href="'. base_url('rekap_tambah?bidang=' . $kategori->kategori_id).'" class="mb-2 mr-2 btn btn-primary active">Tambah Data Rekap</a>';
+				}
+			?>
 		</div>
 		<table class="mb-0 table table-bordered table_user">
 			<thead>

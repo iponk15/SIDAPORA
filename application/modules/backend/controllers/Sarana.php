@@ -130,14 +130,15 @@ class Sarana extends MX_Controller {
         $data['sarana'] = $this->m_global->get($this->table,$joinsarana,[md56('rekap_id',1) => $rekap_id], $selectsarana )[0];
 		
 		// get data sarana detail
-		$select            = 'rekdet_id,rekdet_lembaga,rekdet_nominal,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_jmlbarang';
+		$select            = 'rekdet_id,rekdet_lembaga,rekdet_nominal,bantuan_nama,jnsbtn_nama,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama,rekdet_jmlbarang,tmp.jml';
 		$join              = [
 			[$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],
 			[$this->tableJenisBantuan,'rekdet_jnsbtn_kode = jnsbtn_kode','left'],
 			[$this->tableProvinsi,'rekdet_provinsi_kode = provinsi_kode', 'left'],
 			[$this->tableKabkot,'(rekdet_kabkot_kode = kabkot_kode AND kabkot_provinsi_kode = provinsi_kode)','left'],
 			[$this->tableKecamatan,'(rekdet_kecamatan_kode = kecamatan_kode AND kecamatan_provinsi_kode = provinsi_kode AND kecamatan_kabkot_kode = kabkot_kode)','left'],
-			[$this->tableKeldes,'(rekdet_keldes_kode = keldes_kode AND keldes_provinsi_kode = provinsi_kode AND keldes_kabkot_kode = kabkot_kode AND keldes_kecamatan_kode = kecamatan_kode)','left']
+            [$this->tableKeldes,'(rekdet_keldes_kode = keldes_kode AND keldes_provinsi_kode = provinsi_kode AND keldes_kabkot_kode = kabkot_kode AND keldes_kecamatan_kode = kecamatan_kode)','left'],
+            ['(SELECT count(*) AS jml,sartem_rekdet_id FROM sdp_rekap_item GROUP BY sartem_rekdet_id) AS tmp', 'rekdet_id = tmp.sartem_rekdet_id', 'left' ]
 		];
         $data['rkpDetail'] = $this->m_global->get($this->tablesaranaDetail,$join,[md56('rekdet_rekap_id',1) => $rekap_id], $select, null, ['rekdet_lastupdate', 'DESC']);
 		
@@ -176,9 +177,9 @@ class Sarana extends MX_Controller {
         $data['rekdet_rekap_id']       = $rekap_id;
         $data['rekdet_lembaga']        = $post['rekdet_lembaga'];
         $data['rekdet_provinsi_kode']  = $post['rekdet_provinsi_id'];
-        $data['rekdet_kabkot_kode']    = $post['kecamatan_kabkot_id'];
-        $data['rekdet_kecamatan_kode'] = $post['keldes_kecamatan_id'];
-        $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
+        $data['rekdet_kabkot_kode']    = $post['rekdet_kabkot_kode'];
+        $data['rekdet_kecamatan_kode'] = $post['rekdet_kecamatan_kode'];
+        $data['rekdet_keldes_kode']    = $post['rekdet_keldes_kode'];
         $data['rekdet_createdby']      = getSession('user_id');
         $data['rekdet_createddate']    = date('Y-m-d H:i:s');
         
@@ -251,11 +252,12 @@ class Sarana extends MX_Controller {
             [$this->tableBantuan,'rekdet_bantuan_kode = bantuan_kode','left'],
             [$this->tableJenisBantuan,'rekdet_jnsbtn_kode = jnsbtn_kode','left'],
             [$this->tableProvinsi,'rekdet_provinsi_kode = provinsi_kode','left'],
-            [$this->tableKabkot,'rekdet_kabkot_kode = kabkot_kode','left'],
-            [$this->tableKecamatan,'rekdet_kecamatan_kode = kecamatan_kode','left'],
-            [$this->tableKeldes,'rekdet_keldes_kode = keldes_kode','left']
+            [$this->tableKabkot,'rekdet_kabkot_kode = kabkot_kode AND kabkot_provinsi_kode = provinsi_kode','left'],
+            [$this->tableKecamatan,'rekdet_kecamatan_kode = kecamatan_kode AND kecamatan_provinsi_kode = provinsi_kode AND kecamatan_kabkot_kode = kabkot_kode','left'],
+            [$this->tableKeldes,'rekdet_keldes_kode = keldes_kode AND keldes_provinsi_kode = provinsi_kode AND keldes_kabkot_kode = kabkot_kode AND keldes_kecamatan_kode = kecamatan_kode','left']
         ];
-        $select          = 'rekdet_id,rekdet_rekap_id,rekdet_lembaga,rekdet_nominal,rekap_kategori_id,rekdet_bantuan_kode,rekdet_jnsbtn_kode,rekdet_provinsi_kode,rekdet_kabkot_kode,rekdet_kecamatan_kode,rekdet_keldes_kode,rekdet_jmlbarang';
+        $select = 'rekdet_id,rekdet_rekap_id,rekdet_lembaga,rekdet_nominal,rekap_kategori_id,rekdet_bantuan_kode,rekdet_jnsbtn_kode,rekdet_provinsi_kode,rekdet_kabkot_kode,rekdet_kecamatan_kode,rekdet_keldes_kode,rekdet_jmlbarang,
+			       provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama';
         $data['records'] = $this->m_global->get($this->tablesaranaDetail,$join,[md56('rekdet_id',1) => $rekdet_id],$select)[0];
 
         // get data foreign
@@ -265,12 +267,8 @@ class Sarana extends MX_Controller {
             'jnsbtn_tipe'        => '2'
         ];
 
-        $data['jnsbtn']    = $this->m_global->get($this->tableJenisBantuan,null,$whereJnsbtn,'jnsbtn_kode,jnsbtn_nama');
-        $data['provinsi']  = $this->m_global->get($this->tableProvinsi,null,['provinsi_status' => '1'],'provinsi_kode,provinsi_nama',null,['provinsi_nama','ASC']);
-        $data['kabkot']    = $this->m_global->get($this->tableKabkot,null,['kabkot_provinsi_kode' => $data['records']->rekdet_provinsi_kode ],'kabkot_kode,kabkot_nama');
-        $data['kecamatan'] = $this->m_global->get($this->tableKecamatan,null,['kecamatan_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'kecamatan_kode,kecamatan_nama');
-        $data['kelurahan'] = $this->m_global->get($this->tableKeldes,null,['keldes_provinsi_kode' => $data['records']->rekdet_provinsi_kode],'keldes_kode,keldes_nama');
-        $data['galeri']    = $this->m_global->get($this->tableDokumen,null,[md56('rekdok_rekdet_id',1) => $rekdet_id],'rekdok_id,rekdok_rekdet_id,rekdok_file,rekdok_ringkasan,rekdok_deskripsi,rekdok_is_public,rekdok_step_id');
+        $data['jnsbtn'] = $this->m_global->get($this->tableJenisBantuan,null,$whereJnsbtn,'jnsbtn_kode,jnsbtn_nama');
+        $data['galeri'] = $this->m_global->get($this->tableDokumen,null,[md56('rekdok_rekdet_id',1) => $rekdet_id],'rekdok_id,rekdok_rekdet_id,rekdok_file,rekdok_ringkasan,rekdok_deskripsi,rekdok_is_public,rekdok_step_id');
 
         $this->templates->backend($this->prefix.'detail_ubah', $data);
     }
@@ -337,9 +335,9 @@ class Sarana extends MX_Controller {
 
         $data['rekdet_lembaga']        = $post['rekdet_lembaga'];
         $data['rekdet_provinsi_kode']  = $post['rekdet_provinsi_id'];
-        $data['rekdet_kabkot_kode']    = $post['kecamatan_kabkot_id'];
-        $data['rekdet_kecamatan_kode'] = $post['keldes_kecamatan_id'];
-        $data['rekdet_keldes_kode']    = $post['rekap_keldes_id'];
+        $data['rekdet_kabkot_kode']    = $post['rekdet_kabkot_kode'];
+        $data['rekdet_kecamatan_kode'] = $post['rekdet_kecamatan_kode'];
+        $data['rekdet_keldes_kode']    = $post['rekdet_keldes_kode'];
         $data['rekdet_updatedby']      = getSession('user_id');
         
         $input = $this->m_global->update($this->tablesaranaDetail, $data, [md56('rekdet_id',1) => $rekdet_id]); 

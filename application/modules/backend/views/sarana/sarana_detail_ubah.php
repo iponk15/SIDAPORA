@@ -14,59 +14,29 @@
                     <div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Provinsi</label>
 						<div class="col-sm-3">
-							<select name="rekdet_provinsi_id" class="form-control rekdet_provinsi_id">
-								<option value="">Pilih Provinsi</option>
-								<?php 
-									foreach ($provinsi as $prv) {
-										echo '<option '.( $records->rekdet_provinsi_kode == $prv->provinsi_kode ? 'selected' : '' ).' value="'.$prv->provinsi_kode.'"> '.$prv->provinsi_nama.' </option>';
-									}
-								?>
-							</select>
+							<input type="text" class="form-control rekdet_provinsi_id" id="rekdet_provinsi_id" placeholder="Input Provinsi" value="<?php echo $records->provinsi_nama . ' ('.$records->rekdet_provinsi_kode.')'; ?>">
+							<input type="hidden" class="temp_rekdet_provinsi_id" name="rekdet_provinsi_id" value="<?php echo $records->rekdet_provinsi_kode; ?>">
 						</div>
 					</div>
-                    <div class="position-relative row form-group formKabkot" <?php echo (empty($records->rekdet_kabkot_kode) ? 'style="display:none;"' : '') ?> >
+                    <div class="position-relative row form-group formKabkot" <?php echo (empty($records->rekdet_kabkot_kode) ? 'style="display:none;"' : '' ); ?> >
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Kabupaten</label>
 						<div class="col-sm-3">
-                            <div class="selectKabkot">
-                                <select name="kecamatan_kabkot_id" class="form-control kecamatan_kabkot_id">
-                                    <option value="">Pilih Kabupaten / Kota</option>
-                                    <?php 
-                                        foreach ($kabkot as $kabkots) {
-                                            echo '<option '.( $records->rekdet_kabkot_kode == $kabkots->kabkot_kode ? 'selected' : '' ).' value="'.$kabkots->kabkot_kode.'">'.$kabkots->kabkot_nama.'</option>';
-                                        }
-                                    ?>
-                                </select>
-                            </div>
+							<input type="text" class="form-control rekdet_kabkot_kode" id="rekdet_kabkot_kode" placeholder="Input Kabupaten / Kota" value="<?php echo $records->kabkot_nama . ' ('.$records->rekdet_kabkot_kode.')'; ?>">
+							<input type="hidden" class="temp_rekdet_kabkot_kode" name="rekdet_kabkot_kode" value="<?php echo $records->rekdet_kabkot_kode; ?>">
 						</div>
 					</div>
-                    <div class="position-relative row form-group formkecamatan" <?php echo (empty($records->rekdet_kecamatan_kode) ? 'style="display:none;"' : '') ?>>
+                    <div class="position-relative row form-group formkecamatan" <?php echo (empty($records->rekdet_kecamatan_kode) ? 'style="display:none;"' : '' ); ?>>
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Kecamatan</label>
 						<div class="col-sm-3">
-							<div class="selectKecamatan">
-                                <select name="keldes_kecamatan_id" class="form-control keldes_kecamatan_id">
-                                    <option value=""> Pilih Kecamatan </option>';
-                                    <?php 
-                                        foreach ($kecamatan as $kecamatans) {
-                                            echo '<option '.( $records->rekdet_kecamatan_kode == $kecamatans->kecamatan_kode ? 'selected' : '' ).' value="'.$kecamatans->kecamatan_kode.'"> '.$kecamatans->kecamatan_nama.' </option>';
-                                        }
-                                    ?>
-                                </select>
-                            </div>
+							<input type="text" class="form-control rekdet_kecamatan_kode" id="rekdet_kecamatan_kode" placeholder="Input Provinsi" value="<?php echo $records->kecamatan_nama . ' ('.$records->rekdet_kecamatan_kode.')'; ?>">
+							<input type="hidden" class="temp_rekdet_kecamatan_kode" name="rekdet_kecamatan_kode" value="<?php echo $records->rekdet_kecamatan_kode; ?>">
 						</div>
 					</div>
-                    <div class="position-relative row form-group formKeldes" <?php echo (empty($records->rekdet_keldes_kode) ? 'style="display:none;"' : '' )  ?> >
+                    <div class="position-relative row form-group formKeldes" <?php echo (empty($records->rekdet_keldes_kode) ? 'style="display:none;"' : '' ); ?>>
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Kelurahan</label>
 						<div class="col-sm-3">
-							<div class="selectKelurahan">
-								<select name="rekap_keldes_id" class="form-control rekap_keldes_id">
-									<option value=""> Pilih Kelurahan </option>';
-									<?php 
-										foreach ($kelurahan as $keldes) {
-											echo '<option '.( $records->rekdet_keldes_kode == $keldes->keldes_kode ? 'selected' : '' ).' value="'.$keldes->keldes_kode.'"> '.$keldes->keldes_nama.' </option>';
-										}
-									?>
-								</select>
-							</div>
+							<input type="text" class="form-control rekdet_keldes_kode" id="rekdet_keldes_kode" placeholder="Input Provinsi" value="<?php echo $records->keldes_nama . ' ('.$records->rekdet_keldes_kode.')'; ?>">
+							<input type="hidden" class="temp_rekdet_keldes_kode" name="rekdet_keldes_kode" value="<?php echo $records->rekdet_keldes_kode; ?>" >
 						</div>
 					</div>
 					<input type="hidden" value="<?php echo $records->rekdet_id; ?>" name="rekdet_id">
@@ -137,7 +107,8 @@
 	</div>
 </div>
 
-<a href="<?php echo base_url('sarana_detail_ubah/'.$rekdet_id) ?>" class="reload"></a>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
 
 <script>
     $(document).ready(function(){
@@ -196,6 +167,113 @@
 			}
 		});
 		
+		// start autocomplete provinsi
+		$("#rekdet_provinsi_id").autocomplete({
+			source    : base_url + 'sugges_getprovinsi',
+			minLength : 1,
+			select: function (event, ui) {
+				var provinsi = ui.item.id;
+				$('.temp_rekdet_provinsi_id').val(ui.item.id);
+				$('#rekdet_kabkot_kode').val('');
+				$('.temp_rekdet_kabkot_kode').val('');
+				$('#rekdet_kecamatan_kode').val('');
+				$('.temp_rekdet_kecamatan_kode').val('');
+				$('#rekdet_keldes_kode').val('');
+				$('.temp_rekdet_keldes_kode').val('');
+
+				// start get data kabko
+				$('.formKabkot').fadeIn('slow');
+				$("#rekdet_kabkot_kode").autocomplete({
+					source    : base_url + 'sugges_getkabko?provinsi=' + provinsi,
+					minLength : 1,
+					select: function (event, ui) {
+						var kabkot = ui.item.id;
+						$('.temp_rekdet_kabkot_kode').val(kabkot);
+						$('#rekdet_kecamatan_kode').val('');
+						$('.temp_rekdet_kecamatan_kode').val('');
+						$('#rekdet_keldes_kode').val('');
+						$('.temp_rekdet_keldes_kode').val('');
+
+						// start get data kecamatan
+						$('.formkecamatan').fadeIn('slow');
+						$("#rekdet_kecamatan_kode").autocomplete({
+							source    : base_url + 'sugges_getkecamatan?provinsi=' + provinsi + '&kabkot=' + kabkot,
+							minLength : 1,
+							select: function (event, ui) {
+								var kecamatan = ui.item.id;
+								$('.temp_rekdet_kecamatan_kode').val(kecamatan);
+								$('#rekdet_keldes_kode').val('');
+								$('.temp_rekdet_keldes_kode').val('');
+
+								// start get data kelurahan dan desa
+								$('.formKeldes').fadeIn('slow');
+								$("#rekdet_keldes_kode").autocomplete({
+									source    : base_url + 'sugges_getkeldes?provinsi=' + provinsi + '&kabkot=' + kabkot + '&kecamatan=' + kecamatan,
+									minLength : 1,
+									select: function (event, ui) {
+										var keldes = ui.item.id;
+										$('.temp_rekdet_keldes_kode').val(keldes);
+									}
+								});
+							}
+						});
+					}
+				});
+			}
+		});
+		// end autocomplete provinsi
+		var provinsi  = '<?php echo $records->rekdet_provinsi_kode; ?>';
+		var kabupaten = '<?php echo $records->rekdet_kabkot_kode; ?>';
+		var kecamatan = '<?php echo $records->rekdet_kecamatan_kode; ?>';
+		var keldes    = '<?php echo $records->rekdet_keldes_kode; ?>';
+		
+		getKabkot(provinsi);
+		getKecamatan(provinsi,kabupaten);
+		getKeldes(provinsi,kabupaten,keldes);
+
+		function getKabkot(provinsi){
+			$("#rekdet_kabkot_kode").autocomplete({
+				source    : base_url + 'sugges_getkabko?provinsi=' + provinsi,
+				minLength : 1,
+				select: function (event, ui) {
+					var kabkot = ui.item.id;
+					$('.temp_rekdet_kabkot_kode').val(kabkot);
+					$('#rekdet_kecamatan_kode').val('');
+					$('.temp_rekdet_kecamatan_kode').val('');
+					$('#rekdet_keldes_kode').val('');
+					$('.temp_rekdet_keldes_kode').val('');
+					$('.formKeldes').fadeIn('slow');
+					getKecamatan(provinsi,kabkot);
+				}
+			});
+		}
+
+		function getKecamatan(provinsi,kabkot){
+			$("#rekdet_kecamatan_kode").autocomplete({
+				source    : base_url + 'sugges_getkecamatan?provinsi=' + provinsi + '&kabkot=' + kabkot,
+				minLength : 1,
+				select: function (event, ui) {
+					var kecamatan = ui.item.id;
+					$('.temp_rekdet_kecamatan_kode').val(kecamatan);
+					$('#rekdet_keldes_kode').val('');
+					$('.temp_rekdet_keldes_kode').val('');
+					$('.formKeldes').fadeIn('slow');
+					getKeldes(provinsi,kabkot,kecamatan);
+				}
+			});
+		}
+
+		function getKeldes(provinsi,kabkot,kecamatan){
+			$("#rekdet_keldes_kode").autocomplete({
+				source    : base_url + 'sugges_getkeldes?provinsi=' + provinsi + '&kabkot=' + kabkot + '&kecamatan=' + kecamatan,
+				minLength : 1,
+				select: function (event, ui) {
+					var keldes = ui.item.id;
+					$('.temp_rekdet_keldes_kode').val(keldes);
+				}
+			});
+		}
+		
 		$(wrapper).on("click",".remove_field", function(e){
 			var dtSwl = $(this).attr('data-swall');
 
@@ -228,81 +306,6 @@
 				$(this).parent('div').parent('.formDel').remove();
 				x--;
 			}
-		});
-
-        // get select kabupaten berdasarkan provinsi
-        $('.rekdet_provinsi_id').on('change', function(){
-            $('.formKabkot').fadeIn('slow');
-
-            var provId = $(this).val();
-            var url    = base_url + 'kecamatan_get_kabkot';
-			var dta    = { 'provinsi_id' : provId, 'message' : true };
-
-			$.post(url,dta,function(res){
-				if(res.status == 0){
-					$('.selectKabkot').html(res.message);
-					$('.formkecamatan').fadeOut('slow');
-					$('.formKeldes').fadeOut('slow');
-
-					$('.keldes_kecamatan_id').val();
-					$('.rekap_keldes_id').val();
-				}else{
-					$('.selectKabkot').html(res.message);
-					
-					// get select kecamatan berdasarkan provinsi dan kabupatern
-					$('.kecamatan_kabkot_id').on('change', function(){
-						$('.formkecamatan').fadeIn('slow');
-
-						var kabkotId = $(this).val();
-						var url      = base_url + 'keldes_get_kecamatan';
-						var dta      = { 'provinsi_id' : provId, 'kabkot_id' : kabkotId };
-
-						$.post(url,dta,function(res){
-							$('.selectKecamatan').html(res);
-
-					        // get select kelurahan berdasran provinsi, kabupaten dan kecamatan
-					        $('.keldes_kecamatan_id').on('change', function(){
-					            $('.formKeldes').fadeIn('slow');
-
-					            var kecamatanId = $(this).val();
-					            var url      = base_url + 'rekap_get_kelurahan';
-					            var dta      = { 'provinsi_id' : provId, 'kabkot_id' : kabkotId, 'kecamtan_id' : kecamatanId };
-
-					            $.post(url,dta,function(res){
-					                $('.selectKelurahan').html(res);
-					            });
-					        });
-						});
-					});
-				}
-			},'json');
-        }); 
-
-        $('.kecamatan_kabkot_id').on('change', function(){
-            $('.formkecamatan').fadeIn('slow');
-
-            var kabkotId = $(this).val();
-            var provId   = $('.rekdet_provinsi_id').val();
-            var url      = base_url + 'keldes_get_kecamatan';
-            var dta      = { 'provinsi_id' : provId, 'kabkot_id' : kabkotId };
-
-            $.post(url,dta,function(res){
-                $('.selectKecamatan').html(res);                
-            });
-        });
-
-		$('.keldes_kecamatan_id').on('change', function(){
-			$('.formKeldes').fadeIn('slow');
-
-			var provId      = $('.rekdet_provinsi_id').val();
-			var kabkotId    = $('.kecamatan_kabkot_id').val();
-			var kecamatanId = $(this).val();
-			var url         = base_url + 'rekap_get_kelurahan';
-			var dta         = { 'provinsi_id' : provId, 'kabkot_id' : kabkotId, 'kecamtan_id' : kecamatanId };
-
-			$.post(url,dta,function(res){
-				$('.selectKelurahan').html(res);
-			});
 		});
     });
 </script>

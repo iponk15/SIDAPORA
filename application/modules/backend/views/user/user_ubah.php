@@ -7,19 +7,43 @@
 				<div class="col-sm-8">
 					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Nama</label>
-						<div class="col-sm-3">
+						<div class="col-sm-4">
 							<input value="<?php echo $user[0]->user_nama; ?>" required name="user_nama" placeholder="Input Nama" type="text" class="form-control">
 						</div>
 					</div>
 					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Email</label>
-						<div class="col-sm-3">
+						<div class="col-sm-4">
 							<input value="<?php echo $user[0]->user_email; ?>" required name="user_email" placeholder="Input Email" type="email" class="form-control">
 						</div>
 					</div>
 					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">Role</label>
+						<div class="col-sm-4">
+							<select name="user_role" class="form-control user_role">
+								<option>Pilih Role</option>
+								<option <?php echo ( $user[0]->user_role == '1' ? 'selected' : ''); ?> value="1">Superadmin</option>
+								<option <?php echo ( $user[0]->user_role == '2' ? 'selected' : ''); ?> value="2">Admin Bidang</option>
+							</select>
+						</div>
+					</div>
+					<div class="position-relative row form-group formAdminBidang" <?php echo ( $user[0]->user_role == '1' ? 'style="display: none;"' : ''  ); ?> >
+						<label for="user_bidang" class="col-sm-2 col-form-label">Kategori Bidang</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="user_kategori_id" placeholder="Input kategori bidang" value="<?php echo $user[0]->kategori_nama ?>" >
+							<input type="hidden" class="temp_user_kategori_id" name="user_kategori_id" value="<?php echo $user[0]->kategori_id ?>" >
+						</div>
+					</div>
+					<div class="position-relative row form-group formAdminBidang" <?php echo ( $user[0]->user_role == '1' ? 'style="display: none;"' : ''  ); ?> >
+						<label for="user_kategori_id" class="col-sm-2 col-form-label">Cabang</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="user_cabang_id" placeholder="Input Cabang" value="<?php echo $user[0]->cabang_nama ?>" >
+							<input type="hidden" class="temp_user_cabang_id" name="user_cabang_id" value="<?php echo $user[0]->cabang_id; ?>" >
+						</div>
+					</div>
+					<div class="position-relative row form-group">
 						<label for="exampleEmail" class="col-sm-2 col-form-label">Password</label>
-						<div class="col-sm-3">
+						<div class="col-sm-4">
 							<input name="user_password" placeholder="Input Password" type="password" class="form-control">
 						</div>
 					</div>
@@ -35,3 +59,36 @@
 		</form>
 	</div>
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+
+<script>
+	$(document).ready(function() {
+		$("#user_kategori_id").autocomplete({
+			source    : base_url + 'sugges_getkategroi',
+			minLength : 2,
+			select: function (event, ui) {
+				$('.temp_user_kategori_id').val(ui.item.id);
+			}
+		});
+
+		$("#user_cabang_id").autocomplete({
+			source    : base_url + 'sugges_getcabang',
+			minLength : 2,
+			select: function (event, ui) {
+				$('.temp_user_cabang_id').val(ui.item.id);
+			}
+		});
+
+		$('.user_role').on('change', function(){
+			var val = $(this).val();
+
+			if(val == 2){
+				$('.formAdminBidang').fadeIn('slow');
+			}else{
+				$('.formAdminBidang').fadeOut('slow');
+			}
+		});
+	});
+</script>

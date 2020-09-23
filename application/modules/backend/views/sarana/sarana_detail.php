@@ -53,7 +53,7 @@
 							<td>'.$row->kecamatan_nama.'</td>
 							<td>'.$row->kabkot_nama.'</td>
 							<td>'.$row->provinsi_nama.'</td>
-                            <td width="10%" class="text-center"><a href="#"> Daftar Cabor </a></td>
+                            <td width="10%" class="text-center"><a href="#" data-toggle="modal" data-target="#caborItem"> Daftar Item ( '. $row->jml .' ) </a></td>
                             <td width="10%">
 								<center>
 									<a href="'.base_url('sarana_detail_tambahitem/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-info"><i class="nav-link-icon fa fa-bars"></i></a>
@@ -66,6 +66,25 @@
 				?>
 			</tbody>
 		</table>
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="caborItem" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Modal Header</h4>
+		</div>
+		<div class="modal-body">
+			<p>Some text in the modal.</p>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+		</div>
 	</div>
 </div>
 

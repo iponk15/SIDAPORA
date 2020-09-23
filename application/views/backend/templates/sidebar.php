@@ -45,7 +45,7 @@
 				</li>
 				<li>
 					<a href="<?php echo base_url('kategori'); ?>" class="<?php echo (getCtrl() == 'kategori' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-menu"></i> Kategori
+						<i class="metismenu-icon pe-7s-menu"></i> Bidang
 					</a>
 				</li>
 				<li>
@@ -61,6 +61,11 @@
 				<li>
 					<a href="<?php echo base_url('step'); ?>" class="<?php echo (getCtrl() == 'step' ? 'mm-active' : ''); ?>">
 						<i class="metismenu-icon pe-7s-plugin"></i> Step
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo base_url('cabang'); ?>" class="<?php echo (getCtrl() == 'cabang' ? 'mm-active' : ''); ?>">
+						<i class="metismenu-icon pe-7s-plugin"></i> Cabang Daerah
 					</a>
 				</li>
 				<li class="app-sidebar__heading"><h6><b>Wilayah Administratif</b></h4></li>
@@ -85,16 +90,11 @@
 					</a>
 				</li>
 				<li class="app-sidebar__heading"><h6><b>Data Rekapitulasi</b></h4></li>
-				<li>
-					<a href="<?php echo base_url('rekap'); ?>" class="<?php echo (getCtrl() == 'rekap' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-news-paper"></i> Prasarana
-					</a>
-				</li>
-				<li>
-					<a href="<?php echo base_url('sarana'); ?>" class="<?php echo (getCtrl() == 'sarana' ? 'mm-active' : ''); ?>">
-						<i class="metismenu-icon pe-7s-news-paper"></i> Sarana
-					</a>
-				</li>
+				<?php 
+					$CI   =& get_instance();
+					$param = getInfo('user_role,user_kategori_id');
+					echo get_bidang($param);	
+				?>
 			</ul>
 		</div>
 	</div>

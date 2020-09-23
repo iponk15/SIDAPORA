@@ -215,4 +215,24 @@ $route['step_hapus/(:any)']  = 'backend/step/hapus/$1';
 $route['step_get_kecamatan'] = 'backend/step/getKecamatan';
 // end step
 
+// start cabang
+$route['cabang']               = 'backend/cabang';
+$route['cabang_tambah']        = 'backend/cabang/tambah';
+$route['cabang_simpan']        = 'backend/cabang/simpan';
+$route['cabang_ubah/(:any)']   = 'backend/cabang/ubah/$1';
+$route['cabang_update/(:any)'] = 'backend/cabang/update/$1';
+$route['cabang_hapus/(:any)']  = 'backend/cabang/hapus/$1';
+$route['cabang_get_kecamatan'] = 'backend/cabang/getKecamatan';
+// end step
+
+// start cabang
+$route['sugges_getcabang']       = 'backend/sugges/getCabang';
+$route['sugges_getkategroi']     = 'backend/sugges/getKategori';
+$route['sugges_getjenisbantuan'] = 'backend/sugges/getJenisBantuan';
+$route['sugges_getprovinsi']     = 'backend/sugges/getProvinsi';
+$route['sugges_getkabko']        = 'backend/sugges/getKabkot';
+$route['sugges_getkecamatan']    = 'backend/sugges/sugges_getKecamatan';
+$route['sugges_getkeldes']       = 'backend/sugges/sugges_getKeldes';
+// end step
+
 // =============================================== End Routing Backend ======================================= 
