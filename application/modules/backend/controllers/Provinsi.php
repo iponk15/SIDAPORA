@@ -95,6 +95,45 @@ class provinsi extends MX_Controller {
 			pre('data gagal disimpan');
 		}
     }
+
+    function import(){
+        $this->load->library('excel');
+
+        $post     = $this->input->post();
+        $fileName = $_FILES['data_rekap']['name'];
+        $tmpFile  = $_FILES['data_rekap']['tmp_name'];
+
+        $objPHPExcel     = PHPExcel_IOFactory::load($tmpFile);
+        $cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
+        $sheet           = $objPHPExcel->getSheetNames();
+
+        $p = 0;
+        $x = 1;
+        foreach ($sheet as $sheets) {
+            $rowExcel      = $objPHPExcel->getSheet($p++);
+            $highestRow    = $rowExcel->getHighestRow();
+            $highestColumn = $rowExcel->getHighestColumn();
+            
+            for($row = 2; $row <= $highestRow; $row++){
+                $rowData = $rowExcel->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
+
+                $dataProvinsi['provinsi_kode']       = $rowData[0][0];
+                $dataProvinsi['provinsi_nama']       = $rowData[0][1];
+                $dataProvinsi['provinsi_latitude']   = $rowData[0][2];
+                $dataProvinsi['provinsi_longtitude'] = $rowData[0][3];
+
+                $tempData[] = $dataProvinsi;
+            }
+        }
+
+        $insProvinsi = $this->db->insert_batch('sdp_master_provinsi', $tempData);
+
+        if($insProvinsi){
+            redirect('provinsi');          
+        }else{
+            pre('data gagal disimpan');
+        }
+    }
 }
 
 /* End of file Controllername.php */

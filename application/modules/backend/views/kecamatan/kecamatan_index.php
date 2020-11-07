@@ -1,4 +1,29 @@
 <div class="main-card mb-3 card">
+	<div class="card-header">
+		<h5><b>Import Data</b></h5>
+	</div>
+	<div class="card-body">
+		<form enctype="multipart/form-data" class="" method="POST" action="<?php echo base_url('kecamatan_import'); ?>">
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<div class="position-relative row form-group">
+						<label for="exampleEmail" class="col-sm-2 col-form-label">File excel</label>
+						<div class="col-sm-4">
+							<input type="file" class="form-control" name="data_rekap" placeholder="import data excel">
+						</div>
+						<div class="col-sm-4">
+						<button type="submit" class="mb-2 mr-2 btn btn-success active">Submit</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-2 text-right"></div>
+			</div>
+		</form>
+	</div>
+</div>
+<br>
+<div class="main-card mb-3 card">
 	<div class="card-header"><h5><b><?php echo $header; ?></b></h5></div>
 	<div class="card-body">
 		<div class="text-right"> 
@@ -24,7 +49,7 @@
                         echo '
                         <tr>
                             <td scope="row" width="3%"><center>'.$i++.'</center></td>
-                            <td>'.$row->provinsi_nama.' (<b> '.$row->provinsi_kode.' </b>)</td>
+                            <td width="20%">'.$row->provinsi_nama.' (<b> '.$row->provinsi_kode.' </b>)</td>
                             <td>'.$row->kabkot_nama.' (<b> '.$row->kabkot_kode.' </b>)</td>
                             <td>'.$row->kecamatan_nama.' (<b> '.$row->kecamatan_kode.' </b>)</td>
                             <td class="text-center">'.$row->kecamatan_latitude.'</td>

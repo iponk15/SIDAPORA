@@ -135,6 +135,48 @@ class Keldes extends MX_Controller {
             echo 'Maaf data tidak di temukan';
         }
     }
+
+    function import(){
+        $this->load->library('excel');
+
+        $post     = $this->input->post();
+        $fileName = $_FILES['data_rekap']['name'];
+        $tmpFile  = $_FILES['data_rekap']['tmp_name'];
+
+        $objPHPExcel     = PHPExcel_IOFactory::load($tmpFile);
+        $cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
+        $sheet           = $objPHPExcel->getSheetNames();
+
+        $p = 0;
+        $x = 1;
+        foreach ($sheet as $sheets) {
+            $rowExcel      = $objPHPExcel->getSheet($p++);
+            $highestRow    = $rowExcel->getHighestRow();
+            $highestColumn = $rowExcel->getHighestColumn();
+            
+            for($row = 2; $row <= $highestRow; $row++){
+                $rowData = $rowExcel->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
+
+                $dataKldes['keldes_provinsi_kode']  = $rowData[0][0];
+                $dataKldes['keldes_kabkot_kode']    = $rowData[0][1];
+                $dataKldes['keldes_kecamatan_kode'] = $rowData[0][2];
+                $dataKldes['keldes_kode']           = $rowData[0][3];
+                $dataKldes['keldes_nama']           = $rowData[0][4];
+                $dataKldes['keldes_latitude']       = $rowData[0][5];
+                $dataKldes['keldes_longtitude']     = $rowData[0][6];
+
+                $tempData[] = $dataKldes;
+            }
+        }
+
+        $insKeldes = $this->db->insert_batch('sdp_master_keldes', $tempData);
+
+        if($insKeldes){
+            redirect('keldes');          
+        }else{
+            pre('data gagal disimpan');
+        }
+    }
 }
 
 /* End of file Controllername.php */

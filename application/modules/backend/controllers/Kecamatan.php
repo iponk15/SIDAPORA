@@ -144,6 +144,47 @@ class Kecamatan extends MX_Controller {
             }
         }
     }
+
+    function import(){
+        $this->load->library('excel');
+
+        $post     = $this->input->post();
+        $fileName = $_FILES['data_rekap']['name'];
+        $tmpFile  = $_FILES['data_rekap']['tmp_name'];
+
+        $objPHPExcel     = PHPExcel_IOFactory::load($tmpFile);
+        $cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
+        $sheet           = $objPHPExcel->getSheetNames();
+
+        $p = 0;
+        $x = 1;
+        foreach ($sheet as $sheets) {
+            $rowExcel      = $objPHPExcel->getSheet($p++);
+            $highestRow    = $rowExcel->getHighestRow();
+            $highestColumn = $rowExcel->getHighestColumn();
+            
+            for($row = 2; $row <= $highestRow; $row++){
+                $rowData = $rowExcel->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
+
+                $dataKecamatan['kecamatan_provinsi_kode'] = $rowData[0][0];
+                $dataKecamatan['kecamatan_kabkot_kode']   = $rowData[0][1];
+                $dataKecamatan['kecamatan_kode']          = $rowData[0][2];
+                $dataKecamatan['kecamatan_nama']          = $rowData[0][3];
+                $dataKecamatan['kecamatan_latitude']      = $rowData[0][4];
+                $dataKecamatan['kecamatan_longtitude']    = $rowData[0][5];
+
+                $tempData[] = $dataKecamatan;
+            }
+        }
+
+        $insKecamatan = $this->db->insert_batch('sdp_master_kecamatan', $tempData);
+
+        if($insKecamatan){
+            redirect('kecamatan');          
+        }else{
+            pre('data gagal disimpan');
+        }
+    }
 }
 
 /* End of file Controllername.php */

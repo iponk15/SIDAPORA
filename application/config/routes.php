@@ -133,6 +133,7 @@ $route['provinsi_simpan']        = 'backend/provinsi/simpan';
 $route['provinsi_ubah/(:any)']   = 'backend/provinsi/ubah/$1';
 $route['provinsi_update/(:any)'] = 'backend/provinsi/update/$1';
 $route['provinsi_hapus/(:any)']  = 'backend/provinsi/hapus/$1';
+$route['provinsi_import']        = 'backend/provinsi/import';
 // end provinsi
 
 // start kabupaten / kota
@@ -142,6 +143,7 @@ $route['kabkot_simpan']        = 'backend/kabkot/simpan';
 $route['kabkot_ubah/(:any)']   = 'backend/kabkot/ubah/$1';
 $route['kabkot_update/(:any)'] = 'backend/kabkot/update/$1';
 $route['kabkot_hapus/(:any)']  = 'backend/kabkot/hapus/$1';
+$route['kabkot_import']        = 'backend/kabkot/import';
 // end kabupaten / kota
 
 // start kecamatan
@@ -152,6 +154,7 @@ $route['kecamatan_ubah/(:any)']   = 'backend/kecamatan/ubah/$1';
 $route['kecamatan_update/(:any)'] = 'backend/kecamatan/update/$1';
 $route['kecamatan_hapus/(:any)']  = 'backend/kecamatan/hapus/$1';
 $route['kecamatan_get_kabkot']    = 'backend/kecamatan/getKabkot';
+$route['kecamatan_import']        = 'backend/kecamatan/import';
 // end kecamatan
 
 // start keldes
@@ -162,6 +165,7 @@ $route['keldes_ubah/(:any)']   = 'backend/keldes/ubah/$1';
 $route['keldes_update/(:any)'] = 'backend/keldes/update/$1';
 $route['keldes_hapus/(:any)']  = 'backend/keldes/hapus/$1';
 $route['keldes_get_kecamatan'] = 'backend/keldes/getKecamatan';
+$route['keldes_import']        = 'backend/keldes/import';
 // end keldes
 
 // start rekap
