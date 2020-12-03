@@ -35,28 +35,30 @@
                     <div class="col-sm-12">
                         <h4><b> <?php echo $header; ?> </b></h4> <hr>
                         <div class="position-relative row form-group">
-                            <label class="col-sm-3 col-form-label">Jenis Bantuan</label>
-                            <div class="col-sm-4">
-                                <select name="sartem_jnsbtn_kode" class="form-control">
-                                    <option value="">Pilih Jenis Bantuan</option>
-                                    <?php
-                                        foreach ($jnsbtn as $jenis) {
-                                            echo '<option value="'. $jenis->jnsbtn_kode .'">'. $jenis->jnsbtn_nama .'</option>';
-                                        }
-                                    ?>
-                                </select>
+                            <label class="col-sm-2 col-form-label">Cabor</label>
+                            <div class="col-sm-4" style="margin-left: -8.4%;">
+                                <input type="text" class="form-control" name="sarbor_cabor" placeholder="Cabor">
                             </div>
                         </div>
-                        <div class="position-relative row form-group">
-                            <label class="col-sm-3 col-form-label">Jumlah Item</label>
-                            <div class="col-sm-4">
-                                <input type="number" class="form-control" name="sartem_jml" placeholder="Jumlah Item">
+                        <div class="input_fields_wrap">
+                            <div class="position-relative row form-group">
+                                <label class="col-sm-1 col-form-label">Item</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="sarbortem_item[]" placeholder="Item">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="number" class="form-control" name="sarbortem_jml[]" placeholder="Jumlah">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="sarbortem_satuan[]" placeholder="Satuan">
+                                </div>
                             </div>
                         </div>
                         <div class="position-relative row form-check">
-                            <div class="col-sm-4 offset-sm-3">
-                                <a href="<?php echo base_url('sarana_detail/' . md56($records->rekdet_rekap_id)); ?>" class="mb-2 mr-2 btn btn-light active">Kembali</a>
-                                <button type="submit" class="mb-2 mr-2 btn btn-success active">Submit</button>
+                            <div class="col-sm-6 offset-sm-1">
+                                <a style="margin-left: -3%;" href="<?php echo base_url('sarana_detail/' . md56($records->rekdet_rekap_id)); ?>" class="mb-2 mr-2 btn btn-light active">Kembali</a>
+                                <button type="submit" class="mb-2 mr-2 btn btn-success">Submit</button>
+                                <button type="submit" class="mb-2 mr-2 btn btn-success add_field_button"><i class="fa fa-plus"></i> Tambah Item</button>
                             </div>
                         </div>
                     </div>
@@ -71,27 +73,38 @@
 			<thead>
 				<tr>
 					<th><center>No.</center></th>
-					<th><center>Kode</center></th>
-					<th><center>Jenis Sarana</center></th>
-					<th><center>Jumlah Sarana</center></th>
+					<th><center>Cabor</center></th>
+					<th><center>Item Cabor</center></th>
 					<th><center>Action</center></th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
+                    $tr = '';
                     $i = 1;
                     foreach ($items as $value) {
-                        echo '<tr>
+                        $list = '['.$value->list.']';
+                        $dec  = json_decode($list);
+                        $tr .= '<tr>
                                 <td class="text-center">'.$i++.'</td>
-                                <td class="text-center">'.$value->jnsbtn_kode.'</td>
-                                <td class="text-center">'.$value->jnsbtn_nama.'</td>
-                                <td class="text-center">'.$value->sartem_jml.'</td>
+                                <td class="text-center">'.$value->sarbor_cabor.'</td>
+                                <td class=""> ';
+
+                                    foreach ($dec as $lst) {
+                                        $tr .= '<ul>
+                                            <li>'.$lst->item.' - '.$lst->jml.' '.$lst->satuan.'</li>
+                                        </ul>';
+                                    }      
+
+                        $tr .=' </td>
                                 <td class="text-center">
-                                    <a href="" class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="nav-link-icon fa fa-edit"></i></a>
-                                    <a href="'.base_url('sarana_item_hapus/'.md56($value->sartem_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-danger"><i class="nav-link-icon fa fa-trash"></i></a>
+                                    <!-- <a href="" class="mb-2 mr-2 btn-transition btn btn-outline-primary"><i class="nav-link-icon fa fa-edit"></i></a> -->
+                                    <a href="'.base_url('sarana_item_hapus/'.md56($value->sarbor_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-danger"><i class="nav-link-icon fa fa-trash"></i></a>
                                 </td>
                             </tr>';
                     }
+
+                    echo $tr;
                 ?>
 			</tbody>
 		</table>
@@ -101,5 +114,38 @@
 <script>
 	$(document).ready(function() {
 		$('.table_item_sarana').DataTable();
+
+        var max_fields      = 10; //maximum input boxes allowed
+        var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
+        var add_button      = $(".add_field_button"); //Add button ID
+        
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e){ //on add input button click
+            e.preventDefault();
+            x++; //text box increment
+            $(wrapper).append('<div class="position-relative row form-group set_'+ x +'">' +
+                                '<label class="col-sm-1 col-form-label"></label>' +
+                                '<div class="col-sm-4">' +
+                                    '<input type="text" class="form-control" name="sarbortem_item[]" placeholder="Item">' +
+                                '</div>' +
+                                '<div class="col-sm-2">' +
+                                    '<input type="number" class="form-control" name="sarbortem_jml[]" placeholder="Jumlah">' +
+                                '</div>' +
+                                '<div class="col-sm-2">' +
+                                    '<input type="text" class="form-control" name="sarbortem_satuan[]" placeholder="Satuan">' +
+                                '</div>' +
+                                '<div class="col-sm-3">' +
+                                    '<button data-set="'+ x +'" class="btn btn-sm btn-danger form-control remove_field" style="width: 25%;"><i class="fa fa-trash"></i></button>' +
+                                '</div>' +
+                            '</div>');
+        });
+        
+        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+            e.preventDefault(); 
+            var set = $(this).data('set');
+            $('.set_' + set).remove();
+
+            x--;
+        })
 	} );
 </script>
