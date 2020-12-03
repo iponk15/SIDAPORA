@@ -53,7 +53,7 @@
 							<td>'.$row->kecamatan_nama.'</td>
 							<td>'.$row->kabkot_nama.'</td>
 							<td>'.$row->provinsi_nama.'</td>
-                            <td width="10%" class="text-center"><a href="#" data-toggle="modal" data-target="#caborItem"> Daftar Item ( '. $row->jml .' ) </a></td>
+                            <td width="10%" class="text-center"><a href="javascript:void(0);"> Daftar Item ( '. ($row->jml == null ? 0 : $row->jml ) .' ) </a></td>
                             <td width="10%">
 								<center>
 									<a href="'.base_url('sarana_detail_tambahitem/'.md56($row->rekdet_id)).'" class="mb-2 mr-2 btn-transition btn btn-outline-info"><i class="nav-link-icon fa fa-bars"></i></a>
