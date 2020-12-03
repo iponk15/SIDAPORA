@@ -28,7 +28,7 @@
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/js/jquery.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datatable/DataTables/media/js/jquery.dataTables.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/datepicker/js/bootstrap-datepicker.js'); ?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/swal/swal.min.js'); ?>"></script>
+	<!-- <script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/swal/swal.min.js'); ?>"></script> -->
 	<script type="text/javascript" src="<?php echo base_url('assets/backend/plugins/sweetalert2/dist/sweetalert2.min.js'); ?>"></script>
 
 
