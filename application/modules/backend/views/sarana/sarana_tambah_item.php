@@ -1,5 +1,5 @@
 <div class="main-card mb-3 card">
-	<div class="card-header"> <h5><b> Form Tambah Item </b></h5></div>
+	<div class="card-header"> <h5><b> Form Tambah Cabor Item </b></h5></div>
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-4">
@@ -83,16 +83,15 @@
                     $tr = '';
                     $i = 1;
                     foreach ($items as $value) {
-                        $list = '['.$value->list.']';
-                        $dec  = json_decode($list);
-                        $tr .= '<tr>
+                        $list = getListItem(md56($value->sarbor_id));
+                        $tr  .= '<tr>
                                 <td class="text-center">'.$i++.'</td>
                                 <td class="text-center">'.$value->sarbor_cabor.'</td>
                                 <td class=""> ';
 
-                                    foreach ($dec as $lst) {
+                                    foreach ($list as $lst) {
                                         $tr .= '<ul>
-                                            <li>'.$lst->item.' - '.$lst->jml.' '.$lst->satuan.'</li>
+                                            <li>'.$lst->sarbortem_item.' - '.$lst->sarbortem_jml.' '.$lst->sarbortem_satuan.'</li>
                                         </ul>';
                                     }      
 

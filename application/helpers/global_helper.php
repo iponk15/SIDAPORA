@@ -136,4 +136,12 @@ function getInfo($field){
     return $result;
 }
 
+function getListItem($sarbor_id){
+    $CI     =& get_instance();
+    $select = 'sarbortem_item,sarbortem_jml,sarbortem_satuan';
+    $result = $CI->m_global->get('sdp_rekap_caboritem',null,[md56('sarbortem_sarbor_id',1) => $sarbor_id],$select);
+    
+    return $result;
+}
+
 ?>

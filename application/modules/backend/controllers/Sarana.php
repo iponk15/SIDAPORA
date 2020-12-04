@@ -571,7 +571,7 @@ class Sarana extends MX_Controller {
         $data['pagetitle'] = 'Halaman sarana Detail';
 		$data['subtitle']  = 'Tambah data sarana Detail';
 		$data['icon']      = 'news-paper';
-        $data['header']    = 'Form Item Jenis Bantuan';
+        $data['header']    = 'Form Cabor';
         $data['url']       = $this->url;
         $data['rekdet_id'] = $rekdet_id;
 
@@ -585,7 +585,7 @@ class Sarana extends MX_Controller {
         $data['records']   = $this->m_global->get('sdp_rekap_detail',$joinRecords,$whereRecords,'rekdet_lembaga,rekdet_rekap_id,provinsi_nama,kabkot_nama,kecamatan_nama,keldes_nama')[0];
 
         $joinCabor     = [ ['sdp_rekap_caboritem', 'sarbortem_sarbor_id = sarbor_id', 'left'] ];
-        $selectCabor   = "sarbor_id,sarbor_cabor, GROUP_CONCAT(CONCAT('{".'"'."item".'"'." : ".'"'."', sarbortem_item, '".'"'.", ".'"'."jml".'"'." : ".'"'."',sarbortem_jml,'".'"'.", ".'"'."satuan".'"'." : ".'"'."',sarbortem_satuan,'".'"'."}')) AS list";
+        $selectCabor   = "sarbor_id,sarbor_cabor";
         $data['items'] = $this->m_global->get('sdp_rekap_cabor',$joinCabor,[md56('sarbor_rekdet_id',1) => $rekdet_id],$selectCabor,null,null,null,null,'sarbor_id');
 
         $this->templates->backend($this->prefix.'tambah_item', $data);
