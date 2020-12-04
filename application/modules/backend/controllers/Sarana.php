@@ -21,6 +21,7 @@ class Sarana extends MX_Controller {
     }
 
     public function index(){
+        $get = $this->input->get();
         $data['pagetitle'] = 'Halaman sarana';
 		$data['subtitle']  = 'Daftar sarana';
 		$data['icon']      = 'news-paper';
@@ -29,7 +30,7 @@ class Sarana extends MX_Controller {
         // get data
         $join            = [[$this->tableKategori,'rekap_kategori_id = kategori_id','left']];
         $select          = 'rekap_id,rekap_judul,rekap_tahun,rekap_status,kategori_nama';
-        $where           = ['rekap_tipe' => '2'];
+        $where           = ['rekap_tipe' => '2', 'rekap_kategori_id' => $get['bidang']];
         $data['records'] = $this->m_global->get($this->table,$join,$where,$select,null,['rekap_lastupdate','DESC']);
 
         // get data kategori
