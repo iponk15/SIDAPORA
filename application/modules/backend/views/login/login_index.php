@@ -1,107 +1,71 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="">
-		<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-		<meta name="generator" content="Jekyll v3.8.5">
-		<title>Halaman Login</title>
-
-		<!-- Bootstrap core CSS -->
-		<link href="<?php echo base_url('assets/backend/css/bootstrap.min.css'); ?>" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-		<style>
-			.bd-placeholder-img {
-				font-size: 1.125rem;
-				text-anchor: middle;
-			}
-
-			@media (min-width: 768px) {
-				.bd-placeholder-img-lg {
-					font-size: 3.5rem;
-				}
-			}
-
-			body {
-				margin: 0;
-				width: 100%;
-				height: 100vh;
-				font-family: "Exo", sans-serif;
-				color: #fff;
-				/* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
-				background: linear-gradient(-45deg, red, yellow, green, blue);
-				background-size: 400% 400%;
-				animation: gradientBG 15s ease infinite;
-			}
-
-			@keyframes gradientBG {
-				0% {
-					background-position: 0% 50%;
-				}
-				50% {
-					background-position: 100% 50%;
-				}
-				100% {
-					background-position: 0% 50%;
-				}
-			}
-
-			.container {
-				width: 100%;
-				position: absolute;
-				top: 35%;
-				text-align: center;
-			}
-
-			h1 {
-				font-weight: 300;
-			}
-
-			h3 {
-				color: #eee;
-				font-weight: 100;
-			}
-
-			h5 {
-				color:#eee;
-				font-weight:300;
-			}
-
-			a,
-			a:hover {
-				text-decoration: none;
-				color: #ddd;
-			}
-
-		</style>
-		<!-- Custom styles for this template -->
-		<link href="<?php echo base_url('assets/backend/css/floating-labels.css'); ?>" rel="stylesheet">
+		<title>Login SIDAPORA</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/png" href="<?php echo base_url('assets/frontend/img/icons/favicon.ico'); ?>" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/css/bootstrap.min.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/css/font-awesome.min.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/css/icon-font.min.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/css/animate.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/css/hamburgers.min.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/css/animsition.min.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/css/select2.min.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/css/daterangepicker.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/css/util.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/css/main.css'); ?>">
 	</head>
 	<body>
-		<form class="form-signin" method="POST" action="<?php echo base_url('login/masuk'); ?>">
-			<div class="text-center mb-4">
-				<!-- <img class="mb-4" src="<?php echo base_url('assets/backend/img/bl.png'); ?>" alt="" width="110" height="80"> -->
-				<h1><b> SIDAPORA </b></h1>
-				<br>
-				<br>
-				<!-- <h1 class="h3 mb-3 font-weight-normal">Halaman Login</h1> -->
+		<div class="limiter">
+			<div class="container-login100">
+				<div class="wrap-login100">
+					<div class="login100-form-title" style="background-image: url(<?php echo base_url('assets/frontend/img/bg-01.jpg'); ?>);">
+						<span class="login100-form-title-1">Sign In</span>
+					</div>
+					<form class="login100-form validate-form" action="<?php echo base_url('login/masuk'); ?>" method="POST">
+						<div class="wrap-input100 validate-input m-b-26" data-validate="Email is required">
+							<span class="label-input100">Email</span>
+							<input class="input100" type="text" name="user_email" placeholder="Enter email">
+							<span class="focus-input100"></span>
+						</div>
+						<div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+							<span class="label-input100">Password</span>
+							<input class="input100" type="password" name="user_password" placeholder="Enter password">
+							<span class="focus-input100"></span>
+						</div>
+						<div class="flex-sb-m w-full p-b-30">
+							<!-- <div class="contact100-form-checkbox">
+								<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+								<label class="label-checkbox100" for="ckb1">Remember me</label>
+							</div>
+							<div><a href="#" class="txt1">Forgot Password?</a></div> -->
+						</div>
+						<div class="container-login100-form-btn">
+							<button type="submit" class="login100-form-btn">Login</button>
+						</div>
+					</form>
+				</div>
 			</div>
+		</div>
 
-			<div class="form-label-group">
-				<input type="text" name="user_email" class="form-control" placeholder="Email" required>
-				<label for="inputEmail">Email</label>
-			</div>
+		<script src="<?php echo base_url('assets/frontend/js/jquery-3.2.1.min.js'); ?>"></script>
+		<script src="<?php echo base_url('assets/frontend/js/animsition.min.js'); ?>"></script>
+		<script src="<?php echo base_url('assets/frontend/js/popper.js'); ?>"></script>
+		<script src="<?php echo base_url('assets/frontend/js/bootstrap.min.js'); ?>"></script>
+		<script src="<?php echo base_url('assets/frontend/js/select2.min.js'); ?>"></script>
+		<script src="<?php echo base_url('assets/frontend/js/moment.min.js'); ?>"></script>
+		<script src="<?php echo base_url('assets/frontend/js/daterangepicker.js'); ?>"></script>
+		<script src="<?php echo base_url('assets/frontend/js/countdowntime.js'); ?>"></script>
+		<script src="<?php echo base_url('assets/frontend/js/main.js'); ?>"></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
 
-			<div class="form-label-group">
-				<input type="password" name="user_password" class="form-control" placeholder="Password" required>
-				<label for="inputPassword">Password</label>
-			</div>
-
-			<div class="checkbox mb-3">
-				<!-- <label><input type="checkbox" value="remember-me"> Remember me</label> -->
-			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			<!-- <p class="mt-5 mb-3 text-muted text-center"> &copy; Irfan Isma Somantri || Theme By : <a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/" target="_blank"> Bootstrap </a> <?php echo date('Y'); ?></p> -->
-		</form>
+			gtag('config', 'UA-23581568-13');
+		</script>
 	</body>
 </html>
