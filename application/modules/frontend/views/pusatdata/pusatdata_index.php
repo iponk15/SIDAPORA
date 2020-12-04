@@ -115,8 +115,8 @@
     </div>
 </div>
 
-<div class="modal fade bs-modal-lg" id="list_item" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" style="width:1350px;">
+<div class="modal fade" id="list_item" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content" style="top: 120px;">
             <div class="modal-header" style="background-color: turquoise;">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>

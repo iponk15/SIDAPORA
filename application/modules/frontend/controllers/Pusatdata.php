@@ -464,14 +464,12 @@ class Pusatdata extends MX_Controller
 
     function dokumentasi()
     {
-        $post        = $this->input->post();
-        $join = [
-            ['sdp_master_step', 'sdp_master_step.step_id = rekdok_step_id', 'left']
-        ];
-        $where[md56('rekdok_rekdet_id', 1)] = $post['rekdet_id'];
-        $where['rekdok_is_public']  = '1';
-        $dok         = $this->m_global->get($this->tableRekapDokumen, $join, $where, 'rekdok_ringkasan,rekdok_id,rekdok_file,rekdok_deskripsi', null, ['step_order', 'asc']);
+        $post   = $this->input->post();
+        $join   = [ ['sdp_master_step', 'sdp_master_step.step_id = rekdok_step_id', 'left'] ];
+        $where  = [md56('rekdok_rekdet_id', 1) => $post['rekdet_id'], 'rekdok_is_public' => '1' ];
+        $dok    = $this->m_global->get($this->tableRekapDokumen, $join, $where, 'rekdok_ringkasan,rekdok_id,rekdok_file,rekdok_deskripsi', null, ['step_order', 'asc']);
         $result = [];
+		
         foreach ($dok as $key => $value) {
             $extension = pathinfo($value->rekdok_file, PATHINFO_EXTENSION);
 
@@ -482,26 +480,17 @@ class Pusatdata extends MX_Controller
                 }
             }
         }
-        $data['dok']    = $result;
-        // pre($result, 1);
+        $data['dok'] = $result;
+		
         $this->load->view($this->prefix . 'dokumentasi', $data);
     }
 
     function list_item()
     {
-        $post        = $this->input->post();
-        $join = [
-            ['sdp_rekap_detail', 'sdp_rekap_detail.rekdet_id = sdp_rekap_item.sartem_rekdet_id', 'left'],
-            ['sdp_master_jenis_bantuan', 'sdp_master_jenis_bantuan.jnsbtn_kode = sdp_rekap_item.sartem_jnsbtn_kode', 'left']
-        ];
-
-        $select = 'sartem_jml,
-            rekdet_lembaga,
-            jnsbtn_nama';
-
-        $where['jnsbtn_tipe']   = 2;
-        $where[md56('rekdet_id', 1)] = $post['rekdet_id'];
-        $data['records'] = $this->m_global->get('sdp_rekap_item', $join, $where, $select, null, ['rekdet_lembaga', 'asc']);
+        $post            = $this->input->post();
+        $select          = 'sarbor_id,sarbor_cabor';
+        $where           = [md56('sarbor_rekdet_id', 1) => $post['rekdet_id'], 'sarbor_status' => '1'];
+        $data['records'] = $this->m_global->get('sdp_rekap_cabor', null, $where, $select);
 
         $this->load->view($this->prefix . 'list_item', $data);
     }
