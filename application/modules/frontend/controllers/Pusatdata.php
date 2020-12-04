@@ -85,6 +85,7 @@ class Pusatdata extends MX_Controller
         }
 
         $data['getmap']  = $this->m_global->get($view_db, NULL, $whereMap, '*', null, ['provinsi_nama', 'asc']);
+        // pre($data['getmap'], 1);
         //START SET LATITUDE LONGTITUDE
         if ($data['provinsi'] != '') {
             $latitude = $data['getmap'][0]->provinsi_latitude ?? $latitude;
@@ -104,9 +105,6 @@ class Pusatdata extends MX_Controller
             $zoom = 11;
         }
         //END SET LATITUDE LONGTITUDE
-
-        // pre($this->db->last_query());
-        // pre($data['getmap'], 1);
 
         // start get data map
         $result = array();

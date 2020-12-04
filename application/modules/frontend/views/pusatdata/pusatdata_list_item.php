@@ -6,15 +6,9 @@
                 <table class="table table-striped table-bordered table-advance table-hover">
                     <thead>
                         <tr>
-                            <th>
-                                <i class="fa fa-building"></i> Nama Lembaga
-                            </th>
-                            <th class="hidden-xs">
-                                <i class="fa fa-briefcase"></i> Jenis Bantuan
-                            </th>
-                            <th>
-                                <i class="fa fa-bookmark"></i> Jumlah
-                            </th>
+                            <th class="text-center"><i class="fa fa-building"></i> No</th>
+                            <th class="text-center"><i class="fa fa-briefcase"></i> Cabor</th>
+                            <th class="text-center"><i class="fa fa-bookmark"></i> Item Cabor</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,19 +19,24 @@
                                 </td>
                             </tr>
                         <?php } else { ?>
-                            <?php foreach ($records as $item) { ?>
-                                <tr>
-                                    <td>
-                                        <?php echo $item->rekdet_lembaga ?>
-                                    </td>
-                                    <td class="hidden-xs">
-                                        <?php echo $item->jnsbtn_nama ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $item->sartem_jml ?>
-                                    </td>
-                                </tr>
-
+                            <?php 
+                                $no = 1; 
+                                foreach ($records as $item) { 
+                                    $list = getListItem(md56($item->sarbor_id));
+                            ?>
+                                        <tr>
+                                            <td class="text-center""><?php echo $no ++; ?></td>
+                                            <td><?php echo $item->sarbor_cabor ?></td>
+                                            <td>
+                                                <?php
+                                                    foreach ($list as $lst) {
+                                                        echo '<ul>
+                                                                <li>'.$lst->sarbortem_item.' - '.$lst->sarbortem_jml.' '.$lst->sarbortem_satuan.'</li>
+                                                            </ul>';
+                                                    }      
+                                                ?>
+                                            </td>
+                                        </tr>
                             <?php } ?>
                         <?php } ?>
 
